@@ -1,0 +1,1335 @@
+openapi: 3.0.0
+info:
+  version: 1.2.1
+  title: Tidelift External Alignments Packages API
+  x-logo:
+    url: /docs/assets/tidelift_logo.png
+    altText: Tidelift
+  license:
+    name: Proprietary
+servers:
+- url: https://api.tidelift.com/external-api
+security:
+- BearerAuth:
+  - user
+  - project
+  - organization
+tags:
+- name: Packages
+paths:
+  /v1/packages:
+    get:
+      x-tidelift-api-meta:
+        product-area: intelligence-api
+        access-level: small
+        visibility: public
+      tags:
+      - Packages
+      security:
+      - BearerAuth:
+        - user
+        - organization
+      operationId: getPackages
+      x-rails-controller: packages#index
+      summary: Gets a paginated list of packages with at least one filter applied
+      description: Gets a paginated list of packages with at least one filter applied
+      parameters:
+      - name: lifted
+        description: Filter parameter. Filters packages to only those that are lifted or non-lifted.
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: source_repository_url
+        description: Filter parameter. Filters packages to only those associated with the url-encoded source repository url.
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: searchable_name
+        description: Filter parameter. Filters packages to those whose name contains the given string.
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: platform
+        description: Filter parameter. Filters packages to those matching the given platform.
+        in: query
+        required: false
+        schema:
+          type: string
+      - $ref: '#/components/parameters/pagePaginationParam'
+      - $ref: '#/components/parameters/perPagePaginationParam'
+      responses:
+        '200':
+          description: The paginated list of packages
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/PaginationEnvelope'
+                - $ref: '#/components/schemas/PackageList'
+        '400':
+          description: Packages must be filtered.
+        '401':
+          $ref: '#/components/responses/401Error'
+        '404':
+          description: Not Found - SourceRepository
+  /v1/packages/lookup:
+    post:
+      x-tidelift-api-meta:
+        product-area: intelligence-api
+        access-level: small
+        visibility: public
+      tags:
+      - Packages
+      security:
+      - BearerAuth:
+        - user
+        - organization
+      operationId: lookup
+      x-rails-controller: packages#lookup
+      summary: Show details of a set of packages.
+      description: Show details of a set of packages
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - type: object
+                title: Package hashes
+                properties:
+                  packages:
+                    description: The packages being looked up
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Package'
+                additionalProperties: false
+                required:
+                - packages
+              - type: object
+                title: PURLs
+                properties:
+                  purls:
+                    description: Array of properly formatted PURLs
+                    type: array
+                    items:
+                      type: string
+                      example: pkg:pypi/urllib3
+                additionalProperties: false
+                required:
+                - purls
+      responses:
+        '200':
+          description: Details of packages found from the search and any package names that had no results.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                - packages
+                - missing_results
+                properties:
+                  packages:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PackageDetail'
+                  missing_results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PackageWithHint'
+        '400':
+          description: Request body format incorrect or more than 1000 packages requested.
+        '401':
+          $ref: '#/components/responses/401Error'
+        '403':
+          description: 403 Forbidden
+  /v1/packages/eol-packages:
+    post:
+      x-tidelift-api-meta:
+        product-area: intelligence-api
+        access-level: small
+        visibility: public
+      tags:
+      - Packages
+      security:
+      - BearerAuth:
+        - user
+        - organization
+      operationId: eol_packages
+      x-rails-controller: packages#eol_packages
+      summary: Show end-of-life details for a set of packages.
+      description: Show end-of-life details for a set of packages
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - type: object
+                title: Package hashes
+                properties:
+                  packages:
+                    description: The packages being looked up
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Package'
+                additionalProperties: false
+                required:
+                - packages
+              - type: object
+                title: PURLs
+                properties:
+                  purls:
+                    description: Array of properly formatted PURLs
+                    type: array
+                    items:
+                      type: string
+                      example: pkg:pypi/urllib3
+                additionalProperties: false
+                required:
+                - purls
+      responses:
+        '200':
+          description: Details of packages found from the search and any package names that had no results.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                - packages
+                - missing_results
+                properties:
+                  packages:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties: false
+                      properties:
+                        platform:
+                          type: string
+                        name:
+                          type: string
+                        purl:
+                          type: string
+                        package_is_not_eol:
+                          $ref: '#/components/schemas/PackageCheckStatus'
+                        package_eol_indicators:
+                          type: object
+                          additionalProperties: false
+                          properties:
+                            eol_reference_found:
+                              type: boolean
+                            effective_on:
+                              type: string
+                              format: date
+                              nullable: true
+                            reference_url:
+                              type: string
+                              nullable: true
+                            package_renamed_to:
+                              type: array
+                              items:
+                                type: string
+                            no_planned_maintenance:
+                              type: boolean
+                            reason:
+                              type: string
+                        maintenance_plan:
+                          type: object
+                          additionalProperties: false
+                          properties:
+                            plan_type:
+                              type: string
+                            major_version_count:
+                              type: integer
+                              nullable: true
+                            minor_version_count:
+                              type: integer
+                              nullable: true
+                            external_url:
+                              type: string
+                              nullable: true
+                  missing_results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PackageWithHint'
+        '400':
+          description: Request body format incorrect or more than 1000 packages requested.
+        '401':
+          $ref: '#/components/responses/401Error'
+        '403':
+          description: 403 Forbidden
+  /v1/packages/updates-since:
+    get:
+      x-tidelift-api-meta:
+        product-area: intelligence-api
+        access-level: small
+        visibility: public
+      tags:
+      - Packages
+      security:
+      - BearerAuth:
+        - user
+        - organization
+      operationId: updates_since
+      x-rails-controller: packages#updates_since
+      summary: Show packages that have updated data since the given datetime.
+      description: Show packages that have updated data since the given datetime.
+      parameters:
+      - $ref: '#/components/parameters/pagePaginationParam'
+      - $ref: '#/components/parameters/perPagePaginationParam'
+      - in: query
+        name: date
+        schema:
+          type: string
+          format: datetime
+        required: true
+        description: The datetime to search for changes on or after
+      responses:
+        '200':
+          description: Package platforms and names that have been updated since the passed date.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/PaginationEnvelope'
+                - type: object
+                  additionalProperties: false
+                  required:
+                  - results
+                  properties:
+                    results:
+                      type: array
+                      items:
+                        type: object
+                        required:
+                        - platform
+                        - name
+                        - purl
+                        - last_changed_on
+                        properties:
+                          platform:
+                            type: string
+                          name:
+                            type: string
+                          purl:
+                            type: string
+                          last_changed_on:
+                            type: string
+                            format: datetime
+                            description: When the package record last was updated by new information
+        '401':
+          $ref: '#/components/responses/401Error'
+        '403':
+          description: 403 Forbidden
+  /v1/packages/{package_platform}/{package_name}:
+    get:
+      x-tidelift-api-meta:
+        product-area: intelligence-api
+        access-level: small
+        visibility: public
+      tags:
+      - Packages
+      security:
+      - BearerAuth:
+        - user
+        - organization
+      operationId: showPackage
+      x-rails-controller: packages#show
+      summary: Show details of a specific package.
+      description: Show details of a specific package
+      parameters:
+      - $ref: '#/components/parameters/packagePlatformParam'
+      - $ref: '#/components/parameters/packageNameParam'
+      responses:
+        '200':
+          description: Details of the package
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackageDetail'
+        '400':
+          description: Parameters specified are not correct, or the package is from an unsupported platform.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardError'
+        '401':
+          $ref: '#/components/responses/401Error'
+        '403':
+          description: 403 Forbidden
+        '404':
+          description: Package not found
+  /v1/packages/{package_platform}/{package_name}/attestation-statement:
+    get:
+      x-tidelift-api-meta:
+        product-area: intelligence-api
+        access-level: small
+        visibility: public
+      tags:
+      - Packages
+      security:
+      - BearerAuth:
+        - user
+        - organization
+      operationId: getPackageAttestationStatement
+      x-rails-controller: packages#attestation_statement
+      summary: Show the attestation statement for a specific package.
+      description: Show the attestation statement for a specific package
+      parameters:
+      - $ref: '#/components/parameters/packagePlatformParam'
+      - $ref: '#/components/parameters/packageNameParam'
+      responses:
+        '200':
+          description: Details of the package
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackageAttestationStatement'
+        '400':
+          description: Parameters specified are not correct, or the package is from an unsupported platform.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardError'
+        '401':
+          $ref: '#/components/responses/401Error'
+        '403':
+          description: 403 Forbidden
+        '404':
+          description: Package not found
+components:
+  schemas:
+    PackageDetailRelease:
+      type: object
+      additionalProperties: false
+      required:
+      - version
+      - published_at
+      properties:
+        version:
+          type: string
+          nullable: true
+        published_at:
+          type: string
+          nullable: true
+          format: date-time
+    Package:
+      type: object
+      additionalProperties: false
+      required:
+      - platform
+      - name
+      properties:
+        platform:
+          type: string
+        name:
+          type: string
+    PackageAppearsMaintainedQualityCheck:
+      description: The project lacks auto-detectable evidence of recent activity
+      type: object
+      additionalProperties: false
+      required:
+      - status
+      - recommendation_status
+      - additional_data
+      properties:
+        status:
+          $ref: '#/components/schemas/PackageCheckStatus'
+        recommendation_status:
+          $ref: '#/components/schemas/QualityCheckRecommendationStatus'
+        additional_data:
+          oneOf:
+          - $ref: '#/components/schemas/PackageAppearsMaintainedAdditionalData--maintenance-appearance'
+          - $ref: '#/components/schemas/PackageAppearsMaintainedAdditionalData--maintenance-assessment'
+          - $ref: '#/components/schemas/PackageAppearsMaintainedAdditionalData--is-lifted'
+          - type: object
+            nullable: true
+    PackageDetail:
+      type: object
+      additionalProperties: false
+      required:
+      - name
+      - platform
+      - purl
+      - description
+      - tidelift_recommendation
+      - alternative_packages
+      - security_policy_url
+      - versioning_scheme
+      - contributors_count
+      - sdlc_policy
+      - sdlc_evidence
+      - repository
+      - repository_statistics
+      - license
+      - latest_release
+      - latest_stable_release
+      - latest_recommended_release
+      - releases
+      - quality_checks
+      - last_changed_on
+      - is_lifted
+      - openssf_scorecard
+      properties:
+        platform:
+          type: string
+          description: The package manager platform, all lowercase.
+          example:
+          - maven
+          - npm
+          - pypi
+          - rubygems
+          - go
+          - nuget
+        name:
+          type: string
+          description: The canonical name of the package (may be adjusted for casing or hyphen vs underscore for example)
+        purl:
+          type: string
+          description: An identifier for the package following the [package URL (purl) specification](https://github.com/package-url/purl-spec)
+        description:
+          type: string
+          nullable: true
+          description: Package description taken from the upstream package manager data
+        tidelift_recommendation:
+          $ref: '#/components/schemas/TideliftPackageRecommendation'
+        tidelift_recommendation_reasons:
+          $ref: '#/components/schemas/TideliftPackageRecommendationReasons'
+        alternative_packages:
+          type: array
+          description: List of alternative packages that could be used in place of this package
+          items:
+            type: object
+            additionalProperties: false
+            required:
+            - name
+            - type
+            properties:
+              name:
+                type: string
+                description: Name of the other package
+              type:
+                type: string
+                description: How the alternative package relates to the original package
+                enum:
+                - rename
+                - alternative
+        last_changed_on:
+          type: string
+          format: date
+          nullable: true
+          description: When the package record last was updated by new information
+        security_policy_url:
+          type: string
+          nullable: true
+          description: If available, a url for the package's upstream security reporting policy
+        versioning_scheme:
+          type: string
+          description: The version numbering rules that the package intends to use; Tidelift may add new possible values for this field over time
+          enum:
+          - maven
+          - pep440
+          - osgi
+          - semver
+          - calver
+          - other
+        contributors_count:
+          type: integer
+          nullable: true
+          description: Number of contributors to the upstream source repository, if available
+        package_manager_url:
+          type: string
+          nullable: true
+          description: Link to this package on the package manager website
+          example:
+          - https://www.npmjs.com/package/for-each-key
+          - https://pypi.org/project/Flask-Sockets/
+        sdlc_policy:
+          type: string
+          nullable: true
+          description: If available, a URL where the project explains its software development lifecycle policy (for example, which release streams are still receiving security updates)
+        sdlc_evidence:
+          type: string
+          nullable: true
+          description: If available, a URL that may help figure out the project's software development lifecycle policies
+        repository:
+          type: object
+          description: The source code repository where the package is maintained
+          additionalProperties: false
+          required:
+          - url
+          - source
+          properties:
+            url:
+              type: string
+              nullable: true
+            source:
+              type: string
+              enum:
+              - human_verified
+              - package_manager
+        repository_statistics:
+          type: object
+          nullable: true
+          description: Statistics about the package's source code repository that can be used to assess upstream activity and maintenance
+          additionalProperties: false
+          required:
+          - last_52_weeks_contributors
+          - last_commit_at
+          - one_year_closed_pull_requests
+          - one_year_total_pull_requests
+          - one_year_closed_issues
+          - one_year_total_issues
+          - status
+          properties:
+            last_52_weeks_contributors:
+              type: integer
+              nullable: true
+              description: Number of distinct contributors in the past year
+            last_commit_at:
+              type: string
+              format: date
+              nullable: true
+              description: Date of the last commit
+            one_year_closed_pull_requests:
+              type: integer
+              nullable: true
+              description: How many pull requests have been closed in the past year
+            one_year_total_pull_requests:
+              type: integer
+              nullable: true
+              description: How many pull requests were opened in the last year
+            one_year_closed_issues:
+              type: integer
+              nullable: true
+              description: How many issues have been closed in the last year
+            one_year_total_issues:
+              type: integer
+              nullable: true
+              description: How many issues were opened in the last year
+            status:
+              type: string
+              enum:
+              - Active
+              - Unmaintained
+              - Removed
+              description: Source repositories may be active, archived (Unmaintained), or deleted (Removed); Tidelift may add other statuses in the future
+        license:
+          type: object
+          required:
+          - expression
+          - source
+          properties:
+            expression:
+              type: string
+              nullable: true
+              description: An [SPDX expression](https://spdx.github.io/spdx-spec/v2.3/SPDX-license-expressions/)
+              example: GPL-3.0 OR MIT
+            source:
+              type: string
+              nullable: true
+              enum:
+              - corrected_by_tidelift
+              - researched_by_tidelift
+              - valid_spdx
+              - tidelift_researching
+              - overridden_by_organization
+              - verified_by_maintainer
+              - unknown
+              description: 'The source of the license information, if the license is known.
+
+                '
+        latest_release:
+          allOf:
+          - $ref: '#/components/schemas/PackageDetailRelease'
+          - description: 'The latest release of the package according to version number sort
+
+              (NOT according to time, for example a security update for an old
+
+              release stream cannot be the latest even if it was the most recently published)
+
+              '
+        latest_stable_release:
+          allOf:
+          - $ref: '#/components/schemas/PackageDetailRelease'
+          - description: 'The latest release of the package according to version number sort, which is not a prerelease version (excludes betas, release candidates, etc.)
+
+              '
+        latest_recommended_release:
+          allOf:
+          - $ref: '#/components/schemas/PackageDetailRelease'
+          - description: 'The latest release of the package ignoring releases with known problems
+
+              '
+        is_lifted:
+          type: boolean
+          description: Whether Tidelift partners with the maintainers of this package
+        releases:
+          type: array
+          description: An array of all known public releases of the package
+          items:
+            type: object
+            additionalProperties: false
+            required:
+            - version
+            - published_at
+            - tidelift_recommendation
+            properties:
+              version:
+                type: string
+                description: The release's name
+              published_at:
+                type: string
+                nullable: true
+                format: date-time
+                description: Time that the release was published to the package manager
+              tidelift_recommendation:
+                $ref: '#/components/schemas/TideliftReleaseRecommendation'
+        openssf_scorecard:
+          type: object
+          nullable: true
+          additionalProperties: false
+          description: The latest [OpenSSF Scorecard](https://github.com/ossf/scorecard) for the package, if available
+          required:
+          - last_checked_at
+          - overall
+          - checks
+          properties:
+            last_checked_at:
+              type: string
+              format: date-time
+              description: When the scorecard was last refreshed
+            overall:
+              type: object
+              additionalProperties: false
+              required:
+              - score
+              properties:
+                score:
+                  type: number
+                  format: float
+                  description: Overall score for the latest scorecard
+            checks:
+              type: array
+              description: Individual OpenSSF scorecard checks. See [OpenSSF Scorecard documentation](https://github.com/ossf/scorecard?tab=readme-ov-file#scorecard-checks) for details
+              items:
+                type: object
+                additionalProperties: false
+                required:
+                - check_name
+                - score
+                - reason
+                properties:
+                  check_name:
+                    type: string
+                    description: Name of the individual check
+                  score:
+                    type: number
+                    format: float
+                    description: Score for the individual cehck
+                  reason:
+                    type: string
+                    description: Supporting information for the individual check score
+        quality_checks:
+          allOf:
+          - $ref: '#/components/schemas/QualityChecks'
+          - description: 'Quality checks are boolean indicators of package quality (but the boolean can be `noassertion` or `pending` if we don''t have the data yet).
+
+              A `pending` check is in the process of being recomputed. A `noassertion` check may be missing needed data and require manual research.
+
+              (Tidelift can often help fill in `noassertion` checks, let us know what you need.)
+
+              '
+    PackageAppearsMaintainedAdditionalData--maintenance-assessment:
+      type: object
+      additionalProperties: false
+      required:
+      - reason
+      - is_maintained
+      - is_maintained_updated_at
+      properties:
+        reason:
+          type: string
+          enum:
+          - package_is_maintained_assessed_true
+          - package_is_maintained_assessed_false
+          description: Tidelift has manually assessed this package's maintenance status.
+        is_maintained:
+          type: boolean
+          description: The manual assessment of the package's maintenance status.
+        is_maintained_updated_at:
+          type: string
+          format: date-time
+          description: The time at which the package's maintenance status was manually assessed.
+    TideliftReleaseRecommendation:
+      type: string
+      nullable: true
+      enum:
+      - recommended
+      - not_recommended
+      - not_assessed
+    QualityCheckRecommendationStatus:
+      type: string
+      enum:
+      - success
+      - warning
+      - issue
+      - unknown
+    GenericQualityCheck:
+      type: object
+      additionalProperties: false
+      required:
+      - status
+      - recommendation_status
+      - additional_data
+      properties:
+        status:
+          $ref: '#/components/schemas/PackageCheckStatus'
+        recommendation_status:
+          $ref: '#/components/schemas/QualityCheckRecommendationStatus'
+        additional_data:
+          type: object
+          nullable: true
+    PackageIsNotEOLQualityCheck:
+      description: The project does not have an active end-of-life notification.
+      type: object
+      additionalProperties: false
+      required:
+      - status
+      - recommendation_status
+      - additional_data
+      properties:
+        status:
+          $ref: '#/components/schemas/PackageCheckStatus'
+        recommendation_status:
+          $ref: '#/components/schemas/QualityCheckRecommendationStatus'
+        additional_data:
+          type: object
+          additionalProperties: false
+          required:
+          - reason
+          - eol_reference_found
+          - effective_on
+          - reference_url
+          - package_renamed_to
+          - no_planned_maintenance
+          properties:
+            reason:
+              type: string
+              enum:
+              - package_repository_is_unmaintained
+              - package_is_renamed
+              - package_has_future_end_of_life
+              - package_has_no_known_end_of_life
+              - package_is_unknown
+              description: The reason Tidelift has decided the package's end-of-life status.
+            eol_reference_found:
+              type: boolean
+              description: If Tidelift has a known end-of-life effective date from a published source.
+            effective_on:
+              type: string
+              format: date
+              nullable: true
+              description: The ISO 8601 formatted date at which the package will be considered end-of-life.
+            reference_url:
+              type: string
+              nullable: true
+              description: The URL which indicates that the package will be end-of-life.
+            package_renamed_to:
+              description: The packages that this package was renamed to.
+              type: array
+              items:
+                type: object
+                properties:
+                  platform:
+                    type: string
+                  name:
+                    type: string
+            no_planned_maintenance:
+              type: boolean
+              description: If the package's deprecation status and repository activity indicates no further updates should be expected.
+    PackageList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PackageWithPurl'
+    PackageWithHint:
+      allOf:
+      - $ref: '#/components/schemas/Package'
+      - type: object
+        description: An optional hint, which might be the reason the package wasn't found.
+        additionalProperties: false
+        properties:
+          hint:
+            type: string
+    PackageCheckStatus:
+      type: string
+      enum:
+      - passed
+      - not_passed
+      - noassertion
+      - pending
+    PackageAppearsMaintainedAdditionalData--maintenance-appearance:
+      type: object
+      additionalProperties: false
+      required:
+      - reason
+      - contributors_in_past_year
+      - contributors_in_past_year_count
+      - frequent_package_activity
+      - frequent_package_activity_one_year_closed_issues_count
+      - frequent_package_activity_one_year_total_issues_count
+      - frequent_package_activity_one_year_closed_pull_requests_count
+      - frequent_package_activity_one_year_total_pull_requests_count
+      - recent_commits
+      - recent_commits_date
+      - recent_latest_release
+      - recent_latest_release_date
+      - repository_not_marked_unmaintained
+      - repository_not_marked_unmaintained_status
+      properties:
+        reason:
+          type: string
+          enum:
+          - package_appears_maintained
+          - package_appears_unmaintained
+          description: 'Tidelift checks upstream source repository and release activity to determine maintenace activity for the package.
+
+            If the source repository has been marked archived or unmaintained, it fails this check.
+
+            Otherwise, Tidelift considers a package to appear unmaintained if all of the following are `false`: `contributors_in_past_year`
+
+            `frequent_package_activity`, `recent_commits`, and `recent_latest_release`.
+
+            '
+        contributors_in_past_year:
+          type: boolean
+          description: Whether there has been any contributors to the package's source repository in the past year.
+          nullable: true
+        contributors_in_past_year_count:
+          type: number
+          description: How many contributors there were to the package's source repository in the past year.
+          nullable: true
+        frequent_package_activity:
+          type: boolean
+          description: Whether at least 1/3 of issues and pull requests must have been closed in the past year.
+          nullable: true
+        frequent_package_activity_one_year_closed_issues_count:
+          type: boolean
+          description: Number of closed issues on the package's source repository in the past year.
+          nullable: true
+        frequent_package_activity_one_year_total_issues_count:
+          type: boolean
+          description: Total number of issues on the package's source repository in the past year.
+          nullable: true
+        frequent_package_activity_one_year_closed_pull_requests_count:
+          type: boolean
+          description: Number of closed pull requests on the package's source repository in the past year.
+          nullable: true
+        frequent_package_activity_one_year_total_pull_requests_count:
+          type: boolean
+          description: Total number of pull requests on the package's source repository in the past year.
+          nullable: true
+        recent_commits:
+          type: boolean
+          description: Whether there has been a commit to the package's source repository in the past year.
+          nullable: true
+        recent_commits_date:
+          type: string
+          format: date
+          description: When the package's source repository had its most recent commit.
+          nullable: true
+        recent_latest_release:
+          type: boolean
+          description: Whether there has been a release of the package in the past 6 months.
+          nullable: true
+        recent_latest_release_date:
+          type: string
+          format: date-time
+          description: When the package's most recent release was published.
+          nullable: true
+        repository_not_marked_unmaintained:
+          type: boolean
+          description: Whether the package's source repository been archived or otherwise marked unmaintained.
+          nullable: true
+        repository_not_marked_unmaintained_status:
+          type: string
+          description: The package's source repository's current maintenance status.
+          nullable: true
+    TideliftPackageRecommendationReasons:
+      type: array
+      items:
+        type: string
+        enum:
+        - is deprecated
+        - does not appear maintained
+        - has no releases available
+        - contains binary artifacts
+        - has not verified two factor authentication
+        - doesn't have all release managers reviewed
+        - has vulnerabilities in latest release
+        - has dependency issues on latest release
+        - has no stable releases older than two years
+        - is lifted
+        - has organizational backing
+    PackageAppearsMaintainedAdditionalData--is-lifted:
+      type: object
+      additionalProperties: false
+      required:
+      - reason
+      properties:
+        reason:
+          type: string
+          enum:
+          - package_is_lifted
+          description: Tidelift is partnering with the maintainer of this package to ensure its continued maintenance.
+    PackageHasMultipleActiveMaintainersQualityCheck:
+      description: The package has multiple active maintainers
+      type: object
+      additionalProperties: false
+      required:
+      - status
+      - recommendation_status
+      properties:
+        status:
+          type: string
+          enum:
+          - passed
+          - not_passed
+        recommendation_status:
+          type: string
+          enum:
+          - success
+          - warning
+        additional_data:
+          type: object
+          nullable: true
+          additionalProperties: false
+          required:
+          - one_maintainer
+          - unmaintained
+          - not_enough_contributors
+          - last_52_weeks_contributors
+          - contributor_count
+          properties:
+            one_maintainer:
+              type: boolean
+              description: If the project has less than two maintainers.
+            unmaintained:
+              type: boolean
+              description: If the package appears unmaintained.
+            not_enough_contributors:
+              type: boolean
+              description: If the project has had less than two contributors in the last 52 weeks or less than five contributors overall.
+            last_52_weeks_contributors:
+              type: integer
+              description: The count of contributors in the last 52 weeks.
+            contributor_count:
+              type: integer
+              description: The total count of contributors.
+    TideliftPackageRecommendation:
+      type: string
+      nullable: true
+      enum:
+      - recommended
+      - not_recommended
+      - caution_advised
+      - neutral
+      - not_assessed
+    PaginationEnvelope:
+      type: object
+      required:
+      - current_page
+      - next_page
+      - prev_page
+      - total_pages
+      - total_count
+      - per_page
+      properties:
+        current_page:
+          type: integer
+        next_page:
+          type: integer
+          nullable: true
+        prev_page:
+          type: integer
+          nullable: true
+        total_pages:
+          type: integer
+        total_count:
+          type: integer
+        per_page:
+          type: integer
+    StandardError:
+      description: The standard error format
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: An error code representing the error
+          example: an_error_code
+        message:
+          type: string
+          description: A human-readable error message representing the error
+          example: An error message.
+        details:
+          type: object
+          description: An optional object with extra helpful details about the error.
+          example:
+            errors:
+              name: is not a valid email.
+    PackageAttestationStatement:
+      type: object
+      additionalProperties: false
+      required:
+      - PackageName
+      - PackagePlatform
+      - PURL
+      - UpstreamRepositoryURL
+      - SPDXLicenseLatestRelease
+      - LatestStableRelease
+      - ReleasesInUse
+      - SBOM
+      - PackageManagerMFAEnabled
+      - SourceRepoMFAEnabled
+      - DocumentedBuildPractices
+      - KnownReleasesURL
+      - CleanReleaseAvailable
+      - FixedVulnerabilities
+      - DependenciesAreManaged
+      - KnownVulnerabilitiesURL
+      - PackageSecurityPolicyURL
+      - PackageSecurityContact
+      - SecurityResponsive
+      - MultipleMaintainers
+      - SuccessionPlan
+      - NoBinariesInRepository
+      - CodeReviewPractice
+      - FuzzingPractice
+      - SDLCPolicyURL
+      - SDLCEvidenceDataURL
+      - PackageStatus
+      - IncomeStreams
+      properties:
+        PackageName:
+          type: string
+        PackagePlatform:
+          type: string
+        PURL:
+          type: string
+        UpstreamRepositoryURL:
+          type: string
+        SPDXLicenseLatestRelease:
+          type: string
+        LatestStableRelease:
+          type: string
+        ReleasesInUse:
+          type: array
+          items:
+            type: string
+        SBOM:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            required:
+            - Type
+            - URL
+            - DigitalSignatureURL
+            properties:
+              Type:
+                type: string
+              URL:
+                type: string
+              DigitalSignatureURL:
+                type: string
+        PackageManagerMFAEnabled:
+          type: string
+        SourceRepoMFAEnabled:
+          type: string
+        DocumentedBuildPractices:
+          type: string
+        KnownReleasesURL:
+          type: string
+        CleanReleaseAvailable:
+          type: string
+        FixedVulnerabilities:
+          type: string
+        DependenciesAreManaged:
+          type: string
+        KnownVulnerabilitiesURL:
+          type: string
+        PackageSecurityPolicyURL:
+          type: string
+        PackageSecurityContact:
+          type: string
+        SecurityResponsive:
+          type: string
+        MultipleMaintainers:
+          type: string
+        SuccessionPlan:
+          type: string
+        NoBinariesInRepository:
+          type: string
+        CodeReviewPractice:
+          type: string
+        FuzzingPractice:
+          type: string
+        ReleasesDigitallySigned:
+          type: string
+        SDLCPolicyURL:
+          type: string
+        SDLCEvidenceDataURL:
+          type: string
+        PackageStatus:
+          type: object
+          additionalProperties: false
+          required:
+          - Status
+          - LastModifiedDateTimeUTC
+          properties:
+            Status:
+              type: string
+            LastModifiedDateTimeUTC:
+              type: string
+              format: date-time
+        IncomeStreams:
+          oneOf:
+          - type: string
+            enum:
+            - NOASSERTION
+          - type: array
+            items:
+              type: object
+              required:
+              - Type
+              - EvidenceURL
+              - LastModifiedDateTimeUTC
+              properties:
+                Type:
+                  type: string
+                EvidenceURL:
+                  type: string
+                LastModifiedDateTimeUTC:
+                  type: string
+                  format: date-time
+    QualityChecks:
+      type: object
+      additionalProperties: false
+      required:
+      - no_known_vulnerabilities_on_latest_release
+      - no_known_issues_in_dependencies_for_latest_release
+      - discoverable_security_policy
+      - two_factor_authentication_at_source_repository
+      - two_factor_authentication_for_package_manager
+      - release_managers_are_reviewed
+      - package_is_not_deprecated
+      - package_appears_maintained
+      - package_has_a_stable_release_greater_than_two_years_old
+      - package_has_multiple_active_maintainers
+      - package_is_not_eol
+      - releases_are_discoverable_upstream
+      properties:
+        no_known_vulnerabilities_on_latest_release:
+          allOf:
+          - $ref: '#/components/schemas/GenericQualityCheck'
+          - description: A latest release should be available that clears all valid, confirmed, known vulnerabilities
+        no_known_issues_in_dependencies_for_latest_release:
+          allOf:
+          - $ref: '#/components/schemas/GenericQualityCheck'
+          - description: The transitive dependencies of the latest release should pass Tidelift's standards
+        discoverable_security_policy:
+          allOf:
+          - $ref: '#/components/schemas/GenericQualityCheck'
+          - description: The project should have a policy and process for reporting security vulnerabilities
+        two_factor_authentication_at_source_repository:
+          allOf:
+          - $ref: '#/components/schemas/GenericQualityCheck'
+          - description: The project should use two-factor authentication for everyone with access to the source code
+        two_factor_authentication_for_package_manager:
+          allOf:
+          - $ref: '#/components/schemas/GenericQualityCheck'
+          - description: The project should use two-factor authentication to publish releases
+        release_managers_are_reviewed:
+          allOf:
+          - $ref: '#/components/schemas/GenericQualityCheck'
+          - description: A Tidelift-partnered maintainer should confirm the list of people allowed to publish releases
+        package_is_not_deprecated:
+          allOf:
+          - $ref: '#/components/schemas/GenericQualityCheck'
+          - description: The package should not be deprecated
+        package_appears_maintained:
+          $ref: '#/components/schemas/PackageAppearsMaintainedQualityCheck'
+        package_has_a_stable_release_greater_than_two_years_old:
+          allOf:
+          - $ref: '#/components/schemas/GenericQualityCheck'
+          - description: The project should be "seasoned" with at least two years of stable releases
+        package_has_multiple_active_maintainers:
+          $ref: '#/components/schemas/PackageHasMultipleActiveMaintainersQualityCheck'
+        package_is_not_eol:
+          $ref: '#/components/schemas/PackageIsNotEOLQualityCheck'
+        releases_are_discoverable_upstream:
+          allOf:
+          - $ref: '#/components/schemas/GenericQualityCheck'
+          - description: The project should have releases that are still available for download
+    PackageWithPurl:
+      type: object
+      additionalProperties: false
+      required:
+      - platform
+      - name
+      properties:
+        platform:
+          type: string
+        name:
+          type: string
+        purl:
+          type: string
+  parameters:
+    perPagePaginationParam:
+      name: per_page
+      in: query
+      required: false
+      schema:
+        type: integer
+    packageNameParam:
+      in: path
+      name: package_name
+      required: true
+      schema:
+        type: string
+        example: rails
+      description: The name of the package to look up.
+    packagePlatformParam:
+      in: path
+      name: package_platform
+      required: true
+      schema:
+        type: string
+        example: rubygems
+      description: The platform of the package.
+    pagePaginationParam:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+  responses:
+    401Error:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandardError'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

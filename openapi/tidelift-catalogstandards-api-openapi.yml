@@ -1,0 +1,195 @@
+openapi: 3.0.0
+info:
+  version: 1.2.1
+  title: Tidelift External Alignments CatalogStandards API
+  x-logo:
+    url: /docs/assets/tidelift_logo.png
+    altText: Tidelift
+  license:
+    name: Proprietary
+servers:
+- url: https://api.tidelift.com/external-api
+security:
+- BearerAuth:
+  - user
+  - project
+  - organization
+tags:
+- name: CatalogStandards
+paths:
+  /v1/{org_name}/catalogs/{catalog_name}/configure-standards/allowed-licenses/add:
+    put:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - CatalogStandards
+      security:
+      - BearerAuth:
+        - user
+        - project
+        - organization
+      operationId: configureAllowedLicensesAdd
+      x-rails-controller: catalog_standards/allowed_licenses#add_licenses
+      summary: Add SPDX licenses to the catalog's license policies.
+      description: Add SPDX licenses to the catalog's license policies.
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      - $ref: '#/components/parameters/catalogNameParam'
+      - name: policy_status
+        in: query
+        required: true
+        description: Specify how releases should be used by projects aligning to this catalog. - 'approved' or 'denied'
+        schema:
+          type: string
+          enum:
+          - approved
+          - denied
+      - name: generate_tasks
+        in: query
+        required: true
+        description: Specify whether tasks should be generated for new violations for the licenses
+        schema:
+          type: boolean
+      - name: licenses
+        in: query
+        required: true
+        description: List of individual licenses in SPDX format to add (note that SPDX expressions are not allowed)
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: License(s) added to list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicensingCatalogRule'
+        '400':
+          description: Invalid request, Invalid parameters, Invalid record
+        '403':
+          description: 403 Forbidden
+        '404':
+          description: Catalog not found
+  /v1/{org_name}/catalogs/{catalog_name}/configure-standards/allowed-licenses/remove:
+    put:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - CatalogStandards
+      security:
+      - BearerAuth:
+        - user
+        - project
+        - organization
+      operationId: configureAllowedLicensesRemove
+      x-rails-controller: catalog_standards/allowed_licenses#remove_licenses
+      summary: Remove SPDX licenses from the catalog's license policies.
+      description: Remove SPDX licenses from the catalog's license policies.
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      - $ref: '#/components/parameters/catalogNameParam'
+      - name: licenses
+        in: query
+        required: true
+        description: List of individual licenses in SPDX format to remove (note that SPDX expressions are not allowed)
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: License(s) removed from list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicensingCatalogRule'
+        '400':
+          description: Invalid request, Invalid parameters, Invalid record
+        '403':
+          description: 403 Forbidden
+        '404':
+          description: Catalog not found
+  /v1/{org_name}/catalogs/{catalog_name}/configure-standards/allowed-licenses:
+    get:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - CatalogStandards
+      security:
+      - BearerAuth:
+        - user
+        - project
+        - organization
+      operationId: showAllowedLicenses
+      x-rails-controller: catalog_standards/allowed_licenses#show
+      summary: Show the catalog's license policies
+      description: Show the catalog's license policies.
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      - $ref: '#/components/parameters/catalogNameParam'
+      responses:
+        '200':
+          description: Licenses in this catalog's license policies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicensingCatalogRule'
+        '403':
+          description: 403 Forbidden
+        '404':
+          description: Catalog not found
+components:
+  schemas:
+    LicensingCatalogRule:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        value:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              policy_status:
+                type: string
+              generate_tasks:
+                type: boolean
+              reference_url:
+                type: string
+          example:
+            MIT:
+              policy_status: approved
+              generate_tasks: true
+              reference_url: https://github.com/tidelift/project1/blob/main/LICENSE.md
+  parameters:
+    orgNameParam:
+      in: path
+      name: org_name
+      required: true
+      schema:
+        type: string
+        example: My-Company
+      description: The name of the Organization.
+    catalogNameParam:
+      in: path
+      name: catalog_name
+      required: true
+      schema:
+        type: string
+        example: default
+      description: The name of the Catalog.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

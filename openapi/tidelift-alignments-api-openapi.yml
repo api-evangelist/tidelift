@@ -1,0 +1,738 @@
+openapi: 3.0.0
+info:
+  version: 1.2.1
+  title: Tidelift External Alignments API
+  x-logo:
+    url: /docs/assets/tidelift_logo.png
+    altText: Tidelift
+  license:
+    name: Proprietary
+servers:
+- url: https://api.tidelift.com/external-api
+security:
+- BearerAuth:
+  - user
+  - project
+  - organization
+tags:
+- name: Alignments
+paths:
+  /v1/catalog/{org_name}/alignment:
+    post:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - Alignments
+      security:
+      - BearerAuth:
+        - user
+        - project
+        - organization
+      operationId: performProjectlessAlignment
+      x-rails-controller: catalog#alignment
+      summary: Perform an alignment without specifying a project
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      responses:
+        '200':
+          description: Alignment info against default catalog
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alignment'
+        '401':
+          $ref: '#/components/responses/401Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                catalog_name:
+                  type: string
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                files:
+                  type: string
+                  format: binary
+  /v1/catalog/{org_name}/{project}/alignment:
+    post:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - Alignments
+      security:
+      - BearerAuth:
+        - user
+        - project
+        - organization
+      operationId: performProjectAlignment
+      x-rails-controller: catalog#alignment
+      summary: Perform an alignment with a specific project
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      - name: project
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Alignment information against project's catalog
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alignment'
+        '401':
+          $ref: '#/components/responses/401Error'
+  /v1/catalog/{org_name}/{project}/alignments:
+    get:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - Alignments
+      security:
+      - BearerAuth:
+        - user
+        - project
+        - organization
+      operationId: getProjectAlignments
+      x-rails-controller: alignments#index
+      summary: Get recent saved alignments
+      description: Gets a list of all the saved alignments from the previous three weeks
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      - name: project
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: branch
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: revision
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of saved alignments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AlignmentFragment'
+        '401':
+          $ref: '#/components/responses/401Error'
+  /v1/{org_name}/projects/{project}/alignments/{revision}/status:
+    get:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - Alignments
+      security:
+      - BearerAuth:
+        - user
+        - project
+        - organization
+      operationId: getProjectAlignmentStatus
+      x-rails-controller: alignments#status
+      summary: Get a saved alignment with additional information
+      description: 'The alignment will also include information on violations per dependency.
+
+        '
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      - name: project
+        description: The name of the project. The external identifier will not work here.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: revision
+        description: The `revision` of the alignment.
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Detailed results and status of saved alignment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlignmentStatus'
+        '403':
+          description: 403 Forbidden
+        '404':
+          description: 404 Scan Not Found
+components:
+  schemas:
+    StandardError:
+      description: The standard error format
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: An error code representing the error
+          example: an_error_code
+        message:
+          type: string
+          description: A human-readable error message representing the error
+          example: An error message.
+        details:
+          type: object
+          description: An optional object with extra helpful details about the error.
+          example:
+            errors:
+              name: is not a valid email.
+    ScanLog:
+      nullable: true
+      description: Information about a scan problem, if there was one.
+      properties:
+        code:
+          type: string
+          nullable: false
+          description: Machine-readable code for the issue.
+          enum:
+          - inexact_versions
+          - invalid_version
+          - invalid_packages
+        message:
+          type: string
+          nullable: false
+          description: Human-readable message about the issue.
+        details:
+          type: object
+          description: List of details about the issue.
+          properties:
+            platform:
+              type: string
+              nullable: true
+              description: Relevant platform that triggered the issue.
+            path:
+              type: string
+              nullable: true
+              description: Relevant manifest path that triggered the issue.
+            kind:
+              type: string
+              nullable: true
+              description: Relevant manifest kind that triggered the issue.
+              enum:
+              - lockfile
+              - manifest
+            message:
+              type: string
+              nullable: true
+              description: Relevant human-readable message about this detail.
+    AlignmentFragment:
+      type: object
+      additionalProperties: false
+      properties:
+        alignment_id:
+          type: string
+          description: Unique identifier for the alignment results.
+        revision:
+          type: string
+          description: Revision of the project that was used for alignment analysis.
+        finished_at:
+          type: string
+          nullable: true
+          description: Time when the alignment finished analyzing release data.
+        release_count:
+          type: integer
+          nullable: true
+          description: Number of releases included in the alignment results.
+        newly_introduced_count:
+          type: integer
+          description: Number of new issues found since the baseline alignment.
+        alignment_pct:
+          type: number
+          format: float
+          nullable: true
+          description: Percentage of releases that are aligned to the catalog's configured standards.
+        branch:
+          type: string
+          description: Branch name of the project that was used for alignment analysis.
+        status:
+          type: string
+          nullable: true
+          description: Status to indicate if the alignment has finished analyzing or is still running.
+          enum:
+          - scheduled
+          - running
+          - complete
+          - error
+        result:
+          type: string
+          nullable: true
+          description: Status of whether all releases are in alignment or not.
+          enum:
+          - success
+          - failure
+        error:
+          $ref: '#/components/schemas/ScanLog'
+        error_code:
+          type: string
+          deprecated: true
+          description: Short code to represent an error encountered during analysis.
+          nullable: true
+          enum:
+          - retriable_error
+          - manifest_parse
+          - no_manifests_found
+          - no_packages_found
+          - retries_exhausted
+          - canceling_obsolete_scans
+          - multiple_manifests_same_platform
+          - inexact_versions
+          - marked_failed
+          - invalid_external_identifier
+          - invalid_version
+          - invalid_packages
+        error_message:
+          type: string
+          deprecated: true
+          nullable: true
+          description: A more descriptive summary of any error encountered during analysis.
+        error_details:
+          type: string
+          deprecated: true
+          nullable: true
+          description: String representation of some more metadata of an error encountered during analysis.
+        warnings:
+          type: array
+          nullable: true
+          description: A list of warnings encountered during the analysis.
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                description: Short code to represent a warning encountered during analysis.
+                nullable: true
+                enum:
+                - inexact_versions
+                - invalid_version
+                - invalid_packages
+              message:
+                type: string
+                nullable: true
+                description: A more descriptive summary of any warning encountered during analysis.
+              details:
+                type: string
+                nullable: true
+                description: String representation of some more metadata of a warning encountered during analysis.
+    Alignment:
+      type: object
+      additionalProperties: false
+      required:
+      - _meta
+      - organization
+      - project
+      - files
+      - alignment_pct
+      - unapproved
+      - alternatives
+      - upcoming_denials
+      - approved
+      - requested
+      - denied
+      - catalog
+      - baseline_alignment
+      - actions
+      properties:
+        _meta:
+          type: object
+          properties:
+            version:
+              type: string
+        organization:
+          type: string
+          description: Name of the Team that owns the alignment.
+        team:
+          type: string
+          description: Name of the Team that owns the alignment.
+        files:
+          type: string
+          description: File names used in the alignment analysis.
+        alignment_pct:
+          type: number
+          format: float
+          description: Percentage of Package releases that are aligned to the Catalog's standards.
+        unapproved:
+          description: Package releases in the alignment that are not included in the catalog and have no status.
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/AlignmentRelease'
+        alternatives:
+          description: List of alternative Package releases that could be used to bring the project closer to full alignment.
+          type: array
+          nullable: true
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The package name.
+              platform:
+                type: string
+                description: The package platform.
+              in_use:
+                type: array
+                description: List of releases for this package that are used in other projects.
+                items:
+                  type: string
+                  nullable: true
+              not_in_use:
+                type: array
+                description: List of releases for this package that are in the catalog but not used in other projects.
+                items:
+                  type: string
+        upcoming_denials:
+          description: Package releases that are configured to be out of alignment with the Catalog's standards in the future.
+          type: array
+          nullable: true
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the package.
+              platform:
+                type: string
+                description: The platform of the package.
+              version:
+                type: string
+                description: The version of the release.
+              deny_at:
+                type: string
+                description: The date when the release will no longer be acceptable to be used.
+              reason:
+                type: string
+                description: The reason why the release will no longer be allowed or why the decision has been delayed.
+              highest_approved_version:
+                type: string
+                nullable: true
+                description: The latest version of this package that is allowed for use.
+        approved:
+          description: Package releases in the alignment that are approved for use.
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/AlignmentRelease'
+        requested:
+          description: Package releases in the alignment that have been requested but have not been analyzed yet.
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/AlignmentRelease'
+        denied:
+          description: Package releases in the alignment that are not approved for use.
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/AlignmentRelease'
+        no_new_introduction:
+          description: Package releases in the alignment that are approved for use, but are not allowed to introduce any further issues.
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/AlignmentRelease'
+        catalog:
+          type: object
+          description: The catalog used to determine the alignment status of each package release.
+          additionalProperties: false
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            display_name:
+              type: string
+            catalog_standards:
+              type: array
+              items:
+                type: object
+                additionalProperties: false
+                required:
+                - slug
+                - name
+                - description
+                - enabled
+                properties:
+                  slug:
+                    type: string
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  enabled:
+                    type: boolean
+        project:
+          type: string
+          description: Name of the project used for the alignment.
+          nullable: true
+        baseline_alignment:
+          description: A previous alignment that can be used to compare data between. This can be useful to spot regressions that have been introduced since the baseline alignment was run.
+          type: object
+          additionalProperties: false
+          nullable: true
+          required:
+          - number
+          - date
+          properties:
+            number:
+              type: integer
+              description: The ordered alignment number within the project.
+            date:
+              type: string
+              format: date-time
+              description: When the alignment was run.
+        actions:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            required:
+            - action_description
+            - action
+            - violations
+            properties:
+              action_description:
+                type: string
+              action:
+                type: object
+                properties:
+                  package_name:
+                    type: string
+                  dependency_source:
+                    type: string
+                  current_version:
+                    type: string
+                  suggested_version:
+                    type: string
+              violations:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+    AlignmentRelease:
+      type: object
+      properties:
+        id:
+          type: integer
+        latest_release_number:
+          type: string
+          nullable: true
+          description: Version of the package that is considered the most recent release.
+        license_normalized:
+          type: boolean
+          nullable: true
+          description: If license data has been normalized to SPDX values from an upstream source.
+        license_set_by_admin:
+          type: boolean
+          nullable: true
+          description: If license data has been set by a Tidelift researcher.
+        licenses:
+          type: string
+          nullable: true
+          description: License expression for this release.
+        name:
+          type: string
+          description: The package name.
+        platform:
+          type: string
+          description: The package platform.
+        project_license:
+          type: string
+          nullable: true
+          description: The license data tied to the package.
+        repository_license:
+          type: string
+          nullable: true
+          description: The license data tied to the package's source repository.
+        type:
+          type: string
+          nullable: true
+        unknown:
+          type: boolean
+          nullable: true
+          description: If Tidelift does not have any upstream data for this package.
+        direct:
+          type: boolean
+          description: If the package is referenced directly by the project dependency manifest.
+        resolved_version:
+          type: string
+          description: Real release version that the manifest resolved to.
+        requirement:
+          type: string
+          description: Raw requirement text included in the project manifest file.
+        lockfile_requirement:
+          type: string
+          nullable: true
+          description: Raw requirement text included in the project's manifest lockfile.
+        original_license:
+          type: string
+          nullable: true
+          description: The license found using only upstream source data.
+        version:
+          type: string
+          description: Version of the release used in the alignment analysis.
+        status:
+          type: string
+          nullable: true
+          description: Status of this release within the alignment results.
+    AlignmentStatus:
+      allOf:
+      - $ref: '#/components/schemas/Alignment'
+      - type: object
+        required:
+        - details_url
+        - status
+        - revision
+        - external_identifier
+        - alignment_counts
+        - production_alignment_counts
+        additionalProperties: false
+        properties:
+          error:
+            $ref: '#/components/schemas/ScanLog'
+          warnings:
+            type: array
+            items:
+              $ref: '#/components/schemas/ScanLog'
+          actions:
+            type: array
+            items:
+              type: object
+              additionalProperties: false
+              required:
+              - action_description
+              - action
+              - violations
+              properties:
+                action_description:
+                  type: string
+                action:
+                  type: object
+                  properties:
+                    package_name:
+                      type: string
+                    dependency_source:
+                      type: string
+                    current_version:
+                      type: string
+                    suggested_version:
+                      type: string
+                violations:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+          details_url:
+            type: string
+            description: URL to view more alignment details in the Tidelift UI.
+          status:
+            type: string
+            nullable: true
+            description: Status to indicate if the alignment has finished analyzing or is still running.
+            enum:
+            - scheduled
+            - running
+            - error
+            - failure
+            - success
+          revision:
+            type: string
+            description: Revision of the project that was used for alignment analysis.
+          external_identifier:
+            type: string
+            description: The external identifier for the scan, if set
+            nullable: true
+          alignment_counts:
+            description: Counts of releases that fall within each bucket within the alignment results.
+            type: object
+            properties:
+              approved:
+                type: integer
+                description: Number of releases with an approved status.
+              denied:
+                type: integer
+                description: Number of releases with a denied status.
+              requested:
+                type: integer
+                description: Number of releases that have been requested to the catalog, but do not have a status yet.
+              unapproved:
+                type: integer
+                description: Number of releases without any status.
+              newly_introduced:
+                type: integer
+                description: Number of releases with a new issue from the baseline alignment.
+              no_new_introduction:
+                type: integer
+                description: Number of releases that are approved for use, but are not allowed to add any new issues to the project.
+          production_alignment_counts:
+            description: Counts of releases that are likely deployed with the project code that fall within each bucket within the alignment results.
+            type: object
+            properties:
+              approved:
+                type: integer
+                description: Number of releases with an approved status.
+              denied:
+                type: integer
+                description: Number of releases with a denied status.
+              requested:
+                type: integer
+                description: Number of releases that have been requested to the catalog, but do not have a status yet.
+              unapproved:
+                type: integer
+                description: Number of releases without any status.
+              newly_introduced:
+                type: integer
+                description: Number of releases with a new issue from the baseline alignment.
+              no_new_introduction:
+                type: integer
+                description: Number of releases that are approved for use, but are not allowed to add any new issues to the project.
+  parameters:
+    orgNameParam:
+      in: path
+      name: org_name
+      required: true
+      schema:
+        type: string
+        example: My-Company
+      description: The name of the Organization.
+  responses:
+    401Error:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandardError'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

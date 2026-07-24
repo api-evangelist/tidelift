@@ -1,0 +1,643 @@
+openapi: 3.0.0
+info:
+  version: 1.2.1
+  title: Tidelift External Alignments Reports API
+  x-logo:
+    url: /docs/assets/tidelift_logo.png
+    altText: Tidelift
+  license:
+    name: Proprietary
+servers:
+- url: https://api.tidelift.com/external-api
+security:
+- BearerAuth:
+  - user
+  - project
+  - organization
+tags:
+- name: Reports
+paths:
+  /v1/{org_name}/reports/{report_type}:
+    get:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - Reports
+      security:
+      - BearerAuth:
+        - user
+        - project
+        - organization
+      operationId: latestReport
+      x-rails-controller: reports_streaming#latest
+      summary: Get the latest report
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      - name: catalog_name
+        in: query
+        required: false
+        description: Name of catalog used to generate the report. A catalog or project is needed if a report ID was not provided.
+        schema:
+          type: string
+          example: default
+      - name: report_id
+        in: query
+        required: false
+        description: ID of the generated report
+        schema:
+          type: string
+          example: 12345-ABCDE
+      - name: projects[]
+        in: query
+        required: false
+        description: 'Names of projects to filter by. Currently only used for the following reports:
+
+
+          * all_projects_compliance
+
+          * all_projects_package_quality
+
+          * all_projects_violations
+
+          * license_attribution
+
+          * release_usage
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+          example:
+          - my-project
+          - my-other-project
+      - $ref: '#/components/parameters/reportTypeParam'
+      - name: catalog_standards[]
+        in: query
+        required: false
+        description: Catalog Standards to filter by (only supported by all_projects_violations)
+        schema:
+          type: array
+          items:
+            type: string
+          example:
+          - deprecation
+          - known_packages
+          - up_to_date
+          - vulnerabilities
+          - allowed_licenses
+          - identified_licenses
+      responses:
+        '200':
+          description: Returns latest catalog report JSON
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  report_type:
+                    $ref: '#/components/schemas/ReportTypes'
+                  catalog_id:
+                    type: string
+                  created_at:
+                    type: string
+                  report:
+                    type: array
+                    items:
+                      anyOf:
+                      - $ref: '#/components/schemas/ReleaseUsageReport'
+                      - $ref: '#/components/schemas/LicenseAttributionReport'
+                      - $ref: '#/components/schemas/AllProjectsComplianceReport'
+                      - $ref: '#/components/schemas/AllProjectsViolationsReport'
+                      - $ref: '#/components/schemas/AllProjectsPackageQualityReport'
+                      - $ref: '#/components/schemas/CatalogActivityAuditReport'
+                      - $ref: '#/components/schemas/EOLImpactReport'
+        '400':
+          description: Parameters specified are not correct or the report file is not found. A catalog or list of Projects is required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardError'
+        '401':
+          description: Parameters specified are not correct or API key does not have access to the Organization, Catalog, or all the Projects specifie. Must provide either a catalog, a list of projects, or a report ID.
+  /v1/{org_name}/reports/{report_type}/status:
+    get:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - Reports
+      security:
+      - BearerAuth:
+        - user
+        - project
+        - organization
+      operationId: reportStatus
+      x-rails-controller: reports#status
+      summary: Get the status of a report
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      - name: catalog_name
+        in: query
+        required: false
+        description: Name of catalog used to generate the report.  A catalog or project is needed if a report ID was not provided.
+        schema:
+          type: string
+          example: default
+      - name: report_id
+        in: query
+        required: false
+        description: ID of the generated report
+        schema:
+          type: string
+          example: 12345-ABCDE
+      - name: projects[]
+        in: query
+        required: false
+        description: 'Names of projects to filter by. Currently only used for the following reports:
+
+
+          * all_projects_compliance
+
+          * all_projects_package_quality
+
+          * all_projects_violations
+
+          * license_attribution
+
+          * release_usage
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+          example:
+          - my-project
+          - my-other-project
+      - name: catalog_standards[]
+        in: query
+        required: false
+        description: Catalog Standards to filter by (only supported by all_projects_violations)
+        schema:
+          type: array
+          items:
+            type: string
+          example:
+          - deprecation
+          - known_packages
+          - up_to_date
+          - vulnerabilities
+          - allowed_licenses
+          - identified_licenses
+      - $ref: '#/components/parameters/reportTypeParam'
+      responses:
+        '200':
+          description: Returns latest catalog report JSON
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                - report_id
+                - status
+                properties:
+                  report_id:
+                    type: string
+                  status:
+                    type: string
+        '401':
+          description: Parameters specified are not correct or API key does not have access to the Organization, Catalog, or all the Projects specifie. Must provide either a catalog, a list of projects, or a report ID.
+        '400':
+          description: Report with parameters not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardError'
+  /v1/{org_name}/reports/{report_type}/generate:
+    post:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - Reports
+      security:
+      - BearerAuth:
+        - user
+        - project
+        - organization
+      operationId: generateReport
+      x-rails-controller: reports#generate
+      summary: Run a new report
+      description: Note that organization and catalog wide reports are generated daily for subscribers and so should not need to be manually generated and you can instead just retrieve the most recent report.
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      - name: catalog_name
+        in: query
+        required: false
+        description: Name of catalog used to generate the report.
+        schema:
+          type: string
+          example: default
+      - name: projects[]
+        in: query
+        required: false
+        description: 'Names of projects to filter by. Currently only used for the following reports:
+
+
+          * all_projects_compliance
+
+          * all_projects_package_quality
+
+          * all_projects_violations
+
+          * license_attribution
+
+          * release_usage
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+          example:
+          - my-project
+          - my-other-project
+      - name: catalog_standards[]
+        in: query
+        required: false
+        description: Catalog Standards to filter by (only supported by all_projects_violations)
+        schema:
+          type: array
+          items:
+            type: string
+          example:
+          - deprecation
+          - known_packages
+          - up_to_date
+          - vulnerabilities
+          - allowed_licenses
+          - identified_licenses
+      - $ref: '#/components/parameters/reportTypeParam'
+      responses:
+        '200':
+          description: Returns latest catalog report JSON
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                - report_id
+                - status
+                properties:
+                  report_id:
+                    type: string
+                  status:
+                    type: string
+        '400':
+          description: Parameters specified are not correct. A catalog or list of Projects is required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardError'
+        '401':
+          description: API key does not have access to the Organization, Catalog, or one of the Projects specified.
+components:
+  schemas:
+    ReleaseUsageReport:
+      type: object
+      properties:
+        package_platform:
+          type: string
+        package_name:
+          type: string
+        package_version:
+          type: string
+        package_status:
+          type: string
+        license:
+          type: string
+        date_added:
+          type: string
+        published_date:
+          type: string
+          nullable: true
+        projects_using:
+          type: string
+        decision_by_name:
+          type: string
+        decision_by_email:
+          type: string
+        internal_package:
+          type: string
+        package_link:
+          type: string
+        package_source:
+          type: string
+        purl:
+          type: string
+        deny_at:
+          type: string
+          nullable: true
+    StandardError:
+      description: The standard error format
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: An error code representing the error
+          example: an_error_code
+        message:
+          type: string
+          description: A human-readable error message representing the error
+          example: An error message.
+        details:
+          type: object
+          description: An optional object with extra helpful details about the error.
+          example:
+            errors:
+              name: is not a valid email.
+    AllProjectsViolationsReport:
+      type: object
+      properties:
+        project:
+          type: string
+        external_identifier:
+          type: string
+        catalog:
+          type: string
+        groups:
+          type: string
+        violation_type:
+          type: string
+        platform:
+          type: string
+        direct_package:
+          type: string
+        direct_verison:
+          type: string
+        direct_purl:
+          type: string
+        violating_package:
+          type: string
+        violating_version:
+          type: string
+        violating_purl:
+          type: string
+        dependency_chain:
+          type: string
+        dependency_scope:
+          type: string
+        action:
+          type: string
+        action_status:
+          type: string
+        action_recommendation:
+          type: string
+        recommended_dependency_chain:
+          type: string
+        violation_id:
+          type: string
+        violation_title:
+          type: string
+        violation_description:
+          type: string
+        violation_allowed:
+          type: boolean
+        violation_link:
+          type: string
+        lifter_recommendation:
+          type: string
+        report_date:
+          type: string
+    LicenseAttributionReport:
+      type: object
+      properties:
+        package_name:
+          type: string
+        package_version:
+          type: string
+        package_platform:
+          type: string
+        dependency_type:
+          type: string
+        detected_license:
+          type: string
+        license_source:
+          type: string
+        projects_using:
+          type: string
+        external_link:
+          type: string
+        package_link:
+          type: string
+        license_text:
+          type: string
+    AllProjectsPackageQualityReport:
+      type: object
+      properties:
+        purl:
+          type: string
+        platform:
+          type: string
+        package_name:
+          type: string
+        tidelift_recommendation:
+          type: string
+        tidelift_recommendation_reasons:
+          type: string
+        production_projects_count:
+          type: string
+        non_production_projects_count:
+          type: string
+        direct_projects_count:
+          type: string
+        transitive_projects_count:
+          type: string
+        project_usage_link:
+          type: string
+        package_link:
+          type: string
+        report_date:
+          type: string
+    ReportTypes:
+      type: string
+      enum:
+      - all_projects_compliance
+      - all_projects_package_quality
+      - all_projects_violations
+      - catalog_activity_audit
+      - eol_impact
+      - license_attribution
+      - release_usage
+      example: all_projects_violations
+    CatalogActivityAuditReport:
+      type: object
+      properties:
+        date:
+          type: string
+        event_name:
+          type: string
+        event_details:
+          type: string
+        user:
+          type: string
+        event_link:
+          type: string
+    PackageCheckStatus:
+      type: string
+      enum:
+      - passed
+      - not_passed
+      - noassertion
+      - pending
+    AllProjectsComplianceReport:
+      type: object
+      properties:
+        project:
+          type: string
+        external_identifier:
+          type: string
+          nullable: true
+        catalog:
+          type: string
+        groups:
+          type: string
+        alignment:
+          type: number
+        project_link:
+          type: string
+        blocked_releases_count:
+          type: integer
+        low_security_vulnerabilities:
+          type: integer
+        medium_security_vulnerabilities:
+          type: integer
+        high_security_vulnerabilities:
+          type: integer
+        critical_security_vulnerabilities:
+          type: integer
+        active_release_stream_violations:
+          type: integer
+        allowed_licenses_violations:
+          type: integer
+        deprecation_violations:
+          type: integer
+        identified_licenses_violations:
+          type: integer
+        known_packages_violations:
+          type: integer
+        prereleases_violations:
+          type: integer
+        removed_releases_violations:
+          type: integer
+        up_to_date_violations:
+          type: integer
+        vulnerabilities_violations:
+          type: integer
+        eol_packages_violations:
+          type: integer
+        known_releases_violations:
+          type: integer
+        report_date:
+          type: string
+    EOLImpactReport:
+      type: object
+      properties:
+        purl:
+          type: string
+        platform:
+          type: string
+        package_name:
+          type: string
+        version_in_use:
+          type: string
+          description: Version requested in catalog
+        latest_stable_version:
+          type: string
+          description: Latest stable version number of package
+        days_out:
+          type: string
+          description: Number of days between the publish date of latest stable version and version in use
+        versions_out:
+          type: string
+          description: Count of major and minor versions between the latest stable version and version in use
+        release_is_not_eol:
+          $ref: '#/components/schemas/PackageCheckStatus'
+        release_is_not_eol_explanation:
+          type: string
+          description: The categorical reason this release is or is not considered to be at end of life
+          enum:
+          - release_is_attested_supported
+          - release_is_attested_unsupported
+          - release_is_prerelease
+          - release_is_assumed_supported
+          - release_is_assumed_unsupported
+        maintenance_plan:
+          type: string
+          description: The recent versions supported by maintainer or URL at which they report their maintenance policy
+        package_is_not_eol:
+          $ref: '#/components/schemas/PackageCheckStatus'
+        package_is_not_eol_explanation:
+          type: string
+          description: The categorical reason this package is or is not considered to be at end of life
+          enum:
+          - package_is_end_of_life
+          - package_has_future_end_of_life
+          - package_has_no_known_end_of_life
+          - package_repository_is_unmaintained
+          - package_is_renamed
+          - package_is_unknown
+        package_eol_effective_on:
+          type: string
+          description: Date at which the End of Life takes effect
+        package_vuln_count:
+          type: string
+          description: Count of vulnerabilities affecting package
+        release_vuln_count:
+          type: string
+          description: Count of vulnerabilities affecting release
+        project_count:
+          type: string
+          description: Count of projects used by release
+        project_names:
+          type: string
+          description: Comma separated list of project names used by release
+        direct:
+          type: string
+          description: Returns true if any projects use this package as a direct dependency
+          enum:
+          - true
+          - false
+        report_date:
+          type: string
+          description: Timestamp at which report was generated.
+  parameters:
+    orgNameParam:
+      in: path
+      name: org_name
+      required: true
+      schema:
+        type: string
+        example: My-Company
+      description: The name of the Organization.
+    reportTypeParam:
+      in: path
+      name: report_type
+      required: true
+      description: "Type of report\n\n - [all_projects_compliance (compliance of projects to catalog standards)](https://support.tidelift.com/hc/en-us/articles/24885171849236)\n - [all_projects_package_quality (Tidelift recommendations by package)](https://support.tidelift.com/hc/en-us/articles/24971666742932)\n - [all_projects_violations (All projects violations)](https://support.tidelift.com/hc/en-us/articles/24883174701332)\n - catalog_activity_audit (Catalog Activity)\n - eol_impact (End of life)\n - license_attribution (License attribution)\n - release_usage (Catalog-wide open source use)\n"
+      schema:
+        $ref: '#/components/schemas/ReportTypes'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

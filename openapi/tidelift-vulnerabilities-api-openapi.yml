@@ -1,0 +1,318 @@
+openapi: 3.0.0
+info:
+  version: 1.2.1
+  title: Tidelift External Alignments Vulnerabilities API
+  x-logo:
+    url: /docs/assets/tidelift_logo.png
+    altText: Tidelift
+  license:
+    name: Proprietary
+servers:
+- url: https://api.tidelift.com/external-api
+security:
+- BearerAuth:
+  - user
+  - project
+  - organization
+tags:
+- name: Vulnerabilities
+paths:
+  /v1/vulnerabilities/{vulnerability_id}:
+    get:
+      x-tidelift-api-meta:
+        product-area: intelligence-api
+        access-level: small
+        visibility: public
+      tags:
+      - Vulnerabilities
+      security:
+      - BearerAuth:
+        - user
+        - organization
+      operationId: getVulnerability
+      x-rails-controller: vulnerabilities#show
+      summary: Get a vulnerability
+      description: Get a vulnerability, along with any recommendation
+      parameters:
+      - $ref: '#/components/parameters/vulnerabilityIdParam'
+      responses:
+        '200':
+          description: The vulnerability with recommendations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vulnerability'
+        '404':
+          $ref: '#/components/responses/404Error'
+  /v1/vulnerabilities/{vulnerability_id}/affected_releases:
+    get:
+      x-tidelift-api-meta:
+        product-area: intelligence-api
+        access-level: small
+        visibility: public
+      tags:
+      - Vulnerabilities
+      security:
+      - BearerAuth:
+        - user
+        - organization
+      operationId: getVulnerabilityAffectedReleases
+      x-rails-controller: vulnerabilities#affected_releases
+      summary: Get affected releases for a vulnerability
+      description: Get affected releases for a vulnerability
+      parameters:
+      - $ref: '#/components/parameters/vulnerabilityIdParam'
+      responses:
+        '200':
+          description: The vulnerability's affected releases.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/PaginationEnvelope'
+                - type: object
+                  additionalProperties: false
+                  required:
+                  - results
+                  properties:
+                    results:
+                      type: array
+                      items:
+                        type: object
+                        additionalProperties: false
+                        required:
+                        - platform
+                        - name
+                        - version
+                        - purl
+                        properties:
+                          platform:
+                            type: string
+                          name:
+                            type: string
+                          purl:
+                            type: string
+                          version:
+                            type: string
+                            nullable: true
+        '404':
+          $ref: '#/components/responses/404Error'
+components:
+  schemas:
+    StandardError:
+      description: The standard error format
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: An error code representing the error
+          example: an_error_code
+        message:
+          type: string
+          description: A human-readable error message representing the error
+          example: An error message.
+        details:
+          type: object
+          description: An optional object with extra helpful details about the error.
+          example:
+            errors:
+              name: is not a valid email.
+    PaginationEnvelope:
+      type: object
+      required:
+      - current_page
+      - next_page
+      - prev_page
+      - total_pages
+      - total_count
+      - per_page
+      properties:
+        current_page:
+          type: integer
+        next_page:
+          type: integer
+          nullable: true
+        prev_page:
+          type: integer
+          nullable: true
+        total_pages:
+          type: integer
+        total_count:
+          type: integer
+        per_page:
+          type: integer
+    Vulnerability:
+      type: object
+      additionalProperties: false
+      required:
+      - vuln_id
+      - url
+      - nist_url
+      - description
+      - severity
+      - affected_packages
+      properties:
+        updated_at:
+          type: string
+        vuln_id:
+          type: string
+          nullable: true
+        url:
+          type: string
+          nullable: true
+        nist_url:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        cvss_score:
+          type: string
+          nullable: true
+        severity:
+          type: string
+          nullable: true
+        epss_percentile:
+          type: string
+          nullable: true
+        epss_probability:
+          type: string
+          nullable: true
+        epss_score:
+          type: string
+          nullable: true
+        known_exploited:
+          type: boolean
+        cwe_ids:
+          type: array
+          items:
+            type: string
+        affected_packages:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            required:
+            - package
+            - platform
+            - name
+            - purl
+            - recommendation
+            - recommendation_details
+            - unaffected_versions
+            properties:
+              package:
+                type: string
+              platform:
+                type: string
+              name:
+                type: string
+              purl:
+                type: string
+              recommendation:
+                type: string
+                enum:
+                - ignore
+                - upgrade
+                - upgrade_or_workaround
+              recommendation_details:
+                type: object
+                nullable: true
+                required:
+                - id
+                - impact_score
+                - impact_description
+                - real_issue
+                - false_positive_reason
+                - includes_dev
+                - specific_methods_affected
+                - specific_methods_description
+                - other_conditions
+                - other_conditions_description
+                - workaround_available
+                - workaround_description
+                - created_at
+                - updated_at
+                properties:
+                  id:
+                    type: string
+                  created_at:
+                    type: string
+                    format: date-time
+                  updated_at:
+                    type: string
+                    format: date-time
+                  impact_score:
+                    type: integer
+                    nullable: true
+                    description: When using this package as intended, how likely are users to be affected? A general score out of 10.
+                  impact_description:
+                    type: string
+                    nullable: true
+                    description: Detailed explanation of the impact score.
+                  includes_dev:
+                    type: boolean
+                    nullable: true
+                    description: Does this vulnerability apply when the package is only used within a Development or CI environment?
+                  other_conditions:
+                    type: boolean
+                    nullable: true
+                    description: Are there any other conditions that users should check for to determine if they're vulnerable?
+                  other_conditions_description:
+                    type: string
+                    nullable: true
+                    description: Detailed explanation of the other conditions result.
+                  workaround_available:
+                    type: boolean
+                    nullable: true
+                    description: For users who are unable to upgrade to a supported release, is there a workaround available?
+                  workaround_description:
+                    type: string
+                    nullable: true
+                    description: Detailed explanation of the workaround.
+                  specific_methods_affected:
+                    type: boolean
+                    nullable: true
+                    description: Does this vulnerability apply only if certain methods, classes, or functionality are in use?
+                  specific_methods_description:
+                    type: string
+                    nullable: true
+                    description: Detailed explanation of the specific methods result.
+                  real_issue:
+                    type: boolean
+                    description: Is this a real vulnerability or a false positive?
+                  false_positive_reason:
+                    type: string
+                    nullable: true
+                    description: Detailed explanation of the false positive result.
+              affected_versions:
+                type: array
+                items:
+                  type: string
+              unaffected_versions:
+                type: string
+                nullable: true
+  responses:
+    404Error:
+      description: Record Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandardError'
+  parameters:
+    vulnerabilityIdParam:
+      in: path
+      name: vulnerability_id
+      required: true
+      schema:
+        type: string
+        example:
+        - CVE-2021-44228
+        description: The id of the vulnerability.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

@@ -1,0 +1,255 @@
+openapi: 3.0.0
+info:
+  version: 1.2.1
+  title: Tidelift External Alignments Attestations API
+  x-logo:
+    url: /docs/assets/tidelift_logo.png
+    altText: Tidelift
+  license:
+    name: Proprietary
+servers:
+- url: https://api.tidelift.com/external-api
+security:
+- BearerAuth:
+  - user
+  - project
+  - organization
+tags:
+- name: Attestations
+paths:
+  /v1/{org_name}/projects/import-sbom:
+    post:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - Attestations
+      security:
+      - BearerAuth:
+        - user
+        - project
+        - organization
+      operationId: importSbomProject
+      x-rails-controller: projects#import_sbom
+      summary: Create a new project with an initial scan, using the provided SBOM file as the manifest.
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: 'An SBOM file of type: SPDX tag/value, CycloneDX JSON or CycloneDX XML.'
+                project_name:
+                  type: string
+                  description: Can be used to set project name if a name is not detected in the SBOM file.
+                groups:
+                  type: array
+                  description: List of group slugs or names to associate the project with
+                  items:
+                    type: string
+                catalog:
+                  type: string
+                  description: Catalog to align to. Required if mulitple catalogs are in use
+              required:
+              - file
+      responses:
+        '201':
+          description: Project that was created
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Project'
+                - type: object
+                  additionalProperties: false
+                  properties:
+                    using_catalog:
+                      type: string
+                      nullable: true
+                    dot_tidelift:
+                      type: string
+                    attestation_report_url:
+                      type: string
+        '400':
+          description: The project name, groups, catalog or SBOM file are invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardError'
+        '401':
+          $ref: '#/components/responses/401Error'
+        '403':
+          $ref: '#/components/responses/403GroupUsers'
+  /v1/{org_name}/projects/{project}/attestation-report:
+    get:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - Attestations
+      security:
+      - BearerAuth:
+        - user
+        - project
+        - organization
+      operationId: getAttestationReport
+      x-rails-controller: projects#attestation_report
+      summary: Get the TACOS-formatted attestation report for packages used in a project
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      - $ref: '#/components/parameters/projectParam'
+      - name: revision
+        required: false
+        in: query
+        description: sha revision of the project scan for which to download the attestation report (if not provided will use the latest scan of the project's default branch)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The attestation report
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                - '@id'
+                - location
+                - author
+                - role
+                - LastModifiedDateTimeUTC
+                - TACOSversion
+                - application
+                - statements
+                properties:
+                  '@id':
+                    type: string
+                    description: the TACOS framework URL (https://github.com/tacosframework)
+                  location:
+                    type: string
+                    description: URL of this attestation report
+                  author:
+                    type: string
+                    description: the author of the report (Tidelift Support)
+                  role:
+                    type: string
+                    description: the role of the author (Attestor)
+                  LastModifiedDateTimeUTC:
+                    type: string
+                    description: timestamp of the report's creation
+                  TACOSversion:
+                    type: string
+                    description: the version of TACOS used to generate the report
+                  application:
+                    type: string
+                    description: the name of the project for which the report was generated
+                  statements:
+                    type: array
+                    items:
+                      type: object
+                      description: a hash of TACOS statements (https://github.com/tacosframework/TACOS-spec) and their values at time of report generation
+        '400':
+          description: project not found, or scan not found, or attestation report not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardError'
+        '401':
+          $ref: '#/components/responses/401Error'
+components:
+  schemas:
+    StandardError:
+      description: The standard error format
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: An error code representing the error
+          example: an_error_code
+        message:
+          type: string
+          description: A human-readable error message representing the error
+          example: An error message.
+        details:
+          type: object
+          description: An optional object with extra helpful details about the error.
+          example:
+            errors:
+              name: is not a valid email.
+    Project:
+      type: object
+      additionalProperties: false
+      required:
+      - name
+      - groups
+      - branching_behavior
+      - default_branch
+      - external_identifier
+      properties:
+        name:
+          type: string
+        catalog:
+          type: string
+        groups:
+          type: array
+          description: List of group slugs associated with the project
+          items:
+            type: string
+          nullable: true
+        branching_behavior:
+          type: string
+          enum:
+          - specified_branch
+          - latest_aligned_branch
+          description: 'Controls how the project''s default branch is determined. `specified_branch` uses the branch set in `default_branch`. `latest_aligned_branch` automatically updates to the most recently aligned branch.
+
+            '
+        default_branch:
+          type: string
+        external_identifier:
+          type: string
+          description: An optional custom identifier that can be set that corresponds to something outside of Tidelift
+          nullable: true
+  parameters:
+    orgNameParam:
+      in: path
+      name: org_name
+      required: true
+      schema:
+        type: string
+        example: My-Company
+      description: The name of the Organization.
+    projectParam:
+      in: path
+      name: project
+      required: true
+      schema:
+        type: string
+      description: The name of the Project.
+  responses:
+    401Error:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandardError'
+    403GroupUsers:
+      description: The user is not an admin of the organization or doesn't belong to the organization.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandardError'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

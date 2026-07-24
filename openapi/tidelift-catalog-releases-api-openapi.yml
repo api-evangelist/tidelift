@@ -1,0 +1,1052 @@
+openapi: 3.0.0
+info:
+  version: 1.2.1
+  title: Tidelift External Alignments Catalog Releases API
+  x-logo:
+    url: /docs/assets/tidelift_logo.png
+    altText: Tidelift
+  license:
+    name: Proprietary
+servers:
+- url: https://api.tidelift.com/external-api
+security:
+- BearerAuth:
+  - user
+  - project
+  - organization
+tags:
+- name: Catalog Releases
+paths:
+  /v1/{org_name}/catalogs/{catalog_name}/releases:
+    get:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - Catalog Releases
+      security:
+      - BearerAuth:
+        - user
+        - project
+        - organization
+      operationId: listReleases
+      x-rails-controller: catalog#releases
+      summary: List all releases in a catalog
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      - $ref: '#/components/parameters/catalogNameParam'
+      - name: page
+        in: query
+        description: Page in results
+        schema:
+          type: number
+      - name: per_page
+        in: query
+        description: Number of results per page
+        schema:
+          type: number
+      - name: id
+        in: query
+        description: id
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: Status
+        schema:
+          type: string
+      - name: filter
+        in: query
+        description: Filter releases
+        style: deepObject
+        explode: true
+        schema:
+          type: object
+          properties:
+            platform:
+              description: By platform
+              type: string
+            name:
+              description: By name
+              type: string
+      responses:
+        '200':
+          description: Returns paginated catalog releases
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/PaginationEnvelope'
+                - type: object
+                  additionalProperties: false
+                  required:
+                  - results
+                  - platforms
+                  properties:
+                    results:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/CatalogReleaseGroup'
+                    platforms:
+                      type: array
+                      items:
+                        type: array
+                        items:
+                          anyOf:
+                          - type: string
+                          - type: integer
+        '401':
+          $ref: '#/components/responses/401Error'
+  /v1/catalog/{org_name}/{project}/requests:
+    post:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - Catalog Releases
+      security:
+      - BearerAuth:
+        - user
+        - project
+        - organization
+      operationId: createCatalogRequest
+      x-rails-controller: catalog_requests#create
+      summary: Create a new catalog request
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      - $ref: '#/components/parameters/projectParam'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CatalogRequest'
+      responses:
+        '201':
+          description: requests a single package
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogRequestResponse'
+        '401':
+          $ref: '#/components/responses/401Error'
+  /v1/catalog/{org_name}/{project}/request:
+    post:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      deprecated: true
+      tags:
+      - Catalog Releases
+      description: This endpoint has been deprecated in favor of POST /v1/catalog/{org_name}/{project}/requests.
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      - $ref: '#/components/parameters/projectParam'
+      responses:
+        '201':
+          description: requests a single package
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogRequestResponse'
+        '401':
+          $ref: '#/components/responses/401Error'
+  /v1/catalog/{org_name}/{project}/batch_requests:
+    post:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - Catalog Releases
+      security:
+      - BearerAuth:
+        - user
+        - project
+        - organization
+      operationId: createBatchCatalogRequest
+      x-rails-controller: catalog_requests#batch_create
+      summary: Create a new batch catalog request
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      - $ref: '#/components/parameters/projectParam'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchRequest'
+      responses:
+        '201':
+          description: requests multiple packages
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchRequestResponse'
+        '401':
+          $ref: '#/components/responses/401Error'
+        '422':
+          $ref: '#/components/responses/422Error'
+  /v1/catalog/{org_name}/{project}/batch_request:
+    post:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      deprecated: true
+      tags:
+      - Catalog Releases
+      description: This endpoint has been deprecated in favor of POST /v1/catalog/{org_name}/{project}/batch_requests.
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      - $ref: '#/components/parameters/projectParam'
+      responses:
+        '201':
+          description: requests multiple packages
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchRequestResponse'
+        '401':
+          $ref: '#/components/responses/401Error'
+        '422':
+          $ref: '#/components/responses/422Error'
+  /v1/catalog/{org_name}/{project}/lookup/{platform}/{package_name}:
+    get:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      deprecated: true
+      tags:
+      - Catalog Releases
+      description: This endpoint has been deprecated in favor of GET /v1/{org_name}/catalogs/{catalog_name}/releases/lookup.
+      security:
+      - BearerAuth:
+        - user
+        - project
+        - organization
+      operationId: lookupPackageInCatalogDeprecated
+      x-rails-controller: catalog#lookup
+      summary: Retrieve information on a package in a catalog
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      - $ref: '#/components/parameters/projectParam'
+      - name: platform
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: package_name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: catalog_name
+        in: query
+        description: Name of catalog (required if not "default")
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Catalog information for package
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LookupResponse'
+        '401':
+          $ref: '#/components/responses/401Error'
+  /v1/{org_name}/catalogs/{catalog_name}/releases/lookup:
+    get:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - Catalog Releases
+      security:
+      - BearerAuth:
+        - user
+        - project
+        - organization
+      operationId: lookupPackageInCatalog
+      x-rails-controller: catalog#lookup
+      summary: Retrieve information on a package in a catalog
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      - $ref: '#/components/parameters/catalogNameParam'
+      - name: package_platform
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: package_name
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Catalog information for package
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LookupResponse'
+        '401':
+          $ref: '#/components/responses/401Error'
+    post:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - Catalog Releases
+      security:
+      - BearerAuth:
+        - user
+        - project
+        - organization
+      operationId: lookupPackagesInCatalog
+      x-rails-controller: catalog#batch_lookup
+      summary: Retrieve information on multiple packages in a catalog
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Package hashes
+              properties:
+                packages:
+                  description: The packages being looked up
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Package'
+              additionalProperties: false
+              required:
+              - packages
+      responses:
+        '200':
+          description: Details of packages found from the search and any package names that had no results.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                - packages
+                - missing_results
+                properties:
+                  packages:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LookupResponse'
+                  missing_results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PackageWithHint'
+        '400':
+          description: Request body format incorrect or more than 30 packages requested.
+        '401':
+          $ref: '#/components/responses/401Error'
+        '403':
+          description: 403 Forbidden
+components:
+  parameters:
+    orgNameParam:
+      in: path
+      name: org_name
+      required: true
+      schema:
+        type: string
+        example: My-Company
+      description: The name of the Organization.
+    catalogNameParam:
+      in: path
+      name: catalog_name
+      required: true
+      schema:
+        type: string
+        example: default
+      description: The name of the Catalog.
+    projectParam:
+      in: path
+      name: project
+      required: true
+      schema:
+        type: string
+      description: The name of the Project.
+  schemas:
+    CatalogRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        platform:
+          type: string
+        version:
+          type: string
+        message:
+          type: string
+    Package:
+      type: object
+      additionalProperties: false
+      required:
+      - platform
+      - name
+      properties:
+        platform:
+          type: string
+        name:
+          type: string
+    LifterRecommendationFragment:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - impact_score
+      - impact_description
+      - real_issue
+      - false_positive_reason
+      - includes_dev
+      - specific_methods_affected
+      - specific_methods_description
+      - other_conditions
+      - other_conditions_description
+      - workaround_available
+      - workaround_description
+      - visibility
+      - created_at
+      - updated_at
+      properties:
+        id:
+          type: string
+        impact_score:
+          type: number
+          nullable: true
+        impact_description:
+          type: string
+          nullable: true
+        real_issue:
+          type: boolean
+        false_positive_reason:
+          type: string
+          nullable: true
+        includes_dev:
+          type: boolean
+          nullable: true
+        specific_methods_affected:
+          type: boolean
+          nullable: true
+        specific_methods_description:
+          type: string
+          nullable: true
+        other_conditions:
+          type: boolean
+          nullable: true
+        other_conditions_description:
+          type: string
+          nullable: true
+        workaround_available:
+          type: boolean
+          nullable: true
+        workaround_description:
+          type: string
+          nullable: true
+        visibility:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+    LookupResponse:
+      type: object
+      required:
+      - platform
+      - name
+      - description
+      - license
+      - unknown
+      - see_more_url
+      - releases
+      properties:
+        platform:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        license:
+          type: string
+          nullable: true
+        unknown:
+          type: boolean
+        see_more_url:
+          type: string
+        releases:
+          type: object
+          additionalProperties: false
+          required:
+          - approved
+          - denied
+          - available
+          properties:
+            approved:
+              type: array
+              items:
+                $ref: '#/components/schemas/LookupDetail'
+            warning:
+              type: array
+              items:
+                $ref: '#/components/schemas/LookupDetail'
+            no_new_introduction:
+              type: array
+              items:
+                $ref: '#/components/schemas/LookupDetail'
+            available:
+              type: array
+              items:
+                $ref: '#/components/schemas/LookupDetail'
+            denied:
+              type: array
+              items:
+                $ref: '#/components/schemas/LookupDetail'
+        catalog:
+          type: object
+          additionalProperties: false
+          required:
+          - display_name
+          - name
+          - id
+          properties:
+            display_name:
+              type: string
+            name:
+              type: string
+            id:
+              type: string
+        vulnerabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/FullVulnerability'
+    CatalogReleaseGroup:
+      type: object
+      additionalProperties: false
+      required:
+      - approved_releases
+      - denied_releases
+      - requested_releases
+      - platform
+      - name
+      properties:
+        approved_releases:
+          type: array
+          items:
+            type: string
+        denied_releases:
+          type: array
+          items:
+            type: string
+            nullable: true
+        requested_releases:
+          type: array
+          items:
+            type: string
+        warning_releases:
+          type: array
+          items:
+            type: string
+        no_new_introduction_releases:
+          type: array
+          items:
+            type: string
+        platform:
+          type: string
+        name:
+          type: string
+    CatalogRequestResponse:
+      type: object
+      properties:
+        platform:
+          type: string
+        name:
+          type: string
+        version:
+          type: string
+        status:
+          type: string
+        reviewer_notes:
+          type: string
+          nullable: true
+        catalog:
+          type: object
+          properties:
+            display_name:
+              type: string
+            name:
+              type: string
+            id:
+              type: string
+    BatchRequestResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              platform:
+                type: string
+              name:
+                type: string
+              version:
+                type: string
+              status:
+                type: string
+              reviewer_notes:
+                type: string
+                nullable: true
+              repository_id:
+                type: integer
+        incomplete:
+          type: array
+          items:
+            type: object
+            properties:
+              platform:
+                type: string
+              name:
+                type: string
+              version:
+                type: string
+              status:
+                type: string
+              reviewer_notes:
+                type: string
+                nullable: true
+              repository_id:
+                type: integer
+        new:
+          type: array
+          items:
+            type: object
+            properties:
+              platform:
+                type: string
+              name:
+                type: string
+              version:
+                type: string
+              status:
+                type: string
+              reviewer_notes:
+                type: string
+                nullable: true
+              repository_id:
+                type: integer
+        denied:
+          type: array
+          items:
+            type: object
+            properties:
+              platform:
+                type: string
+              name:
+                type: string
+              version:
+                type: string
+              status:
+                type: string
+              reviewer_notes:
+                type: string
+                nullable: true
+              repository_id:
+                type: integer
+        approved:
+          type: array
+          items:
+            type: object
+            properties:
+              platform:
+                type: string
+              name:
+                type: string
+              version:
+                type: string
+              status:
+                type: string
+              reviewer_notes:
+                type: string
+                nullable: true
+              repository_id:
+                type: integer
+        unknown:
+          type: array
+          items:
+            type: object
+            properties:
+              platform:
+                type: string
+              name:
+                type: string
+              version:
+                type: string
+              status:
+                type: string
+              reviewer_notes:
+                type: string
+                nullable: true
+              repository_id:
+                type: integer
+        catalog:
+          type: object
+          properties:
+            name:
+              type: string
+            display_name:
+              type: string
+            id:
+              type: string
+    Violations:
+      type: array
+      items:
+        anyOf:
+        - $ref: '#/components/schemas/AllowedLicensesViolation'
+        - $ref: '#/components/schemas/DeprecationViolation'
+        - $ref: '#/components/schemas/EOLPackagesViolation'
+        - $ref: '#/components/schemas/IdentifiedLicensesViolation'
+        - $ref: '#/components/schemas/UpToDateViolation'
+        - $ref: '#/components/schemas/VulnerabilitiesViolation'
+    PackageWithHint:
+      allOf:
+      - $ref: '#/components/schemas/Package'
+      - type: object
+        description: An optional hint, which might be the reason the package wasn't found.
+        additionalProperties: false
+        properties:
+          hint:
+            type: string
+    DeprecationViolation:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ViolationCommon'
+      - type: object
+        required:
+        - deprecation
+        properties:
+          deprecation:
+            type: object
+            additionalProperties: false
+            required:
+            - deprecated_at
+            - reason
+            - package_to_use_instead
+            properties:
+              deprecated_at:
+                type: string
+                nullable: true
+              reason:
+                type: string
+                nullable: true
+              package_to_use_instead:
+                type: object
+                additionalProperties: false
+                nullable: true
+                required:
+                - platform
+                - name
+                properties:
+                  platform:
+                    type: string
+                  name:
+                    type: string
+    LookupDetail:
+      type: object
+      additionalProperties: false
+      properties:
+        version:
+          type: string
+        deny_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: Date of any pending future denial, if set
+        approve_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: Date of any pending future approval, if set
+        published_at:
+          type: string
+          format: date-time
+          nullable: true
+        notes:
+          type: string
+          nullable: true
+        vulnerabilities:
+          type: array
+          items:
+            type: object
+            nullable: true
+            properties:
+              id:
+                type: string
+              upgrade_path:
+                type: array
+                items:
+                  type: string
+        violations:
+          $ref: '#/components/schemas/Violations'
+    IdentifiedLicensesViolation:
+      type: object
+      additionalProperties: false
+      allOf:
+      - $ref: '#/components/schemas/ViolationCommon'
+      - type: object
+        required:
+        - original_license
+        - repository_url
+        properties:
+          original_license:
+            type: string
+            nullable: true
+          repository_url:
+            type: string
+            nullable: true
+    ViolationCommon:
+      type: object
+      required:
+      - catalog_standard
+      - violation_id
+      - title
+      additionalProperties: false
+      properties:
+        catalog_standard:
+          type: string
+        violation_id:
+          type: string
+        title:
+          type: string
+        package_name:
+          type: string
+        package_platform:
+          type: string
+        version:
+          type: string
+        task_id:
+          type: string
+          nullable: true
+    FullVulnerability:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - url
+      - description
+      - recommendation
+      - live_date
+      - releases
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+        description:
+          type: string
+        recommendation:
+          type: string
+        live_date:
+          type: string
+        releases:
+          type: array
+          items:
+            type: string
+    UpToDateViolation:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ViolationCommon'
+      - type: object
+        required:
+        - up_to_date
+        properties:
+          up_to_date:
+            type: object
+            additionalProperties: false
+            required:
+            - release_date
+            - days_too_old
+            properties:
+              release_date:
+                type: string
+                nullable: true
+              days_too_old:
+                type: string
+                nullable: true
+    PaginationEnvelope:
+      type: object
+      required:
+      - current_page
+      - next_page
+      - prev_page
+      - total_pages
+      - total_count
+      - per_page
+      properties:
+        current_page:
+          type: integer
+        next_page:
+          type: integer
+          nullable: true
+        prev_page:
+          type: integer
+          nullable: true
+        total_pages:
+          type: integer
+        total_count:
+          type: integer
+        per_page:
+          type: integer
+    VulnerabilitiesViolation:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ViolationCommon'
+      - type: object
+        required:
+        - vulnerability
+        properties:
+          vulnerability:
+            type: object
+            additionalProperties: false
+            required:
+            - id
+            - severity
+            - description
+            - date
+            - url
+            - severity_rating
+            - epss_percentile
+            - epss_probability
+            - epss_score
+            - known_exploited
+            - lifter_recommendations
+            properties:
+              id:
+                type: string
+                nullable: true
+              severity:
+                type: string
+                nullable: true
+              description:
+                type: string
+                nullable: true
+              date:
+                type: string
+              url:
+                type: string
+                nullable: true
+              severity_rating:
+                type: string
+                nullable: true
+              epss_percentile:
+                type: string
+                nullable: true
+              epss_probability:
+                type: string
+                nullable: true
+              epss_score:
+                type: string
+                nullable: true
+              known_exploited:
+                type: boolean
+                nullable: true
+              lifter_recommendations:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LifterRecommendationFragment'
+    StandardError:
+      description: The standard error format
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: An error code representing the error
+          example: an_error_code
+        message:
+          type: string
+          description: A human-readable error message representing the error
+          example: An error message.
+        details:
+          type: object
+          description: An optional object with extra helpful details about the error.
+          example:
+            errors:
+              name: is not a valid email.
+    BatchRequest:
+      type: object
+      properties:
+        packages:
+          type: array
+          items:
+            type: object
+            properties:
+              platform:
+                type: string
+              name:
+                type: string
+              version:
+                type: string
+        message:
+          type: string
+    EOLPackagesViolation:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ViolationCommon'
+      - type: object
+        required:
+        - eol_package
+        properties:
+          eol_package:
+            type: object
+            additionalProperties: true
+            required:
+            - reason
+            - description
+            properties:
+              reason:
+                type: string
+                nullable: true
+              description:
+                type: string
+                nullable: true
+    AllowedLicensesViolation:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ViolationCommon'
+      - type: object
+        additionalProperties: false
+        required:
+        - license
+        properties:
+          license:
+            type: string
+  responses:
+    422Error:
+      description: Unprocessable Entity
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandardError'
+    401Error:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandardError'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

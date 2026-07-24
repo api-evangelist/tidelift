@@ -1,0 +1,106 @@
+openapi: 3.0.0
+info:
+  version: 1.2.1
+  title: Tidelift External Alignments Authentication API
+  x-logo:
+    url: /docs/assets/tidelift_logo.png
+    altText: Tidelift
+  license:
+    name: Proprietary
+  description: 'A [Tidelift API key](https://docs.tidelift.com/article/79-api-authentication) is required for all endpoints. If a particular type of API key is required it will be noted on the path.
+
+    <SecurityDefinitions />
+
+    '
+servers:
+- url: https://api.tidelift.com/external-api
+security:
+- BearerAuth:
+  - user
+  - project
+  - organization
+tags:
+- name: Authentication
+  description: 'A [Tidelift API key](https://docs.tidelift.com/article/79-api-authentication) is required for all endpoints. If a particular type of API key is required it will be noted on the path.
+
+    <SecurityDefinitions />
+
+    '
+paths:
+  /v1/authcheck:
+    get:
+      x-rails-controller: auth#check
+      summary: Check if the given API key is valid.
+      operationId: authCheck
+      x-tidelift-api-meta:
+        product-area: api
+        access-level: small
+        visibility: public
+      tags:
+      - Authentication
+      security:
+      - BearerAuth:
+        - user
+        - project
+        - organization
+      responses:
+        '200':
+          description: Valid API key
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                - message
+                properties:
+                  message:
+                    type: string
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  type:
+                    type: string
+                    enum:
+                    - user
+                    - project
+                    - organization
+                  owner_id:
+                    type: string
+        '401':
+          $ref: '#/components/responses/401Error'
+components:
+  schemas:
+    StandardError:
+      description: The standard error format
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: An error code representing the error
+          example: an_error_code
+        message:
+          type: string
+          description: A human-readable error message representing the error
+          example: An error message.
+        details:
+          type: object
+          description: An optional object with extra helpful details about the error.
+          example:
+            errors:
+              name: is not a valid email.
+  responses:
+    401Error:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandardError'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

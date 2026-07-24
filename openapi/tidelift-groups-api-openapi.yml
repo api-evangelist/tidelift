@@ -1,0 +1,405 @@
+openapi: 3.0.0
+info:
+  version: 1.2.1
+  title: Tidelift External Alignments Groups API
+  x-logo:
+    url: /docs/assets/tidelift_logo.png
+    altText: Tidelift
+  license:
+    name: Proprietary
+servers:
+- url: https://api.tidelift.com/external-api
+security:
+- BearerAuth:
+  - user
+  - project
+  - organization
+tags:
+- name: Groups
+paths:
+  /v1/{org_name}/groups:
+    get:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - Groups
+      security:
+      - BearerAuth:
+        - user
+        - organization
+      operationId: listGroups
+      x-rails-controller: groups#index
+      summary: List groups in an organization
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      responses:
+        '200':
+          description: List of all groups the user is a member of (if using a user api-key) or all groups in the organization (if using an organization api-key).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupsResponse'
+    post:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - Groups
+      security:
+      - BearerAuth:
+        - user
+        - organization
+      operationId: createGroup
+      x-rails-controller: groups#create
+      summary: Create a new group
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                group_name:
+                  type: string
+      responses:
+        '201':
+          description: The created group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupResponse'
+        '409':
+          description: The group already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardError'
+  /v1/{org_name}/groups/lookup:
+    get:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - Groups
+      security:
+      - BearerAuth:
+        - user
+        - organization
+      operationId: lookupGroup
+      x-rails-controller: groups#lookup
+      summary: Look up a group by id, name, or slug
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      - name: q
+        in: query
+        description: The query string, which is is either a group ID, a full name of a group, or a full slug of a group.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The found group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupResponse'
+  /v1/{org_name}/groups/{group_id}:
+    delete:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - Groups
+      security:
+      - BearerAuth:
+        - user
+        - organization
+      operationId: deleteGroup
+      x-rails-controller: groups#destroy
+      summary: Delete a group. Does not check to see if the group is being used.
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      - $ref: '#/components/parameters/groupIdParam'
+      responses:
+        '200':
+          description: The group is deleted
+  /v1/{org_name}/groups/{group_id}/projects:
+    get:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - Groups
+      security:
+      - BearerAuth:
+        - user
+        - organization
+      operationId: listGroupProjects
+      x-rails-controller: groups/projects#index
+      summary: List all projects linked to a group
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      - $ref: '#/components/parameters/groupIdParam'
+      responses:
+        '200':
+          description: List of all projects linked to the group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupProjectsResponse'
+    post:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - Groups
+      security:
+      - BearerAuth:
+        - user
+        - organization
+      operationId: addGroupProject
+      x-rails-controller: groups/projects#create
+      summary: Add an existing project to an existing group
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      - $ref: '#/components/parameters/groupIdParam'
+      - name: project
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of all projects linked to the group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupProjectsResponse'
+        '404':
+          description: Requested project not found
+    delete:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - Groups
+      security:
+      - BearerAuth:
+        - user
+        - organization
+      operationId: removeGroupProject
+      x-rails-controller: groups/projects#destroy
+      summary: Remove an existing project from an existing group
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      - $ref: '#/components/parameters/groupIdParam'
+      - name: project
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Project successfully removed from group
+        '404':
+          description: Requested project not found or not linked to group
+  /v1/{org_name}/groups/{group_id}/users:
+    get:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - Groups
+      security:
+      - BearerAuth:
+        - user
+        - organization
+      operationId: listGroupUsers
+      x-rails-controller: groups/users#index
+      summary: List all users in a given group
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      - $ref: '#/components/parameters/groupIdParam'
+      responses:
+        '200':
+          description: List of all users in the group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupUsersResponse'
+    post:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - Groups
+      security:
+      - BearerAuth:
+        - user
+      operationId: addGroupUser
+      x-rails-controller: groups/users#create
+      summary: Add user to group
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      - $ref: '#/components/parameters/groupIdParam'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+      responses:
+        '200':
+          description: The updated list of users in the group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupUsersResponse'
+        '401':
+          $ref: '#/components/responses/404GroupUsers'
+        '403':
+          $ref: '#/components/responses/403GroupUsers'
+    delete:
+      x-tidelift-api-meta:
+        product-area: management-api
+        access-level: small
+        visibility: public
+      tags:
+      - Groups
+      security:
+      - BearerAuth:
+        - user
+      operationId: deleteGroupUser
+      x-rails-controller: groups/users#destroy
+      summary: Remove user from group
+      parameters:
+      - $ref: '#/components/parameters/orgNameParam'
+      - $ref: '#/components/parameters/groupIdParam'
+      - name: email
+        in: query
+        description: Email of the user to remove from the group.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User successfully removed from group
+        '401':
+          $ref: '#/components/responses/404GroupUsers'
+        '403':
+          $ref: '#/components/responses/403GroupUsers'
+components:
+  schemas:
+    StandardError:
+      description: The standard error format
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: An error code representing the error
+          example: an_error_code
+        message:
+          type: string
+          description: A human-readable error message representing the error
+          example: An error message.
+        details:
+          type: object
+          description: An optional object with extra helpful details about the error.
+          example:
+            errors:
+              name: is not a valid email.
+    GroupProjectsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/GroupProjectResponse'
+    GroupProjectResponse:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+    GroupResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        slug:
+          type: string
+        repository_count:
+          type: integer
+          deprecated: true
+          description: Deprecated in favor of project_count.
+        project_count:
+          type: integer
+        user_count:
+          type: integer
+        conditional_exception_count:
+          type: integer
+    GroupUserResponse:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+    GroupsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/GroupResponse'
+    GroupUsersResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/GroupUserResponse'
+  parameters:
+    orgNameParam:
+      in: path
+      name: org_name
+      required: true
+      schema:
+        type: string
+        example: My-Company
+      description: The name of the Organization.
+    groupIdParam:
+      in: path
+      name: group_id
+      required: true
+      schema:
+        type: string
+        example: 1992c539-11f0-4f9a-a668-da54e77726a2
+      description: The id of the group to perform the action on.
+  responses:
+    404GroupUsers:
+      description: The user doesn't exist within the organization
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandardError'
+    403GroupUsers:
+      description: The user is not an admin of the organization or doesn't belong to the organization.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandardError'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
