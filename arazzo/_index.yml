@@ -1,0 +1,8 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/tidelift-subscriber-api-openapi-original.json
+workflows:
+- file: tidelift-package-vulnerability-check.arazzo.yml
+  workflowId: packageVulnerabilityCheck
+  title: Tidelift — package vulnerability check
+  summary: Validate the API key, look up a package and release, pull the SBOM, and inspect a vulnerability.

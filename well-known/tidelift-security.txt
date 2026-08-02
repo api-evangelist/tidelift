@@ -1,0 +1,4 @@
+Contact: security@tidelift.com
+Preferred-Languages: en
+Canonical: https://tidelift.com/.well-known/security.txt
+Policy: https://tidelift.com/security

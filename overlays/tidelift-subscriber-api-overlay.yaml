@@ -1,0 +1,21 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Tidelift External API
+  version: 1.0.0
+extends: openapi/tidelift-subscriber-api-openapi-original.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-21'
+    x-apievangelist-provider: tidelift
+    x-apievangelist-auth: bearer-api-key
+    x-apievangelist-pagination: page-number
+    x-apievangelist-error-envelope: StandardError
+    x-apievangelist-notes: >-
+      Tidelift External API v1.2.1. Bearer API-key auth (user/project/organization key types).
+      Page-number pagination (PaginationEnvelope). Custom StandardError JSON envelope (not RFC 9457).
+      Webhooks delivered signed out-of-band. Parent company Sonar (acquired 2025).
+- target: $.info
+  update:
+    x-apievangelist-status-page: https://status.tidelift.com/
+    x-apievangelist-security-txt: https://tidelift.com/.well-known/security.txt

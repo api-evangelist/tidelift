@@ -1,0 +1,16 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/tidelift-subscriber-api-openapi-original.json
+skills:
+- file: tidelift-check-catalog-violations.md
+  name: Check catalog policy violations
+  api: openapi/tidelift-subscriber-api-openapi-original.json
+  operations: [authCheck, listCatalogsForOrg, listViolationsForCatalog, listViolationStatusOverrides, createViolationStatusOverride]
+- file: tidelift-align-project.md
+  name: Align a project against a catalog
+  api: openapi/tidelift-subscriber-api-openapi-original.json
+  operations: [authCheck, createProject, createProjectKey, performProjectAlignment, getProjectAlignmentStatus, getProjectBillOfMaterials]
+- file: tidelift-lookup-package-intelligence.md
+  name: Look up package and release intelligence
+  api: openapi/tidelift-subscriber-api-openapi-original.json
+  operations: [showPackage, showRelease, releaseDependencies, releaseSbom, getVulnerability, getVulnerabilityAffectedReleases]

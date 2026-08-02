@@ -1,22 +1,311 @@
 aid: tidelift
 name: Tidelift
-description: Tidelift is a company surfaced as a portfolio company of general-catalyst and added to the
-  API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Tidelift provides open-source software supply-chain management for enterprises. Its
+  platform combines package intelligence (maintenance, quality, end-of-life, and
+  vulnerability signals) with catalogs of approved dependencies, policy and license
+  standards enforcement, SBOM import/export, and "alignment" of projects against an
+  organization's standards. Tidelift is distinctive for paying the open-source
+  maintainers ("lifters") behind the packages enterprises rely on. The Tidelift External
+  API (OpenAPI 3.0, Bearer API-key auth) exposes catalogs, violations, projects, groups,
+  packages, releases, vulnerabilities, licenses, and reporting. Tidelift was acquired by
+  Sonar in 2025; the API and developer surface remain active.
 url: https://raw.githubusercontent.com/api-evangelist/tidelift/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - general-catalyst
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-parent-company: sonar
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://api.tidelift.com/docs/assets/tidelift_logo.png
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
-apis: []
+- Open Source
+- Software Supply Chain
+- Dependency Management
+- Application Security
+- SBOM
+- License Compliance
+- Vulnerability Management
+- Developer Tools
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: tidelift:tidelift-alignments-api
+  name: Tidelift Alignments API
+  description: The Alignments API from Tidelift — 4 operation(s) for alignments.
+  humanURL: https://api.tidelift.com/docs/
+  baseURL: https://api.tidelift.com/external-api
+  tags:
+  - Alignments
+  properties:
+  - type: OpenAPI
+    url: openapi/tidelift-alignments-api-openapi.yml
+  - type: APIReference
+    url: https://api.tidelift.com/docs/
+- aid: tidelift:tidelift-attestations-api
+  name: Tidelift Attestations API
+  description: The Attestations API from Tidelift — 2 operation(s) for attestations.
+  humanURL: https://api.tidelift.com/docs/
+  baseURL: https://api.tidelift.com/external-api
+  tags:
+  - Attestations
+  properties:
+  - type: OpenAPI
+    url: openapi/tidelift-attestations-api-openapi.yml
+  - type: APIReference
+    url: https://api.tidelift.com/docs/
+- aid: tidelift:tidelift-authentication-api
+  name: Tidelift Authentication API
+  description: >-
+    A [Tidelift API key](https://docs.tidelift.com/article/79-api-authentication) is required for all
+    endpoints. If a particular type of API key is required it will be noted on the path.
+
+    <SecurityDefinitions />
+  humanURL: https://api.tidelift.com/docs/
+  baseURL: https://api.tidelift.com/external-api
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/tidelift-authentication-api-openapi.yml
+  - type: APIReference
+    url: https://api.tidelift.com/docs/
+- aid: tidelift:tidelift-basic-examples-api
+  name: Tidelift Basic Examples API
+  description: >-
+    * curl
+
+
+    ```
+
+    curl -H "Accept: application/json" \
+         -H "Authorization: bearer <your Tidelift API key>" \
+         https://api.tidelift.com/external-api/v1/packages/pypi/urllib3
+    ```
+
+
+    More detailed examples can be found in [the Tidelift support documentation](https://support.tidelift.com/hc/en-us/articles/4406286633364-How-to-access-Tidelift-APIs#h_01H9TWCQQQ5033Q7DTP89BYC5H).
+  humanURL: https://api.tidelift.com/docs/
+  baseURL: https://api.tidelift.com/external-api
+  tags:
+  - Basic Examples
+  properties:
+  - type: OpenAPI
+    url: openapi/tidelift-basic-examples-api-openapi.yml
+  - type: APIReference
+    url: https://api.tidelift.com/docs/
+- aid: tidelift:tidelift-catalog-releases-api
+  name: Tidelift Catalog Releases API
+  description: The Catalog Releases API from Tidelift — 7 operation(s) for catalog releases.
+  humanURL: https://api.tidelift.com/docs/
+  baseURL: https://api.tidelift.com/external-api
+  tags:
+  - Catalog Releases
+  properties:
+  - type: OpenAPI
+    url: openapi/tidelift-catalog-releases-api-openapi.yml
+  - type: APIReference
+    url: https://api.tidelift.com/docs/
+- aid: tidelift:tidelift-catalogs-api
+  name: Tidelift Catalogs API
+  description: The Catalogs API from Tidelift — 9 operation(s) for catalogs.
+  humanURL: https://api.tidelift.com/docs/
+  baseURL: https://api.tidelift.com/external-api
+  tags:
+  - Catalogs
+  properties:
+  - type: OpenAPI
+    url: openapi/tidelift-catalogs-api-openapi.yml
+  - type: APIReference
+    url: https://api.tidelift.com/docs/
+- aid: tidelift:tidelift-catalogstandards-api
+  name: Tidelift CatalogStandards API
+  description: The CatalogStandards API from Tidelift — 3 operation(s) for catalogstandards.
+  humanURL: https://api.tidelift.com/docs/
+  baseURL: https://api.tidelift.com/external-api
+  tags:
+  - CatalogStandards
+  properties:
+  - type: OpenAPI
+    url: openapi/tidelift-catalogstandards-api-openapi.yml
+  - type: APIReference
+    url: https://api.tidelift.com/docs/
+- aid: tidelift:tidelift-groups-api
+  name: Tidelift Groups API
+  description: The Groups API from Tidelift — 5 operation(s) for groups.
+  humanURL: https://api.tidelift.com/docs/
+  baseURL: https://api.tidelift.com/external-api
+  tags:
+  - Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/tidelift-groups-api-openapi.yml
+  - type: APIReference
+    url: https://api.tidelift.com/docs/
+- aid: tidelift:tidelift-licenses-api
+  name: Tidelift Licenses API
+  description: The Licenses API from Tidelift — 5 operation(s) for licenses.
+  humanURL: https://api.tidelift.com/docs/
+  baseURL: https://api.tidelift.com/external-api
+  tags:
+  - Licenses
+  properties:
+  - type: OpenAPI
+    url: openapi/tidelift-licenses-api-openapi.yml
+  - type: APIReference
+    url: https://api.tidelift.com/docs/
+- aid: tidelift:tidelift-packages-api
+  name: Tidelift Packages API
+  description: The Packages API from Tidelift — 6 operation(s) for packages.
+  humanURL: https://api.tidelift.com/docs/
+  baseURL: https://api.tidelift.com/external-api
+  tags:
+  - Packages
+  properties:
+  - type: OpenAPI
+    url: openapi/tidelift-packages-api-openapi.yml
+  - type: APIReference
+    url: https://api.tidelift.com/docs/
+- aid: tidelift:tidelift-projects-api
+  name: Tidelift Projects API
+  description: The Projects API from Tidelift — 6 operation(s) for projects.
+  humanURL: https://api.tidelift.com/docs/
+  baseURL: https://api.tidelift.com/external-api
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/tidelift-projects-api-openapi.yml
+  - type: APIReference
+    url: https://api.tidelift.com/docs/
+- aid: tidelift:tidelift-releases-api
+  name: Tidelift Releases API
+  description: The Releases API from Tidelift — 5 operation(s) for releases.
+  humanURL: https://api.tidelift.com/docs/
+  baseURL: https://api.tidelift.com/external-api
+  tags:
+  - Releases
+  properties:
+  - type: OpenAPI
+    url: openapi/tidelift-releases-api-openapi.yml
+  - type: APIReference
+    url: https://api.tidelift.com/docs/
+- aid: tidelift:tidelift-reports-api
+  name: Tidelift Reports API
+  description: The Reports API from Tidelift — 3 operation(s) for reports.
+  humanURL: https://api.tidelift.com/docs/
+  baseURL: https://api.tidelift.com/external-api
+  tags:
+  - Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/tidelift-reports-api-openapi.yml
+  - type: APIReference
+    url: https://api.tidelift.com/docs/
+- aid: tidelift:tidelift-users-api
+  name: Tidelift Users API
+  description: The Users API from Tidelift — 1 operation(s) for users.
+  humanURL: https://api.tidelift.com/docs/
+  baseURL: https://api.tidelift.com/external-api
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/tidelift-users-api-openapi.yml
+  - type: APIReference
+    url: https://api.tidelift.com/docs/
+- aid: tidelift:tidelift-vulnerabilities-api
+  name: Tidelift Vulnerabilities API
+  description: The Vulnerabilities API from Tidelift — 2 operation(s) for vulnerabilities.
+  humanURL: https://api.tidelift.com/docs/
+  baseURL: https://api.tidelift.com/external-api
+  tags:
+  - Vulnerabilities
+  properties:
+  - type: OpenAPI
+    url: openapi/tidelift-vulnerabilities-api-openapi.yml
+  - type: APIReference
+    url: https://api.tidelift.com/docs/
+common:
+- type: DeveloperPortal
+  url: https://api.tidelift.com/docs/
+- type: Documentation
+  url: https://support.tidelift.com/hc/en-us
+- type: APIReference
+  url: https://api.tidelift.com/docs/
+- type: GettingStarted
+  url: https://docs.tidelift.com/article/79-api-authentication
+- type: Support
+  url: https://support.tidelift.com/hc/en-us
+- type: Pricing
+  url: https://tidelift.com/subscription/pricing
+- type: GitHubOrganization
+  url: https://github.com/tidelift
+- type: Postman
+  url: https://github.com/tidelift/tidelift-api-postman
+- type: StatusPage
+  url: https://status.tidelift.com/
+- type: Authentication
+  url: authentication/tidelift-authentication.yml
+- type: AgenticAccess
+  url: agentic-access/tidelift-agentic-access.yml
+- type: VulnerabilityDisclosure
+  url: security/tidelift-vulnerability-disclosure.yml
+- type: Security
+  url: https://tidelift.com/security
+- type: DomainSecurity
+  url: security/tidelift-domain-security.yml
+- type: WellKnown
+  url: well-known/tidelift-well-known.yml
+- type: SecurityTxt
+  url: well-known/tidelift-security.txt
+- type: Packages
+  url: packages/tidelift-packages.yml
+- type: SDKs
+  url: packages/tidelift-packages.yml
+- type: CLI
+  url: cli/tidelift-cli.yml
+- type: MCPServer
+  url: mcp/tidelift-mcp.yml
+- type: LLMsTxt
+  url: llms/tidelift-llms.txt
+- type: Conventions
+  url: conventions/tidelift-conventions.yml
+- type: ErrorCatalog
+  url: errors/tidelift-problem-types.yml
+- type: Conformance
+  url: conformance/tidelift-conformance.yml
+- type: Lifecycle
+  url: lifecycle/tidelift-lifecycle.yml
+- type: DataModel
+  url: data-model/tidelift-data-model.yml
+- type: Webhooks
+  url: asyncapi/tidelift-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Arazzo
+  name: Tidelift — package vulnerability check
+  url: arazzo/tidelift-package-vulnerability-check.arazzo.yml
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 22
+  pass: local-v1

@@ -1,0 +1,32 @@
+generated: '2026-07-21'
+method: searched
+source: https://download.tidelift.com/cli/, https://support.tidelift.com/hc/en-us
+name: tidelift
+summary: >-
+  First-party Tidelift CLI — a single downloadable binary that submits a project's
+  resolved dependencies to the Tidelift External API for alignment (compliance/policy
+  evaluation against a catalog) and SBOM workflows. Commonly run in CI (GitHub Actions
+  `tidelift/alignment-action`, GitLab/Jenkins pipeline examples).
+install:
+- platform: linux
+  method: 'curl https://download.tidelift.com/cli/linux/tidelift > tidelift && chmod +x tidelift'
+- platform: macos
+  method: 'curl https://download.tidelift.com/cli/mac/tidelift > tidelift && chmod +x tidelift'
+- platform: windows
+  method: 'download https://download.tidelift.com/cli/windows/tidelift.exe'
+- platform: ci
+  method: GitHub Action tidelift/alignment-action; GitLab/Jenkins pipeline examples in github.com/tidelift
+auth:
+  env: TIDELIFT_API_KEY
+  note: A project-scoped Tidelift API key (Bearer token) authenticates the CLI to the External API.
+commands:
+- group: alignment
+  description: Resolve the local project's dependencies and submit an alignment to Tidelift.
+  examples:
+  - tidelift alignment save --project <project> --organization <org> --revision <sha>
+  - tidelift alignment status --project <project> --organization <org> --revision <sha>
+- group: sbom
+  description: Import or export SBOM data (CycloneDX) for a project.
+related_actions:
+- https://github.com/tidelift/alignment-action
+- https://github.com/tidelift/scan-action

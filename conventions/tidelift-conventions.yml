@@ -1,0 +1,50 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/tidelift-subscriber-api-openapi-original.json, https://docs.tidelift.com/article/79-api-authentication
+authentication:
+  style: bearer-api-key
+  header: 'Authorization: Bearer <TIDELIFT_API_KEY>'
+  key_types:
+  - user
+  - project
+  - organization
+  docs: https://docs.tidelift.com/article/79-api-authentication
+  note: >-
+    A Tidelift API key is required for all endpoints. The security requirement declares
+    three key scopes (user, project, organization); a given path notes which key type it requires.
+idempotency:
+  supported: false
+  note: No Idempotency-Key header is documented in the spec; POST operations are not declared idempotent.
+pagination:
+  style: page-number
+  request_params:
+  - page
+  - per_page
+  response_envelope: PaginationEnvelope
+  response_fields:
+  - current_page
+  - next_page
+  - prev_page
+  - total_pages
+  - total_count
+  - per_page
+error_envelope:
+  media_type: application/json
+  shape: StandardError
+  required:
+  - error
+  - message
+  optional:
+  - details
+  cross_ref: errors/tidelift-problem-types.yml
+rate_limiting:
+  documented: false
+  note: No X-RateLimit headers or rate-limit policy declared in the spec.
+content_types:
+- application/json
+- text/xml
+- text/plain
+cross_references:
+  authentication: authentication/tidelift-authentication.yml
+  errors: errors/tidelift-problem-types.yml
+  lifecycle: lifecycle/tidelift-lifecycle.yml

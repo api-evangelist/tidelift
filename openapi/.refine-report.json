@@ -1,0 +1,42 @@
+{
+  "provider": "tidelift",
+  "sources": [
+    "tidelift-alignments-api-openapi.yml",
+    "tidelift-attestations-api-openapi.yml",
+    "tidelift-authentication-api-openapi.yml",
+    "tidelift-basic-examples-api-openapi.yml",
+    "tidelift-catalog-releases-api-openapi.yml",
+    "tidelift-catalogs-api-openapi.yml",
+    "tidelift-catalogstandards-api-openapi.yml",
+    "tidelift-groups-api-openapi.yml",
+    "tidelift-licenses-api-openapi.yml",
+    "tidelift-packages-api-openapi.yml",
+    "tidelift-projects-api-openapi.yml",
+    "tidelift-releases-api-openapi.yml",
+    "tidelift-reports-api-openapi.yml",
+    "tidelift-users-api-openapi.yml",
+    "tidelift-vulnerabilities-api-openapi.yml"
+  ],
+  "outputs": [
+    "tidelift-alignments-api-openapi.yml",
+    "tidelift-attestations-api-openapi.yml",
+    "tidelift-authentication-api-openapi.yml",
+    "tidelift-basic-examples-api-openapi.yml",
+    "tidelift-catalog-releases-api-openapi.yml",
+    "tidelift-catalogs-api-openapi.yml",
+    "tidelift-catalogstandards-api-openapi.yml",
+    "tidelift-groups-api-openapi.yml",
+    "tidelift-licenses-api-openapi.yml",
+    "tidelift-packages-api-openapi.yml",
+    "tidelift-projects-api-openapi.yml",
+    "tidelift-releases-api-openapi.yml",
+    "tidelift-reports-api-openapi.yml",
+    "tidelift-users-api-openapi.yml",
+    "tidelift-vulnerabilities-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

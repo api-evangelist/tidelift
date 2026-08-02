@@ -1,0 +1,33 @@
+# Tidelift
+
+> Tidelift provides open-source software supply-chain management: package
+> intelligence, catalogs of approved dependencies, policy/standards enforcement,
+> license compliance, vulnerability and end-of-life tracking, SBOM import/export,
+> and alignment of projects against organizational standards. Tidelift also pays
+> the maintainers ("lifters") of the packages enterprises depend on. Tidelift was
+> acquired by Sonar in 2025; the External API and developer surface remain active.
+
+## API
+- [Tidelift External API (ReDoc)](https://api.tidelift.com/docs/): v1.2.1, base https://api.tidelift.com/external-api
+- [OpenAPI spec (JSON)](https://tidelift.com/api/depci/subscriber-api.json): OpenAPI 3.0.0, 54 paths / 66 operations
+- Auth: Bearer API key (user / project / organization key types) — https://docs.tidelift.com/article/79-api-authentication
+
+## Specs & artifacts
+- openapi/tidelift-subscriber-api-openapi-original.json
+- authentication/tidelift-authentication.yml
+- conventions/tidelift-conventions.yml (page-number pagination, StandardError envelope, no idempotency)
+- errors/tidelift-problem-types.yml
+- conformance/tidelift-conformance.yml (CycloneDX, SPDX, purl, OpenAPI 3.0)
+- data-model/tidelift-data-model.yml
+- lifecycle/tidelift-lifecycle.yml (status: https://status.tidelift.com/)
+- mcp/tidelift-mcp.yml (candidate tools, one per operation)
+- asyncapi/tidelift-webhooks.yml (signed outbound webhooks)
+- packages/tidelift-packages.yml + cli/tidelift-cli.yml (the `tidelift` CLI)
+- skills/_index.yml (3 agent skills)
+
+## Docs
+- [Help center / subscriber docs](https://support.tidelift.com/hc/en-us)
+- [Security](https://tidelift.com/security) — https://tidelift.com/.well-known/security.txt
+- [Status](https://status.tidelift.com/)
+- [Pricing](https://tidelift.com/subscription/pricing)
+- [GitHub org](https://github.com/tidelift)

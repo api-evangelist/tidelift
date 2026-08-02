@@ -1,0 +1,29 @@
+generated: '2026-07-21'
+method: searched
+source: rubygems.org, download.tidelift.com, github.com/tidelift
+note: >-
+  Tidelift's first-party client surface is the `tidelift` CLI binary (distributed from
+  download.tidelift.com) used to run alignments and SBOM imports against the External API,
+  plus the legacy `tidelift` RubyGem published by the founders. The npm packages named
+  `tidelift`/`tidelift-cli` are third-party (jonschlinkert) and are NOT marked official.
+packages:
+- language: binary
+  registry: download.tidelift.com
+  name: tidelift
+  url: https://download.tidelift.com/cli/linux/tidelift
+  install: 'curl https://download.tidelift.com/cli/linux/tidelift > tidelift && chmod +x tidelift'
+  official: true
+  note: The Tidelift CLI binary (linux/mac/windows) used for `tidelift alignment save` in CI.
+- language: ruby
+  registry: rubygems
+  name: tidelift
+  url: https://rubygems.org/gems/tidelift
+  install: gem install tidelift
+  official: true
+  note: Legacy first-party gem (authors Andrew Nesbitt & Benjamin Nickolls, Tidelift founders); last release 0.2.0.
+- language: javascript
+  registry: npm
+  name: tidelift
+  url: https://www.npmjs.com/package/tidelift
+  official: false
+  note: Community Node.js client (jonschlinkert), not published by Tidelift.

@@ -1,0 +1,22 @@
+generated: '2026-07-21'
+method: searched
+source: https://api.tidelift.com/external-api, https://status.tidelift.com, openapi/tidelift-subscriber-api-openapi-original.json
+versioning:
+  scheme: uri-path
+  current: v1
+  note: All External API paths are prefixed with /v1 under the /external-api base; spec info.version is 1.2.1.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: >-
+    No published RFC 8594 Sunset/Deprecation header policy found. The spec carries two
+    deprecated path aliases (POST .../request and .../batch_request) superseded by the
+    plural /requests and /batch_requests operations, and a deprecated
+    lookupPackageInCatalogDeprecated operation.
+status_page: https://status.tidelift.com/
+sla:
+  url: null
+deprecated_operations:
+- openapi/tidelift-subscriber-api-openapi-original.json#lookupPackageInCatalogDeprecated
+- 'POST /v1/catalog/{org_name}/{project}/request (alias of createCatalogRequest)'
+- 'POST /v1/catalog/{org_name}/{project}/batch_request (alias of createBatchCatalogRequest)'

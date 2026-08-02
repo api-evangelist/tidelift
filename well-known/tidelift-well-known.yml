@@ -1,0 +1,19 @@
+generated: '2026-07-21'
+method: searched
+host: https://tidelift.com
+documents:
+- path: /.well-known/security.txt
+  status: 200
+  file: tidelift-security.txt
+- path: /.well-known/openid-configuration
+  status: 403
+- path: /.well-known/oauth-authorization-server
+  status: 403
+- path: /.well-known/api-catalog
+  status: 403
+- path: /.well-known/ai-plugin.json
+  status: 403
+notes: >-
+  Only /.well-known/security.txt returns 200. api.tidelift.com 301-redirects all /.well-known
+  paths to /docs/. tidelift.com itself 301-redirects the site root to sonarsource.com (Tidelift
+  was acquired by Sonar) but continues to serve the security.txt and the External API.

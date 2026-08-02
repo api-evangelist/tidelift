@@ -1,0 +1,88 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/tidelift-subscriber-api-openapi-original.json
+id_coordinates:
+  package: '{package_platform}/{package_name}'
+  release: '{package_platform}/{package_name}/{version}'
+  org: org_name (optionally org-type prefixed, e.g. team/abc or github/def)
+  catalog: '{org_name}/{catalog_name}'
+entities:
+- Organization
+- Catalog
+- Project
+- Group
+- Package
+- Release
+- Vulnerability
+- Violation
+- ViolationStatusOverride
+- CatalogBlockedItem
+- Alignment
+- BillOfMaterials
+- Report
+- CatalogRequest
+- License
+- User
+- PackageAttestationStatement
+relationships:
+- from: Organization
+  to: Catalog
+  kind: has_many
+  via: org_name
+- from: Organization
+  to: Project
+  kind: has_many
+  via: org_name
+- from: Organization
+  to: Group
+  kind: has_many
+  via: org_name
+- from: Organization
+  to: User
+  kind: has_many
+  via: org_name
+- from: Catalog
+  to: Violation
+  kind: has_many
+  via: catalog_name
+- from: Catalog
+  to: Release
+  kind: has_many
+  via: catalog_name
+- from: Catalog
+  to: CatalogBlockedItem
+  kind: has_many
+  via: catalog_name
+- from: Violation
+  to: ViolationStatusOverride
+  kind: has_many
+  via: violation_id
+- from: Group
+  to: Project
+  kind: has_many
+  via: group_id
+- from: Group
+  to: User
+  kind: has_many
+  via: group_id
+- from: Project
+  to: Alignment
+  kind: has_many
+  via: project
+- from: Project
+  to: BillOfMaterials
+  kind: has_one
+  via: project
+- from: Package
+  to: Release
+  kind: has_many
+  via: package_platform+package_name
+- from: Release
+  to: Vulnerability
+  kind: has_many
+  via: release_version
+- from: Package
+  to: License
+  kind: has_many
+  via: package_platform+package_name
+schema_count: 79

@@ -1,0 +1,27 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/tidelift/tidelift-webhook-hello-world, https://support.tidelift.com/hc/en-us
+spec_type: Webhooks
+summary: >-
+  Tidelift delivers signed outbound webhooks to a subscriber-configured HTTPS endpoint.
+  Each delivery carries an event type in the payload and is signed so the receiver can
+  verify authenticity before acting. Tidelift publishes an official example receiver
+  (a Google Cloud Function) demonstrating signature validation and event-type dispatch.
+delivery:
+  transport: https-post
+  signed: true
+  signing:
+    mechanism: HMAC signature verified against a per-webhook signing secret
+    receiver_env: TIDELIFT_SIGNING_SECRET
+  payload:
+    format: application/json
+    discriminator_field: event type
+events:
+  note: >-
+    Event types are dispatched on the payload's event-type field; the specific catalog of
+    event names is documented in the Tidelift subscriber help center and not enumerated
+    verbatim here to avoid fabrication.
+examples:
+- name: Sample Tidelift Webhook Receiver
+  url: https://github.com/tidelift/tidelift-webhook-hello-world
+  description: Google Cloud Function that validates the signature and logs the event type.

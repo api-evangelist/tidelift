@@ -1,0 +1,31 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/tidelift-subscriber-api-openapi-original.json
+standards:
+- id: http-bearer-token
+  conforms: true
+  evidence: securitySchemes.BearerAuth type=http scheme=bearer
+- id: oauth2
+  conforms: false
+  evidence: auth is API-key bearer, not oauth2
+- id: openapi-3.0
+  conforms: true
+  evidence: openapi 3.0.0 doc at tidelift.com/api/depci/subscriber-api.json
+- id: cyclonedx-sbom
+  conforms: true
+  evidence: CycloneDxJson/CycloneDxXml schemas + /sbom + import-sbom ops
+- id: spdx-licenses
+  conforms: true
+  evidence: license config uses SPDX identifiers
+- id: purl-package-url
+  conforms: true
+  evidence: PackageWithPurl exposes purl coordinates
+- id: pagination-page-envelope
+  conforms: true
+  evidence: PaginationEnvelope page/next/prev/total
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: custom StandardError envelope
+- id: idempotency
+  conforms: false
+  evidence: no Idempotency-Key header in spec

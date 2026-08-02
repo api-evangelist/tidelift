@@ -1,0 +1,82 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/tidelift-subscriber-api-openapi-original.json
+format: custom-json
+note: Tidelift returns a StandardError JSON envelope (not RFC 9457 application/problem+json).
+envelope:
+  media_type: application/json
+  required:
+  - error
+  - message
+  fields:
+    error: machine-readable error code string
+    message: human-readable message
+    details: optional object with extra context
+problems:
+- status: 400
+  title: Bad request
+  descriptions:
+  - Invalid parameters
+  - Invalid request, Invalid parameters, Invalid record
+  - One of the required parameters is missing
+  - Packages must be filtered.
+  example_operations:
+  - configureAllowedLicensesAdd
+  - configureAllowedLicensesRemove
+  - createCatalogBlockedItems
+  - createPackageLicense
+  - createProject
+  - createReleaseLicense
+- status: 401
+  title: Unauthorized
+  descriptions:
+  - API key does not have access to the Organization, Catalog, or one of the Projects specified.
+  - Parameters specified are not correct or API key does not have access to the Organization, Catalog,
+    or all the Projects specifie. Must provide either a catalog, a list of projects, or a report ID.
+  example_operations:
+  - addGroupUser
+  - authCheck
+  - createBatchCatalogRequest
+  - createCatalogRequest
+  - createProject
+  - createProjectKey
+- status: 403
+  title: Forbidden
+  descriptions:
+  - 403 Forbidden
+  - The api-key used is not authorized to perform the action
+  example_operations:
+  - addGroupUser
+  - configureAllowedLicensesAdd
+  - configureAllowedLicensesRemove
+  - createCatalogBlockedItems
+  - createPackageLicense
+  - createProject
+- status: 404
+  title: Not found
+  descriptions:
+  - 404 Scan Not Found
+  - 404 Violation Not Found
+  - Catalog not found
+  - Catalog not found, Catalog Standard not found
+  example_operations:
+  - addGroupProject
+  - configureAllowedLicensesAdd
+  - configureAllowedLicensesRemove
+  - createCatalogBlockedItems
+  - createPackageLicense
+  - createReleaseLicense
+- status: 409
+  title: Conflict
+  descriptions:
+  - The group already exists
+  example_operations:
+  - createGroup
+- status: 422
+  title: Unprocessable entity
+  descriptions:
+  - The license is invalid
+  example_operations:
+  - createBatchCatalogRequest
+  - createPackageLicense
+  - createReleaseLicense

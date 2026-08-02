@@ -1,0 +1,201 @@
+generated: '2026-07-21'
+method: derived
+status: candidate
+note: No official hosted Tidelift MCP server found; candidate tools derived one-per-operation from the
+  External API.
+server:
+  name: tidelift
+  transport: http
+tools:
+- name: authCheck
+  description: Check if the given API key is valid.
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#authCheck
+- name: listCatalogsForUser
+  description: List all catalogs and organizations for the user
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#listCatalogsForUser
+- name: listCatalogsForUsersOrg
+  description: List all catalogs for a specific organization
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#listCatalogsForUsersOrg
+- name: listCatalogsForOrg
+  description: List all catalogs for an organization
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#listCatalogsForOrg
+- name: listViolationsForCatalog
+  description: Get all the violations for a catalog
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#listViolationsForCatalog
+- name: listViolationStatusOverrides
+  description: Gets all overrides for a violation
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#listViolationStatusOverrides
+- name: createViolationStatusOverride
+  description: Creates a status override for a violation
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#createViolationStatusOverride
+- name: deleteViolationStatusOverride
+  description: Deletes a violation status override by ID
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#deleteViolationStatusOverride
+- name: listCatalogBlockedItems
+  description: Gets all of a catalog's blocked items
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#listCatalogBlockedItems
+- name: createCatalogBlockedItems
+  description: Create catalog blocked items from a version range
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#createCatalogBlockedItems
+- name: deleteCatalogBlockedItems
+  description: Deletes a catalog blocked item by ID
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#deleteCatalogBlockedItems
+- name: listProjects
+  description: List organization projects
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#listProjects
+- name: createProject
+  description: Create a new project
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#createProject
+- name: deleteProject
+  description: Delete a project.
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#deleteProject
+- name: updateProject
+  description: Update project details
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#updateProject
+- name: createProjectKey
+  description: Create a new project API key
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#createProjectKey
+- name: importSbomProject
+  description: Create a new project with an initial scan, using the provided SBOM file as the manifest.
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#importSbomProject
+- name: getAttestationReport
+  description: Get the TACOS-formatted attestation report for packages used in a project
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#getAttestationReport
+- name: listReleases
+  description: List all releases in a catalog
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#listReleases
+- name: latestCatalogReport
+  description: Get the latest catalog report
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#latestCatalogReport
+- name: latestReport
+  description: Get the latest report
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#latestReport
+- name: reportStatus
+  description: Get the status of a report
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#reportStatus
+- name: generateReport
+  description: Run a new report
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#generateReport
+- name: performProjectlessAlignment
+  description: Perform an alignment without specifying a project
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#performProjectlessAlignment
+- name: performProjectAlignment
+  description: Perform an alignment with a specific project
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#performProjectAlignment
+- name: getProjectBillOfMaterials
+  description: Get a project's bill of materials
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#getProjectBillOfMaterials
+- name: getProjectAlignments
+  description: Get recent saved alignments
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#getProjectAlignments
+- name: createCatalogRequest
+  description: Create a new catalog request
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#createCatalogRequest
+- name: createBatchCatalogRequest
+  description: Create a new batch catalog request
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#createBatchCatalogRequest
+- name: lookupPackageInCatalogDeprecated
+  description: Retrieve information on a package in a catalog
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#lookupPackageInCatalogDeprecated
+- name: lookupPackageInCatalog
+  description: Retrieve information on a package in a catalog
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#lookupPackageInCatalog
+- name: lookupPackagesInCatalog
+  description: Retrieve information on multiple packages in a catalog
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#lookupPackagesInCatalog
+- name: listGroups
+  description: List groups in an organization
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#listGroups
+- name: createGroup
+  description: Create a new group
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#createGroup
+- name: lookupGroup
+  description: Look up a group by id, name, or slug
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#lookupGroup
+- name: deleteGroup
+  description: Delete a group. Does not check to see if the group is being used.
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#deleteGroup
+- name: listGroupProjects
+  description: List all projects linked to a group
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#listGroupProjects
+- name: addGroupProject
+  description: Add an existing project to an existing group
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#addGroupProject
+- name: removeGroupProject
+  description: Remove an existing project from an existing group
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#removeGroupProject
+- name: listGroupUsers
+  description: List all users in a given group
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#listGroupUsers
+- name: addGroupUser
+  description: Add user to group
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#addGroupUser
+- name: deleteGroupUser
+  description: Remove user from group
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#deleteGroupUser
+- name: configureAllowedLicensesAdd
+  description: Add SPDX licenses to the catalog's license policies.
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#configureAllowedLicensesAdd
+- name: configureAllowedLicensesRemove
+  description: Remove SPDX licenses from the catalog's license policies.
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#configureAllowedLicensesRemove
+- name: showAllowedLicenses
+  description: Show the catalog's license policies
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#showAllowedLicenses
+- name: createPackageLicense
+  description: Creates or updates a researched license for a given package.
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#createPackageLicense
+- name: deletePackageLicense
+  description: Deletes a researched license for a given package.
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#deletePackageLicense
+- name: createReleaseLicense
+  description: Creates or updates a researched license for a given release.
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#createReleaseLicense
+- name: deleteReleaseLicense
+  description: Deletes a researched license for a given release.
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#deleteReleaseLicense
+- name: getPackages
+  description: Gets a paginated list of packages with at least one filter applied
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#getPackages
+- name: lookup
+  description: Show details of a set of packages.
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#lookup
+- name: eol_packages
+  description: Show end-of-life details for a set of packages.
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#eol_packages
+- name: eol_releases
+  description: Show end-of-life details for a set of releases.
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#eol_releases
+- name: updates_since
+  description: Show packages that have updated data since the given datetime.
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#updates_since
+- name: showPackage
+  description: Show details of a specific package.
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#showPackage
+- name: lookupReleases
+  description: Lookup details for a set of package releases.
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#lookupReleases
+- name: showRelease
+  description: Show details of a specific release of a package.
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#showRelease
+- name: releaseDependencies
+  description: Show the direct dependencies of the release.
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#releaseDependencies
+- name: releaseSbom
+  description: Show the SBOM of the release.
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#releaseSbom
+- name: getPackageAttestationStatement
+  description: Show the attestation statement for a specific package.
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#getPackageAttestationStatement
+- name: getVulnerability
+  description: Get a vulnerability
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#getVulnerability
+- name: getVulnerabilityAffectedReleases
+  description: Get affected releases for a vulnerability
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#getVulnerabilityAffectedReleases
+- name: getProjectAlignmentStatus
+  description: Get a saved alignment with additional information
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#getProjectAlignmentStatus
+- name: listUsersForOrg
+  description: List all users for an organization
+  source_operation: openapi/tidelift-subscriber-api-openapi-original.json#listUsersForOrg
