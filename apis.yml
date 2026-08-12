@@ -245,6 +245,8 @@ apis:
   - type: APIReference
     url: https://api.tidelift.com/docs/
 common:
+- type: Overlay
+  url: overlays/tidelift-subscriber-api-overlay.yaml
 - type: DeveloperPortal
   url: https://api.tidelift.com/docs/
 - type: Documentation
