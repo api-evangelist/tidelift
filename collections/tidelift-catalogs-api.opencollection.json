@@ -1,0 +1,423 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tidelift External Alignments Catalogs API",
+    "version": "1.2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalogs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all catalogs and organizations for the user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/user/catalogs",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all catalogs and organizations for the user"
+        },
+        {
+          "info": {
+            "name": "List all catalogs for a specific organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/user/catalogs/:org_name",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "Organization name"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all catalogs for a specific organization"
+        },
+        {
+          "info": {
+            "name": "List all catalogs for an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/catalogs",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all catalogs for an organization"
+        },
+        {
+          "info": {
+            "name": "Get all the violations for a catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/catalogs/:catalog_name/violations",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "catalog_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Catalog."
+              },
+              {
+                "name": "projects[]",
+                "value": "",
+                "type": "query",
+                "description": "Names of projects to filter by"
+              },
+              {
+                "name": "catalog_standards[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter response to only violations associated with the specified catalog standards. When not provided, no filtering is applied."
+              },
+              {
+                "name": "has_task",
+                "value": "",
+                "type": "query",
+                "description": "Filter response to only violations that have an associated task (or not). When not provided, no filtering is applied."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page in results"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all the violations for a catalog"
+        },
+        {
+          "info": {
+            "name": "Gets all overrides for a violation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/catalogs/:catalog_name/violations/:violation_id/overrides",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "catalog_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Catalog."
+              },
+              {
+                "name": "violation_id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the violation to perform the action on."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets all overrides for a violation"
+        },
+        {
+          "info": {
+            "name": "Creates a status override for a violation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/catalogs/:catalog_name/violations/:violation_id/overrides",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "catalog_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Catalog."
+              },
+              {
+                "name": "violation_id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the violation to perform the action on."
+              },
+              {
+                "name": "platform",
+                "value": "",
+                "type": "query",
+                "description": "The platform of the package, when violation override is scoped to a package or release"
+              },
+              {
+                "name": "package_name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the package, when violation override is scoped to a package or release"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "The version of the package, when violation override is scoped to a release"
+              },
+              {
+                "name": "note",
+                "value": "",
+                "type": "query",
+                "description": "A note that describes the reasoning for the violation override"
+              },
+              {
+                "name": "status",
+                "value": "approved",
+                "type": "query",
+                "description": "The status that the override will apply to affected releases."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a status override for a violation. The override can be scoped to a package, a release, or neither"
+        },
+        {
+          "info": {
+            "name": "Deletes a violation status override by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/catalogs/:catalog_name/violations/:violation_id/overrides/:violation_status_override_id",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "catalog_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Catalog."
+              },
+              {
+                "name": "violation_id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the violation to perform the action on."
+              },
+              {
+                "name": "violation_status_override_id",
+                "value": "",
+                "type": "path",
+                "description": "the ID of the violation status override to perform the action on."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes a violation status override by ID"
+        },
+        {
+          "info": {
+            "name": "Gets all of a catalog's blocked items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/catalogs/:catalog_name/blocked_items",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "catalog_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Catalog."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page in results"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets all of a catalog's blocked items"
+        },
+        {
+          "info": {
+            "name": "Create catalog blocked items from a version range",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/catalogs/:catalog_name/blocked_items",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "catalog_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Catalog."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create catalog blocked items from a version range"
+        },
+        {
+          "info": {
+            "name": "Deletes a catalog blocked item by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/catalogs/:catalog_name/blocked_items/:catalog_blocked_item_id",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "catalog_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Catalog."
+              },
+              {
+                "name": "catalog_blocked_item_id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the catalog blocked item to perform the action on."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes a catalog blocked item by ID"
+        },
+        {
+          "info": {
+            "name": "Get the latest catalog report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/catalogs/:catalog_name/reports/:report_type",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "catalog_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Catalog."
+              },
+              {
+                "name": "report_type",
+                "value": "",
+                "type": "path",
+                "description": "Type of report\n\n - [all_projects_compliance (compliance of projects to catalog standards)](https://support.tidelift.com/hc/en-us/articles/24885171849236)\n - [all_projects_package_quality (Tidelift recommendations by package)](https://support.tidelift.com/hc/en-us/articles/24971666742932)\n - [all_projects_violations (All projects violations)](https://support.tidelift.com/hc/en-us/articles/24883174701332)\n - catalog_activity_audit (Catalog Activity)\n - eol_impact (End of life)\n - license_attribution (License attribution)\n - release_usage (Catalog-wide open source use)\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the latest catalog report"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

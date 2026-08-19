@@ -1,0 +1,135 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tidelift External Alignments CatalogStandards API",
+    "version": "1.2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CatalogStandards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add SPDX licenses to the catalog's license policies.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/catalogs/:catalog_name/configure-standards/allowed-licenses/add",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "catalog_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Catalog."
+              },
+              {
+                "name": "policy_status",
+                "value": "",
+                "type": "query",
+                "description": "Specify how releases should be used by projects aligning to this catalog. - 'approved' or 'denied'"
+              },
+              {
+                "name": "generate_tasks",
+                "value": "",
+                "type": "query",
+                "description": "Specify whether tasks should be generated for new violations for the licenses"
+              },
+              {
+                "name": "licenses",
+                "value": "",
+                "type": "query",
+                "description": "List of individual licenses in SPDX format to add (note that SPDX expressions are not allowed)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Add SPDX licenses to the catalog's license policies."
+        },
+        {
+          "info": {
+            "name": "Remove SPDX licenses from the catalog's license policies.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/catalogs/:catalog_name/configure-standards/allowed-licenses/remove",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "catalog_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Catalog."
+              },
+              {
+                "name": "licenses",
+                "value": "",
+                "type": "query",
+                "description": "List of individual licenses in SPDX format to remove (note that SPDX expressions are not allowed)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Remove SPDX licenses from the catalog's license policies."
+        },
+        {
+          "info": {
+            "name": "Show the catalog's license policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/catalogs/:catalog_name/configure-standards/allowed-licenses",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "catalog_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Catalog."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Show the catalog's license policies."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

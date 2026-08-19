@@ -1,0 +1,1043 @@
+{
+  "item": [
+    {
+      "id": "add2f221-615d-4448-ba9a-ccde70cfa84e",
+      "name": "CatalogStandards",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fe4d65ae-dfc9-45ef-a6d9-f8bbacf3af1c",
+          "name": "Add SPDX licenses to the catalog's license policies.",
+          "request": {
+            "name": "Add SPDX licenses to the catalog's license policies.",
+            "description": {
+              "content": "Add SPDX licenses to the catalog's license policies.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                ":org_name",
+                "catalogs",
+                ":catalog_name",
+                "configure-standards",
+                "allowed-licenses",
+                "add"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "policy_status",
+                  "value": "<string>",
+                  "description": "(Required) Specify how releases should be used by projects aligning to this catalog. - 'approved' or 'denied'"
+                },
+                {
+                  "disabled": false,
+                  "key": "generate_tasks",
+                  "value": "<boolean>",
+                  "description": "(Required) Specify whether tasks should be generated for new violations for the licenses"
+                },
+                {
+                  "disabled": false,
+                  "key": "licenses",
+                  "value": "<string>",
+                  "description": "(Required) List of individual licenses in SPDX format to add (note that SPDX expressions are not allowed)"
+                },
+                {
+                  "disabled": false,
+                  "key": "licenses",
+                  "value": "<string>",
+                  "description": "(Required) List of individual licenses in SPDX format to add (note that SPDX expressions are not allowed)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_name",
+                  "description": "(Required) The name of the Catalog."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e363b99c-3386-4c52-89a5-181c7eeb51a3",
+              "name": "License(s) added to list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "configure-standards",
+                    "allowed-licenses",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "policy_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "generate_tasks",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "licenses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "licenses",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created_at\": \"2022-05-19T02:11:56.800Z\",\n  \"updated_at\": \"2012-01-30T13:09:16.246Z\",\n  \"value\": {\n    \"MIT\": {\n      \"policy_status\": \"approved\",\n      \"generate_tasks\": true,\n      \"reference_url\": \"https://github.com/tidelift/project1/blob/main/LICENSE.md\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07fb6d72-f9c3-4629-a2a8-5e567e43543b",
+              "name": "Invalid request, Invalid parameters, Invalid record",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "configure-standards",
+                    "allowed-licenses",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "policy_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "generate_tasks",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "licenses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "licenses",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3ff22787-0783-4f1b-9748-68e463b2f729",
+              "name": "403 Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "configure-standards",
+                    "allowed-licenses",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "policy_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "generate_tasks",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "licenses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "licenses",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9bfc2560-8d14-4a9d-8f0c-776d47068684",
+              "name": "Catalog not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "configure-standards",
+                    "allowed-licenses",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "policy_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "generate_tasks",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "licenses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "licenses",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b73b81a4-74ac-49aa-bcdd-278062364d87",
+          "name": "Remove SPDX licenses from the catalog's license policies.",
+          "request": {
+            "name": "Remove SPDX licenses from the catalog's license policies.",
+            "description": {
+              "content": "Remove SPDX licenses from the catalog's license policies.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                ":org_name",
+                "catalogs",
+                ":catalog_name",
+                "configure-standards",
+                "allowed-licenses",
+                "remove"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "licenses",
+                  "value": "<string>",
+                  "description": "(Required) List of individual licenses in SPDX format to remove (note that SPDX expressions are not allowed)"
+                },
+                {
+                  "disabled": false,
+                  "key": "licenses",
+                  "value": "<string>",
+                  "description": "(Required) List of individual licenses in SPDX format to remove (note that SPDX expressions are not allowed)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_name",
+                  "description": "(Required) The name of the Catalog."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d535e1be-8090-46f9-a277-d069881f95ee",
+              "name": "License(s) removed from list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "configure-standards",
+                    "allowed-licenses",
+                    "remove"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "licenses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "licenses",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created_at\": \"2022-05-19T02:11:56.800Z\",\n  \"updated_at\": \"2012-01-30T13:09:16.246Z\",\n  \"value\": {\n    \"MIT\": {\n      \"policy_status\": \"approved\",\n      \"generate_tasks\": true,\n      \"reference_url\": \"https://github.com/tidelift/project1/blob/main/LICENSE.md\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0f4356a-c53c-4368-879b-5b75b7bbbbe7",
+              "name": "Invalid request, Invalid parameters, Invalid record",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "configure-standards",
+                    "allowed-licenses",
+                    "remove"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "licenses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "licenses",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "61b47af2-a391-4f1a-b149-fb34a91906f3",
+              "name": "403 Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "configure-standards",
+                    "allowed-licenses",
+                    "remove"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "licenses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "licenses",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "31e4d793-fc94-49c9-bd94-5d438714ca57",
+              "name": "Catalog not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "configure-standards",
+                    "allowed-licenses",
+                    "remove"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "licenses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "licenses",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5c092778-d5b7-40ed-8da0-8b910efef9f8",
+          "name": "Show the catalog's license policies",
+          "request": {
+            "name": "Show the catalog's license policies",
+            "description": {
+              "content": "Show the catalog's license policies.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                ":org_name",
+                "catalogs",
+                ":catalog_name",
+                "configure-standards",
+                "allowed-licenses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_name",
+                  "description": "(Required) The name of the Catalog."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7cce6b98-6bb1-40a0-8ee0-2703aa93e98b",
+              "name": "Licenses in this catalog's license policies",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "configure-standards",
+                    "allowed-licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created_at\": \"2022-05-19T02:11:56.800Z\",\n  \"updated_at\": \"2012-01-30T13:09:16.246Z\",\n  \"value\": {\n    \"MIT\": {\n      \"policy_status\": \"approved\",\n      \"generate_tasks\": true,\n      \"reference_url\": \"https://github.com/tidelift/project1/blob/main/LICENSE.md\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6456757e-15c7-4b34-9b7f-aec56a5de6d3",
+              "name": "403 Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "configure-standards",
+                    "allowed-licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a2480ec0-1588-4f0a-900a-a0a9dd919cf4",
+              "name": "Catalog not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "configure-standards",
+                    "allowed-licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tidelift.com/external-api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "75fa81dc-4f6a-4ff6-a40d-ad693a7db086",
+    "name": "Tidelift External Alignments CatalogStandards API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

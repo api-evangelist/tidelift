@@ -1,0 +1,3018 @@
+{
+  "item": [
+    {
+      "id": "f950f6c2-7d6b-4329-b31b-ea83be0e45f0",
+      "name": "Catalogs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fd661f11-9f74-4582-9f4f-e06f50da798d",
+          "name": "List all catalogs and organizations for the user",
+          "request": {
+            "name": "List all catalogs and organizations for the user",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "user",
+                "catalogs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c15b6f77-abc2-4c1b-ad07-e7afb372b936",
+              "name": "A list of catalogs grouped by organization",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "user",
+                    "catalogs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"roles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"catalogs\": [\n      {\n        \"display_name\": \"string\",\n        \"name\": \"string\",\n        \"release_count\": 7898,\n        \"roles\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"display_name\": \"string\",\n        \"name\": \"string\",\n        \"release_count\": 1160,\n        \"roles\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ]\n  },\n  {\n    \"name\": \"string\",\n    \"roles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"catalogs\": [\n      {\n        \"display_name\": \"string\",\n        \"name\": \"string\",\n        \"release_count\": 2732,\n        \"roles\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"display_name\": \"string\",\n        \"name\": \"string\",\n        \"release_count\": 7971,\n        \"roles\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1bfcdd2-c4f4-44b9-9d74-bd1ccc11df79",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "user",
+                    "catalogs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f353e449-8f47-40ae-b932-8bb66728d7ee",
+          "name": "List all catalogs for a specific organization",
+          "request": {
+            "name": "List all catalogs for a specific organization",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "user",
+                "catalogs",
+                ":org_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) Organization name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "89133f89-4007-4bd5-8458-f147cfbc9fa0",
+              "name": "A list of catalogs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "user",
+                    "catalogs",
+                    ":org_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) Organization name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"roles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"catalogs\": [\n      {\n        \"display_name\": \"string\",\n        \"name\": \"string\",\n        \"release_count\": 3148,\n        \"roles\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"display_name\": \"string\",\n        \"name\": \"string\",\n        \"release_count\": 5431,\n        \"roles\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ]\n  },\n  {\n    \"name\": \"string\",\n    \"roles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"catalogs\": [\n      {\n        \"display_name\": \"string\",\n        \"name\": \"string\",\n        \"release_count\": 3493,\n        \"roles\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"display_name\": \"string\",\n        \"name\": \"string\",\n        \"release_count\": 3101,\n        \"roles\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1a1459f-2060-447c-bf21-e686c64ee366",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "user",
+                    "catalogs",
+                    ":org_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) Organization name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "200e5f2a-55a9-4c9b-9d60-def47b675506",
+          "name": "List all catalogs for an organization",
+          "request": {
+            "name": "List all catalogs for an organization",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                ":org_name",
+                "catalogs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a2234aad-f691-43fb-9125-68bff44ce581",
+              "name": "A list of catalogs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"display_name\": \"string\",\n    \"name\": \"string\",\n    \"release_count\": 5103\n  },\n  {\n    \"display_name\": \"string\",\n    \"name\": \"string\",\n    \"release_count\": 6096\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5667b86-07ef-42a9-bd94-cfa2024604ca",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4f1d1352-3769-405b-a9ad-c4eeadfe0752",
+          "name": "Get all the violations for a catalog",
+          "request": {
+            "name": "Get all the violations for a catalog",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                ":org_name",
+                "catalogs",
+                ":catalog_name",
+                "violations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "projects[]",
+                  "value": "<string>",
+                  "description": "Names of projects to filter by"
+                },
+                {
+                  "disabled": false,
+                  "key": "projects[]",
+                  "value": "<string>",
+                  "description": "Names of projects to filter by"
+                },
+                {
+                  "disabled": false,
+                  "key": "catalog_standards[]",
+                  "value": "<string>",
+                  "description": "Filter response to only violations associated with the specified catalog standards. When not provided, no filtering is applied."
+                },
+                {
+                  "disabled": false,
+                  "key": "catalog_standards[]",
+                  "value": "<string>",
+                  "description": "Filter response to only violations associated with the specified catalog standards. When not provided, no filtering is applied."
+                },
+                {
+                  "disabled": false,
+                  "key": "has_task",
+                  "value": "<boolean>",
+                  "description": "Filter response to only violations that have an associated task (or not). When not provided, no filtering is applied."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<number>",
+                  "description": "Page in results"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_name",
+                  "description": "(Required) The name of the Catalog."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4167758c-f8fb-4a9e-87da-19ae7de8a6f7",
+              "name": "Paginated list of violations for catalog",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "violations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projects[]",
+                      "value": "my-project"
+                    },
+                    {
+                      "key": "projects[]",
+                      "value": "my-other-project"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "deprecation"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "known_packages"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "up_to_date"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "vulnerabilities"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "allowed_licenses"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "identified_licenses"
+                    },
+                    {
+                      "key": "has_task",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"current_page\": 3782,\n  \"next_page\": 2562,\n  \"per_page\": 6417,\n  \"prev_page\": 1510,\n  \"results\": [\n    {\n      \"catalog_standard\": \"string\",\n      \"license\": \"string\",\n      \"title\": \"string\",\n      \"violation_id\": \"string\",\n      \"package_name\": \"string\",\n      \"package_platform\": \"string\",\n      \"version\": \"string\",\n      \"task_id\": \"string\"\n    },\n    {\n      \"catalog_standard\": \"string\",\n      \"license\": \"string\",\n      \"title\": \"string\",\n      \"violation_id\": \"string\",\n      \"package_name\": \"string\",\n      \"package_platform\": \"string\",\n      \"version\": \"string\",\n      \"task_id\": \"string\"\n    }\n  ],\n  \"total_count\": 3293,\n  \"total_pages\": 2479\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93598146-3f8e-4ecc-aa4a-667db1f4523f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "violations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projects[]",
+                      "value": "my-project"
+                    },
+                    {
+                      "key": "projects[]",
+                      "value": "my-other-project"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "deprecation"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "known_packages"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "up_to_date"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "vulnerabilities"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "allowed_licenses"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "identified_licenses"
+                    },
+                    {
+                      "key": "has_task",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09b0aaea-2bdc-4088-89b4-ac32a515ce80",
+              "name": "Catalog not found, Catalog Standard not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "violations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "projects[]",
+                      "value": "my-project"
+                    },
+                    {
+                      "key": "projects[]",
+                      "value": "my-other-project"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "deprecation"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "known_packages"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "up_to_date"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "vulnerabilities"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "allowed_licenses"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "identified_licenses"
+                    },
+                    {
+                      "key": "has_task",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2ee69c9-b955-460f-8ec7-9ffc3bbff8e5",
+          "name": "Gets all overrides for a violation",
+          "request": {
+            "name": "Gets all overrides for a violation",
+            "description": {
+              "content": "Gets all overrides for a violation",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                ":org_name",
+                "catalogs",
+                ":catalog_name",
+                "violations",
+                ":violation_id",
+                "overrides"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_name",
+                  "description": "(Required) The name of the Catalog."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "violation_id",
+                  "description": "(Required) The id of the violation to perform the action on."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "022b60d7-320c-4a2f-a41c-a5b05d3a3a06",
+              "name": "A list of all overrides for the violation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "violations",
+                    ":violation_id",
+                    "overrides"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "violation_id",
+                      "description": "(Required) The id of the violation to perform the action on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"violation_id\": \"string\",\n    \"platform\": \"string\",\n    \"name\": \"string\",\n    \"version\": \"string\",\n    \"status\": \"string\",\n    \"note\": \"string\",\n    \"created_at\": \"2020-02-27T19:48:04.447Z\",\n    \"created_by\": \"string\",\n    \"catalog_standard\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"violation_id\": \"string\",\n    \"platform\": \"string\",\n    \"name\": \"string\",\n    \"version\": \"string\",\n    \"status\": \"string\",\n    \"note\": \"string\",\n    \"created_at\": \"1952-05-01T22:19:39.655Z\",\n    \"created_by\": \"string\",\n    \"catalog_standard\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f34cfde3-3e45-4674-a08e-15ca9b6302be",
+              "name": "404 Violation Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "violations",
+                    ":violation_id",
+                    "overrides"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "violation_id",
+                      "description": "(Required) The id of the violation to perform the action on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "618362ce-a37b-44e7-bf84-737e3b99782d",
+          "name": "Creates a status override for a violation",
+          "request": {
+            "name": "Creates a status override for a violation",
+            "description": {
+              "content": "Creates a status override for a violation. The override can be scoped to a package, a release, or neither",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                ":org_name",
+                "catalogs",
+                ":catalog_name",
+                "violations",
+                ":violation_id",
+                "overrides"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "platform",
+                  "value": "<string>",
+                  "description": "The platform of the package, when violation override is scoped to a package or release"
+                },
+                {
+                  "disabled": false,
+                  "key": "package_name",
+                  "value": "<string>",
+                  "description": "The name of the package, when violation override is scoped to a package or release"
+                },
+                {
+                  "disabled": false,
+                  "key": "version",
+                  "value": "<string>",
+                  "description": "The version of the package, when violation override is scoped to a release"
+                },
+                {
+                  "disabled": false,
+                  "key": "note",
+                  "value": "<string>",
+                  "description": "A note that describes the reasoning for the violation override"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "(Required) The status that the override will apply to affected releases."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_name",
+                  "description": "(Required) The name of the Catalog."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "violation_id",
+                  "description": "(Required) The id of the violation to perform the action on."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b456e11d-7a27-4cca-8351-2b02d3b43adc",
+              "name": "A response indicating the successful creation of the violation status override",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "violations",
+                    ":violation_id",
+                    "overrides"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "platform",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "package_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "note",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "approved"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "violation_id",
+                      "description": "(Required) The id of the violation to perform the action on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d35592b1-1b97-4e7e-898e-feb066d58184",
+              "name": "Invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "violations",
+                    ":violation_id",
+                    "overrides"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "platform",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "package_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "note",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "approved"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "violation_id",
+                      "description": "(Required) The id of the violation to perform the action on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a7c3af40-5f10-424f-9cc0-e8c29c249186",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "violations",
+                    ":violation_id",
+                    "overrides"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "platform",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "package_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "note",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "approved"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "violation_id",
+                      "description": "(Required) The id of the violation to perform the action on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "49ab45ed-89ce-40a0-a628-d38d3588dfbd",
+          "name": "Deletes a violation status override by ID",
+          "request": {
+            "name": "Deletes a violation status override by ID",
+            "description": {
+              "content": "Deletes a violation status override by ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                ":org_name",
+                "catalogs",
+                ":catalog_name",
+                "violations",
+                ":violation_id",
+                "overrides",
+                ":violation_status_override_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_name",
+                  "description": "(Required) The name of the Catalog."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "violation_id",
+                  "description": "(Required) The id of the violation to perform the action on."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "violation_status_override_id",
+                  "description": "(Required) the ID of the violation status override to perform the action on."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b2c69f54-bc4c-4f9e-bd8c-afc201975031",
+              "name": "A response indicating the successful deletion of the violation status override",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "violations",
+                    ":violation_id",
+                    "overrides",
+                    ":violation_status_override_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "violation_id",
+                      "description": "(Required) The id of the violation to perform the action on."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "violation_status_override_id",
+                      "description": "(Required) the ID of the violation status override to perform the action on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68724b0f-0ba5-4a25-a0fd-d2908bbe1c50",
+              "name": "The Violation status override was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "violations",
+                    ":violation_id",
+                    "overrides",
+                    ":violation_status_override_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "violation_id",
+                      "description": "(Required) The id of the violation to perform the action on."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "violation_status_override_id",
+                      "description": "(Required) the ID of the violation status override to perform the action on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f1489212-737b-42c5-9fb7-88a0f60d9b33",
+          "name": "Gets all of a catalog's blocked items",
+          "request": {
+            "name": "Gets all of a catalog's blocked items",
+            "description": {
+              "content": "Gets all of a catalog's blocked items",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                ":org_name",
+                "catalogs",
+                ":catalog_name",
+                "blocked_items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<number>",
+                  "description": "Page in results"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<number>",
+                  "description": "Number of results per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_name",
+                  "description": "(Required) The name of the Catalog."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "70d9bed3-88d1-48ee-a7d2-ddc9d7a8a4b3",
+              "name": "A list of a catalog's blocked items",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "blocked_items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"current_page\": 6704,\n  \"next_page\": 2669,\n  \"per_page\": 5585,\n  \"prev_page\": 2644,\n  \"results\": [\n    {\n      \"id\": \"string\",\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"reason\": \"string\",\n      \"created_by\": \"string\",\n      \"created_at\": \"1992-11-07\"\n    },\n    {\n      \"id\": \"string\",\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"reason\": \"string\",\n      \"created_by\": \"string\",\n      \"created_at\": \"1952-09-07\"\n    }\n  ],\n  \"total_count\": 204,\n  \"total_pages\": 5914\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06ffe46b-0f31-409d-9cd9-eba59364a6d3",
+              "name": "Invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "blocked_items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0eaee583-4c51-4c18-a695-21d58fbbe084",
+              "name": "The user is not an admin of the organization or doesn't belong to the organization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "blocked_items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a6266a2-e604-49b8-993e-5fe988ff5ddf",
+              "name": "Catalog or organization not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "blocked_items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bb95e27d-b364-49be-88d5-58e8304442a3",
+          "name": "Create catalog blocked items from a version range",
+          "request": {
+            "name": "Create catalog blocked items from a version range",
+            "description": {
+              "content": "Create catalog blocked items from a version range",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                ":org_name",
+                "catalogs",
+                ":catalog_name",
+                "blocked_items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_name",
+                  "description": "(Required) The name of the Catalog."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"platform\": \"<string>\",\n  \"name\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"version_low\": \"<string>\",\n  \"version_high\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dbe20246-3d3e-404f-a939-2dded97dd432",
+              "name": "A response indicating the successful creation of a catalog blocked item",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "blocked_items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"platform\": \"<string>\",\n  \"name\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"version_low\": \"<string>\",\n  \"version_high\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ids\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62ae6114-209b-4025-866d-285e7c911f84",
+              "name": "Invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "blocked_items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"platform\": \"<string>\",\n  \"name\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"version_low\": \"<string>\",\n  \"version_high\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2197f107-507b-4453-b471-c5261a49c907",
+              "name": "The user is not an admin of the organization or doesn't belong to the organization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "blocked_items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"platform\": \"<string>\",\n  \"name\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"version_low\": \"<string>\",\n  \"version_high\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36383318-cb17-4f01-b716-2355d91df4b3",
+              "name": "Catalog or organization not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "blocked_items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"platform\": \"<string>\",\n  \"name\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"version_low\": \"<string>\",\n  \"version_high\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "45edeaeb-15c0-4d3f-8878-ad1a32b1b582",
+          "name": "Deletes a catalog blocked item by ID",
+          "request": {
+            "name": "Deletes a catalog blocked item by ID",
+            "description": {
+              "content": "Deletes a catalog blocked item by ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                ":org_name",
+                "catalogs",
+                ":catalog_name",
+                "blocked_items",
+                ":catalog_blocked_item_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_name",
+                  "description": "(Required) The name of the Catalog."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_blocked_item_id",
+                  "description": "(Required) The id of the catalog blocked item to perform the action on."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "70ab4360-7f33-4653-b0b1-1077f9c141ee",
+              "name": "A response indicating the successful deletion of the catalog blocked item",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "blocked_items",
+                    ":catalog_blocked_item_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_blocked_item_id",
+                      "description": "(Required) The id of the catalog blocked item to perform the action on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7cd68069-a0f9-4a5c-b5dd-c4c733c1bed7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "blocked_items",
+                    ":catalog_blocked_item_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_blocked_item_id",
+                      "description": "(Required) The id of the catalog blocked item to perform the action on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53f343b6-becd-4fbf-8cf9-3f2acc15f6bd",
+              "name": "The user is not an admin of the organization or doesn't belong to the organization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "blocked_items",
+                    ":catalog_blocked_item_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_blocked_item_id",
+                      "description": "(Required) The id of the catalog blocked item to perform the action on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4540452b-31e6-4bfa-882f-d61d1fb21e0e",
+              "name": "Catalog, organization, or catalog blocked item not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "blocked_items",
+                    ":catalog_blocked_item_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_blocked_item_id",
+                      "description": "(Required) The id of the catalog blocked item to perform the action on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ebf5d9d-5b02-4f4f-b008-5217978cd703",
+          "name": "Get the latest catalog report",
+          "request": {
+            "name": "Get the latest catalog report",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                ":org_name",
+                "catalogs",
+                ":catalog_name",
+                "reports",
+                ":report_type"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_name",
+                  "description": "(Required) The name of the Catalog."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "report_type",
+                  "description": "(Required) Type of report\n\n - [all_projects_compliance (compliance of projects to catalog standards)](https://support.tidelift.com/hc/en-us/articles/24885171849236)\n - [all_projects_package_quality (Tidelift recommendations by package)](https://support.tidelift.com/hc/en-us/articles/24971666742932)\n - [all_projects_violations (All projects violations)](https://support.tidelift.com/hc/en-us/articles/24883174701332)\n - catalog_activity_audit (Catalog Activity)\n - eol_impact (End of life)\n - license_attribution (License attribution)\n - release_usage (Catalog-wide open source use)\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1f20d6f1-16f4-4164-83d5-2ed2c78792c1",
+              "name": "Returns latest catalog report JSON",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "reports",
+                    ":report_type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "report_type",
+                      "description": "(Required) Type of report\n\n - [all_projects_compliance (compliance of projects to catalog standards)](https://support.tidelift.com/hc/en-us/articles/24885171849236)\n - [all_projects_package_quality (Tidelift recommendations by package)](https://support.tidelift.com/hc/en-us/articles/24971666742932)\n - [all_projects_violations (All projects violations)](https://support.tidelift.com/hc/en-us/articles/24883174701332)\n - catalog_activity_audit (Catalog Activity)\n - eol_impact (End of life)\n - license_attribution (License attribution)\n - release_usage (Catalog-wide open source use)\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"report_type\": \"all_projects_violations\",\n  \"catalog_id\": \"string\",\n  \"created_at\": \"string\",\n  \"report\": [\n    {\n      \"package_platform\": \"string\",\n      \"package_name\": \"string\",\n      \"package_version\": \"string\",\n      \"package_status\": \"string\",\n      \"license\": \"string\",\n      \"date_added\": \"string\",\n      \"published_date\": \"string\",\n      \"projects_using\": \"string\",\n      \"decision_by_name\": \"string\",\n      \"decision_by_email\": \"string\",\n      \"internal_package\": \"string\",\n      \"package_link\": \"string\",\n      \"package_source\": \"string\",\n      \"purl\": \"string\",\n      \"deny_at\": \"string\"\n    },\n    {\n      \"package_platform\": \"string\",\n      \"package_name\": \"string\",\n      \"package_version\": \"string\",\n      \"package_status\": \"string\",\n      \"license\": \"string\",\n      \"date_added\": \"string\",\n      \"published_date\": \"string\",\n      \"projects_using\": \"string\",\n      \"decision_by_name\": \"string\",\n      \"decision_by_email\": \"string\",\n      \"internal_package\": \"string\",\n      \"package_link\": \"string\",\n      \"package_source\": \"string\",\n      \"purl\": \"string\",\n      \"deny_at\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a260457d-763f-437e-94c6-25bc3714f693",
+              "name": "No report has been generated yet.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "reports",
+                    ":report_type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "report_type",
+                      "description": "(Required) Type of report\n\n - [all_projects_compliance (compliance of projects to catalog standards)](https://support.tidelift.com/hc/en-us/articles/24885171849236)\n - [all_projects_package_quality (Tidelift recommendations by package)](https://support.tidelift.com/hc/en-us/articles/24971666742932)\n - [all_projects_violations (All projects violations)](https://support.tidelift.com/hc/en-us/articles/24883174701332)\n - catalog_activity_audit (Catalog Activity)\n - eol_impact (End of life)\n - license_attribution (License attribution)\n - release_usage (Catalog-wide open source use)\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7d705346-bf16-44c4-8ab0-d08767efb2bf",
+              "name": "Multiple catalogs found, please specify one.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "reports",
+                    ":report_type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "report_type",
+                      "description": "(Required) Type of report\n\n - [all_projects_compliance (compliance of projects to catalog standards)](https://support.tidelift.com/hc/en-us/articles/24885171849236)\n - [all_projects_package_quality (Tidelift recommendations by package)](https://support.tidelift.com/hc/en-us/articles/24971666742932)\n - [all_projects_violations (All projects violations)](https://support.tidelift.com/hc/en-us/articles/24883174701332)\n - catalog_activity_audit (Catalog Activity)\n - eol_impact (End of life)\n - license_attribution (License attribution)\n - release_usage (Catalog-wide open source use)\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tidelift.com/external-api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "063fc4c8-8a84-40c1-b28f-321383972e1c",
+    "name": "Tidelift External Alignments Catalogs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

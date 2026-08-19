@@ -1,0 +1,183 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tidelift External Alignments Releases API",
+    "version": "1.2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Releases",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Show end-of-life details for a set of releases.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tidelift.com/external-api/v1/packages/eol-releases",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Show end-of-life details for a set of releases"
+        },
+        {
+          "info": {
+            "name": "Lookup details for a set of package releases.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tidelift.com/external-api/v1/releases/lookup",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lookup details for a set of package releases"
+        },
+        {
+          "info": {
+            "name": "Show details of a specific release of a package.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/packages/:package_platform/:package_name/releases/:release_version",
+            "params": [
+              {
+                "name": "package_platform",
+                "value": "",
+                "type": "path",
+                "description": "The platform of the package."
+              },
+              {
+                "name": "package_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the package to look up."
+              },
+              {
+                "name": "release_version",
+                "value": "",
+                "type": "path",
+                "description": "The version of the package to look up."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Show details of a specific release of a package"
+        },
+        {
+          "info": {
+            "name": "Show the direct dependencies of the release.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/packages/:package_platform/:package_name/releases/:release_version/dependencies",
+            "params": [
+              {
+                "name": "package_platform",
+                "value": "",
+                "type": "path",
+                "description": "The platform of the package."
+              },
+              {
+                "name": "package_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the package to look up."
+              },
+              {
+                "name": "release_version",
+                "value": "",
+                "type": "path",
+                "description": "The version of the package to look up."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Show the direct dependencies of the release and the requirement version string for each"
+        },
+        {
+          "info": {
+            "name": "Show the SBOM of the release.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/packages/:package_platform/:package_name/releases/:release_version/sbom",
+            "params": [
+              {
+                "name": "package_platform",
+                "value": "",
+                "type": "path",
+                "description": "The platform of the package."
+              },
+              {
+                "name": "package_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the package to look up."
+              },
+              {
+                "name": "release_version",
+                "value": "",
+                "type": "path",
+                "description": "The version of the package to look up."
+              },
+              {
+                "name": "sbom_type",
+                "value": "",
+                "type": "query",
+                "description": "The type the SBOM to generate. Required, unless older sbom_format parameter is passed."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Show the SBOM of an upstream release in a given format\n  * [SPDX spec](https://spdx.github.io/spdx-spec/v2.2.2/document-creation-information/)\n  * [CycloneDX spec](https://cyclonedx.org/specification/overview/)\n\nTo request an SBOM, both a file format and SBOM type must be specified.\n\nThe file format can be specified in several ways:\n  * using the `format` query parameter\n  * using the `Accept` header\n  * using a file extension on the route (e.g. sbom.json to request the JSON file format).\n\nThe S"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

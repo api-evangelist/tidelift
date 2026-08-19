@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tidelift External Alignments Authentication API",
+    "version": "1.2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check if the given API key is valid.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/authcheck",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Check if the given API key is valid."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

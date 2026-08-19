@@ -1,0 +1,914 @@
+{
+  "item": [
+    {
+      "id": "ce0a4c40-dc62-4ab4-952e-57ffadcdbba2",
+      "name": "Alignments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d18f3252-6c9c-4442-b663-121a8c842748",
+          "name": "Perform an alignment without specifying a project",
+          "request": {
+            "name": "Perform an alignment without specifying a project",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "catalog",
+                ":org_name",
+                "alignment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "files",
+                  "type": "file",
+                  "description": ""
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3833fa86-b635-4d7b-bf99-d9db61ec3b3a",
+              "name": "Alignment info against default catalog",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    ":org_name",
+                    "alignment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "files",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_meta\": {\n    \"version\": \"string\"\n  },\n  \"organization\": \"string\",\n  \"project\": \"string\",\n  \"files\": \"string\",\n  \"alignment_pct\": 7134.244879483528,\n  \"unapproved\": [\n    {\n      \"id\": 6686,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": true,\n      \"license_set_by_admin\": false,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": true,\n      \"direct\": true,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    },\n    {\n      \"id\": 5728,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": false,\n      \"license_set_by_admin\": false,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": false,\n      \"direct\": false,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    }\n  ],\n  \"alternatives\": [\n    {\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"in_use\": [\n        \"string\",\n        \"string\"\n      ],\n      \"not_in_use\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"in_use\": [\n        \"string\",\n        \"string\"\n      ],\n      \"not_in_use\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"upcoming_denials\": [\n    {\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"version\": \"string\",\n      \"deny_at\": \"string\",\n      \"reason\": \"string\",\n      \"highest_approved_version\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"version\": \"string\",\n      \"deny_at\": \"string\",\n      \"reason\": \"string\",\n      \"highest_approved_version\": \"string\"\n    }\n  ],\n  \"approved\": [\n    {\n      \"id\": 8006,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": false,\n      \"license_set_by_admin\": true,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": false,\n      \"direct\": true,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    },\n    {\n      \"id\": 9630,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": false,\n      \"license_set_by_admin\": true,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": false,\n      \"direct\": false,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    }\n  ],\n  \"requested\": [\n    {\n      \"id\": 1479,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": false,\n      \"license_set_by_admin\": false,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": true,\n      \"direct\": true,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    },\n    {\n      \"id\": 4493,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": true,\n      \"license_set_by_admin\": true,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": true,\n      \"direct\": true,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    }\n  ],\n  \"denied\": [\n    {\n      \"id\": 4163,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": false,\n      \"license_set_by_admin\": false,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": true,\n      \"direct\": false,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    },\n    {\n      \"id\": 894,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": true,\n      \"license_set_by_admin\": true,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": true,\n      \"direct\": true,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    }\n  ],\n  \"catalog\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"display_name\": \"string\",\n    \"catalog_standards\": [\n      {\n        \"slug\": \"string\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"enabled\": true\n      },\n      {\n        \"slug\": \"string\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"enabled\": false\n      }\n    ]\n  },\n  \"baseline_alignment\": {\n    \"number\": 8890,\n    \"date\": \"1987-01-15T18:17:41.258Z\"\n  },\n  \"actions\": [\n    {\n      \"action_description\": \"string\",\n      \"action\": {\n        \"package_name\": \"string\",\n        \"dependency_source\": \"string\",\n        \"current_version\": \"string\",\n        \"suggested_version\": \"string\"\n      },\n      \"violations\": [\n        {\n          \"title\": \"string\"\n        },\n        {\n          \"title\": \"string\"\n        }\n      ]\n    },\n    {\n      \"action_description\": \"string\",\n      \"action\": {\n        \"package_name\": \"string\",\n        \"dependency_source\": \"string\",\n        \"current_version\": \"string\",\n        \"suggested_version\": \"string\"\n      },\n      \"violations\": [\n        {\n          \"title\": \"string\"\n        },\n        {\n          \"title\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"team\": \"string\",\n  \"no_new_introduction\": [\n    {\n      \"id\": 4316,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": false,\n      \"license_set_by_admin\": false,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": false,\n      \"direct\": false,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    },\n    {\n      \"id\": 6413,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": false,\n      \"license_set_by_admin\": false,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": false,\n      \"direct\": false,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3437a63-63a3-4812-9874-95890444138f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    ":org_name",
+                    "alignment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "files",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c6f6a948-06ea-4c71-bc69-e89d5eaae0e3",
+          "name": "Perform an alignment with a specific project",
+          "request": {
+            "name": "Perform an alignment with a specific project",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "catalog",
+                ":org_name",
+                ":project",
+                "alignment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1ecae71f-370c-4b5f-a95e-43362dcc9a3b",
+              "name": "Alignment information against project's catalog",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    ":org_name",
+                    ":project",
+                    "alignment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_meta\": {\n    \"version\": \"string\"\n  },\n  \"organization\": \"string\",\n  \"project\": \"string\",\n  \"files\": \"string\",\n  \"alignment_pct\": 7566.613786097102,\n  \"unapproved\": [\n    {\n      \"id\": 8661,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": false,\n      \"license_set_by_admin\": true,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": true,\n      \"direct\": true,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    },\n    {\n      \"id\": 4039,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": false,\n      \"license_set_by_admin\": false,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": false,\n      \"direct\": false,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    }\n  ],\n  \"alternatives\": [\n    {\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"in_use\": [\n        \"string\",\n        \"string\"\n      ],\n      \"not_in_use\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"in_use\": [\n        \"string\",\n        \"string\"\n      ],\n      \"not_in_use\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"upcoming_denials\": [\n    {\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"version\": \"string\",\n      \"deny_at\": \"string\",\n      \"reason\": \"string\",\n      \"highest_approved_version\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"version\": \"string\",\n      \"deny_at\": \"string\",\n      \"reason\": \"string\",\n      \"highest_approved_version\": \"string\"\n    }\n  ],\n  \"approved\": [\n    {\n      \"id\": 6273,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": true,\n      \"license_set_by_admin\": false,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": true,\n      \"direct\": false,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    },\n    {\n      \"id\": 4243,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": false,\n      \"license_set_by_admin\": true,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": false,\n      \"direct\": true,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    }\n  ],\n  \"requested\": [\n    {\n      \"id\": 9476,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": false,\n      \"license_set_by_admin\": true,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": true,\n      \"direct\": false,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    },\n    {\n      \"id\": 6823,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": true,\n      \"license_set_by_admin\": true,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": true,\n      \"direct\": true,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    }\n  ],\n  \"denied\": [\n    {\n      \"id\": 2440,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": true,\n      \"license_set_by_admin\": false,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": true,\n      \"direct\": true,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    },\n    {\n      \"id\": 7256,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": false,\n      \"license_set_by_admin\": true,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": true,\n      \"direct\": false,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    }\n  ],\n  \"catalog\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"display_name\": \"string\",\n    \"catalog_standards\": [\n      {\n        \"slug\": \"string\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"enabled\": false\n      },\n      {\n        \"slug\": \"string\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"enabled\": false\n      }\n    ]\n  },\n  \"baseline_alignment\": {\n    \"number\": 7629,\n    \"date\": \"1955-11-22T15:58:29.666Z\"\n  },\n  \"actions\": [\n    {\n      \"action_description\": \"string\",\n      \"action\": {\n        \"package_name\": \"string\",\n        \"dependency_source\": \"string\",\n        \"current_version\": \"string\",\n        \"suggested_version\": \"string\"\n      },\n      \"violations\": [\n        {\n          \"title\": \"string\"\n        },\n        {\n          \"title\": \"string\"\n        }\n      ]\n    },\n    {\n      \"action_description\": \"string\",\n      \"action\": {\n        \"package_name\": \"string\",\n        \"dependency_source\": \"string\",\n        \"current_version\": \"string\",\n        \"suggested_version\": \"string\"\n      },\n      \"violations\": [\n        {\n          \"title\": \"string\"\n        },\n        {\n          \"title\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"team\": \"string\",\n  \"no_new_introduction\": [\n    {\n      \"id\": 7849,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": true,\n      \"license_set_by_admin\": true,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": true,\n      \"direct\": true,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    },\n    {\n      \"id\": 2432,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": true,\n      \"license_set_by_admin\": true,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": false,\n      \"direct\": true,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eea3c056-9ff2-4609-a5a1-08d7a2b4ef8c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    ":org_name",
+                    ":project",
+                    "alignment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a158a09d-7b95-4571-971c-948799791c3e",
+          "name": "Get recent saved alignments",
+          "request": {
+            "name": "Get recent saved alignments",
+            "description": {
+              "content": "Gets a list of all the saved alignments from the previous three weeks",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "catalog",
+                ":org_name",
+                ":project",
+                "alignments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "branch",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "revision",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "18698cb6-53af-4689-8445-aede41c94c23",
+              "name": "List of saved alignments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    ":org_name",
+                    ":project",
+                    "alignments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "branch",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "revision",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"alignment_id\": \"string\",\n    \"revision\": \"string\",\n    \"finished_at\": \"string\",\n    \"release_count\": 9535,\n    \"newly_introduced_count\": 1301,\n    \"alignment_pct\": 4903.606677102654,\n    \"branch\": \"string\",\n    \"status\": \"error\",\n    \"result\": \"failure\",\n    \"error\": {\n      \"code\": \"inexact_versions\",\n      \"message\": \"string\",\n      \"details\": {\n        \"platform\": \"string\",\n        \"path\": \"string\",\n        \"kind\": \"lockfile\",\n        \"message\": \"string\"\n      }\n    },\n    \"error_code\": \"invalid_version\",\n    \"error_message\": \"string\",\n    \"error_details\": \"string\",\n    \"warnings\": [\n      {\n        \"code\": \"invalid_version\",\n        \"message\": \"string\",\n        \"details\": \"string\"\n      },\n      {\n        \"code\": \"invalid_version\",\n        \"message\": \"string\",\n        \"details\": \"string\"\n      }\n    ]\n  },\n  {\n    \"alignment_id\": \"string\",\n    \"revision\": \"string\",\n    \"finished_at\": \"string\",\n    \"release_count\": 1705,\n    \"newly_introduced_count\": 6592,\n    \"alignment_pct\": 4818.0722527684375,\n    \"branch\": \"string\",\n    \"status\": \"scheduled\",\n    \"result\": \"success\",\n    \"error\": {\n      \"code\": \"invalid_version\",\n      \"message\": \"string\",\n      \"details\": {\n        \"platform\": \"string\",\n        \"path\": \"string\",\n        \"kind\": \"lockfile\",\n        \"message\": \"string\"\n      }\n    },\n    \"error_code\": \"no_packages_found\",\n    \"error_message\": \"string\",\n    \"error_details\": \"string\",\n    \"warnings\": [\n      {\n        \"code\": \"invalid_packages\",\n        \"message\": \"string\",\n        \"details\": \"string\"\n      },\n      {\n        \"code\": \"invalid_packages\",\n        \"message\": \"string\",\n        \"details\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "173dd980-4405-43ad-ae8a-6fe49162d3f2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    ":org_name",
+                    ":project",
+                    "alignments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "branch",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "revision",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c4aab530-500d-47e8-b9e1-d702857a4c1f",
+          "name": "Get a saved alignment with additional information",
+          "request": {
+            "name": "Get a saved alignment with additional information",
+            "description": {
+              "content": "The alignment will also include information on violations per dependency.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                ":org_name",
+                "projects",
+                ":project",
+                "alignments",
+                ":revision",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project",
+                  "description": "(Required) The name of the project. The external identifier will not work here."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "revision",
+                  "description": "(Required) The `revision` of the alignment."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a0cebc54-4a06-430e-a290-b9209bca5c3d",
+              "name": "Detailed results and status of saved alignment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "projects",
+                    ":project",
+                    "alignments",
+                    ":revision",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) The name of the project. The external identifier will not work here."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "revision",
+                      "description": "(Required) The `revision` of the alignment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_meta\": {\n    \"version\": \"string\"\n  },\n  \"actions\": [\n    {\n      \"action_description\": \"string\",\n      \"action\": {\n        \"package_name\": \"string\",\n        \"dependency_source\": \"string\",\n        \"current_version\": \"string\",\n        \"suggested_version\": \"string\"\n      },\n      \"violations\": [\n        {\n          \"title\": \"string\"\n        },\n        {\n          \"title\": \"string\"\n        }\n      ]\n    },\n    {\n      \"action_description\": \"string\",\n      \"action\": {\n        \"package_name\": \"string\",\n        \"dependency_source\": \"string\",\n        \"current_version\": \"string\",\n        \"suggested_version\": \"string\"\n      },\n      \"violations\": [\n        {\n          \"title\": \"string\"\n        },\n        {\n          \"title\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"alignment_counts\": {\n    \"approved\": 211,\n    \"denied\": 3140,\n    \"requested\": 4292,\n    \"unapproved\": 3127,\n    \"newly_introduced\": 9922,\n    \"no_new_introduction\": 1764\n  },\n  \"alignment_pct\": 4142.167034646671,\n  \"alternatives\": [\n    {\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"in_use\": [\n        \"string\",\n        \"string\"\n      ],\n      \"not_in_use\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"in_use\": [\n        \"string\",\n        \"string\"\n      ],\n      \"not_in_use\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"approved\": [\n    {\n      \"id\": 9959,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": true,\n      \"license_set_by_admin\": true,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": true,\n      \"direct\": true,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    },\n    {\n      \"id\": 9023,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": true,\n      \"license_set_by_admin\": true,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": true,\n      \"direct\": false,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    }\n  ],\n  \"baseline_alignment\": {\n    \"number\": 2188,\n    \"date\": \"1994-04-16T01:17:45.977Z\"\n  },\n  \"catalog\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"display_name\": \"string\",\n    \"catalog_standards\": [\n      {\n        \"slug\": \"string\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"enabled\": false\n      },\n      {\n        \"slug\": \"string\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"enabled\": false\n      }\n    ]\n  },\n  \"denied\": [\n    {\n      \"id\": 5856,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": false,\n      \"license_set_by_admin\": true,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": false,\n      \"direct\": true,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    },\n    {\n      \"id\": 5959,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": true,\n      \"license_set_by_admin\": true,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": false,\n      \"direct\": false,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    }\n  ],\n  \"details_url\": \"string\",\n  \"external_identifier\": \"string\",\n  \"files\": \"string\",\n  \"organization\": \"string\",\n  \"production_alignment_counts\": {\n    \"approved\": 3065,\n    \"denied\": 2322,\n    \"requested\": 1421,\n    \"unapproved\": 8242,\n    \"newly_introduced\": 884,\n    \"no_new_introduction\": 731\n  },\n  \"project\": \"string\",\n  \"requested\": [\n    {\n      \"id\": 6012,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": false,\n      \"license_set_by_admin\": true,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": false,\n      \"direct\": false,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    },\n    {\n      \"id\": 1618,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": false,\n      \"license_set_by_admin\": true,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": true,\n      \"direct\": true,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    }\n  ],\n  \"revision\": \"string\",\n  \"status\": \"scheduled\",\n  \"unapproved\": [\n    {\n      \"id\": 5116,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": true,\n      \"license_set_by_admin\": true,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": false,\n      \"direct\": false,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    },\n    {\n      \"id\": 2012,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": false,\n      \"license_set_by_admin\": true,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": true,\n      \"direct\": true,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    }\n  ],\n  \"upcoming_denials\": [\n    {\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"version\": \"string\",\n      \"deny_at\": \"string\",\n      \"reason\": \"string\",\n      \"highest_approved_version\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"version\": \"string\",\n      \"deny_at\": \"string\",\n      \"reason\": \"string\",\n      \"highest_approved_version\": \"string\"\n    }\n  ],\n  \"team\": \"string\",\n  \"no_new_introduction\": [\n    {\n      \"id\": 2285,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": true,\n      \"license_set_by_admin\": false,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": true,\n      \"direct\": false,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    },\n    {\n      \"id\": 8947,\n      \"latest_release_number\": \"string\",\n      \"license_normalized\": false,\n      \"license_set_by_admin\": false,\n      \"licenses\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"project_license\": \"string\",\n      \"repository_license\": \"string\",\n      \"type\": \"string\",\n      \"unknown\": false,\n      \"direct\": false,\n      \"resolved_version\": \"string\",\n      \"requirement\": \"string\",\n      \"lockfile_requirement\": \"string\",\n      \"original_license\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\"\n    }\n  ],\n  \"error\": {\n    \"code\": \"invalid_packages\",\n    \"message\": \"string\",\n    \"details\": {\n      \"platform\": \"string\",\n      \"path\": \"string\",\n      \"kind\": \"manifest\",\n      \"message\": \"string\"\n    }\n  },\n  \"warnings\": [\n    {\n      \"code\": \"invalid_version\",\n      \"message\": \"string\",\n      \"details\": {\n        \"platform\": \"string\",\n        \"path\": \"string\",\n        \"kind\": \"lockfile\",\n        \"message\": \"string\"\n      }\n    },\n    {\n      \"code\": \"invalid_version\",\n      \"message\": \"string\",\n      \"details\": {\n        \"platform\": \"string\",\n        \"path\": \"string\",\n        \"kind\": \"lockfile\",\n        \"message\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c618dac-96ac-47d6-8081-b00fccbe89f8",
+              "name": "403 Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "projects",
+                    ":project",
+                    "alignments",
+                    ":revision",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) The name of the project. The external identifier will not work here."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "revision",
+                      "description": "(Required) The `revision` of the alignment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6130631f-ce67-40e5-ae6c-7a7fb3363b08",
+              "name": "404 Scan Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "projects",
+                    ":project",
+                    "alignments",
+                    ":revision",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) The name of the project. The external identifier will not work here."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "revision",
+                      "description": "(Required) The `revision` of the alignment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tidelift.com/external-api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f1fa9e73-5a38-43ad-baae-96f01e4a7e91",
+    "name": "Tidelift External Alignments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,2354 @@
+{
+  "item": [
+    {
+      "id": "09ca527e-190c-4307-b93e-0110493ec71b",
+      "name": "Projects",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "38a6c5e1-b18a-4f75-b104-070dbe0ac126",
+          "name": "List organization projects",
+          "request": {
+            "name": "List organization projects",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                ":org_name",
+                "projects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f223a7be-4887-4090-9027-1d140a08893d",
+              "name": "A list of projects in the Organization",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"projects\": [\n    {\n      \"name\": \"string\",\n      \"groups\": [\n        \"string\",\n        \"string\"\n      ],\n      \"branching_behavior\": \"latest_aligned_branch\",\n      \"default_branch\": \"string\",\n      \"external_identifier\": \"string\",\n      \"catalog\": \"string\",\n      \"created_at\": \"2012-03-25T05:23:23.273Z\"\n    },\n    {\n      \"name\": \"string\",\n      \"groups\": [\n        \"string\",\n        \"string\"\n      ],\n      \"branching_behavior\": \"latest_aligned_branch\",\n      \"default_branch\": \"string\",\n      \"external_identifier\": \"string\",\n      \"catalog\": \"string\",\n      \"created_at\": \"1971-01-20T07:32:45.144Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b1ab2b5-c0f3-4a76-a243-6cd6b2b58e0d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e4665b1b-5396-4834-9ad0-852c146aa655",
+          "name": "Create a new project",
+          "request": {
+            "name": "Create a new project",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                ":org_name",
+                "projects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"project_name\": \"<string>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"catalog\": \"<string>\",\n  \"default_branch\": \"<string>\",\n  \"external_identifier\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e4b8e1fe-38c6-4aa3-8b02-fc389bb7d7bd",
+              "name": "Project that was created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_name\": \"<string>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"catalog\": \"<string>\",\n  \"default_branch\": \"<string>\",\n  \"external_identifier\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"branching_behavior\": \"specified_branch\",\n  \"default_branch\": \"string\",\n  \"dot_tidelift\": \"string\",\n  \"external_identifier\": \"string\",\n  \"groups\": [\n    \"string\",\n    \"string\"\n  ],\n  \"name\": \"string\",\n  \"using_catalog\": \"string\",\n  \"catalog\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "840fc6f1-f275-4f40-96f5-67cb25fcfaf9",
+              "name": "The project name, external identifier, branch name, groups or catalog are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_name\": \"<string>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"catalog\": \"<string>\",\n  \"default_branch\": \"<string>\",\n  \"external_identifier\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"available_catalogs\": [\n    \"string\",\n    \"string\"\n  ],\n  \"details\": {\n    \"available_catalogs\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c82675b-c41d-45bf-91e0-08b33a65565f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_name\": \"<string>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"catalog\": \"<string>\",\n  \"default_branch\": \"<string>\",\n  \"external_identifier\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aac36b35-c468-4a98-9ab3-fffdb8b744ad",
+              "name": "The user is not an admin of the organization or doesn't belong to the organization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_name\": \"<string>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"catalog\": \"<string>\",\n  \"default_branch\": \"<string>\",\n  \"external_identifier\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f9546c4-b57d-469a-bec1-02c594501fd8",
+          "name": "Delete a project.",
+          "request": {
+            "name": "Delete a project.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                ":org_name",
+                "projects",
+                ":project"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project",
+                  "description": "(Required) The name of the Project."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5ab6b3aa-5e81-4aff-b519-d7d32ce7da31",
+              "name": "The project is deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "projects",
+                    ":project"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) The name of the Project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "297f29f7-5e93-4e4f-be95-41e68deeca5f",
+              "name": "The user is not an admin of the organization or doesn't belong to the organization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "projects",
+                    ":project"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) The name of the Project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "95b53299-868c-4439-8c75-f44ea05fcc58",
+          "name": "Update project details",
+          "request": {
+            "name": "Update project details",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                ":org_name",
+                "projects",
+                ":project"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project",
+                  "description": "(Required) The name of the Project."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"branching_behavior\": \"<string>\",\n  \"catalog\": \"<string>\",\n  \"default_branch\": \"<string>\",\n  \"external_identifier\": \"<string>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4354d243-28a6-4835-9ef6-a1d42cbe4309",
+              "name": "Successfully updated project details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "projects",
+                    ":project"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) The name of the Project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"branching_behavior\": \"<string>\",\n  \"catalog\": \"<string>\",\n  \"default_branch\": \"<string>\",\n  \"external_identifier\": \"<string>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8ab94aa3-58aa-4f3f-b835-0935ec1e0555",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "projects",
+                    ":project"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) The name of the Project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"branching_behavior\": \"<string>\",\n  \"catalog\": \"<string>\",\n  \"default_branch\": \"<string>\",\n  \"external_identifier\": \"<string>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21b45ff8-1c29-4a87-8ad1-a7e3159eb202",
+              "name": "The user is not an admin of the organization or doesn't belong to the organization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "projects",
+                    ":project"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) The name of the Project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"branching_behavior\": \"<string>\",\n  \"catalog\": \"<string>\",\n  \"default_branch\": \"<string>\",\n  \"external_identifier\": \"<string>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35ead28c-e25d-488e-8c40-83c0ed442e76",
+              "name": "Invalid catalog or groups sent",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "projects",
+                    ":project"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) The name of the Project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"branching_behavior\": \"<string>\",\n  \"catalog\": \"<string>\",\n  \"default_branch\": \"<string>\",\n  \"external_identifier\": \"<string>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "21555138-649c-4051-af4c-2fae4e7bf8bd",
+          "name": "Create a new project API key",
+          "request": {
+            "name": "Create a new project API key",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                ":org_name",
+                "projects",
+                ":project",
+                "new-key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project",
+                  "description": "(Required) The name of the Project."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8c60e08f-7cd4-4bdb-9f1c-64121fa075bc",
+              "name": "The token generated for the key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "projects",
+                    ":project",
+                    "new-key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) The name of the Project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69d8087c-459f-4be7-b0a1-e6c8792df8d8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "projects",
+                    ":project",
+                    "new-key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) The name of the Project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f6feb026-22e4-45ea-a19a-37c97d28e3a5",
+          "name": "Create a new project with an initial scan, using the provided SBOM file as the manifest.",
+          "request": {
+            "name": "Create a new project with an initial scan, using the provided SBOM file as the manifest.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                ":org_name",
+                "projects",
+                "import-sbom"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "(Required) An SBOM file of type: SPDX tag/value, CycloneDX JSON or CycloneDX XML."
+                },
+                {
+                  "key": "project_name",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Can be used to set project name if a name is not detected in the SBOM file."
+                },
+                {
+                  "key": "groups",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "type": "text",
+                  "description": "List of group slugs or names to associate the project with"
+                },
+                {
+                  "key": "catalog",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Catalog to align to. Required if mulitple catalogs are in use"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e9367744-2b81-4b49-98fa-1bf5530fa1ca",
+              "name": "Project that was created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "projects",
+                    "import-sbom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) An SBOM file of type: SPDX tag/value, CycloneDX JSON or CycloneDX XML.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Can be used to set project name if a name is not detected in the SBOM file.",
+                        "type": "text/plain"
+                      },
+                      "key": "project_name",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "List of group slugs or names to associate the project with",
+                        "type": "text/plain"
+                      },
+                      "key": "groups",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Catalog to align to. Required if mulitple catalogs are in use",
+                        "type": "text/plain"
+                      },
+                      "key": "catalog",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"<string>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"branching_behavior\": \"<string>\",\n  \"default_branch\": \"<string>\",\n  \"external_identifier\": \"<string>\",\n  \"catalog\": \"<string>\",\n  \"using_catalog\": \"string\",\n  \"dot_tidelift\": \"string\",\n  \"attestation_report_url\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49c8c2e6-f45d-4fda-bde0-f3c42f4d2fc1",
+              "name": "The project name, groups, catalog or SBOM file are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "projects",
+                    "import-sbom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) An SBOM file of type: SPDX tag/value, CycloneDX JSON or CycloneDX XML.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Can be used to set project name if a name is not detected in the SBOM file.",
+                        "type": "text/plain"
+                      },
+                      "key": "project_name",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "List of group slugs or names to associate the project with",
+                        "type": "text/plain"
+                      },
+                      "key": "groups",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Catalog to align to. Required if mulitple catalogs are in use",
+                        "type": "text/plain"
+                      },
+                      "key": "catalog",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ac3693a-8734-494f-ba58-568b73d75ffb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "projects",
+                    "import-sbom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) An SBOM file of type: SPDX tag/value, CycloneDX JSON or CycloneDX XML.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Can be used to set project name if a name is not detected in the SBOM file.",
+                        "type": "text/plain"
+                      },
+                      "key": "project_name",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "List of group slugs or names to associate the project with",
+                        "type": "text/plain"
+                      },
+                      "key": "groups",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Catalog to align to. Required if mulitple catalogs are in use",
+                        "type": "text/plain"
+                      },
+                      "key": "catalog",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "03550266-a1d9-4add-abcf-687ad7ccf3ad",
+              "name": "The user is not an admin of the organization or doesn't belong to the organization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "projects",
+                    "import-sbom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) An SBOM file of type: SPDX tag/value, CycloneDX JSON or CycloneDX XML.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Can be used to set project name if a name is not detected in the SBOM file.",
+                        "type": "text/plain"
+                      },
+                      "key": "project_name",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "List of group slugs or names to associate the project with",
+                        "type": "text/plain"
+                      },
+                      "key": "groups",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Catalog to align to. Required if mulitple catalogs are in use",
+                        "type": "text/plain"
+                      },
+                      "key": "catalog",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97bf1d8b-b332-4930-a12f-4c071a9250c7",
+          "name": "Get the TACOS-formatted attestation report for packages used in a project",
+          "request": {
+            "name": "Get the TACOS-formatted attestation report for packages used in a project",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                ":org_name",
+                "projects",
+                ":project",
+                "attestation-report"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "revision",
+                  "value": "<string>",
+                  "description": "sha revision of the project scan for which to download the attestation report (if not provided will use the latest scan of the project's default branch)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project",
+                  "description": "(Required) The name of the Project."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "22b7e4ff-9678-45b9-b320-91f6d1c0818d",
+              "name": "The attestation report",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "projects",
+                    ":project",
+                    "attestation-report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "revision",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) The name of the Project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@id\": \"string\",\n  \"location\": \"string\",\n  \"author\": \"string\",\n  \"role\": \"string\",\n  \"LastModifiedDateTimeUTC\": \"string\",\n  \"TACOSversion\": \"string\",\n  \"application\": \"string\",\n  \"statements\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1dc72aee-d852-4b9d-bb4f-be3a9d56be26",
+              "name": "project not found, or scan not found, or attestation report not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "projects",
+                    ":project",
+                    "attestation-report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "revision",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) The name of the Project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74fb2515-e039-481e-ad74-6970fd87d3fb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "projects",
+                    ":project",
+                    "attestation-report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "revision",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) The name of the Project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9ad91e60-9aa9-419d-ad73-47c9a9fecaa6",
+          "name": "Get a project's bill of materials",
+          "request": {
+            "name": "Get a project's bill of materials",
+            "description": {
+              "content": "Get the bill of materials for the latest alignment or, optionally, a specific alignment for the project based on the revision or alignment id.\n\nTo request an bill of materials, both a file format and SBOM type must be specified.\n\nThe file format can be specified in several ways:\n  * using the `format` query parameter\n  * using the `Accept` header\n  * using a file extension on the route (e.g. sbom.json to request the JSON file format).\n\nThe SBOM type can be specified using the `sbom_type` query parameter.\n\nSupported combinations:\n  * `format=json, sbom_type=tidelift`: generic Tidelift JSON bill of materials\n    * This format will also be used if both `format` and `sbom_type` are omitted\n  * `format=json`, `sbom_type=cyclonedx`\n  * `format=csv, sbom_type=tidelift`: generic Tidelift CSV bill of materials\n    * This format will also be used if `sbom_type` is omitted\n  * `format=xml`, `sbom_type=cyclonedx`\n  * `format=spdx`, `sbom_type=spdx`\n    * for SPDX, only specifying `format` is necessary, `sbom_type` can be inferred\n\nOlder versions of the API supported using only the `format` query parameter (without also specifying an `sbom_type`).\nThe following mappings are provided to maintain backwards compatibility.\n  * `format=cyclonedx` or `format=cyclone_dx` implies `format=xml` and `sbom_type=cyclonedx`.\n  * `format=spdx` also implies `sbom_type=spdx`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "catalog",
+                ":org_name",
+                ":project",
+                "bill-of-materials"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "revision",
+                  "value": "<string>",
+                  "description": "Revision id of the alignment to lookup"
+                },
+                {
+                  "disabled": false,
+                  "key": "alignment_id",
+                  "value": "<string>",
+                  "description": "Id of the alignment to lookup"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sbom_type",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "df7f7747-5f15-4554-b25f-19007b77f37c",
+              "name": "Bill of materials for a given alignment",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    ":org_name",
+                    ":project",
+                    "bill-of-materials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "revision",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "alignment_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "sbom_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"platform\": \"string\",\n    \"version\": \"string\",\n    \"license_analysis\": {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"license\": \"string\",\n      \"source\": \"string\",\n      \"original_license\": \"string\",\n      \"status\": \"string\"\n    },\n    \"direct\": true,\n    \"sources\": [\n      {\n        \"type\": \"string\",\n        \"kind\": \"string\",\n        \"requirement\": \"string\",\n        \"path\": \"string\"\n      },\n      {\n        \"type\": \"string\",\n        \"kind\": \"string\",\n        \"requirement\": \"string\",\n        \"path\": \"string\"\n      }\n    ]\n  },\n  {\n    \"name\": \"string\",\n    \"platform\": \"string\",\n    \"version\": \"string\",\n    \"license_analysis\": {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"license\": \"string\",\n      \"source\": \"string\",\n      \"original_license\": \"string\",\n      \"status\": \"string\"\n    },\n    \"direct\": false,\n    \"sources\": [\n      {\n        \"type\": \"string\",\n        \"kind\": \"string\",\n        \"requirement\": \"string\",\n        \"path\": \"string\"\n      },\n      {\n        \"type\": \"string\",\n        \"kind\": \"string\",\n        \"requirement\": \"string\",\n        \"path\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42a36f47-c889-43fb-89ed-47e8be690a20",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    ":org_name",
+                    ":project",
+                    "bill-of-materials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "revision",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "alignment_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "sbom_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5fee2976-5917-47a1-8e40-11b8f1afc1b3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    ":org_name",
+                    ":project",
+                    "bill-of-materials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "revision",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "alignment_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "sbom_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dcd1746c-82dd-4952-b32f-0c6357878cff",
+              "name": "Couldn't find scan by revision or latest from default branch, or unable to build BOM from Scan.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    ":org_name",
+                    ":project",
+                    "bill-of-materials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "revision",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "alignment_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "sbom_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tidelift.com/external-api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "074d7ce4-ea2d-4485-ad05-38e340e431cf",
+    "name": "Tidelift External Alignments Projects API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

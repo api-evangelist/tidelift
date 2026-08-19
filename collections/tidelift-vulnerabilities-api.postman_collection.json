@@ -1,0 +1,362 @@
+{
+  "item": [
+    {
+      "id": "287499a4-f307-4e3b-8e6f-7c2b63ca3746",
+      "name": "Vulnerabilities",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f5825053-9051-4688-9dfe-77541269e369",
+          "name": "Get a vulnerability",
+          "request": {
+            "name": "Get a vulnerability",
+            "description": {
+              "content": "Get a vulnerability, along with any recommendation",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vulnerabilities",
+                ":vulnerability_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vulnerability_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "64b645db-5f43-472e-8a5a-ac8dd9d60a87",
+              "name": "The vulnerability with recommendations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vulnerabilities",
+                    ":vulnerability_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vulnerability_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"vuln_id\": \"string\",\n  \"url\": \"string\",\n  \"nist_url\": \"string\",\n  \"description\": \"string\",\n  \"severity\": \"string\",\n  \"affected_packages\": [\n    {\n      \"package\": \"string\",\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"purl\": \"string\",\n      \"recommendation\": \"upgrade\",\n      \"recommendation_details\": {\n        \"id\": \"string\",\n        \"impact_score\": 4129,\n        \"impact_description\": \"string\",\n        \"real_issue\": true,\n        \"false_positive_reason\": \"string\",\n        \"includes_dev\": true,\n        \"specific_methods_affected\": true,\n        \"specific_methods_description\": \"string\",\n        \"other_conditions\": true,\n        \"other_conditions_description\": \"string\",\n        \"workaround_available\": true,\n        \"workaround_description\": \"string\",\n        \"created_at\": \"1968-04-12T01:53:35.384Z\",\n        \"updated_at\": \"1966-04-26T19:22:34.544Z\"\n      },\n      \"unaffected_versions\": \"string\",\n      \"affected_versions\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"package\": \"string\",\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"purl\": \"string\",\n      \"recommendation\": \"upgrade\",\n      \"recommendation_details\": {\n        \"id\": \"string\",\n        \"impact_score\": 2099,\n        \"impact_description\": \"string\",\n        \"real_issue\": false,\n        \"false_positive_reason\": \"string\",\n        \"includes_dev\": false,\n        \"specific_methods_affected\": true,\n        \"specific_methods_description\": \"string\",\n        \"other_conditions\": true,\n        \"other_conditions_description\": \"string\",\n        \"workaround_available\": true,\n        \"workaround_description\": \"string\",\n        \"created_at\": \"1994-12-09T17:37:27.217Z\",\n        \"updated_at\": \"1956-03-26T17:54:19.770Z\"\n      },\n      \"unaffected_versions\": \"string\",\n      \"affected_versions\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"updated_at\": \"string\",\n  \"cvss_score\": \"string\",\n  \"epss_percentile\": \"string\",\n  \"epss_probability\": \"string\",\n  \"epss_score\": \"string\",\n  \"known_exploited\": false,\n  \"cwe_ids\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8fe1c15d-a0d2-4c69-8416-12f6bedfd3a1",
+              "name": "Record Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vulnerabilities",
+                    ":vulnerability_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vulnerability_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6321afcd-900a-4b46-bcea-c8a76f004667",
+          "name": "Get affected releases for a vulnerability",
+          "request": {
+            "name": "Get affected releases for a vulnerability",
+            "description": {
+              "content": "Get affected releases for a vulnerability",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "vulnerabilities",
+                ":vulnerability_id",
+                "affected_releases"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vulnerability_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c4ab0d60-777e-472a-bee6-2b797e6b8e3c",
+              "name": "The vulnerability's affected releases.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vulnerabilities",
+                    ":vulnerability_id",
+                    "affected_releases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vulnerability_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"current_page\": 4946,\n  \"next_page\": 8658,\n  \"per_page\": 1242,\n  \"prev_page\": 731,\n  \"results\": [\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"purl\": \"string\"\n    },\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"purl\": \"string\"\n    }\n  ],\n  \"total_count\": 3029,\n  \"total_pages\": 3383\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "597a6264-a941-4824-96e6-c8936b7e9c90",
+              "name": "Record Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "vulnerabilities",
+                    ":vulnerability_id",
+                    "affected_releases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vulnerability_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tidelift.com/external-api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bf1d0c17-aee1-4b30-9c79-0003334d4c2d",
+    "name": "Tidelift External Alignments Vulnerabilities API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

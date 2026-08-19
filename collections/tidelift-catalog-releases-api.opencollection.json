@@ -1,0 +1,302 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tidelift External Alignments Catalog Releases API",
+    "version": "1.2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalog Releases",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all releases in a catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/catalogs/:catalog_name/releases",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "catalog_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Catalog."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page in results"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "id"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter releases"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all releases in a catalog"
+        },
+        {
+          "info": {
+            "name": "Create a new catalog request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tidelift.com/external-api/v1/catalog/:org_name/:project/requests",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Project."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new catalog request"
+        },
+        {
+          "info": {
+            "name": "POST /v1/catalog/{org_name}/{project}/request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tidelift.com/external-api/v1/catalog/:org_name/:project/request",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Project."
+              }
+            ]
+          },
+          "docs": "This endpoint has been deprecated in favor of POST /v1/catalog/{org_name}/{project}/requests."
+        },
+        {
+          "info": {
+            "name": "Create a new batch catalog request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tidelift.com/external-api/v1/catalog/:org_name/:project/batch_requests",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Project."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new batch catalog request"
+        },
+        {
+          "info": {
+            "name": "POST /v1/catalog/{org_name}/{project}/batch_request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tidelift.com/external-api/v1/catalog/:org_name/:project/batch_request",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Project."
+              }
+            ]
+          },
+          "docs": "This endpoint has been deprecated in favor of POST /v1/catalog/{org_name}/{project}/batch_requests."
+        },
+        {
+          "info": {
+            "name": "Retrieve information on a package in a catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/catalog/:org_name/:project/lookup/:platform/:package_name",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Project."
+              },
+              {
+                "name": "platform",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "package_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "catalog_name",
+                "value": "",
+                "type": "query",
+                "description": "Name of catalog (required if not \"default\")"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This endpoint has been deprecated in favor of GET /v1/{org_name}/catalogs/{catalog_name}/releases/lookup."
+        },
+        {
+          "info": {
+            "name": "Retrieve information on a package in a catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/catalogs/:catalog_name/releases/lookup",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "catalog_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Catalog."
+              },
+              {
+                "name": "package_platform",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "package_name",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve information on a package in a catalog"
+        },
+        {
+          "info": {
+            "name": "Retrieve information on multiple packages in a catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/catalogs/:catalog_name/releases/lookup",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve information on multiple packages in a catalog"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

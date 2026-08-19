@@ -1,0 +1,326 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tidelift External Alignments Groups API",
+    "version": "1.2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List groups in an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/groups",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List groups in an organization"
+        },
+        {
+          "info": {
+            "name": "Create a new group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/groups",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new group"
+        },
+        {
+          "info": {
+            "name": "Look up a group by id, name, or slug",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/groups/lookup",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "The query string, which is is either a group ID, a full name of a group, or a full slug of a group."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Look up a group by id, name, or slug"
+        },
+        {
+          "info": {
+            "name": "Delete a group. Does not check to see if the group is being used.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/groups/:group_id",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the group to perform the action on."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a group. Does not check to see if the group is being used."
+        },
+        {
+          "info": {
+            "name": "List all projects linked to a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/groups/:group_id/projects",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the group to perform the action on."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all projects linked to a group"
+        },
+        {
+          "info": {
+            "name": "Add an existing project to an existing group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/groups/:group_id/projects",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the group to perform the action on."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Add an existing project to an existing group"
+        },
+        {
+          "info": {
+            "name": "Remove an existing project from an existing group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/groups/:group_id/projects",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the group to perform the action on."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Remove an existing project from an existing group"
+        },
+        {
+          "info": {
+            "name": "List all users in a given group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/groups/:group_id/users",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the group to perform the action on."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all users in a given group"
+        },
+        {
+          "info": {
+            "name": "Add user to group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/groups/:group_id/users",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the group to perform the action on."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Add user to group"
+        },
+        {
+          "info": {
+            "name": "Remove user from group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/groups/:group_id/users",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the group to perform the action on."
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Email of the user to remove from the group."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Remove user from group"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

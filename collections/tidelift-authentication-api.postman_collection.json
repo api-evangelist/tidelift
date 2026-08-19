@@ -1,0 +1,170 @@
+{
+  "item": [
+    {
+      "id": "dab478a0-24f8-4434-b73e-66644e5e7175",
+      "name": "Authentication",
+      "description": {
+        "content": "A [Tidelift API key](https://docs.tidelift.com/article/79-api-authentication) is required for all endpoints. If a particular type of API key is required it will be noted on the path.\n<SecurityDefinitions />\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "58cd5dba-73f2-4c3c-a7ec-15601ff24921",
+          "name": "Check if the given API key is valid.",
+          "request": {
+            "name": "Check if the given API key is valid.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "authcheck"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "88a2810d-5559-42b4-8572-0d30a519f973",
+              "name": "Valid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "authcheck"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"type\": \"organization\",\n  \"owner_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41c29b53-ae4b-4aa8-a0e1-ad9887bb1842",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "authcheck"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tidelift.com/external-api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "164156a1-394e-4ce5-a116-5aa989091f70",
+    "name": "Tidelift External Alignments Authentication API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A [Tidelift API key](https://docs.tidelift.com/article/79-api-authentication) is required for all endpoints. If a particular type of API key is required it will be noted on the path.\n<SecurityDefinitions />\n",
+      "type": "text/plain"
+    }
+  }
+}

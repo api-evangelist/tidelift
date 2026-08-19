@@ -1,0 +1,302 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tidelift External Alignments Projects API",
+    "version": "1.2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List organization projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/projects",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List organization projects"
+        },
+        {
+          "info": {
+            "name": "Create a new project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/projects",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new project"
+        },
+        {
+          "info": {
+            "name": "Update project details",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/projects/:project",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Project."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update project details"
+        },
+        {
+          "info": {
+            "name": "Delete a project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/projects/:project",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Project."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a project."
+        },
+        {
+          "info": {
+            "name": "Create a new project API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/projects/:project/new-key",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Project."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new project API key"
+        },
+        {
+          "info": {
+            "name": "Create a new project with an initial scan, using the provided SBOM file as the manifest.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/projects/import-sbom",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "project_name",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "groups",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "catalog",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new project with an initial scan, using the provided SBOM file as the manifest."
+        },
+        {
+          "info": {
+            "name": "Get the TACOS-formatted attestation report for packages used in a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/projects/:project/attestation-report",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Project."
+              },
+              {
+                "name": "revision",
+                "value": "",
+                "type": "query",
+                "description": "sha revision of the project scan for which to download the attestation report (if not provided will use the latest scan of the project's default branch)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the TACOS-formatted attestation report for packages used in a project"
+        },
+        {
+          "info": {
+            "name": "Get a project's bill of materials",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/catalog/:org_name/:project/bill-of-materials",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "revision",
+                "value": "",
+                "type": "query",
+                "description": "Revision id of the alignment to lookup"
+              },
+              {
+                "name": "alignment_id",
+                "value": "",
+                "type": "query",
+                "description": "Id of the alignment to lookup"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sbom_type",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the bill of materials for the latest alignment or, optionally, a specific alignment for the project based on the revision or alignment id.\n\nTo request an bill of materials, both a file format and SBOM type must be specified.\n\nThe file format can be specified in several ways:\n  * using the `format` query parameter\n  * using the `Accept` header\n  * using a file extension on the route (e.g. sbom.json to request the JSON file format).\n\nThe SBOM type can be specified using the `sbom_type` query p"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

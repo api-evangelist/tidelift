@@ -1,0 +1,177 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tidelift External Alignments Reports API",
+    "version": "1.2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the latest report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/reports/:report_type",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "catalog_name",
+                "value": "",
+                "type": "query",
+                "description": "Name of catalog used to generate the report. A catalog or project is needed if a report ID was not provided."
+              },
+              {
+                "name": "report_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the generated report"
+              },
+              {
+                "name": "projects[]",
+                "value": "",
+                "type": "query",
+                "description": "Names of projects to filter by. Currently only used for the following reports:\n\n* all_projects_compliance\n* all_projects_package_quality\n* all_projects_violations\n* license_attribution\n* release_usage\n"
+              },
+              {
+                "name": "report_type",
+                "value": "",
+                "type": "path",
+                "description": "Type of report\n\n - [all_projects_compliance (compliance of projects to catalog standards)](https://support.tidelift.com/hc/en-us/articles/24885171849236)\n - [all_projects_package_quality (Tidelift recommendations by package)](https://support.tidelift.com/hc/en-us/articles/24971666742932)\n - [all_projects_violations (All projects violations)](https://support.tidelift.com/hc/en-us/articles/24883174701332)\n - catalog_activity_audit (Catalog Activity)\n - eol_impact (End of life)\n - license_attribution (License attribution)\n - release_usage (Catalog-wide open source use)\n"
+              },
+              {
+                "name": "catalog_standards[]",
+                "value": "",
+                "type": "query",
+                "description": "Catalog Standards to filter by (only supported by all_projects_violations)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the latest report"
+        },
+        {
+          "info": {
+            "name": "Get the status of a report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/reports/:report_type/status",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "catalog_name",
+                "value": "",
+                "type": "query",
+                "description": "Name of catalog used to generate the report.  A catalog or project is needed if a report ID was not provided."
+              },
+              {
+                "name": "report_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the generated report"
+              },
+              {
+                "name": "projects[]",
+                "value": "",
+                "type": "query",
+                "description": "Names of projects to filter by. Currently only used for the following reports:\n\n* all_projects_compliance\n* all_projects_package_quality\n* all_projects_violations\n* license_attribution\n* release_usage\n"
+              },
+              {
+                "name": "catalog_standards[]",
+                "value": "",
+                "type": "query",
+                "description": "Catalog Standards to filter by (only supported by all_projects_violations)"
+              },
+              {
+                "name": "report_type",
+                "value": "",
+                "type": "path",
+                "description": "Type of report\n\n - [all_projects_compliance (compliance of projects to catalog standards)](https://support.tidelift.com/hc/en-us/articles/24885171849236)\n - [all_projects_package_quality (Tidelift recommendations by package)](https://support.tidelift.com/hc/en-us/articles/24971666742932)\n - [all_projects_violations (All projects violations)](https://support.tidelift.com/hc/en-us/articles/24883174701332)\n - catalog_activity_audit (Catalog Activity)\n - eol_impact (End of life)\n - license_attribution (License attribution)\n - release_usage (Catalog-wide open source use)\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the status of a report"
+        },
+        {
+          "info": {
+            "name": "Run a new report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tidelift.com/external-api/v1/:org_name/reports/:report_type/generate",
+            "params": [
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Organization."
+              },
+              {
+                "name": "catalog_name",
+                "value": "",
+                "type": "query",
+                "description": "Name of catalog used to generate the report."
+              },
+              {
+                "name": "projects[]",
+                "value": "",
+                "type": "query",
+                "description": "Names of projects to filter by. Currently only used for the following reports:\n\n* all_projects_compliance\n* all_projects_package_quality\n* all_projects_violations\n* license_attribution\n* release_usage\n"
+              },
+              {
+                "name": "catalog_standards[]",
+                "value": "",
+                "type": "query",
+                "description": "Catalog Standards to filter by (only supported by all_projects_violations)"
+              },
+              {
+                "name": "report_type",
+                "value": "",
+                "type": "path",
+                "description": "Type of report\n\n - [all_projects_compliance (compliance of projects to catalog standards)](https://support.tidelift.com/hc/en-us/articles/24885171849236)\n - [all_projects_package_quality (Tidelift recommendations by package)](https://support.tidelift.com/hc/en-us/articles/24971666742932)\n - [all_projects_violations (All projects violations)](https://support.tidelift.com/hc/en-us/articles/24883174701332)\n - catalog_activity_audit (Catalog Activity)\n - eol_impact (End of life)\n - license_attribution (License attribution)\n - release_usage (Catalog-wide open source use)\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Note that organization and catalog wide reports are generated daily for subscribers and so should not need to be manually generated and you can instead just retrieve the most recent report."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

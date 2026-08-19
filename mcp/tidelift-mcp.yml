@@ -199,3 +199,9 @@ tools:
 - name: listUsersForOrg
   description: List all users for an organization
   source_operation: openapi/tidelift-subscriber-api-openapi-original.json#listUsersForOrg
+deployment:
+  mode: none
+  verified: derived
+  tools: 64
+  checked: '2026-08-12'
+  source: catalog MCP census

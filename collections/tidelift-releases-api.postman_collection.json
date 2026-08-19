@@ -1,0 +1,1817 @@
+{
+  "item": [
+    {
+      "id": "168f59a0-5db6-4ae9-a02f-646df2e0dc2a",
+      "name": "Releases",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b9b4bcac-61a8-47d9-92b9-378cc3f42e01",
+          "name": "Show end-of-life details for a set of releases.",
+          "request": {
+            "name": "Show end-of-life details for a set of releases.",
+            "description": {
+              "content": "Show end-of-life details for a set of releases",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "packages",
+                "eol-releases"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"releases\": [\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d64f343e-cb10-403b-9f45-9a635e9241cd",
+              "name": "Details of releases found from the search and any package names that had no results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "packages",
+                    "eol-releases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"releases\": [\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"releases\": [\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"purl\": \"string\",\n      \"package_is_not_eol\": \"passed\",\n      \"package_eol_indicators\": {\n        \"eol_reference_found\": false,\n        \"effective_on\": \"1953-09-12\",\n        \"reference_url\": \"string\",\n        \"package_renamed_to\": [\n          \"string\",\n          \"string\"\n        ],\n        \"no_planned_maintenance\": false,\n        \"reason\": \"string\"\n      },\n      \"maintenance_plan\": {\n        \"plan_type\": \"string\",\n        \"major_version_count\": 7415,\n        \"minor_version_count\": 841,\n        \"external_url\": \"string\"\n      },\n      \"release_is_not_eol\": \"noassertion\",\n      \"release_is_not_eol_explanation\": \"string\"\n    },\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"purl\": \"string\",\n      \"package_is_not_eol\": \"not_passed\",\n      \"package_eol_indicators\": {\n        \"eol_reference_found\": false,\n        \"effective_on\": \"1962-11-27\",\n        \"reference_url\": \"string\",\n        \"package_renamed_to\": [\n          \"string\",\n          \"string\"\n        ],\n        \"no_planned_maintenance\": false,\n        \"reason\": \"string\"\n      },\n      \"maintenance_plan\": {\n        \"plan_type\": \"string\",\n        \"major_version_count\": 9197,\n        \"minor_version_count\": 845,\n        \"external_url\": \"string\"\n      },\n      \"release_is_not_eol\": \"passed\",\n      \"release_is_not_eol_explanation\": \"string\"\n    }\n  ],\n  \"missing_results\": [\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9687891-e3a5-4304-85ce-36602fc82cbf",
+              "name": "Request body format incorrect or more than 1000 packages requested.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "packages",
+                    "eol-releases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"releases\": [\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1f777813-6e60-4d76-8605-1208ce436aea",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "packages",
+                    "eol-releases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"releases\": [\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3734200-1906-4af1-9873-d3fd1ce6b6df",
+              "name": "403 Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "packages",
+                    "eol-releases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"releases\": [\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a024e0ba-f7bf-48e8-90b5-cac450e5d6bc",
+          "name": "Lookup details for a set of package releases.",
+          "request": {
+            "name": "Lookup details for a set of package releases.",
+            "description": {
+              "content": "Lookup details for a set of package releases",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "releases",
+                "lookup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"releases\": [\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d986bf8d-2e18-4353-9127-d9c82dcf5846",
+              "name": "Details of the package releases found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "releases",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"releases\": [\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"releases\": {\n    \"name\": \"string\",\n    \"platform\": \"string\",\n    \"version\": \"string\",\n    \"published_at\": \"string\",\n    \"purl\": \"string\",\n    \"repository\": {\n      \"url\": \"string\",\n      \"source\": \"human_verified\"\n    },\n    \"tidelift_recommendation\": \"not_assessed\",\n    \"violations\": [\n      [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    ],\n    \"license\": {\n      \"expression\": \"string\",\n      \"source\": \"researched_by_tidelift\"\n    },\n    \"nearest_recommended_release\": {\n      \"version\": \"string\",\n      \"published_at\": \"2013-09-29T19:06:57.824Z\"\n    },\n    \"lookup_name\": \"string\"\n  },\n  \"missing_releases\": [\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94a7cc42-c19d-4f6d-85df-d9bb93f5ac89",
+              "name": "Request body format incorrect or more than 1000 releases requested.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "releases",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"releases\": [\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "33c05a5e-74ef-455f-a279-d43f79cdaa4a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "releases",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"releases\": [\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2443e78f-375e-464a-8434-4a1f5e8a7905",
+              "name": "403 Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "releases",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"releases\": [\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3ffd775d-d0ae-470b-aa5d-a8b8e398d0f7",
+          "name": "Show details of a specific release of a package.",
+          "request": {
+            "name": "Show details of a specific release of a package.",
+            "description": {
+              "content": "Show details of a specific release of a package",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "packages",
+                ":package_platform",
+                ":package_name",
+                "releases",
+                ":release_version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "package_platform",
+                  "description": "(Required) The platform of the package."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "package_name",
+                  "description": "(Required) The name of the package to look up."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "release_version",
+                  "description": "(Required) The version of the package to look up."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "722c6a3c-42ca-4aea-9c8a-2629e970de9f",
+              "name": "Details of the package release",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "packages",
+                    ":package_platform",
+                    ":package_name",
+                    "releases",
+                    ":release_version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_platform",
+                      "description": "(Required) The platform of the package."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_name",
+                      "description": "(Required) The name of the package to look up."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "release_version",
+                      "description": "(Required) The version of the package to look up."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"platform\": \"string\",\n  \"version\": \"string\",\n  \"published_at\": \"string\",\n  \"purl\": \"string\",\n  \"repository\": {\n    \"url\": \"string\",\n    \"source\": \"human_verified\"\n  },\n  \"tidelift_recommendation\": \"not_assessed\",\n  \"violations\": [\n    [\n      {\n        \"catalog_standard\": \"string\",\n        \"license\": \"string\",\n        \"title\": \"string\",\n        \"violation_id\": \"string\",\n        \"package_name\": \"string\",\n        \"package_platform\": \"string\",\n        \"version\": \"string\",\n        \"task_id\": \"string\"\n      },\n      {\n        \"catalog_standard\": \"string\",\n        \"license\": \"string\",\n        \"title\": \"string\",\n        \"violation_id\": \"string\",\n        \"package_name\": \"string\",\n        \"package_platform\": \"string\",\n        \"version\": \"string\",\n        \"task_id\": \"string\"\n      }\n    ],\n    [\n      {\n        \"catalog_standard\": \"string\",\n        \"license\": \"string\",\n        \"title\": \"string\",\n        \"violation_id\": \"string\",\n        \"package_name\": \"string\",\n        \"package_platform\": \"string\",\n        \"version\": \"string\",\n        \"task_id\": \"string\"\n      },\n      {\n        \"catalog_standard\": \"string\",\n        \"license\": \"string\",\n        \"title\": \"string\",\n        \"violation_id\": \"string\",\n        \"package_name\": \"string\",\n        \"package_platform\": \"string\",\n        \"version\": \"string\",\n        \"task_id\": \"string\"\n      }\n    ]\n  ],\n  \"license\": {\n    \"expression\": \"string\",\n    \"source\": \"valid_spdx\"\n  },\n  \"nearest_recommended_release\": {\n    \"version\": \"string\",\n    \"published_at\": \"1989-05-04T07:15:40.303Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2c76e16-fd27-41ca-be4d-6aac792a79d1",
+              "name": "Parameters specified are not correct, or the release is from an unsupported platform.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "packages",
+                    ":package_platform",
+                    ":package_name",
+                    "releases",
+                    ":release_version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_platform",
+                      "description": "(Required) The platform of the package."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_name",
+                      "description": "(Required) The name of the package to look up."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "release_version",
+                      "description": "(Required) The version of the package to look up."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6f4a0d9-aa88-4595-9b46-c43ed2e03755",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "packages",
+                    ":package_platform",
+                    ":package_name",
+                    "releases",
+                    ":release_version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_platform",
+                      "description": "(Required) The platform of the package."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_name",
+                      "description": "(Required) The name of the package to look up."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "release_version",
+                      "description": "(Required) The version of the package to look up."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28b4490a-5bf8-45cf-a3b5-5fe6caa5d9f8",
+              "name": "403 Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "packages",
+                    ":package_platform",
+                    ":package_name",
+                    "releases",
+                    ":release_version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_platform",
+                      "description": "(Required) The platform of the package."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_name",
+                      "description": "(Required) The name of the package to look up."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "release_version",
+                      "description": "(Required) The version of the package to look up."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "560b1e88-5bec-4b39-9a9c-87d01084f9f7",
+              "name": "Release or Package not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "packages",
+                    ":package_platform",
+                    ":package_name",
+                    "releases",
+                    ":release_version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_platform",
+                      "description": "(Required) The platform of the package."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_name",
+                      "description": "(Required) The name of the package to look up."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "release_version",
+                      "description": "(Required) The version of the package to look up."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b2a1b451-46cd-4c3f-8840-4ed820b9279a",
+          "name": "Show the direct dependencies of the release.",
+          "request": {
+            "name": "Show the direct dependencies of the release.",
+            "description": {
+              "content": "Show the direct dependencies of the release and the requirement version string for each",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "packages",
+                ":package_platform",
+                ":package_name",
+                "releases",
+                ":release_version",
+                "dependencies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "package_platform",
+                  "description": "(Required) The platform of the package."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "package_name",
+                  "description": "(Required) The name of the package to look up."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "release_version",
+                  "description": "(Required) The version of the package to look up."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "065da124-8ecb-4e62-868f-f2a7e32306d5",
+              "name": "Paginated list of dependencies and their required version",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "packages",
+                    ":package_platform",
+                    ":package_name",
+                    "releases",
+                    ":release_version",
+                    "dependencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_platform",
+                      "description": "(Required) The platform of the package."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_name",
+                      "description": "(Required) The name of the package to look up."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "release_version",
+                      "description": "(Required) The version of the package to look up."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"current_page\": 1377,\n  \"next_page\": 7811,\n  \"prev_page\": 3588,\n  \"total_pages\": 5271,\n  \"total_count\": 2583,\n  \"per_page\": 241,\n  \"results\": [\n    {\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"requirement\": \"string\",\n      \"purl\": \"string\",\n      \"scope\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"requirement\": \"string\",\n      \"purl\": \"string\",\n      \"scope\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60bc1856-fe93-4e1d-b003-7ed0a5d0b023",
+              "name": "Your request to show the direct dependencies of the release is being processed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "packages",
+                    ":package_platform",
+                    ":package_name",
+                    "releases",
+                    ":release_version",
+                    "dependencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_platform",
+                      "description": "(Required) The platform of the package."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_name",
+                      "description": "(Required) The name of the package to look up."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "release_version",
+                      "description": "(Required) The version of the package to look up."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "965c09aa-7167-4df1-a74a-2b0515e1740b",
+              "name": "Parameters specified are not correct, or the release is from an unsupported platform.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "packages",
+                    ":package_platform",
+                    ":package_name",
+                    "releases",
+                    ":release_version",
+                    "dependencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_platform",
+                      "description": "(Required) The platform of the package."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_name",
+                      "description": "(Required) The name of the package to look up."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "release_version",
+                      "description": "(Required) The version of the package to look up."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c6f8608-6f14-4bf0-bce6-fcc9b9d1ac48",
+              "name": "403 Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "packages",
+                    ":package_platform",
+                    ":package_name",
+                    "releases",
+                    ":release_version",
+                    "dependencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_platform",
+                      "description": "(Required) The platform of the package."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_name",
+                      "description": "(Required) The name of the package to look up."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "release_version",
+                      "description": "(Required) The version of the package to look up."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "45e689e1-2fde-45b2-b0af-7d976a79a6da",
+              "name": "Release or Package not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "packages",
+                    ":package_platform",
+                    ":package_name",
+                    "releases",
+                    ":release_version",
+                    "dependencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_platform",
+                      "description": "(Required) The platform of the package."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_name",
+                      "description": "(Required) The name of the package to look up."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "release_version",
+                      "description": "(Required) The version of the package to look up."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1980a899-84f8-44b5-bf36-e1acbf4c6140",
+          "name": "Show the SBOM of the release.",
+          "request": {
+            "name": "Show the SBOM of the release.",
+            "description": {
+              "content": "Show the SBOM of an upstream release in a given format\n  * [SPDX spec](https://spdx.github.io/spdx-spec/v2.2.2/document-creation-information/)\n  * [CycloneDX spec](https://cyclonedx.org/specification/overview/)\n\nTo request an SBOM, both a file format and SBOM type must be specified.\n\nThe file format can be specified in several ways:\n  * using the `format` query parameter\n  * using the `Accept` header\n  * using a file extension on the route (e.g. sbom.json to request the JSON file format).\n\nThe SBOM type can be specified using the `sbom_type` query parameter.\n\nSupported combinations:\n  * `sbom_type=cyclonedx`, `format=xml`\n  * `sbom_type=cyclonedx`, `format=json`\n  * `sbom_type=spdx`, `format=spdx`\n    * for SPDX, only specifying `format` is necessary, `sbom_type` can be inferred\n\nOlder versions of the API supported an `sbom_format` query parameter (without specifying both `sbom_type` and\nformat). The following mappings are provided to maintain backwards compatibility.\n  * `sbom_format=cyclonedx` implies `sbom_type=cyclonedx` and `format=xml`\n  * `sbom_format=spdx` implies `sbom_type=spdx` and `format=spdx`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "packages",
+                ":package_platform",
+                ":package_name",
+                "releases",
+                ":release_version",
+                "sbom"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sbom_type",
+                  "value": "<string>",
+                  "description": "The type the SBOM to generate. Required, unless older sbom_format parameter is passed."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "package_platform",
+                  "description": "(Required) The platform of the package."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "package_name",
+                  "description": "(Required) The name of the package to look up."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "release_version",
+                  "description": "(Required) The version of the package to look up."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e452c793-eadd-4de1-a0be-c4fb8a324106",
+              "name": "SBOM of the direct and transitive dependencies of the release",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "packages",
+                    ":package_platform",
+                    ":package_name",
+                    "releases",
+                    ":release_version",
+                    "sbom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sbom_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_platform",
+                      "description": "(Required) The platform of the package."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_name",
+                      "description": "(Required) The name of the package to look up."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "release_version",
+                      "description": "(Required) The version of the package to look up."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bomFormat\": \"CycloneDX\",\n  \"specVersion\": \"string\",\n  \"serialNumber\": \"string\",\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d56fcd99-0796-4864-98d4-744ff5de195b",
+              "name": "Unknown format, or the release is from an unsupported platform",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "packages",
+                    ":package_platform",
+                    ":package_name",
+                    "releases",
+                    ":release_version",
+                    "sbom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sbom_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_platform",
+                      "description": "(Required) The platform of the package."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_name",
+                      "description": "(Required) The name of the package to look up."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "release_version",
+                      "description": "(Required) The version of the package to look up."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2901333b-536e-4bc8-86a2-e57db7d7a4ef",
+              "name": "403 Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "packages",
+                    ":package_platform",
+                    ":package_name",
+                    "releases",
+                    ":release_version",
+                    "sbom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sbom_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_platform",
+                      "description": "(Required) The platform of the package."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_name",
+                      "description": "(Required) The name of the package to look up."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "release_version",
+                      "description": "(Required) The version of the package to look up."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3743d30c-7690-45c1-bb70-aefb2d367291",
+              "name": "Release or Package not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "packages",
+                    ":package_platform",
+                    ":package_name",
+                    "releases",
+                    ":release_version",
+                    "sbom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sbom_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_platform",
+                      "description": "(Required) The platform of the package."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_name",
+                      "description": "(Required) The name of the package to look up."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "release_version",
+                      "description": "(Required) The version of the package to look up."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tidelift.com/external-api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6de8a9dc-56da-453c-af71-7e1041e8d1b5",
+    "name": "Tidelift External Alignments Releases API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

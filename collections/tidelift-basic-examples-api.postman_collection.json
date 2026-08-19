@@ -1,0 +1,170 @@
+{
+  "item": [
+    {
+      "id": "ff99795a-e6de-416e-8669-b256880def01",
+      "name": "Basic Examples",
+      "description": {
+        "content": "* curl\n\n```\ncurl -H \"Accept: application/json\" \\\n     -H \"Authorization: bearer <your Tidelift API key>\" \\\n     https://api.tidelift.com/external-api/v1/packages/pypi/urllib3\n```\n\nMore detailed examples can be found in [the Tidelift support documentation](https://support.tidelift.com/hc/en-us/articles/4406286633364-How-to-access-Tidelift-APIs#h_01H9TWCQQQ5033Q7DTP89BYC5H).\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "110e04c9-b8c7-4d61-9922-e20be6de2f36",
+          "name": "Check if the given API key is valid.",
+          "request": {
+            "name": "Check if the given API key is valid.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "authcheck"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d56f6819-c401-4748-b333-6e7ee857f200",
+              "name": "Valid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "authcheck"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"type\": \"user\",\n  \"owner_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f25a0c8-eef8-4e64-931c-8205218ebd3b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "authcheck"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tidelift.com/external-api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ef6fc773-c6dc-4959-9978-8e73c247f053",
+    "name": "Tidelift External Alignments Basic Examples API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "* curl\n\n```\ncurl -H \"Accept: application/json\" \\\n     -H \"Authorization: bearer <your Tidelift API key>\" \\\n     https://api.tidelift.com/external-api/v1/packages/pypi/urllib3\n```\n\nMore detailed examples can be found in [the Tidelift support documentation](https://support.tidelift.com/hc/en-us/articles/4406286633364-How-to-access-Tidelift-APIs#h_01H9TWCQQQ5033Q7DTP89BYC5H).\n",
+      "type": "text/plain"
+    }
+  }
+}

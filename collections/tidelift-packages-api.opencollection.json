@@ -1,0 +1,204 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tidelift External Alignments Packages API",
+    "version": "1.2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Packages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Gets a paginated list of packages with at least one filter applied",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/packages",
+            "params": [
+              {
+                "name": "lifted",
+                "value": "",
+                "type": "query",
+                "description": "Filter parameter. Filters packages to only those that are lifted or non-lifted."
+              },
+              {
+                "name": "source_repository_url",
+                "value": "",
+                "type": "query",
+                "description": "Filter parameter. Filters packages to only those associated with the url-encoded source repository url."
+              },
+              {
+                "name": "searchable_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter parameter. Filters packages to those whose name contains the given string."
+              },
+              {
+                "name": "platform",
+                "value": "",
+                "type": "query",
+                "description": "Filter parameter. Filters packages to those matching the given platform."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets a paginated list of packages with at least one filter applied"
+        },
+        {
+          "info": {
+            "name": "Show details of a set of packages.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tidelift.com/external-api/v1/packages/lookup",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Show details of a set of packages"
+        },
+        {
+          "info": {
+            "name": "Show end-of-life details for a set of packages.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tidelift.com/external-api/v1/packages/eol-packages",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Show end-of-life details for a set of packages"
+        },
+        {
+          "info": {
+            "name": "Show packages that have updated data since the given datetime.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/packages/updates-since",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "The datetime to search for changes on or after"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Show packages that have updated data since the given datetime."
+        },
+        {
+          "info": {
+            "name": "Show details of a specific package.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/packages/:package_platform/:package_name",
+            "params": [
+              {
+                "name": "package_platform",
+                "value": "",
+                "type": "path",
+                "description": "The platform of the package."
+              },
+              {
+                "name": "package_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the package to look up."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Show details of a specific package"
+        },
+        {
+          "info": {
+            "name": "Show the attestation statement for a specific package.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tidelift.com/external-api/v1/packages/:package_platform/:package_name/attestation-statement",
+            "params": [
+              {
+                "name": "package_platform",
+                "value": "",
+                "type": "path",
+                "description": "The platform of the package."
+              },
+              {
+                "name": "package_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the package to look up."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Show the attestation statement for a specific package"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1965 @@
+{
+  "item": [
+    {
+      "id": "64a77938-e0c9-4bad-80ac-f08d83b4fb89",
+      "name": "Catalog Releases",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b23947a3-7a3f-40f6-b9e5-6c90d71ee4d2",
+          "name": "List all releases in a catalog",
+          "request": {
+            "name": "List all releases in a catalog",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                ":org_name",
+                "catalogs",
+                ":catalog_name",
+                "releases"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<number>",
+                  "description": "Page in results"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<number>",
+                  "description": "Number of results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "id"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[platform]",
+                  "value": "<string>",
+                  "description": "Filter releases"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[name]",
+                  "value": "<string>",
+                  "description": "Filter releases"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_name",
+                  "description": "(Required) The name of the Catalog."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c78082c1-fc69-43e5-b86a-b7aeca98d4ed",
+              "name": "Returns paginated catalog releases",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "releases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[platform]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[name]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"current_page\": 7949,\n  \"next_page\": 6169,\n  \"per_page\": 1995,\n  \"platforms\": [\n    [\n      \"string\",\n      \"string\"\n    ],\n    [\n      \"string\",\n      \"string\"\n    ]\n  ],\n  \"prev_page\": 8677,\n  \"results\": [\n    {\n      \"approved_releases\": [\n        \"string\",\n        \"string\"\n      ],\n      \"denied_releases\": [\n        \"string\",\n        \"string\"\n      ],\n      \"requested_releases\": [\n        \"string\",\n        \"string\"\n      ],\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"warning_releases\": [\n        \"string\",\n        \"string\"\n      ],\n      \"no_new_introduction_releases\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"approved_releases\": [\n        \"string\",\n        \"string\"\n      ],\n      \"denied_releases\": [\n        \"string\",\n        \"string\"\n      ],\n      \"requested_releases\": [\n        \"string\",\n        \"string\"\n      ],\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"warning_releases\": [\n        \"string\",\n        \"string\"\n      ],\n      \"no_new_introduction_releases\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"total_count\": 947,\n  \"total_pages\": 6630\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "649a1b04-bd5c-4a4f-8a79-d6281054b94d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "releases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[platform]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[name]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "47b85e7f-67ec-4908-a0a3-78a822f01d48",
+          "name": "Create a new catalog request",
+          "request": {
+            "name": "Create a new catalog request",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "catalog",
+                ":org_name",
+                ":project",
+                "requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project",
+                  "description": "(Required) The name of the Project."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"platform\": \"<string>\",\n  \"version\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fda00f21-f616-46c6-bc7e-e78b52de1539",
+              "name": "requests a single package",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    ":org_name",
+                    ":project",
+                    "requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) The name of the Project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"platform\": \"<string>\",\n  \"version\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"platform\": \"string\",\n  \"name\": \"string\",\n  \"version\": \"string\",\n  \"status\": \"string\",\n  \"reviewer_notes\": \"string\",\n  \"catalog\": {\n    \"display_name\": \"string\",\n    \"name\": \"string\",\n    \"id\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79cd4afe-9daa-4e85-9a81-01079b1fc275",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    ":org_name",
+                    ":project",
+                    "requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) The name of the Project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"platform\": \"<string>\",\n  \"version\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b7f34345-c855-4986-8693-089afe437e0f",
+          "name": "This endpoint has been deprecated in favor of POST /v1/catalog/{org_name}/{project}/requests.",
+          "request": {
+            "name": "This endpoint has been deprecated in favor of POST /v1/catalog/{org_name}/{project}/requests.",
+            "description": {
+              "content": "This endpoint has been deprecated in favor of POST /v1/catalog/{org_name}/{project}/requests.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "catalog",
+                ":org_name",
+                ":project",
+                "request"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project",
+                  "description": "(Required) The name of the Project."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c7477101-db27-4189-a5a4-c1ea7fba5e0a",
+              "name": "requests a single package",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    ":org_name",
+                    ":project",
+                    "request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) The name of the Project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"platform\": \"string\",\n  \"name\": \"string\",\n  \"version\": \"string\",\n  \"status\": \"string\",\n  \"reviewer_notes\": \"string\",\n  \"catalog\": {\n    \"display_name\": \"string\",\n    \"name\": \"string\",\n    \"id\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28a43ecb-a93b-484f-ac00-399bc690e2ec",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    ":org_name",
+                    ":project",
+                    "request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) The name of the Project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "63ef3c6e-3ef8-4b78-8625-16f57e55d8c5",
+          "name": "Create a new batch catalog request",
+          "request": {
+            "name": "Create a new batch catalog request",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "catalog",
+                ":org_name",
+                ":project",
+                "batch_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project",
+                  "description": "(Required) The name of the Project."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"packages\": [\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    }\n  ],\n  \"message\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ed49e767-262f-4a4d-94d8-28804b17c7ff",
+              "name": "requests multiple packages",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    ":org_name",
+                    ":project",
+                    "batch_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) The name of the Project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"packages\": [\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    }\n  ],\n  \"message\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\",\n      \"reviewer_notes\": \"string\",\n      \"repository_id\": 3333\n    },\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\",\n      \"reviewer_notes\": \"string\",\n      \"repository_id\": 9212\n    }\n  ],\n  \"incomplete\": [\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\",\n      \"reviewer_notes\": \"string\",\n      \"repository_id\": 9963\n    },\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\",\n      \"reviewer_notes\": \"string\",\n      \"repository_id\": 4771\n    }\n  ],\n  \"new\": [\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\",\n      \"reviewer_notes\": \"string\",\n      \"repository_id\": 8628\n    },\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\",\n      \"reviewer_notes\": \"string\",\n      \"repository_id\": 6334\n    }\n  ],\n  \"denied\": [\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\",\n      \"reviewer_notes\": \"string\",\n      \"repository_id\": 1705\n    },\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\",\n      \"reviewer_notes\": \"string\",\n      \"repository_id\": 7079\n    }\n  ],\n  \"approved\": [\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\",\n      \"reviewer_notes\": \"string\",\n      \"repository_id\": 1208\n    },\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\",\n      \"reviewer_notes\": \"string\",\n      \"repository_id\": 415\n    }\n  ],\n  \"unknown\": [\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\",\n      \"reviewer_notes\": \"string\",\n      \"repository_id\": 3221\n    },\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\",\n      \"reviewer_notes\": \"string\",\n      \"repository_id\": 8474\n    }\n  ],\n  \"catalog\": {\n    \"name\": \"string\",\n    \"display_name\": \"string\",\n    \"id\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93896b1e-01ea-4109-af48-30af0db74199",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    ":org_name",
+                    ":project",
+                    "batch_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) The name of the Project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"packages\": [\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    }\n  ],\n  \"message\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9275d928-50f3-4f0b-80b1-a2283d740090",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    ":org_name",
+                    ":project",
+                    "batch_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) The name of the Project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"packages\": [\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    }\n  ],\n  \"message\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "739ba961-a9aa-4443-88c6-de62ee933c78",
+          "name": "This endpoint has been deprecated in favor of POST /v1/catalog/{org_name}/{project}/batch_requests.",
+          "request": {
+            "name": "This endpoint has been deprecated in favor of POST /v1/catalog/{org_name}/{project}/batch_requests.",
+            "description": {
+              "content": "This endpoint has been deprecated in favor of POST /v1/catalog/{org_name}/{project}/batch_requests.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "catalog",
+                ":org_name",
+                ":project",
+                "batch_request"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project",
+                  "description": "(Required) The name of the Project."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "16755274-3a1c-4cec-89b4-19fa26338510",
+              "name": "requests multiple packages",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    ":org_name",
+                    ":project",
+                    "batch_request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) The name of the Project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\",\n      \"reviewer_notes\": \"string\",\n      \"repository_id\": 3622\n    },\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\",\n      \"reviewer_notes\": \"string\",\n      \"repository_id\": 9049\n    }\n  ],\n  \"incomplete\": [\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\",\n      \"reviewer_notes\": \"string\",\n      \"repository_id\": 9699\n    },\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\",\n      \"reviewer_notes\": \"string\",\n      \"repository_id\": 5337\n    }\n  ],\n  \"new\": [\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\",\n      \"reviewer_notes\": \"string\",\n      \"repository_id\": 7121\n    },\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\",\n      \"reviewer_notes\": \"string\",\n      \"repository_id\": 6388\n    }\n  ],\n  \"denied\": [\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\",\n      \"reviewer_notes\": \"string\",\n      \"repository_id\": 8574\n    },\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\",\n      \"reviewer_notes\": \"string\",\n      \"repository_id\": 9594\n    }\n  ],\n  \"approved\": [\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\",\n      \"reviewer_notes\": \"string\",\n      \"repository_id\": 6598\n    },\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\",\n      \"reviewer_notes\": \"string\",\n      \"repository_id\": 3364\n    }\n  ],\n  \"unknown\": [\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\",\n      \"reviewer_notes\": \"string\",\n      \"repository_id\": 8500\n    },\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"status\": \"string\",\n      \"reviewer_notes\": \"string\",\n      \"repository_id\": 1938\n    }\n  ],\n  \"catalog\": {\n    \"name\": \"string\",\n    \"display_name\": \"string\",\n    \"id\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8898700d-fdad-40f0-a793-f33f8e743a72",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    ":org_name",
+                    ":project",
+                    "batch_request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) The name of the Project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c178288-c7bb-4bfa-a18c-2e1de87d07bb",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    ":org_name",
+                    ":project",
+                    "batch_request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) The name of the Project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9c7ea254-b89a-4bda-8e90-10933c69f9b8",
+          "name": "Retrieve information on a package in a catalog",
+          "request": {
+            "name": "Retrieve information on a package in a catalog",
+            "description": {
+              "content": "This endpoint has been deprecated in favor of GET /v1/{org_name}/catalogs/{catalog_name}/releases/lookup.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "catalog",
+                ":org_name",
+                ":project",
+                "lookup",
+                ":platform",
+                ":package_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "catalog_name",
+                  "value": "<string>",
+                  "description": "Name of catalog (required if not \"default\")"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "project",
+                  "description": "(Required) The name of the Project."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "platform",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "package_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "26f8c76f-7bf6-43bc-85e5-542e58e96bd9",
+              "name": "Catalog information for package",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    ":org_name",
+                    ":project",
+                    "lookup",
+                    ":platform",
+                    ":package_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "catalog_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) The name of the Project."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "platform",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"platform\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"license\": \"string\",\n  \"unknown\": true,\n  \"see_more_url\": \"string\",\n  \"releases\": {\n    \"approved\": [\n      {\n        \"version\": \"string\",\n        \"deny_at\": \"1982-03-12T23:38:19.330Z\",\n        \"approve_at\": \"1968-07-21T19:51:12.449Z\",\n        \"published_at\": \"1969-01-31T04:22:36.263Z\",\n        \"notes\": \"string\",\n        \"vulnerabilities\": [\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ],\n        \"violations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      {\n        \"version\": \"string\",\n        \"deny_at\": \"1981-07-09T02:41:25.537Z\",\n        \"approve_at\": \"1971-05-11T01:46:59.047Z\",\n        \"published_at\": \"1985-10-20T16:02:57.406Z\",\n        \"notes\": \"string\",\n        \"vulnerabilities\": [\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ],\n        \"violations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    ],\n    \"denied\": [\n      {\n        \"version\": \"string\",\n        \"deny_at\": \"1976-05-03T07:45:04.975Z\",\n        \"approve_at\": \"1970-03-13T18:58:56.582Z\",\n        \"published_at\": \"1949-12-04T09:00:18.010Z\",\n        \"notes\": \"string\",\n        \"vulnerabilities\": [\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ],\n        \"violations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      {\n        \"version\": \"string\",\n        \"deny_at\": \"1969-03-27T04:57:27.534Z\",\n        \"approve_at\": \"2002-04-04T03:49:07.541Z\",\n        \"published_at\": \"1989-03-20T14:43:52.492Z\",\n        \"notes\": \"string\",\n        \"vulnerabilities\": [\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ],\n        \"violations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    ],\n    \"available\": [\n      {\n        \"version\": \"string\",\n        \"deny_at\": \"1950-08-10T04:34:07.323Z\",\n        \"approve_at\": \"2003-07-25T05:36:57.096Z\",\n        \"published_at\": \"1969-07-10T03:28:24.480Z\",\n        \"notes\": \"string\",\n        \"vulnerabilities\": [\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ],\n        \"violations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      {\n        \"version\": \"string\",\n        \"deny_at\": \"1990-04-28T07:13:14.270Z\",\n        \"approve_at\": \"1970-09-13T23:02:27.888Z\",\n        \"published_at\": \"2006-08-15T01:52:11.837Z\",\n        \"notes\": \"string\",\n        \"vulnerabilities\": [\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ],\n        \"violations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    ],\n    \"warning\": [\n      {\n        \"version\": \"string\",\n        \"deny_at\": \"1970-07-30T17:38:13.535Z\",\n        \"approve_at\": \"1975-01-25T17:20:08.720Z\",\n        \"published_at\": \"1965-05-12T19:36:30.434Z\",\n        \"notes\": \"string\",\n        \"vulnerabilities\": [\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ],\n        \"violations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      {\n        \"version\": \"string\",\n        \"deny_at\": \"1959-12-11T09:33:26.253Z\",\n        \"approve_at\": \"1999-01-30T12:32:49.840Z\",\n        \"published_at\": \"1969-08-29T09:57:23.032Z\",\n        \"notes\": \"string\",\n        \"vulnerabilities\": [\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ],\n        \"violations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    ],\n    \"no_new_introduction\": [\n      {\n        \"version\": \"string\",\n        \"deny_at\": \"1995-11-06T19:19:30.625Z\",\n        \"approve_at\": \"1999-09-22T10:53:28.165Z\",\n        \"published_at\": \"1960-02-21T22:36:06.811Z\",\n        \"notes\": \"string\",\n        \"vulnerabilities\": [\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ],\n        \"violations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      {\n        \"version\": \"string\",\n        \"deny_at\": \"2012-01-13T20:10:27.178Z\",\n        \"approve_at\": \"1964-04-23T15:20:34.403Z\",\n        \"published_at\": \"1949-11-01T12:50:23.708Z\",\n        \"notes\": \"string\",\n        \"vulnerabilities\": [\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ],\n        \"violations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    ]\n  },\n  \"catalog\": {\n    \"display_name\": \"string\",\n    \"name\": \"string\",\n    \"id\": \"string\"\n  },\n  \"vulnerabilities\": [\n    {\n      \"id\": \"string\",\n      \"url\": \"string\",\n      \"description\": \"string\",\n      \"recommendation\": \"string\",\n      \"live_date\": \"string\",\n      \"releases\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"url\": \"string\",\n      \"description\": \"string\",\n      \"recommendation\": \"string\",\n      \"live_date\": \"string\",\n      \"releases\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07935aba-1683-4dcc-b471-ed58241b3908",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "catalog",
+                    ":org_name",
+                    ":project",
+                    "lookup",
+                    ":platform",
+                    ":package_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "catalog_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "project",
+                      "description": "(Required) The name of the Project."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "platform",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "288bbe5e-d1e4-41e6-8ec3-563a06863d38",
+          "name": "Retrieve information on a package in a catalog",
+          "request": {
+            "name": "Retrieve information on a package in a catalog",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                ":org_name",
+                "catalogs",
+                ":catalog_name",
+                "releases",
+                "lookup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "package_platform",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "package_name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_name",
+                  "description": "(Required) The name of the Catalog."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9326d971-17b1-4c98-b6d4-142b6befd9a2",
+              "name": "Catalog information for package",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "releases",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "package_platform",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "package_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"platform\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"license\": \"string\",\n  \"unknown\": true,\n  \"see_more_url\": \"string\",\n  \"releases\": {\n    \"approved\": [\n      {\n        \"version\": \"string\",\n        \"deny_at\": \"1959-09-05T02:09:51.667Z\",\n        \"approve_at\": \"1962-03-20T10:57:06.323Z\",\n        \"published_at\": \"2002-08-26T14:23:32.209Z\",\n        \"notes\": \"string\",\n        \"vulnerabilities\": [\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ],\n        \"violations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      {\n        \"version\": \"string\",\n        \"deny_at\": \"1957-03-05T11:29:38.960Z\",\n        \"approve_at\": \"1972-02-11T23:33:28.171Z\",\n        \"published_at\": \"2025-09-17T13:41:45.189Z\",\n        \"notes\": \"string\",\n        \"vulnerabilities\": [\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ],\n        \"violations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    ],\n    \"denied\": [\n      {\n        \"version\": \"string\",\n        \"deny_at\": \"1965-11-04T07:17:19.243Z\",\n        \"approve_at\": \"1948-10-13T21:24:20.387Z\",\n        \"published_at\": \"1975-09-29T06:45:03.660Z\",\n        \"notes\": \"string\",\n        \"vulnerabilities\": [\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ],\n        \"violations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      {\n        \"version\": \"string\",\n        \"deny_at\": \"1961-10-08T11:31:16.078Z\",\n        \"approve_at\": \"2000-02-02T20:52:54.350Z\",\n        \"published_at\": \"2003-09-17T05:32:33.891Z\",\n        \"notes\": \"string\",\n        \"vulnerabilities\": [\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ],\n        \"violations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    ],\n    \"available\": [\n      {\n        \"version\": \"string\",\n        \"deny_at\": \"2009-05-14T01:22:32.524Z\",\n        \"approve_at\": \"1996-02-11T04:17:54.437Z\",\n        \"published_at\": \"1976-12-23T19:07:55.505Z\",\n        \"notes\": \"string\",\n        \"vulnerabilities\": [\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ],\n        \"violations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      {\n        \"version\": \"string\",\n        \"deny_at\": \"2000-05-24T00:16:53.995Z\",\n        \"approve_at\": \"1996-11-19T21:43:34.542Z\",\n        \"published_at\": \"2011-05-28T20:26:37.408Z\",\n        \"notes\": \"string\",\n        \"vulnerabilities\": [\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ],\n        \"violations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    ],\n    \"warning\": [\n      {\n        \"version\": \"string\",\n        \"deny_at\": \"1958-10-18T16:54:52.183Z\",\n        \"approve_at\": \"2005-11-16T07:59:30.737Z\",\n        \"published_at\": \"2023-11-29T23:43:23.378Z\",\n        \"notes\": \"string\",\n        \"vulnerabilities\": [\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ],\n        \"violations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      {\n        \"version\": \"string\",\n        \"deny_at\": \"1975-10-01T17:58:12.249Z\",\n        \"approve_at\": \"2014-12-21T11:19:40.540Z\",\n        \"published_at\": \"1993-02-06T17:27:37.643Z\",\n        \"notes\": \"string\",\n        \"vulnerabilities\": [\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ],\n        \"violations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    ],\n    \"no_new_introduction\": [\n      {\n        \"version\": \"string\",\n        \"deny_at\": \"1982-04-13T10:05:59.864Z\",\n        \"approve_at\": \"1989-12-17T19:16:10.381Z\",\n        \"published_at\": \"1968-12-06T20:53:48.392Z\",\n        \"notes\": \"string\",\n        \"vulnerabilities\": [\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ],\n        \"violations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      {\n        \"version\": \"string\",\n        \"deny_at\": \"2010-05-15T18:15:33.054Z\",\n        \"approve_at\": \"1990-11-04T09:16:19.135Z\",\n        \"published_at\": \"1947-02-27T02:38:06.960Z\",\n        \"notes\": \"string\",\n        \"vulnerabilities\": [\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          },\n          {\n            \"id\": \"string\",\n            \"upgrade_path\": [\n              \"string\",\n              \"string\"\n            ]\n          }\n        ],\n        \"violations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    ]\n  },\n  \"catalog\": {\n    \"display_name\": \"string\",\n    \"name\": \"string\",\n    \"id\": \"string\"\n  },\n  \"vulnerabilities\": [\n    {\n      \"id\": \"string\",\n      \"url\": \"string\",\n      \"description\": \"string\",\n      \"recommendation\": \"string\",\n      \"live_date\": \"string\",\n      \"releases\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"url\": \"string\",\n      \"description\": \"string\",\n      \"recommendation\": \"string\",\n      \"live_date\": \"string\",\n      \"releases\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7642e539-76d3-4514-b037-fb78e6a43f79",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "releases",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "package_platform",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "package_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) The name of the Catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "73895fe2-52a3-4985-9081-90b95c7fb455",
+          "name": "Retrieve information on multiple packages in a catalog",
+          "request": {
+            "name": "Retrieve information on multiple packages in a catalog",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                ":org_name",
+                "catalogs",
+                ":catalog_name",
+                "releases",
+                "lookup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"packages\": [\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ddf547d6-d251-4161-a25f-e962b0d4099f",
+              "name": "Details of packages found from the search and any package names that had no results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "releases",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"packages\": [\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"packages\": [\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"license\": \"string\",\n      \"unknown\": true,\n      \"see_more_url\": \"string\",\n      \"releases\": {\n        \"approved\": [\n          {\n            \"version\": \"string\",\n            \"deny_at\": \"2009-08-04T06:52:33.284Z\",\n            \"approve_at\": \"2018-06-27T08:18:50.123Z\",\n            \"published_at\": \"1968-01-30T10:04:57.835Z\",\n            \"notes\": \"string\",\n            \"vulnerabilities\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ],\n            \"violations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"version\": \"string\",\n            \"deny_at\": \"2009-06-13T13:08:47.540Z\",\n            \"approve_at\": \"1997-10-29T04:07:18.812Z\",\n            \"published_at\": \"1950-06-29T12:00:39.278Z\",\n            \"notes\": \"string\",\n            \"vulnerabilities\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ],\n            \"violations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"denied\": [\n          {\n            \"version\": \"string\",\n            \"deny_at\": \"2013-11-13T01:05:32.834Z\",\n            \"approve_at\": \"1949-11-17T20:07:49.966Z\",\n            \"published_at\": \"1957-12-17T05:43:25.616Z\",\n            \"notes\": \"string\",\n            \"vulnerabilities\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ],\n            \"violations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"version\": \"string\",\n            \"deny_at\": \"1995-04-13T19:37:06.536Z\",\n            \"approve_at\": \"1986-02-14T01:22:39.360Z\",\n            \"published_at\": \"1993-05-29T13:19:05.037Z\",\n            \"notes\": \"string\",\n            \"vulnerabilities\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ],\n            \"violations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"available\": [\n          {\n            \"version\": \"string\",\n            \"deny_at\": \"2008-04-04T12:15:26.582Z\",\n            \"approve_at\": \"1990-12-06T02:17:27.227Z\",\n            \"published_at\": \"1988-02-07T20:12:58.666Z\",\n            \"notes\": \"string\",\n            \"vulnerabilities\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ],\n            \"violations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"version\": \"string\",\n            \"deny_at\": \"2022-02-26T06:59:23.444Z\",\n            \"approve_at\": \"1982-10-09T15:51:28.796Z\",\n            \"published_at\": \"1960-04-20T16:29:02.565Z\",\n            \"notes\": \"string\",\n            \"vulnerabilities\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ],\n            \"violations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"warning\": [\n          {\n            \"version\": \"string\",\n            \"deny_at\": \"2010-01-27T11:36:46.097Z\",\n            \"approve_at\": \"1967-06-20T10:18:04.216Z\",\n            \"published_at\": \"1961-05-28T02:40:09.450Z\",\n            \"notes\": \"string\",\n            \"vulnerabilities\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ],\n            \"violations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"version\": \"string\",\n            \"deny_at\": \"2013-03-24T14:40:13.641Z\",\n            \"approve_at\": \"1971-12-05T02:10:51.552Z\",\n            \"published_at\": \"1981-05-14T01:40:36.714Z\",\n            \"notes\": \"string\",\n            \"vulnerabilities\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ],\n            \"violations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"no_new_introduction\": [\n          {\n            \"version\": \"string\",\n            \"deny_at\": \"1978-06-04T01:21:44.047Z\",\n            \"approve_at\": \"1987-06-12T05:13:49.550Z\",\n            \"published_at\": \"1956-11-30T11:26:23.181Z\",\n            \"notes\": \"string\",\n            \"vulnerabilities\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ],\n            \"violations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"version\": \"string\",\n            \"deny_at\": \"2025-04-26T02:21:39.526Z\",\n            \"approve_at\": \"1965-05-08T19:09:12.598Z\",\n            \"published_at\": \"1971-08-31T15:11:23.277Z\",\n            \"notes\": \"string\",\n            \"vulnerabilities\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ],\n            \"violations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"catalog\": {\n        \"display_name\": \"string\",\n        \"name\": \"string\",\n        \"id\": \"string\"\n      },\n      \"vulnerabilities\": [\n        {\n          \"id\": \"string\",\n          \"url\": \"string\",\n          \"description\": \"string\",\n          \"recommendation\": \"string\",\n          \"live_date\": \"string\",\n          \"releases\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"url\": \"string\",\n          \"description\": \"string\",\n          \"recommendation\": \"string\",\n          \"live_date\": \"string\",\n          \"releases\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    {\n      \"platform\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"license\": \"string\",\n      \"unknown\": true,\n      \"see_more_url\": \"string\",\n      \"releases\": {\n        \"approved\": [\n          {\n            \"version\": \"string\",\n            \"deny_at\": \"1991-02-03T23:51:41.321Z\",\n            \"approve_at\": \"1958-08-03T13:45:03.057Z\",\n            \"published_at\": \"1967-03-19T09:26:11.548Z\",\n            \"notes\": \"string\",\n            \"vulnerabilities\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ],\n            \"violations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"version\": \"string\",\n            \"deny_at\": \"1958-03-30T15:24:01.657Z\",\n            \"approve_at\": \"1985-01-10T10:48:17.374Z\",\n            \"published_at\": \"2014-01-03T08:58:42.059Z\",\n            \"notes\": \"string\",\n            \"vulnerabilities\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ],\n            \"violations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"denied\": [\n          {\n            \"version\": \"string\",\n            \"deny_at\": \"2020-05-19T07:22:53.408Z\",\n            \"approve_at\": \"1994-01-03T07:16:13.664Z\",\n            \"published_at\": \"1972-05-07T03:56:00.199Z\",\n            \"notes\": \"string\",\n            \"vulnerabilities\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ],\n            \"violations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"version\": \"string\",\n            \"deny_at\": \"2026-06-01T19:47:33.178Z\",\n            \"approve_at\": \"1975-05-19T07:27:12.906Z\",\n            \"published_at\": \"1970-09-24T20:58:21.202Z\",\n            \"notes\": \"string\",\n            \"vulnerabilities\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ],\n            \"violations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"available\": [\n          {\n            \"version\": \"string\",\n            \"deny_at\": \"1983-06-23T22:17:42.098Z\",\n            \"approve_at\": \"2022-05-19T09:50:03.213Z\",\n            \"published_at\": \"2005-01-06T05:25:02.173Z\",\n            \"notes\": \"string\",\n            \"vulnerabilities\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ],\n            \"violations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"version\": \"string\",\n            \"deny_at\": \"1959-05-13T05:44:29.386Z\",\n            \"approve_at\": \"1971-05-01T15:57:40.948Z\",\n            \"published_at\": \"1987-11-27T06:02:32.254Z\",\n            \"notes\": \"string\",\n            \"vulnerabilities\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ],\n            \"violations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"warning\": [\n          {\n            \"version\": \"string\",\n            \"deny_at\": \"1969-12-19T22:48:12.105Z\",\n            \"approve_at\": \"1951-04-12T16:57:07.552Z\",\n            \"published_at\": \"1976-11-13T21:42:36.247Z\",\n            \"notes\": \"string\",\n            \"vulnerabilities\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ],\n            \"violations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"version\": \"string\",\n            \"deny_at\": \"1965-12-28T10:23:13.204Z\",\n            \"approve_at\": \"1985-11-18T02:53:11.049Z\",\n            \"published_at\": \"1960-04-02T10:59:12.680Z\",\n            \"notes\": \"string\",\n            \"vulnerabilities\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ],\n            \"violations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"no_new_introduction\": [\n          {\n            \"version\": \"string\",\n            \"deny_at\": \"2007-06-27T22:41:25.750Z\",\n            \"approve_at\": \"1970-07-15T15:22:25.928Z\",\n            \"published_at\": \"2000-05-25T12:15:36.504Z\",\n            \"notes\": \"string\",\n            \"vulnerabilities\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ],\n            \"violations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"version\": \"string\",\n            \"deny_at\": \"2012-03-16T12:15:22.832Z\",\n            \"approve_at\": \"1951-02-15T10:49:54.203Z\",\n            \"published_at\": \"1987-06-05T02:44:51.768Z\",\n            \"notes\": \"string\",\n            \"vulnerabilities\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"upgrade_path\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ],\n            \"violations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"catalog\": {\n        \"display_name\": \"string\",\n        \"name\": \"string\",\n        \"id\": \"string\"\n      },\n      \"vulnerabilities\": [\n        {\n          \"id\": \"string\",\n          \"url\": \"string\",\n          \"description\": \"string\",\n          \"recommendation\": \"string\",\n          \"live_date\": \"string\",\n          \"releases\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"url\": \"string\",\n          \"description\": \"string\",\n          \"recommendation\": \"string\",\n          \"live_date\": \"string\",\n          \"releases\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    }\n  ],\n  \"missing_results\": [\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"hint\": \"string\"\n    },\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\",\n      \"hint\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7b3e451-af9b-4004-ae88-4fd48e24cdf5",
+              "name": "Request body format incorrect or more than 30 packages requested.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "releases",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"packages\": [\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "53ac8b11-3606-4c03-9b3f-d2ca6c113b1b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "releases",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"packages\": [\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a4a73de4-ed98-492f-a553-edb063981623",
+              "name": "403 Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "releases",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"packages\": [\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"platform\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tidelift.com/external-api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "107ad4fd-2d3c-4f76-ac24-3faf5a020ebe",
+    "name": "Tidelift External Alignments Catalog Releases API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

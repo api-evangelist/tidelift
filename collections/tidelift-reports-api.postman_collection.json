@@ -1,0 +1,1225 @@
+{
+  "item": [
+    {
+      "id": "2abd5e67-5db2-4ebc-910e-afbb13e8f3ff",
+      "name": "Reports",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "106124b6-2bfc-408c-bea2-b1709475f938",
+          "name": "Get the latest report",
+          "request": {
+            "name": "Get the latest report",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                ":org_name",
+                "reports",
+                ":report_type"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "catalog_name",
+                  "value": "<string>",
+                  "description": "Name of catalog used to generate the report. A catalog or project is needed if a report ID was not provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "report_id",
+                  "value": "<string>",
+                  "description": "ID of the generated report"
+                },
+                {
+                  "disabled": false,
+                  "key": "projects[]",
+                  "value": "<string>",
+                  "description": "Names of projects to filter by. Currently only used for the following reports:\n\n* all_projects_compliance\n* all_projects_package_quality\n* all_projects_violations\n* license_attribution\n* release_usage\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "projects[]",
+                  "value": "<string>",
+                  "description": "Names of projects to filter by. Currently only used for the following reports:\n\n* all_projects_compliance\n* all_projects_package_quality\n* all_projects_violations\n* license_attribution\n* release_usage\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "catalog_standards[]",
+                  "value": "<string>",
+                  "description": "Catalog Standards to filter by (only supported by all_projects_violations)"
+                },
+                {
+                  "disabled": false,
+                  "key": "catalog_standards[]",
+                  "value": "<string>",
+                  "description": "Catalog Standards to filter by (only supported by all_projects_violations)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "report_type",
+                  "description": "(Required) Type of report\n\n - [all_projects_compliance (compliance of projects to catalog standards)](https://support.tidelift.com/hc/en-us/articles/24885171849236)\n - [all_projects_package_quality (Tidelift recommendations by package)](https://support.tidelift.com/hc/en-us/articles/24971666742932)\n - [all_projects_violations (All projects violations)](https://support.tidelift.com/hc/en-us/articles/24883174701332)\n - catalog_activity_audit (Catalog Activity)\n - eol_impact (End of life)\n - license_attribution (License attribution)\n - release_usage (Catalog-wide open source use)\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "85ee61cb-0c01-411d-a041-6c79b84eb088",
+              "name": "Returns latest catalog report JSON",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "reports",
+                    ":report_type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "catalog_name",
+                      "value": "default"
+                    },
+                    {
+                      "key": "report_id",
+                      "value": "12345-ABCDE"
+                    },
+                    {
+                      "key": "projects[]",
+                      "value": "my-project"
+                    },
+                    {
+                      "key": "projects[]",
+                      "value": "my-other-project"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "deprecation"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "known_packages"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "up_to_date"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "vulnerabilities"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "allowed_licenses"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "identified_licenses"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "report_type",
+                      "description": "(Required) Type of report\n\n - [all_projects_compliance (compliance of projects to catalog standards)](https://support.tidelift.com/hc/en-us/articles/24885171849236)\n - [all_projects_package_quality (Tidelift recommendations by package)](https://support.tidelift.com/hc/en-us/articles/24971666742932)\n - [all_projects_violations (All projects violations)](https://support.tidelift.com/hc/en-us/articles/24883174701332)\n - catalog_activity_audit (Catalog Activity)\n - eol_impact (End of life)\n - license_attribution (License attribution)\n - release_usage (Catalog-wide open source use)\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"report_type\": \"all_projects_violations\",\n  \"catalog_id\": \"string\",\n  \"created_at\": \"string\",\n  \"report\": [\n    {\n      \"package_platform\": \"string\",\n      \"package_name\": \"string\",\n      \"package_version\": \"string\",\n      \"package_status\": \"string\",\n      \"license\": \"string\",\n      \"date_added\": \"string\",\n      \"published_date\": \"string\",\n      \"projects_using\": \"string\",\n      \"decision_by_name\": \"string\",\n      \"decision_by_email\": \"string\",\n      \"internal_package\": \"string\",\n      \"package_link\": \"string\",\n      \"package_source\": \"string\",\n      \"purl\": \"string\",\n      \"deny_at\": \"string\"\n    },\n    {\n      \"package_platform\": \"string\",\n      \"package_name\": \"string\",\n      \"package_version\": \"string\",\n      \"package_status\": \"string\",\n      \"license\": \"string\",\n      \"date_added\": \"string\",\n      \"published_date\": \"string\",\n      \"projects_using\": \"string\",\n      \"decision_by_name\": \"string\",\n      \"decision_by_email\": \"string\",\n      \"internal_package\": \"string\",\n      \"package_link\": \"string\",\n      \"package_source\": \"string\",\n      \"purl\": \"string\",\n      \"deny_at\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1fa0aad6-20b8-45f4-9dca-93dc9e1bcf79",
+              "name": "Parameters specified are not correct or the report file is not found. A catalog or list of Projects is required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "reports",
+                    ":report_type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "catalog_name",
+                      "value": "default"
+                    },
+                    {
+                      "key": "report_id",
+                      "value": "12345-ABCDE"
+                    },
+                    {
+                      "key": "projects[]",
+                      "value": "my-project"
+                    },
+                    {
+                      "key": "projects[]",
+                      "value": "my-other-project"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "deprecation"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "known_packages"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "up_to_date"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "vulnerabilities"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "allowed_licenses"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "identified_licenses"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "report_type",
+                      "description": "(Required) Type of report\n\n - [all_projects_compliance (compliance of projects to catalog standards)](https://support.tidelift.com/hc/en-us/articles/24885171849236)\n - [all_projects_package_quality (Tidelift recommendations by package)](https://support.tidelift.com/hc/en-us/articles/24971666742932)\n - [all_projects_violations (All projects violations)](https://support.tidelift.com/hc/en-us/articles/24883174701332)\n - catalog_activity_audit (Catalog Activity)\n - eol_impact (End of life)\n - license_attribution (License attribution)\n - release_usage (Catalog-wide open source use)\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef1ed2d9-f47b-4490-9f56-83ddb52c3f93",
+              "name": "Parameters specified are not correct or API key does not have access to the Organization, Catalog, or all the Projects specifie. Must provide either a catalog, a list of projects, or a report ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "reports",
+                    ":report_type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "catalog_name",
+                      "value": "default"
+                    },
+                    {
+                      "key": "report_id",
+                      "value": "12345-ABCDE"
+                    },
+                    {
+                      "key": "projects[]",
+                      "value": "my-project"
+                    },
+                    {
+                      "key": "projects[]",
+                      "value": "my-other-project"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "deprecation"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "known_packages"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "up_to_date"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "vulnerabilities"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "allowed_licenses"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "identified_licenses"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "report_type",
+                      "description": "(Required) Type of report\n\n - [all_projects_compliance (compliance of projects to catalog standards)](https://support.tidelift.com/hc/en-us/articles/24885171849236)\n - [all_projects_package_quality (Tidelift recommendations by package)](https://support.tidelift.com/hc/en-us/articles/24971666742932)\n - [all_projects_violations (All projects violations)](https://support.tidelift.com/hc/en-us/articles/24883174701332)\n - catalog_activity_audit (Catalog Activity)\n - eol_impact (End of life)\n - license_attribution (License attribution)\n - release_usage (Catalog-wide open source use)\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6df24d25-406c-402d-a2e6-f18a4e964596",
+          "name": "Get the status of a report",
+          "request": {
+            "name": "Get the status of a report",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                ":org_name",
+                "reports",
+                ":report_type",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "catalog_name",
+                  "value": "<string>",
+                  "description": "Name of catalog used to generate the report.  A catalog or project is needed if a report ID was not provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "report_id",
+                  "value": "<string>",
+                  "description": "ID of the generated report"
+                },
+                {
+                  "disabled": false,
+                  "key": "projects[]",
+                  "value": "<string>",
+                  "description": "Names of projects to filter by. Currently only used for the following reports:\n\n* all_projects_compliance\n* all_projects_package_quality\n* all_projects_violations\n* license_attribution\n* release_usage\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "projects[]",
+                  "value": "<string>",
+                  "description": "Names of projects to filter by. Currently only used for the following reports:\n\n* all_projects_compliance\n* all_projects_package_quality\n* all_projects_violations\n* license_attribution\n* release_usage\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "catalog_standards[]",
+                  "value": "<string>",
+                  "description": "Catalog Standards to filter by (only supported by all_projects_violations)"
+                },
+                {
+                  "disabled": false,
+                  "key": "catalog_standards[]",
+                  "value": "<string>",
+                  "description": "Catalog Standards to filter by (only supported by all_projects_violations)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "report_type",
+                  "description": "(Required) Type of report\n\n - [all_projects_compliance (compliance of projects to catalog standards)](https://support.tidelift.com/hc/en-us/articles/24885171849236)\n - [all_projects_package_quality (Tidelift recommendations by package)](https://support.tidelift.com/hc/en-us/articles/24971666742932)\n - [all_projects_violations (All projects violations)](https://support.tidelift.com/hc/en-us/articles/24883174701332)\n - catalog_activity_audit (Catalog Activity)\n - eol_impact (End of life)\n - license_attribution (License attribution)\n - release_usage (Catalog-wide open source use)\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fa5e4ed4-082d-4809-992c-36e441b49c94",
+              "name": "Returns latest catalog report JSON",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "reports",
+                    ":report_type",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "catalog_name",
+                      "value": "default"
+                    },
+                    {
+                      "key": "report_id",
+                      "value": "12345-ABCDE"
+                    },
+                    {
+                      "key": "projects[]",
+                      "value": "my-project"
+                    },
+                    {
+                      "key": "projects[]",
+                      "value": "my-other-project"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "deprecation"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "known_packages"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "up_to_date"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "vulnerabilities"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "allowed_licenses"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "identified_licenses"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "report_type",
+                      "description": "(Required) Type of report\n\n - [all_projects_compliance (compliance of projects to catalog standards)](https://support.tidelift.com/hc/en-us/articles/24885171849236)\n - [all_projects_package_quality (Tidelift recommendations by package)](https://support.tidelift.com/hc/en-us/articles/24971666742932)\n - [all_projects_violations (All projects violations)](https://support.tidelift.com/hc/en-us/articles/24883174701332)\n - catalog_activity_audit (Catalog Activity)\n - eol_impact (End of life)\n - license_attribution (License attribution)\n - release_usage (Catalog-wide open source use)\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"report_id\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "200ba01b-54d7-40cf-b631-8a512d6e789a",
+              "name": "Report with parameters not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "reports",
+                    ":report_type",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "catalog_name",
+                      "value": "default"
+                    },
+                    {
+                      "key": "report_id",
+                      "value": "12345-ABCDE"
+                    },
+                    {
+                      "key": "projects[]",
+                      "value": "my-project"
+                    },
+                    {
+                      "key": "projects[]",
+                      "value": "my-other-project"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "deprecation"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "known_packages"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "up_to_date"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "vulnerabilities"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "allowed_licenses"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "identified_licenses"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "report_type",
+                      "description": "(Required) Type of report\n\n - [all_projects_compliance (compliance of projects to catalog standards)](https://support.tidelift.com/hc/en-us/articles/24885171849236)\n - [all_projects_package_quality (Tidelift recommendations by package)](https://support.tidelift.com/hc/en-us/articles/24971666742932)\n - [all_projects_violations (All projects violations)](https://support.tidelift.com/hc/en-us/articles/24883174701332)\n - catalog_activity_audit (Catalog Activity)\n - eol_impact (End of life)\n - license_attribution (License attribution)\n - release_usage (Catalog-wide open source use)\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d0d70d7-a716-4db9-b70e-c7c9a04ca8f6",
+              "name": "Parameters specified are not correct or API key does not have access to the Organization, Catalog, or all the Projects specifie. Must provide either a catalog, a list of projects, or a report ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "reports",
+                    ":report_type",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "catalog_name",
+                      "value": "default"
+                    },
+                    {
+                      "key": "report_id",
+                      "value": "12345-ABCDE"
+                    },
+                    {
+                      "key": "projects[]",
+                      "value": "my-project"
+                    },
+                    {
+                      "key": "projects[]",
+                      "value": "my-other-project"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "deprecation"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "known_packages"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "up_to_date"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "vulnerabilities"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "allowed_licenses"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "identified_licenses"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "report_type",
+                      "description": "(Required) Type of report\n\n - [all_projects_compliance (compliance of projects to catalog standards)](https://support.tidelift.com/hc/en-us/articles/24885171849236)\n - [all_projects_package_quality (Tidelift recommendations by package)](https://support.tidelift.com/hc/en-us/articles/24971666742932)\n - [all_projects_violations (All projects violations)](https://support.tidelift.com/hc/en-us/articles/24883174701332)\n - catalog_activity_audit (Catalog Activity)\n - eol_impact (End of life)\n - license_attribution (License attribution)\n - release_usage (Catalog-wide open source use)\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0807c5f6-145b-4d67-b3a2-be64a0877a21",
+          "name": "Run a new report",
+          "request": {
+            "name": "Run a new report",
+            "description": {
+              "content": "Note that organization and catalog wide reports are generated daily for subscribers and so should not need to be manually generated and you can instead just retrieve the most recent report.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                ":org_name",
+                "reports",
+                ":report_type",
+                "generate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "catalog_name",
+                  "value": "<string>",
+                  "description": "Name of catalog used to generate the report."
+                },
+                {
+                  "disabled": false,
+                  "key": "projects[]",
+                  "value": "<string>",
+                  "description": "Names of projects to filter by. Currently only used for the following reports:\n\n* all_projects_compliance\n* all_projects_package_quality\n* all_projects_violations\n* license_attribution\n* release_usage\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "projects[]",
+                  "value": "<string>",
+                  "description": "Names of projects to filter by. Currently only used for the following reports:\n\n* all_projects_compliance\n* all_projects_package_quality\n* all_projects_violations\n* license_attribution\n* release_usage\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "catalog_standards[]",
+                  "value": "<string>",
+                  "description": "Catalog Standards to filter by (only supported by all_projects_violations)"
+                },
+                {
+                  "disabled": false,
+                  "key": "catalog_standards[]",
+                  "value": "<string>",
+                  "description": "Catalog Standards to filter by (only supported by all_projects_violations)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_name",
+                  "description": "(Required) The name of the Organization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "report_type",
+                  "description": "(Required) Type of report\n\n - [all_projects_compliance (compliance of projects to catalog standards)](https://support.tidelift.com/hc/en-us/articles/24885171849236)\n - [all_projects_package_quality (Tidelift recommendations by package)](https://support.tidelift.com/hc/en-us/articles/24971666742932)\n - [all_projects_violations (All projects violations)](https://support.tidelift.com/hc/en-us/articles/24883174701332)\n - catalog_activity_audit (Catalog Activity)\n - eol_impact (End of life)\n - license_attribution (License attribution)\n - release_usage (Catalog-wide open source use)\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fa55cfb1-2c7f-403d-bdc2-31bbf7dd810b",
+              "name": "Returns latest catalog report JSON",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "reports",
+                    ":report_type",
+                    "generate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "catalog_name",
+                      "value": "default"
+                    },
+                    {
+                      "key": "projects[]",
+                      "value": "my-project"
+                    },
+                    {
+                      "key": "projects[]",
+                      "value": "my-other-project"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "deprecation"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "known_packages"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "up_to_date"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "vulnerabilities"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "allowed_licenses"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "identified_licenses"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "report_type",
+                      "description": "(Required) Type of report\n\n - [all_projects_compliance (compliance of projects to catalog standards)](https://support.tidelift.com/hc/en-us/articles/24885171849236)\n - [all_projects_package_quality (Tidelift recommendations by package)](https://support.tidelift.com/hc/en-us/articles/24971666742932)\n - [all_projects_violations (All projects violations)](https://support.tidelift.com/hc/en-us/articles/24883174701332)\n - catalog_activity_audit (Catalog Activity)\n - eol_impact (End of life)\n - license_attribution (License attribution)\n - release_usage (Catalog-wide open source use)\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"report_id\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cdf185d4-9360-4c52-88f2-a838822877f6",
+              "name": "Parameters specified are not correct. A catalog or list of Projects is required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "reports",
+                    ":report_type",
+                    "generate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "catalog_name",
+                      "value": "default"
+                    },
+                    {
+                      "key": "projects[]",
+                      "value": "my-project"
+                    },
+                    {
+                      "key": "projects[]",
+                      "value": "my-other-project"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "deprecation"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "known_packages"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "up_to_date"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "vulnerabilities"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "allowed_licenses"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "identified_licenses"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "report_type",
+                      "description": "(Required) Type of report\n\n - [all_projects_compliance (compliance of projects to catalog standards)](https://support.tidelift.com/hc/en-us/articles/24885171849236)\n - [all_projects_package_quality (Tidelift recommendations by package)](https://support.tidelift.com/hc/en-us/articles/24971666742932)\n - [all_projects_violations (All projects violations)](https://support.tidelift.com/hc/en-us/articles/24883174701332)\n - catalog_activity_audit (Catalog Activity)\n - eol_impact (End of life)\n - license_attribution (License attribution)\n - release_usage (Catalog-wide open source use)\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"an_error_code\",\n  \"message\": \"An error message.\",\n  \"details\": {\n    \"errors\": {\n      \"name\": \"is not a valid email.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "96bd14c6-8b72-413b-995b-d8c4a95b2e86",
+              "name": "API key does not have access to the Organization, Catalog, or one of the Projects specified.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    ":org_name",
+                    "reports",
+                    ":report_type",
+                    "generate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "catalog_name",
+                      "value": "default"
+                    },
+                    {
+                      "key": "projects[]",
+                      "value": "my-project"
+                    },
+                    {
+                      "key": "projects[]",
+                      "value": "my-other-project"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "deprecation"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "known_packages"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "up_to_date"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "vulnerabilities"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "allowed_licenses"
+                    },
+                    {
+                      "key": "catalog_standards[]",
+                      "value": "identified_licenses"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_name",
+                      "description": "(Required) The name of the Organization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "report_type",
+                      "description": "(Required) Type of report\n\n - [all_projects_compliance (compliance of projects to catalog standards)](https://support.tidelift.com/hc/en-us/articles/24885171849236)\n - [all_projects_package_quality (Tidelift recommendations by package)](https://support.tidelift.com/hc/en-us/articles/24971666742932)\n - [all_projects_violations (All projects violations)](https://support.tidelift.com/hc/en-us/articles/24883174701332)\n - catalog_activity_audit (Catalog Activity)\n - eol_impact (End of life)\n - license_attribution (License attribution)\n - release_usage (Catalog-wide open source use)\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tidelift.com/external-api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "91e25c41-a281-470e-b72b-c4700006b7e1",
+    "name": "Tidelift External Alignments Reports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}
