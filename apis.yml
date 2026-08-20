@@ -34,6 +34,16 @@ created: '2026-07-17'
 modified: '2026-07-21'
 tags:
 - Company
+- Open-Source
+- Software Supply Chain
+- Dependency Management
+- Application Security
+- SBOM
+- License Compliance
+- Vulnerability Management
+- Developer Tools
+tags_raw:
+- Company
 - Open Source
 - Software Supply Chain
 - Dependency Management
@@ -154,6 +164,8 @@ apis:
   humanURL: https://api.tidelift.com/docs/
   baseURL: https://api.tidelift.com/external-api
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -190,6 +202,8 @@ apis:
   humanURL: https://api.tidelift.com/docs/
   baseURL: https://api.tidelift.com/external-api
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
@@ -226,6 +240,8 @@ apis:
   humanURL: https://api.tidelift.com/docs/
   baseURL: https://api.tidelift.com/external-api
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
