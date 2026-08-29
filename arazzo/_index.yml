@@ -1,6 +1,6 @@
-generated: '2026-07-21'
-method: derived
-source: openapi/tidelift-subscriber-api-openapi-original.json
+x-generated: '2026-07-21'
+x-method: derived
+x-source: openapi/tidelift-subscriber-api-openapi-original.json
 workflows:
 - file: tidelift-package-vulnerability-check.arazzo.yml
   workflowId: packageVulnerabilityCheck
