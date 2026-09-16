@@ -1,15 +1,13 @@
 aid: tidelift
 name: Tidelift
-description: >-
-  Tidelift provides open-source software supply-chain management for enterprises. Its
-  platform combines package intelligence (maintenance, quality, end-of-life, and
-  vulnerability signals) with catalogs of approved dependencies, policy and license
-  standards enforcement, SBOM import/export, and "alignment" of projects against an
-  organization's standards. Tidelift is distinctive for paying the open-source
-  maintainers ("lifters") behind the packages enterprises rely on. The Tidelift External
-  API (OpenAPI 3.0, Bearer API-key auth) exposes catalogs, violations, projects, groups,
-  packages, releases, vulnerabilities, licenses, and reporting. Tidelift was acquired by
-  Sonar in 2025; the API and developer surface remain active.
+description: Tidelift provides open-source software supply-chain management for enterprises. Its platform
+  combines package intelligence (maintenance, quality, end-of-life, and vulnerability signals) with catalogs
+  of approved dependencies, policy and license standards enforcement, SBOM import/export, and "alignment"
+  of projects against an organization's standards. Tidelift is distinctive for paying the open-source
+  maintainers ("lifters") behind the packages enterprises rely on. The Tidelift External API (OpenAPI
+  3.0, Bearer API-key auth) exposes catalogs, violations, projects, groups, packages, releases, vulnerabilities,
+  licenses, and reporting. Tidelift was acquired by Sonar in 2025; the API and developer surface remain
+  active.
 url: https://raw.githubusercontent.com/api-evangelist/tidelift/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -44,7 +42,7 @@ accessModel:
 image: https://api.tidelift.com/docs/assets/tidelift_logo.png
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-21'
+modified: '2026-09-16'
 tags:
 - Company
 - Open-Source
@@ -97,11 +95,10 @@ apis:
     url: https://api.tidelift.com/docs/
 - aid: tidelift:tidelift-authentication-api
   name: Tidelift Authentication API
-  description: >-
-    A [Tidelift API key](https://docs.tidelift.com/article/79-api-authentication) is required for all
-    endpoints. If a particular type of API key is required it will be noted on the path.
+  description: 'A [Tidelift API key](https://docs.tidelift.com/article/79-api-authentication) is required
+    for all endpoints. If a particular type of API key is required it will be noted on the path.
 
-    <SecurityDefinitions />
+    <SecurityDefinitions />'
   humanURL: https://api.tidelift.com/docs/
   baseURL: https://api.tidelift.com/external-api
   tags:
@@ -113,19 +110,9 @@ apis:
     url: https://api.tidelift.com/docs/
 - aid: tidelift:tidelift-basic-examples-api
   name: Tidelift Basic Examples API
-  description: >-
-    * curl
-
-
-    ```
-
-    curl -H "Accept: application/json" \
-         -H "Authorization: bearer <your Tidelift API key>" \
-         https://api.tidelift.com/external-api/v1/packages/pypi/urllib3
-    ```
-
-
-    More detailed examples can be found in [the Tidelift support documentation](https://support.tidelift.com/hc/en-us/articles/4406286633364-How-to-access-Tidelift-APIs#h_01H9TWCQQQ5033Q7DTP89BYC5H).
+  description: "* curl\n\n```\ncurl -H \"Accept: application/json\" \\\n     -H \"Authorization: bearer\
+    \ <your Tidelift API key>\" \\\n     https://api.tidelift.com/external-api/v1/packages/pypi/urllib3\n\
+    ```\n\nMore detailed examples can be found in [the Tidelift support documentation](https://support.tidelift.com/hc/en-us/articles/4406286633364-How-to-access-Tidelift-APIs#h_01H9TWCQQQ5033Q7DTP89BYC5H)."
   humanURL: https://api.tidelift.com/docs/
   baseURL: https://api.tidelift.com/external-api
   tags:
@@ -274,6 +261,8 @@ apis:
   - type: APIReference
     url: https://api.tidelift.com/docs/
 common:
+- type: Website
+  url: https://tidelift.com
 - type: Overlay
   url: overlays/tidelift-subscriber-api-overlay.yaml
 - type: DeveloperPortal
@@ -316,7 +305,10 @@ common:
   url: cli/tidelift-cli.yml
 - type: X-MCPServerCandidate
   url: mcp/tidelift-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate
+    — a tool list derived from the published API contracts, not an existing server. The scorer already
+    read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type
+    surfaces with a server that does not exist.'
 - type: LLMsTxt
   url: llms/tidelift-llms.txt
 - type: Conventions
