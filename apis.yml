@@ -87,6 +87,8 @@ apis:
   humanURL: https://api.tidelift.com/docs/
   baseURL: https://api.tidelift.com/external-api
   tags:
+  - Attestation
+  tags_raw:
   - Attestations
   properties:
   - type: OpenAPI
@@ -140,6 +142,8 @@ apis:
   humanURL: https://api.tidelift.com/docs/
   baseURL: https://api.tidelift.com/external-api
   tags:
+  - Catalog
+  tags_raw:
   - Catalogs
   properties:
   - type: OpenAPI
@@ -261,6 +265,11 @@ apis:
   - type: APIReference
     url: https://api.tidelift.com/docs/
 common:
+- type: ParentCompany
+  url: https://apis.io/providers/sonar/
+  name: Sonar
+  x-relationship: acquired
+  x-evidence: "description names Sonar and https://tidelift.com now redirects to sonarsource.com (roadmap#390, corroborate-dead.py)"
 - type: Website
   url: https://tidelift.com
 - type: Overlay
