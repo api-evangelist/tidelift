@@ -1,7 +1,7 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   version: 1.2.1
-  title: Tidelift External Alignments CatalogStandards API
+  title: Tidelift External Catalog Standards API
   x-logo:
     url: /docs/assets/tidelift_logo.png
     altText: Tidelift
@@ -32,7 +32,7 @@ paths:
         - organization
       operationId: configureAllowedLicensesAdd
       x-rails-controller: catalog_standards/allowed_licenses#add_licenses
-      summary: Add SPDX licenses to the catalog's license policies.
+      summary: Add SPDX licenses to the catalog's license policies
       description: Add SPDX licenses to the catalog's license policies.
       parameters:
       - $ref: '#/components/parameters/orgNameParam'
@@ -88,7 +88,7 @@ paths:
         - organization
       operationId: configureAllowedLicensesRemove
       x-rails-controller: catalog_standards/allowed_licenses#remove_licenses
-      summary: Remove SPDX licenses from the catalog's license policies.
+      summary: Remove SPDX licenses from the catalog's license policies
       description: Remove SPDX licenses from the catalog's license policies.
       parameters:
       - $ref: '#/components/parameters/orgNameParam'
@@ -146,6 +146,23 @@ paths:
         '404':
           description: Catalog not found
 components:
+  parameters:
+    orgNameParam:
+      in: path
+      name: org_name
+      required: true
+      schema:
+        type: string
+        example: My-Company
+      description: The name of the Organization.
+    catalogNameParam:
+      in: path
+      name: catalog_name
+      required: true
+      schema:
+        type: string
+        example: default
+      description: The name of the Catalog.
   schemas:
     LicensingCatalogRule:
       type: object
@@ -172,23 +189,6 @@ components:
               policy_status: approved
               generate_tasks: true
               reference_url: https://github.com/tidelift/project1/blob/main/LICENSE.md
-  parameters:
-    orgNameParam:
-      in: path
-      name: org_name
-      required: true
-      schema:
-        type: string
-        example: My-Company
-      description: The name of the Organization.
-    catalogNameParam:
-      in: path
-      name: catalog_name
-      required: true
-      schema:
-        type: string
-        example: default
-      description: The name of the Catalog.
   securitySchemes:
     BearerAuth:
       type: http

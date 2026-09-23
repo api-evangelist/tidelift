@@ -1,7 +1,7 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   version: 1.2.1
-  title: Tidelift External Alignments Users API
+  title: Tidelift External Users API
   x-logo:
     url: /docs/assets/tidelift_logo.png
     altText: Tidelift
@@ -90,14 +90,14 @@ components:
         example: My-Company
       description: The name of the Organization.
   responses:
-    404Error:
-      description: Record Not Found
+    403GroupUsers:
+      description: The user is not an admin of the organization or doesn't belong to the organization.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/StandardError'
-    403GroupUsers:
-      description: The user is not an admin of the organization or doesn't belong to the organization.
+    404Error:
+      description: Record Not Found
       content:
         application/json:
           schema:

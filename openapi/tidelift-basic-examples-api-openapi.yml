@@ -1,13 +1,27 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   version: 1.2.1
-  title: Tidelift External Alignments Basic Examples API
+  title: Tidelift External Basic Examples API
   x-logo:
     url: /docs/assets/tidelift_logo.png
     altText: Tidelift
   license:
     name: Proprietary
-  description: "* curl\n\n```\ncurl -H \"Accept: application/json\" \\\n     -H \"Authorization: bearer <your Tidelift API key>\" \\\n     https://api.tidelift.com/external-api/v1/packages/pypi/urllib3\n```\n\nMore detailed examples can be found in [the Tidelift support documentation](https://support.tidelift.com/hc/en-us/articles/4406286633364-How-to-access-Tidelift-APIs#h_01H9TWCQQQ5033Q7DTP89BYC5H).\n"
+  description: '* curl
+
+
+    ```
+
+    curl -H "Accept: application/json" \
+
+    -H "Authorization: bearer " \
+
+    https://api.tidelift.com/external-api/v1/packages/pypi/urllib3
+
+    ```
+
+
+    More detailed examples can be found in the Tidelift support documentation.'
 servers:
 - url: https://api.tidelift.com/external-api
 security:
@@ -17,12 +31,26 @@ security:
   - organization
 tags:
 - name: Basic Examples
-  description: "* curl\n\n```\ncurl -H \"Accept: application/json\" \\\n     -H \"Authorization: bearer <your Tidelift API key>\" \\\n     https://api.tidelift.com/external-api/v1/packages/pypi/urllib3\n```\n\nMore detailed examples can be found in [the Tidelift support documentation](https://support.tidelift.com/hc/en-us/articles/4406286633364-How-to-access-Tidelift-APIs#h_01H9TWCQQQ5033Q7DTP89BYC5H).\n"
+  description: '* curl
+
+
+    ```
+
+    curl -H "Accept: application/json" \
+
+    -H "Authorization: bearer " \
+
+    https://api.tidelift.com/external-api/v1/packages/pypi/urllib3
+
+    ```
+
+
+    More detailed examples can be found in the Tidelift support documentation.'
 paths:
   /v1/authcheck:
     get:
       x-rails-controller: auth#check
-      summary: Check if the given API key is valid.
+      summary: Check if the given API key is valid
       operationId: authCheck
       x-tidelift-api-meta:
         product-area: api

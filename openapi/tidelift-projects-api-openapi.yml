@@ -1,7 +1,7 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   version: 1.2.1
-  title: Tidelift External Alignments Projects API
+  title: Tidelift External Projects API
   x-logo:
     url: /docs/assets/tidelift_logo.png
     altText: Tidelift
@@ -113,8 +113,9 @@ paths:
                   - dot_tidelift
                   properties:
                     using_catalog:
-                      type: string
-                      nullable: true
+                      type:
+                      - string
+                      - 'null'
                     dot_tidelift:
                       type: string
         '400':
@@ -156,7 +157,7 @@ paths:
         - organization
       operationId: deleteProject
       x-rails-controller: projects#destroy
-      summary: Delete a project.
+      summary: Delete a project
       parameters:
       - $ref: '#/components/parameters/orgNameParam'
       - $ref: '#/components/parameters/projectParam'
@@ -196,8 +197,9 @@ paths:
                 - catalog
                 properties:
                   catalog:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
       responses:
         '200':
           description: Successfully updated project details
@@ -267,7 +269,7 @@ paths:
         - organization
       operationId: importSbomProject
       x-rails-controller: projects#import_sbom
-      summary: Create a new project with an initial scan, using the provided SBOM file as the manifest.
+      summary: Create a new project with an initial scan, using the provided SBOM file as the…
       parameters:
       - $ref: '#/components/parameters/orgNameParam'
       requestBody:
@@ -305,8 +307,9 @@ paths:
                   additionalProperties: false
                   properties:
                     using_catalog:
-                      type: string
-                      nullable: true
+                      type:
+                      - string
+                      - 'null'
                     dot_tidelift:
                       type: string
                     attestation_report_url:
@@ -414,7 +417,50 @@ paths:
       operationId: getProjectBillOfMaterials
       x-rails-controller: projects#bill_of_materials
       summary: Get a project's bill of materials
-      description: "Get the bill of materials for the latest alignment or, optionally, a specific alignment for the project based on the revision or alignment id.\n\nTo request an bill of materials, both a file format and SBOM type must be specified.\n\nThe file format can be specified in several ways:\n  * using the `format` query parameter\n  * using the `Accept` header\n  * using a file extension on the route (e.g. sbom.json to request the JSON file format).\n\nThe SBOM type can be specified using the `sbom_type` query parameter.\n\nSupported combinations:\n  * `format=json, sbom_type=tidelift`: generic Tidelift JSON bill of materials\n    * This format will also be used if both `format` and `sbom_type` are omitted\n  * `format=json`, `sbom_type=cyclonedx`\n  * `format=csv, sbom_type=tidelift`: generic Tidelift CSV bill of materials\n    * This format will also be used if `sbom_type` is omitted\n  * `format=xml`, `sbom_type=cyclonedx`\n  * `format=spdx`, `sbom_type=spdx`\n    * for SPDX, only specifying `format` is necessary, `sbom_type` can be inferred\n\nOlder versions of the API supported using only the `format` query parameter (without also specifying an `sbom_type`).\nThe following mappings are provided to maintain backwards compatibility.\n  * `format=cyclonedx` or `format=cyclone_dx` implies `format=xml` and `sbom_type=cyclonedx`.\n  * `format=spdx` also implies `sbom_type=spdx`\n"
+      description: 'Get the bill of materials for the latest alignment or, optionally, a specific alignment for the project based on the revision or alignment id.
+
+
+        To request an bill of materials, both a file format and SBOM type must be specified.
+
+
+        The file format can be specified in several ways:
+
+        * using the `format` query parameter
+
+        * using the `Accept` header
+
+        * using a file extension on the route (e.g. sbom.json to request the JSON file format).
+
+
+        The SBOM type can be specified using the `sbom_type` query parameter.
+
+
+        Supported combinations:
+
+        * `format=json, sbom_type=tidelift`: generic Tidelift JSON bill of materials
+
+        * This format will also be used if both `format` and `sbom_type` are omitted
+
+        * `format=json`, `sbom_type=cyclonedx`
+
+        * `format=csv, sbom_type=tidelift`: generic Tidelift CSV bill of materials
+
+        * This format will also be used if `sbom_type` is omitted
+
+        * `format=xml`, `sbom_type=cyclonedx`
+
+        * `format=spdx`, `sbom_type=spdx`
+
+        * for SPDX, only specifying `format` is necessary, `sbom_type` can be inferred
+
+
+        Older versions of the API supported using only the `format` query parameter (without also specifying an `sbom_type`).
+
+        The following mappings are provided to maintain backwards compatibility.
+
+        * `format=cyclonedx` or `format=cyclone_dx` implies `format=xml` and `sbom_type=cyclonedx`.
+
+        * `format=spdx` also implies `sbom_type=spdx`'
       parameters:
       - $ref: '#/components/parameters/orgNameParam'
       - name: project
@@ -471,27 +517,6 @@ paths:
           description: Couldn't find scan by revision or latest from default branch, or unable to build BOM from Scan.
 components:
   schemas:
-    StandardError:
-      description: The standard error format
-      type: object
-      required:
-      - error
-      - message
-      properties:
-        error:
-          type: string
-          description: An error code representing the error
-          example: an_error_code
-        message:
-          type: string
-          description: A human-readable error message representing the error
-          example: An error message.
-        details:
-          type: object
-          description: An optional object with extra helpful details about the error.
-          example:
-            errors:
-              name: is not a valid email.
     BillOfMaterials:
       type: array
       items:
@@ -523,11 +548,13 @@ components:
               license:
                 type: string
               source:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
               original_license:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
               status:
                 type: string
           direct:
@@ -545,6 +572,27 @@ components:
                   type: string
                 path:
                   type: string
+    StandardError:
+      description: The standard error format
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: An error code representing the error
+          example: an_error_code
+        message:
+          type: string
+          description: A human-readable error message representing the error
+          example: An error message.
+        details:
+          type: object
+          description: An optional object with extra helpful details about the error.
+          example:
+            errors:
+              name: is not a valid email.
     Project:
       type: object
       additionalProperties: false
@@ -560,11 +608,12 @@ components:
         catalog:
           type: string
         groups:
-          type: array
+          type:
+          - array
+          - 'null'
           description: List of group slugs associated with the project
           items:
             type: string
-          nullable: true
         branching_behavior:
           type: string
           enum:
@@ -576,10 +625,18 @@ components:
         default_branch:
           type: string
         external_identifier:
-          type: string
+          type:
+          - string
+          - 'null'
           description: An optional custom identifier that can be set that corresponds to something outside of Tidelift
-          nullable: true
   parameters:
+    projectParam:
+      in: path
+      name: project
+      required: true
+      schema:
+        type: string
+      description: The name of the Project.
     orgNameParam:
       in: path
       name: org_name
@@ -588,13 +645,6 @@ components:
         type: string
         example: My-Company
       description: The name of the Organization.
-    projectParam:
-      in: path
-      name: project
-      required: true
-      schema:
-        type: string
-      description: The name of the Project.
   responses:
     400Error:
       description: Bad Request

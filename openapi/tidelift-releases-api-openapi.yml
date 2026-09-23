@@ -1,7 +1,7 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   version: 1.2.1
-  title: Tidelift External Alignments Releases API
+  title: Tidelift External Releases API
   x-logo:
     url: /docs/assets/tidelift_logo.png
     altText: Tidelift
@@ -31,8 +31,7 @@ paths:
         - organization
       operationId: eol_releases
       x-rails-controller: releases#eol_releases
-      summary: Show end-of-life details for a set of releases.
-      description: Show end-of-life details for a set of releases
+      summary: Show end-of-life details for a set of releases
       requestBody:
         content:
           application/json:
@@ -96,12 +95,14 @@ paths:
                             eol_reference_found:
                               type: boolean
                             effective_on:
-                              type: string
+                              type:
+                              - string
+                              - 'null'
                               format: date
-                              nullable: true
                             reference_url:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             package_renamed_to:
                               type: array
                               items:
@@ -111,21 +112,25 @@ paths:
                             reason:
                               type: string
                         maintenance_plan:
-                          type: object
-                          nullable: true
+                          type:
+                          - object
+                          - 'null'
                           additionalProperties: false
                           properties:
                             plan_type:
                               type: string
                             major_version_count:
-                              type: integer
-                              nullable: true
+                              type:
+                              - integer
+                              - 'null'
                             minor_version_count:
-                              type: integer
-                              nullable: true
+                              type:
+                              - integer
+                              - 'null'
                             external_url:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                         release_is_not_eol:
                           $ref: '#/components/schemas/PackageCheckStatus'
                         release_is_not_eol_explanation:
@@ -154,8 +159,7 @@ paths:
         - organization
       operationId: lookupReleases
       x-rails-controller: releases#lookup
-      summary: Lookup details for a set of package releases.
-      description: Lookup details for a set of package releases
+      summary: Lookup details for a set of package releases
       requestBody:
         content:
           application/json:
@@ -223,8 +227,7 @@ paths:
         - organization
       operationId: showRelease
       x-rails-controller: releases#show
-      summary: Show details of a specific release of a package.
-      description: Show details of a specific release of a package
+      summary: Show details of a specific release of a package
       parameters:
       - $ref: '#/components/parameters/packagePlatformParam'
       - $ref: '#/components/parameters/packageNameParam'
@@ -262,7 +265,7 @@ paths:
         - organization
       operationId: releaseDependencies
       x-rails-controller: releases#release_dependencies
-      summary: Show the direct dependencies of the release.
+      summary: Show the direct dependencies of the release
       description: Show the direct dependencies of the release and the requirement version string for each
       parameters:
       - $ref: '#/components/parameters/packagePlatformParam'
@@ -310,8 +313,47 @@ paths:
         - organization
       operationId: releaseSbom
       x-rails-controller: releases#sbom
-      summary: Show the SBOM of the release.
-      description: "Show the SBOM of an upstream release in a given format\n  * [SPDX spec](https://spdx.github.io/spdx-spec/v2.2.2/document-creation-information/)\n  * [CycloneDX spec](https://cyclonedx.org/specification/overview/)\n\nTo request an SBOM, both a file format and SBOM type must be specified.\n\nThe file format can be specified in several ways:\n  * using the `format` query parameter\n  * using the `Accept` header\n  * using a file extension on the route (e.g. sbom.json to request the JSON file format).\n\nThe SBOM type can be specified using the `sbom_type` query parameter.\n\nSupported combinations:\n  * `sbom_type=cyclonedx`, `format=xml`\n  * `sbom_type=cyclonedx`, `format=json`\n  * `sbom_type=spdx`, `format=spdx`\n    * for SPDX, only specifying `format` is necessary, `sbom_type` can be inferred\n\nOlder versions of the API supported an `sbom_format` query parameter (without specifying both `sbom_type` and\nformat). The following mappings are provided to maintain backwards compatibility.\n  * `sbom_format=cyclonedx` implies `sbom_type=cyclonedx` and `format=xml`\n  * `sbom_format=spdx` implies `sbom_type=spdx` and `format=spdx`\n"
+      summary: Show the SBOM of the release
+      description: 'Show the SBOM of an upstream release in a given format
+
+        * SPDX spec
+
+        * CycloneDX spec
+
+
+        To request an SBOM, both a file format and SBOM type must be specified.
+
+
+        The file format can be specified in several ways:
+
+        * using the `format` query parameter
+
+        * using the `Accept` header
+
+        * using a file extension on the route (e.g. sbom.json to request the JSON file format).
+
+
+        The SBOM type can be specified using the `sbom_type` query parameter.
+
+
+        Supported combinations:
+
+        * `sbom_type=cyclonedx`, `format=xml`
+
+        * `sbom_type=cyclonedx`, `format=json`
+
+        * `sbom_type=spdx`, `format=spdx`
+
+        * for SPDX, only specifying `format` is necessary, `sbom_type` can be inferred
+
+
+        Older versions of the API supported an `sbom_format` query parameter (without specifying both `sbom_type` and
+
+        format). The following mappings are provided to maintain backwards compatibility.
+
+        * `sbom_format=cyclonedx` implies `sbom_type=cyclonedx` and `format=xml`
+
+        * `sbom_format=spdx` implies `sbom_type=spdx` and `format=spdx`'
       parameters:
       - $ref: '#/components/parameters/packagePlatformParam'
       - $ref: '#/components/parameters/packageNameParam'
@@ -358,67 +400,153 @@ paths:
         '404':
           description: Release or Package not found
 components:
+  parameters:
+    packageNameParam:
+      in: path
+      name: package_name
+      required: true
+      schema:
+        type: string
+        example: rails
+      description: The name of the package to look up.
+    perPagePaginationParam:
+      name: per_page
+      in: query
+      required: false
+      schema:
+        type: integer
+    packagePlatformParam:
+      in: path
+      name: package_platform
+      required: true
+      schema:
+        type: string
+        example: rubygems
+      description: The platform of the package.
+    releaseVersionParam:
+      in: path
+      name: release_version
+      required: true
+      schema:
+        type: string
+        example: 1.2.3
+      description: The version of the package to look up.
+    pagePaginationParam:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+    sbomTypeParam:
+      in: query
+      name: sbom_type
+      schema:
+        type: string
+        enum:
+        - cyclonedx
+        - spdx
+      description: The type the SBOM to generate. Required, unless older sbom_format parameter is passed.
   schemas:
-    LifterRecommendationFragment:
+    VulnerabilitiesViolation:
       type: object
-      additionalProperties: false
-      required:
-      - id
-      - impact_score
-      - impact_description
-      - real_issue
-      - false_positive_reason
-      - includes_dev
-      - specific_methods_affected
-      - specific_methods_description
-      - other_conditions
-      - other_conditions_description
-      - workaround_available
-      - workaround_description
-      - visibility
-      - created_at
-      - updated_at
+      allOf:
+      - $ref: '#/components/schemas/ViolationCommon'
+      - type: object
+        required:
+        - vulnerability
+        properties:
+          vulnerability:
+            type: object
+            additionalProperties: false
+            required:
+            - id
+            - severity
+            - description
+            - date
+            - url
+            - severity_rating
+            - epss_percentile
+            - epss_probability
+            - epss_score
+            - known_exploited
+            - lifter_recommendations
+            properties:
+              id:
+                type:
+                - string
+                - 'null'
+              severity:
+                type:
+                - string
+                - 'null'
+              description:
+                type:
+                - string
+                - 'null'
+              date:
+                type: string
+              url:
+                type:
+                - string
+                - 'null'
+              severity_rating:
+                type:
+                - string
+                - 'null'
+              epss_percentile:
+                type:
+                - string
+                - 'null'
+              epss_probability:
+                type:
+                - string
+                - 'null'
+              epss_score:
+                type:
+                - string
+                - 'null'
+              known_exploited:
+                type:
+                - boolean
+                - 'null'
+              lifter_recommendations:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LifterRecommendationFragment'
+    Violations:
+      type: array
+      items:
+        anyOf:
+        - $ref: '#/components/schemas/AllowedLicensesViolation'
+        - $ref: '#/components/schemas/DeprecationViolation'
+        - $ref: '#/components/schemas/EOLPackagesViolation'
+        - $ref: '#/components/schemas/IdentifiedLicensesViolation'
+        - $ref: '#/components/schemas/UpToDateViolation'
+        - $ref: '#/components/schemas/VulnerabilitiesViolation'
+    CycloneDxJson:
+      type: object
       properties:
-        id:
+        bomFormat:
           type: string
-        impact_score:
-          type: number
-          nullable: true
-        impact_description:
+          enum:
+          - CycloneDX
+        specVersion:
           type: string
-          nullable: true
-        real_issue:
-          type: boolean
-        false_positive_reason:
+        serialNumber:
           type: string
-          nullable: true
-        includes_dev:
-          type: boolean
-          nullable: true
-        specific_methods_affected:
-          type: boolean
-          nullable: true
-        specific_methods_description:
-          type: string
-          nullable: true
-        other_conditions:
-          type: boolean
-          nullable: true
-        other_conditions_description:
-          type: string
-          nullable: true
-        workaround_available:
-          type: boolean
-          nullable: true
-        workaround_description:
-          type: string
-          nullable: true
-        visibility:
-          type: string
-        created_at:
-          type: string
-        updated_at:
-          type: string
+        metadata:
+          type: object
+        components:
+          type: array
+          items:
+            type: object
+        dependencies:
+          type: array
+          items:
+            type: object
+      xml:
+        namespace: http://cyclonedx.org/schema/bom/1.3
+        name: bom
     ReleaseDetail:
       type: object
       properties:
@@ -429,16 +557,18 @@ components:
         version:
           type: string
         published_at:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         purl:
           type: string
         repository:
           type: object
           properties:
             url:
-              type: string
-              nullable: true
+              type:
+              - string
+              - 'null'
             source:
               type: string
               enum:
@@ -465,32 +595,24 @@ components:
               - overridden_by_organization
               - verified_by_maintainer
         nearest_recommended_release:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           properties:
             version:
               type: string
             published_at:
-              type: string
-              nullable: true
+              type:
+              - string
+              - 'null'
               format: date-time
-    TideliftReleaseRecommendation:
+    PackageCheckStatus:
       type: string
-      nullable: true
       enum:
-      - recommended
-      - not_recommended
-      - not_assessed
-    Violations:
-      type: array
-      items:
-        anyOf:
-        - $ref: '#/components/schemas/AllowedLicensesViolation'
-        - $ref: '#/components/schemas/DeprecationViolation'
-        - $ref: '#/components/schemas/EOLPackagesViolation'
-        - $ref: '#/components/schemas/IdentifiedLicensesViolation'
-        - $ref: '#/components/schemas/UpToDateViolation'
-        - $ref: '#/components/schemas/VulnerabilitiesViolation'
+      - passed
+      - not_passed
+      - noassertion
+      - pending
     DeprecationViolation:
       type: object
       allOf:
@@ -508,15 +630,18 @@ components:
             - package_to_use_instead
             properties:
               deprecated_at:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
               reason:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
               package_to_use_instead:
-                type: object
+                type:
+                - object
+                - 'null'
                 additionalProperties: false
-                nullable: true
                 required:
                 - platform
                 - name
@@ -525,120 +650,19 @@ components:
                     type: string
                   name:
                     type: string
-    PackageCheckStatus:
-      type: string
-      enum:
-      - passed
-      - not_passed
-      - noassertion
-      - pending
-    IdentifiedLicensesViolation:
+    Release:
       type: object
       additionalProperties: false
-      allOf:
-      - $ref: '#/components/schemas/ViolationCommon'
-      - type: object
-        required:
-        - original_license
-        - repository_url
-        properties:
-          original_license:
-            type: string
-            nullable: true
-          repository_url:
-            type: string
-            nullable: true
-    CycloneDxJson:
-      type: object
-      properties:
-        bomFormat:
-          type: string
-          enum:
-          - CycloneDX
-        specVersion:
-          type: string
-        serialNumber:
-          type: string
-        metadata:
-          type: object
-        components:
-          type: array
-          items:
-            type: object
-        dependencies:
-          type: array
-          items:
-            type: object
-      xml:
-        namespace: http://cyclonedx.org/schema/bom/1.3
-        name: bom
-    ViolationCommon:
-      type: object
       required:
-      - catalog_standard
-      - violation_id
-      - title
-      additionalProperties: false
+      - platform
+      - name
+      - version
       properties:
-        catalog_standard:
-          type: string
-        violation_id:
-          type: string
-        title:
-          type: string
-        package_name:
-          type: string
-        package_platform:
-          type: string
-        version:
-          type: string
-        task_id:
-          type: string
-          nullable: true
-    AllowedLicensesViolation:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/ViolationCommon'
-      - type: object
-        additionalProperties: false
-        required:
-        - license
-        properties:
-          license:
-            type: string
-    UpToDateViolation:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/ViolationCommon'
-      - type: object
-        required:
-        - up_to_date
-        properties:
-          up_to_date:
-            type: object
-            additionalProperties: false
-            required:
-            - release_date
-            - days_too_old
-            properties:
-              release_date:
-                type: string
-                nullable: true
-              days_too_old:
-                type: string
-                nullable: true
-    ReleaseRequirement:
-      type: object
-      properties:
-        name:
-          type: string
         platform:
           type: string
-        requirement:
+        name:
           type: string
-        purl:
-          type: string
-        scope:
+        version:
           type: string
     PaginationEnvelope:
       type: object
@@ -653,74 +677,19 @@ components:
         current_page:
           type: integer
         next_page:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         prev_page:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         total_pages:
           type: integer
         total_count:
           type: integer
         per_page:
           type: integer
-    VulnerabilitiesViolation:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/ViolationCommon'
-      - type: object
-        required:
-        - vulnerability
-        properties:
-          vulnerability:
-            type: object
-            additionalProperties: false
-            required:
-            - id
-            - severity
-            - description
-            - date
-            - url
-            - severity_rating
-            - epss_percentile
-            - epss_probability
-            - epss_score
-            - known_exploited
-            - lifter_recommendations
-            properties:
-              id:
-                type: string
-                nullable: true
-              severity:
-                type: string
-                nullable: true
-              description:
-                type: string
-                nullable: true
-              date:
-                type: string
-              url:
-                type: string
-                nullable: true
-              severity_rating:
-                type: string
-                nullable: true
-              epss_percentile:
-                type: string
-                nullable: true
-              epss_probability:
-                type: string
-                nullable: true
-              epss_score:
-                type: string
-                nullable: true
-              known_exploited:
-                type: boolean
-                nullable: true
-              lifter_recommendations:
-                type: array
-                items:
-                  $ref: '#/components/schemas/LifterRecommendationFragment'
     StandardError:
       description: The standard error format
       type: object
@@ -742,6 +711,69 @@ components:
           example:
             errors:
               name: is not a valid email.
+    ViolationCommon:
+      type: object
+      required:
+      - catalog_standard
+      - violation_id
+      - title
+      additionalProperties: false
+      properties:
+        catalog_standard:
+          type: string
+        violation_id:
+          type: string
+        title:
+          type: string
+        package_name:
+          type: string
+        package_platform:
+          type: string
+        version:
+          type: string
+        task_id:
+          type:
+          - string
+          - 'null'
+    TideliftReleaseRecommendation:
+      type:
+      - string
+      - 'null'
+      enum:
+      - recommended
+      - not_recommended
+      - not_assessed
+    IdentifiedLicensesViolation:
+      type: object
+      additionalProperties: false
+      allOf:
+      - $ref: '#/components/schemas/ViolationCommon'
+      - type: object
+        required:
+        - original_license
+        - repository_url
+        properties:
+          original_license:
+            type:
+            - string
+            - 'null'
+          repository_url:
+            type:
+            - string
+            - 'null'
+    ReleaseRequirement:
+      type: object
+      properties:
+        name:
+          type: string
+        platform:
+          type: string
+        requirement:
+          type: string
+        purl:
+          type: string
+        scope:
+          type: string
     EOLPackagesViolation:
       type: object
       allOf:
@@ -758,11 +790,47 @@ components:
             - description
             properties:
               reason:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
               description:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
+    UpToDateViolation:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ViolationCommon'
+      - type: object
+        required:
+        - up_to_date
+        properties:
+          up_to_date:
+            type: object
+            additionalProperties: false
+            required:
+            - release_date
+            - days_too_old
+            properties:
+              release_date:
+                type:
+                - string
+                - 'null'
+              days_too_old:
+                type:
+                - string
+                - 'null'
+    AllowedLicensesViolation:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ViolationCommon'
+      - type: object
+        additionalProperties: false
+        required:
+        - license
+        properties:
+          license:
+            type: string
     CycloneDxXml:
       type: object
       properties:
@@ -779,66 +847,76 @@ components:
       xml:
         namespace: http://cyclonedx.org/schema/bom/1.3
         name: bom
-    Release:
+    LifterRecommendationFragment:
       type: object
       additionalProperties: false
       required:
-      - platform
-      - name
-      - version
+      - id
+      - impact_score
+      - impact_description
+      - real_issue
+      - false_positive_reason
+      - includes_dev
+      - specific_methods_affected
+      - specific_methods_description
+      - other_conditions
+      - other_conditions_description
+      - workaround_available
+      - workaround_description
+      - visibility
+      - created_at
+      - updated_at
       properties:
-        platform:
+        id:
           type: string
-        name:
+        impact_score:
+          type:
+          - number
+          - 'null'
+        impact_description:
+          type:
+          - string
+          - 'null'
+        real_issue:
+          type: boolean
+        false_positive_reason:
+          type:
+          - string
+          - 'null'
+        includes_dev:
+          type:
+          - boolean
+          - 'null'
+        specific_methods_affected:
+          type:
+          - boolean
+          - 'null'
+        specific_methods_description:
+          type:
+          - string
+          - 'null'
+        other_conditions:
+          type:
+          - boolean
+          - 'null'
+        other_conditions_description:
+          type:
+          - string
+          - 'null'
+        workaround_available:
+          type:
+          - boolean
+          - 'null'
+        workaround_description:
+          type:
+          - string
+          - 'null'
+        visibility:
           type: string
-        version:
+        created_at:
           type: string
-  parameters:
-    perPagePaginationParam:
-      name: per_page
-      in: query
-      required: false
-      schema:
-        type: integer
-    sbomTypeParam:
-      in: query
-      name: sbom_type
-      schema:
-        type: string
-        enum:
-        - cyclonedx
-        - spdx
-      description: The type the SBOM to generate. Required, unless older sbom_format parameter is passed.
-    releaseVersionParam:
-      in: path
-      name: release_version
-      required: true
-      schema:
-        type: string
-        example: 1.2.3
-      description: The version of the package to look up.
-    packagePlatformParam:
-      in: path
-      name: package_platform
-      required: true
-      schema:
-        type: string
-        example: rubygems
-      description: The platform of the package.
-    packageNameParam:
-      in: path
-      name: package_name
-      required: true
-      schema:
-        type: string
-        example: rails
-      description: The name of the package to look up.
-    pagePaginationParam:
-      name: page
-      in: query
-      required: false
-      schema:
-        type: integer
+        updated_at:
+          type: string
   responses:
     401Error:
       description: Unauthorized

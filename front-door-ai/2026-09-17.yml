@@ -1,0 +1,32 @@
+# Front Door AI Index — tidelift — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: tidelift
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: tidelift.com
+  final_host: www.sonarsource.com
+  ownership: own
+  owner: tidelift
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 19
+  host_score: 19
+  density: 9.2
+  words: 2066
+  tiers:
+    agentic: 4
+    core: 14
+    model: 1
+  ambiguous: 3
+  top_terms:
+    AI: 14
+    agent: 2
+    Claude: 1
+    agentic: 1
+    copilot: 1
+    embedding: 1
+    fine-tune: 1
+    intelligence: 1

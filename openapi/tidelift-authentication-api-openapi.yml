@@ -1,17 +1,13 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   version: 1.2.1
-  title: Tidelift External Alignments Authentication API
+  title: Tidelift External Authentication API
   x-logo:
     url: /docs/assets/tidelift_logo.png
     altText: Tidelift
   license:
     name: Proprietary
-  description: 'A [Tidelift API key](https://docs.tidelift.com/article/79-api-authentication) is required for all endpoints. If a particular type of API key is required it will be noted on the path.
-
-    <SecurityDefinitions />
-
-    '
+  description: A Tidelift API key is required for all endpoints. If a particular type of API key is required it will be noted on the path.
 servers:
 - url: https://api.tidelift.com/external-api
 security:
@@ -21,16 +17,12 @@ security:
   - organization
 tags:
 - name: Authentication
-  description: 'A [Tidelift API key](https://docs.tidelift.com/article/79-api-authentication) is required for all endpoints. If a particular type of API key is required it will be noted on the path.
-
-    <SecurityDefinitions />
-
-    '
+  description: A Tidelift API key is required for all endpoints. If a particular type of API key is required it will be noted on the path.
 paths:
   /v1/authcheck:
     get:
       x-rails-controller: auth#check
-      summary: Check if the given API key is valid.
+      summary: Check if the given API key is valid
       operationId: authCheck
       x-tidelift-api-meta:
         product-area: api

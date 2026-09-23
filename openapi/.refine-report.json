@@ -1,21 +1,7 @@
 {
   "provider": "tidelift",
   "sources": [
-    "tidelift-alignments-api-openapi.yml",
-    "tidelift-attestations-api-openapi.yml",
-    "tidelift-authentication-api-openapi.yml",
-    "tidelift-basic-examples-api-openapi.yml",
-    "tidelift-catalog-releases-api-openapi.yml",
-    "tidelift-catalogs-api-openapi.yml",
-    "tidelift-catalogstandards-api-openapi.yml",
-    "tidelift-groups-api-openapi.yml",
-    "tidelift-licenses-api-openapi.yml",
-    "tidelift-packages-api-openapi.yml",
-    "tidelift-projects-api-openapi.yml",
-    "tidelift-releases-api-openapi.yml",
-    "tidelift-reports-api-openapi.yml",
-    "tidelift-users-api-openapi.yml",
-    "tidelift-vulnerabilities-api-openapi.yml"
+    "_original/tidelift-subscriber-api-openapi-original.json"
   ],
   "outputs": [
     "tidelift-alignments-api-openapi.yml",
@@ -23,8 +9,8 @@
     "tidelift-authentication-api-openapi.yml",
     "tidelift-basic-examples-api-openapi.yml",
     "tidelift-catalog-releases-api-openapi.yml",
-    "tidelift-catalogs-api-openapi.yml",
     "tidelift-catalogstandards-api-openapi.yml",
+    "tidelift-catalogs-api-openapi.yml",
     "tidelift-groups-api-openapi.yml",
     "tidelift-licenses-api-openapi.yml",
     "tidelift-packages-api-openapi.yml",
@@ -37,6 +23,39 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "tidelift-subscriber-api-openapi-original.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "tidelift-subscriber-api-openapi-original.json: declared missing tag: Alignments",
+    "tidelift-subscriber-api-openapi-original.json: declared missing tag: Attestations",
+    "tidelift-subscriber-api-openapi-original.json: declared missing tag: Catalog Releases",
+    "tidelift-subscriber-api-openapi-original.json: declared missing tag: CatalogStandards",
+    "tidelift-subscriber-api-openapi-original.json: declared missing tag: Catalogs",
+    "tidelift-subscriber-api-openapi-original.json: declared missing tag: Groups",
+    "tidelift-subscriber-api-openapi-original.json: declared missing tag: Licenses",
+    "tidelift-subscriber-api-openapi-original.json: declared missing tag: Packages",
+    "tidelift-subscriber-api-openapi-original.json: declared missing tag: Projects",
+    "tidelift-subscriber-api-openapi-original.json: declared missing tag: Releases",
+    "tidelift-subscriber-api-openapi-original.json: declared missing tag: Reports",
+    "tidelift-subscriber-api-openapi-original.json: declared missing tag: Users",
+    "tidelift-subscriber-api-openapi-original.json: declared missing tag: Vulnerabilities",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "tidelift-alignments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tidelift-attestations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tidelift-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tidelift-basic-examples-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tidelift-catalog-releases-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tidelift-catalogs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tidelift-catalogstandards-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tidelift-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tidelift-licenses-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tidelift-packages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tidelift-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tidelift-releases-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tidelift-reports-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tidelift-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tidelift-vulnerabilities-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

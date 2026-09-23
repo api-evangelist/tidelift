@@ -1,7 +1,7 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   version: 1.2.1
-  title: Tidelift External Alignments Vulnerabilities API
+  title: Tidelift External Vulnerabilities API
   x-logo:
     url: /docs/assets/tidelift_logo.png
     altText: Tidelift
@@ -59,7 +59,6 @@ paths:
       operationId: getVulnerabilityAffectedReleases
       x-rails-controller: vulnerabilities#affected_releases
       summary: Get affected releases for a vulnerability
-      description: Get affected releases for a vulnerability
       parameters:
       - $ref: '#/components/parameters/vulnerabilityIdParam'
       responses:
@@ -93,12 +92,39 @@ paths:
                           purl:
                             type: string
                           version:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
         '404':
           $ref: '#/components/responses/404Error'
 components:
   schemas:
+    PaginationEnvelope:
+      type: object
+      required:
+      - current_page
+      - next_page
+      - prev_page
+      - total_pages
+      - total_count
+      - per_page
+      properties:
+        current_page:
+          type: integer
+        next_page:
+          type:
+          - integer
+          - 'null'
+        prev_page:
+          type:
+          - integer
+          - 'null'
+        total_pages:
+          type: integer
+        total_count:
+          type: integer
+        per_page:
+          type: integer
     StandardError:
       description: The standard error format
       type: object
@@ -120,30 +146,6 @@ components:
           example:
             errors:
               name: is not a valid email.
-    PaginationEnvelope:
-      type: object
-      required:
-      - current_page
-      - next_page
-      - prev_page
-      - total_pages
-      - total_count
-      - per_page
-      properties:
-        current_page:
-          type: integer
-        next_page:
-          type: integer
-          nullable: true
-        prev_page:
-          type: integer
-          nullable: true
-        total_pages:
-          type: integer
-        total_count:
-          type: integer
-        per_page:
-          type: integer
     Vulnerability:
       type: object
       additionalProperties: false
@@ -158,32 +160,41 @@ components:
         updated_at:
           type: string
         vuln_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         url:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         nist_url:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         description:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         cvss_score:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         severity:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         epss_percentile:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         epss_probability:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         epss_score:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         known_exploited:
           type: boolean
         cwe_ids:
@@ -219,8 +230,9 @@ components:
                 - upgrade
                 - upgrade_or_workaround
               recommendation_details:
-                type: object
-                nullable: true
+                type:
+                - object
+                - 'null'
                 required:
                 - id
                 - impact_score
@@ -246,55 +258,66 @@ components:
                     type: string
                     format: date-time
                   impact_score:
-                    type: integer
-                    nullable: true
+                    type:
+                    - integer
+                    - 'null'
                     description: When using this package as intended, how likely are users to be affected? A general score out of 10.
                   impact_description:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: Detailed explanation of the impact score.
                   includes_dev:
-                    type: boolean
-                    nullable: true
+                    type:
+                    - boolean
+                    - 'null'
                     description: Does this vulnerability apply when the package is only used within a Development or CI environment?
                   other_conditions:
-                    type: boolean
-                    nullable: true
+                    type:
+                    - boolean
+                    - 'null'
                     description: Are there any other conditions that users should check for to determine if they're vulnerable?
                   other_conditions_description:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: Detailed explanation of the other conditions result.
                   workaround_available:
-                    type: boolean
-                    nullable: true
+                    type:
+                    - boolean
+                    - 'null'
                     description: For users who are unable to upgrade to a supported release, is there a workaround available?
                   workaround_description:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: Detailed explanation of the workaround.
                   specific_methods_affected:
-                    type: boolean
-                    nullable: true
+                    type:
+                    - boolean
+                    - 'null'
                     description: Does this vulnerability apply only if certain methods, classes, or functionality are in use?
                   specific_methods_description:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: Detailed explanation of the specific methods result.
                   real_issue:
                     type: boolean
                     description: Is this a real vulnerability or a false positive?
                   false_positive_reason:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: Detailed explanation of the false positive result.
               affected_versions:
                 type: array
                 items:
                   type: string
               unaffected_versions:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
   responses:
     404Error:
       description: Record Not Found

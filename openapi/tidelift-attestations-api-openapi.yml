@@ -1,7 +1,7 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   version: 1.2.1
-  title: Tidelift External Alignments Attestations API
+  title: Tidelift External Attestations API
   x-logo:
     url: /docs/assets/tidelift_logo.png
     altText: Tidelift
@@ -32,7 +32,7 @@ paths:
         - organization
       operationId: importSbomProject
       x-rails-controller: projects#import_sbom
-      summary: Create a new project with an initial scan, using the provided SBOM file as the manifest.
+      summary: Create a new project with an initial scan, using the provided SBOM file as the…
       parameters:
       - $ref: '#/components/parameters/orgNameParam'
       requestBody:
@@ -70,8 +70,9 @@ paths:
                   additionalProperties: false
                   properties:
                     using_catalog:
-                      type: string
-                      nullable: true
+                      type:
+                      - string
+                      - 'null'
                     dot_tidelift:
                       type: string
                     attestation_report_url:
@@ -164,6 +165,22 @@ paths:
         '401':
           $ref: '#/components/responses/401Error'
 components:
+  parameters:
+    projectParam:
+      in: path
+      name: project
+      required: true
+      schema:
+        type: string
+      description: The name of the Project.
+    orgNameParam:
+      in: path
+      name: org_name
+      required: true
+      schema:
+        type: string
+        example: My-Company
+      description: The name of the Organization.
   schemas:
     StandardError:
       description: The standard error format
@@ -201,11 +218,12 @@ components:
         catalog:
           type: string
         groups:
-          type: array
+          type:
+          - array
+          - 'null'
           description: List of group slugs associated with the project
           items:
             type: string
-          nullable: true
         branching_behavior:
           type: string
           enum:
@@ -217,25 +235,10 @@ components:
         default_branch:
           type: string
         external_identifier:
-          type: string
+          type:
+          - string
+          - 'null'
           description: An optional custom identifier that can be set that corresponds to something outside of Tidelift
-          nullable: true
-  parameters:
-    orgNameParam:
-      in: path
-      name: org_name
-      required: true
-      schema:
-        type: string
-        example: My-Company
-      description: The name of the Organization.
-    projectParam:
-      in: path
-      name: project
-      required: true
-      schema:
-        type: string
-      description: The name of the Project.
   responses:
     401Error:
       description: Unauthorized
