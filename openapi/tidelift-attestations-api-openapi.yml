@@ -181,28 +181,20 @@ components:
         type: string
         example: My-Company
       description: The name of the Organization.
+  responses:
+    403GroupUsers:
+      description: The user is not an admin of the organization or doesn't belong to the organization.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandardError'
+    401Error:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandardError'
   schemas:
-    StandardError:
-      description: The standard error format
-      type: object
-      required:
-      - error
-      - message
-      properties:
-        error:
-          type: string
-          description: An error code representing the error
-          example: an_error_code
-        message:
-          type: string
-          description: A human-readable error message representing the error
-          example: An error message.
-        details:
-          type: object
-          description: An optional object with extra helpful details about the error.
-          example:
-            errors:
-              name: is not a valid email.
     Project:
       type: object
       additionalProperties: false
@@ -239,19 +231,27 @@ components:
           - string
           - 'null'
           description: An optional custom identifier that can be set that corresponds to something outside of Tidelift
-  responses:
-    401Error:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StandardError'
-    403GroupUsers:
-      description: The user is not an admin of the organization or doesn't belong to the organization.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StandardError'
+    StandardError:
+      description: The standard error format
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: An error code representing the error
+          example: an_error_code
+        message:
+          type: string
+          description: A human-readable error message representing the error
+          example: An error message.
+        details:
+          type: object
+          description: An optional object with extra helpful details about the error.
+          example:
+            errors:
+              name: is not a valid email.
   securitySchemes:
     BearerAuth:
       type: http

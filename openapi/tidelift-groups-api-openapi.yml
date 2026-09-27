@@ -302,20 +302,65 @@ paths:
         '403':
           $ref: '#/components/responses/403GroupUsers'
 components:
-  responses:
-    404GroupUsers:
-      description: The user doesn't exist within the organization
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StandardError'
-    403GroupUsers:
-      description: The user is not an admin of the organization or doesn't belong to the organization.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StandardError'
+  parameters:
+    groupIdParam:
+      in: path
+      name: group_id
+      required: true
+      schema:
+        type: string
+        example: 1992c539-11f0-4f9a-a668-da54e77726a2
+      description: The id of the group to perform the action on.
+    orgNameParam:
+      in: path
+      name: org_name
+      required: true
+      schema:
+        type: string
+        example: My-Company
+      description: The name of the Organization.
   schemas:
+    GroupProjectResponse:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+    GroupsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/GroupResponse'
+    GroupUserResponse:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+    GroupUsersResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/GroupUserResponse'
+    GroupResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        slug:
+          type: string
+        repository_count:
+          type: integer
+          deprecated: true
+          description: Deprecated in favor of project_count.
+        project_count:
+          type: integer
+        user_count:
+          type: integer
+        conditional_exception_count:
+          type: integer
     StandardError:
       description: The standard error format
       type: object
@@ -337,68 +382,23 @@ components:
           example:
             errors:
               name: is not a valid email.
-    GroupsResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/GroupResponse'
-    GroupUsersResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/GroupUserResponse'
-    GroupProjectResponse:
-      type: object
-      properties:
-        uuid:
-          type: string
-        name:
-          type: string
-    GroupResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        slug:
-          type: string
-        repository_count:
-          type: integer
-          deprecated: true
-          description: Deprecated in favor of project_count.
-        project_count:
-          type: integer
-        user_count:
-          type: integer
-        conditional_exception_count:
-          type: integer
     GroupProjectsResponse:
       type: array
       items:
         $ref: '#/components/schemas/GroupProjectResponse'
-    GroupUserResponse:
-      type: object
-      properties:
-        name:
-          type: string
-        email:
-          type: string
-  parameters:
-    groupIdParam:
-      in: path
-      name: group_id
-      required: true
-      schema:
-        type: string
-        example: 1992c539-11f0-4f9a-a668-da54e77726a2
-      description: The id of the group to perform the action on.
-    orgNameParam:
-      in: path
-      name: org_name
-      required: true
-      schema:
-        type: string
-        example: My-Company
-      description: The name of the Organization.
+  responses:
+    403GroupUsers:
+      description: The user is not an admin of the organization or doesn't belong to the organization.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandardError'
+    404GroupUsers:
+      description: The user doesn't exist within the organization
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandardError'
   securitySchemes:
     BearerAuth:
       type: http

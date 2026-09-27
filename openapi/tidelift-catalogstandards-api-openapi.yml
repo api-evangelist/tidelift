@@ -146,23 +146,6 @@ paths:
         '404':
           description: Catalog not found
 components:
-  parameters:
-    orgNameParam:
-      in: path
-      name: org_name
-      required: true
-      schema:
-        type: string
-        example: My-Company
-      description: The name of the Organization.
-    catalogNameParam:
-      in: path
-      name: catalog_name
-      required: true
-      schema:
-        type: string
-        example: default
-      description: The name of the Catalog.
   schemas:
     LicensingCatalogRule:
       type: object
@@ -189,6 +172,23 @@ components:
               policy_status: approved
               generate_tasks: true
               reference_url: https://github.com/tidelift/project1/blob/main/LICENSE.md
+  parameters:
+    orgNameParam:
+      in: path
+      name: org_name
+      required: true
+      schema:
+        type: string
+        example: My-Company
+      description: The name of the Organization.
+    catalogNameParam:
+      in: path
+      name: catalog_name
+      required: true
+      schema:
+        type: string
+        example: default
+      description: The name of the Catalog.
   securitySchemes:
     BearerAuth:
       type: http

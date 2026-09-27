@@ -427,198 +427,6 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/LifterRecommendationFragment'
-    Violations:
-      type: array
-      items:
-        anyOf:
-        - $ref: '#/components/schemas/AllowedLicensesViolation'
-        - $ref: '#/components/schemas/DeprecationViolation'
-        - $ref: '#/components/schemas/EOLPackagesViolation'
-        - $ref: '#/components/schemas/IdentifiedLicensesViolation'
-        - $ref: '#/components/schemas/UpToDateViolation'
-        - $ref: '#/components/schemas/VulnerabilitiesViolation'
-    Package:
-      type: object
-      additionalProperties: false
-      required:
-      - platform
-      - name
-      properties:
-        platform:
-          type: string
-        name:
-          type: string
-    CatalogReleaseGroup:
-      type: object
-      additionalProperties: false
-      required:
-      - approved_releases
-      - denied_releases
-      - requested_releases
-      - platform
-      - name
-      properties:
-        approved_releases:
-          type: array
-          items:
-            type: string
-        denied_releases:
-          type: array
-          items:
-            type:
-            - string
-            - 'null'
-        requested_releases:
-          type: array
-          items:
-            type: string
-        warning_releases:
-          type: array
-          items:
-            type: string
-        no_new_introduction_releases:
-          type: array
-          items:
-            type: string
-        platform:
-          type: string
-        name:
-          type: string
-    PackageWithHint:
-      allOf:
-      - $ref: '#/components/schemas/Package'
-      - type: object
-        description: An optional hint, which might be the reason the package wasn't found.
-        additionalProperties: false
-        properties:
-          hint:
-            type: string
-    LookupResponse:
-      type: object
-      required:
-      - platform
-      - name
-      - description
-      - license
-      - unknown
-      - see_more_url
-      - releases
-      properties:
-        platform:
-          type: string
-        name:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-        license:
-          type:
-          - string
-          - 'null'
-        unknown:
-          type: boolean
-        see_more_url:
-          type: string
-        releases:
-          type: object
-          additionalProperties: false
-          required:
-          - approved
-          - denied
-          - available
-          properties:
-            approved:
-              type: array
-              items:
-                $ref: '#/components/schemas/LookupDetail'
-            warning:
-              type: array
-              items:
-                $ref: '#/components/schemas/LookupDetail'
-            no_new_introduction:
-              type: array
-              items:
-                $ref: '#/components/schemas/LookupDetail'
-            available:
-              type: array
-              items:
-                $ref: '#/components/schemas/LookupDetail'
-            denied:
-              type: array
-              items:
-                $ref: '#/components/schemas/LookupDetail'
-        catalog:
-          type: object
-          additionalProperties: false
-          required:
-          - display_name
-          - name
-          - id
-          properties:
-            display_name:
-              type: string
-            name:
-              type: string
-            id:
-              type: string
-        vulnerabilities:
-          type: array
-          items:
-            $ref: '#/components/schemas/FullVulnerability'
-    CatalogRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        platform:
-          type: string
-        version:
-          type: string
-        message:
-          type: string
-    LookupDetail:
-      type: object
-      additionalProperties: false
-      properties:
-        version:
-          type: string
-        deny_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Date of any pending future denial, if set
-        approve_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Date of any pending future approval, if set
-        published_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        notes:
-          type:
-          - string
-          - 'null'
-        vulnerabilities:
-          type: array
-          items:
-            type:
-            - object
-            - 'null'
-            properties:
-              id:
-                type: string
-              upgrade_path:
-                type: array
-                items:
-                  type: string
-        violations:
-          $ref: '#/components/schemas/Violations'
     DeprecationViolation:
       type: object
       allOf:
@@ -656,53 +464,15 @@ components:
                     type: string
                   name:
                     type: string
-    PaginationEnvelope:
-      type: object
-      required:
-      - current_page
-      - next_page
-      - prev_page
-      - total_pages
-      - total_count
-      - per_page
-      properties:
-        current_page:
-          type: integer
-        next_page:
-          type:
-          - integer
-          - 'null'
-        prev_page:
-          type:
-          - integer
-          - 'null'
-        total_pages:
-          type: integer
-        total_count:
-          type: integer
-        per_page:
-          type: integer
-    StandardError:
-      description: The standard error format
-      type: object
-      required:
-      - error
-      - message
-      properties:
-        error:
-          type: string
-          description: An error code representing the error
-          example: an_error_code
-        message:
-          type: string
-          description: A human-readable error message representing the error
-          example: An error message.
-        details:
-          type: object
-          description: An optional object with extra helpful details about the error.
-          example:
-            errors:
-              name: is not a valid email.
+    PackageWithHint:
+      allOf:
+      - $ref: '#/components/schemas/Package'
+      - type: object
+        description: An optional hint, which might be the reason the package wasn't found.
+        additionalProperties: false
+        properties:
+          hint:
+            type: string
     BatchRequestResponse:
       type: object
       properties:
@@ -829,72 +599,40 @@ components:
               type: string
             id:
               type: string
-    ViolationCommon:
+    UpToDateViolation:
       type: object
-      required:
-      - catalog_standard
-      - violation_id
-      - title
-      additionalProperties: false
-      properties:
-        catalog_standard:
-          type: string
-        violation_id:
-          type: string
-        title:
-          type: string
-        package_name:
-          type: string
-        package_platform:
-          type: string
-        version:
-          type: string
-        task_id:
-          type:
-          - string
-          - 'null'
-    IdentifiedLicensesViolation:
-      type: object
-      additionalProperties: false
       allOf:
       - $ref: '#/components/schemas/ViolationCommon'
       - type: object
         required:
-        - original_license
-        - repository_url
+        - up_to_date
         properties:
-          original_license:
-            type:
-            - string
-            - 'null'
-          repository_url:
-            type:
-            - string
-            - 'null'
-    CatalogRequestResponse:
+          up_to_date:
+            type: object
+            additionalProperties: false
+            required:
+            - release_date
+            - days_too_old
+            properties:
+              release_date:
+                type:
+                - string
+                - 'null'
+              days_too_old:
+                type:
+                - string
+                - 'null'
+    CatalogRequest:
       type: object
       properties:
-        platform:
-          type: string
         name:
+          type: string
+        platform:
           type: string
         version:
           type: string
-        status:
+        message:
           type: string
-        reviewer_notes:
-          type:
-          - string
-          - 'null'
-        catalog:
-          type: object
-          properties:
-            display_name:
-              type: string
-            name:
-              type: string
-            id:
-              type: string
     FullVulnerability:
       type: object
       additionalProperties: false
@@ -920,6 +658,122 @@ components:
           type: array
           items:
             type: string
+    AllowedLicensesViolation:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ViolationCommon'
+      - type: object
+        additionalProperties: false
+        required:
+        - license
+        properties:
+          license:
+            type: string
+    LookupResponse:
+      type: object
+      required:
+      - platform
+      - name
+      - description
+      - license
+      - unknown
+      - see_more_url
+      - releases
+      properties:
+        platform:
+          type: string
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        license:
+          type:
+          - string
+          - 'null'
+        unknown:
+          type: boolean
+        see_more_url:
+          type: string
+        releases:
+          type: object
+          additionalProperties: false
+          required:
+          - approved
+          - denied
+          - available
+          properties:
+            approved:
+              type: array
+              items:
+                $ref: '#/components/schemas/LookupDetail'
+            warning:
+              type: array
+              items:
+                $ref: '#/components/schemas/LookupDetail'
+            no_new_introduction:
+              type: array
+              items:
+                $ref: '#/components/schemas/LookupDetail'
+            available:
+              type: array
+              items:
+                $ref: '#/components/schemas/LookupDetail'
+            denied:
+              type: array
+              items:
+                $ref: '#/components/schemas/LookupDetail'
+        catalog:
+          type: object
+          additionalProperties: false
+          required:
+          - display_name
+          - name
+          - id
+          properties:
+            display_name:
+              type: string
+            name:
+              type: string
+            id:
+              type: string
+        vulnerabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/FullVulnerability'
+    Package:
+      type: object
+      additionalProperties: false
+      required:
+      - platform
+      - name
+      properties:
+        platform:
+          type: string
+        name:
+          type: string
+    StandardError:
+      description: The standard error format
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: An error code representing the error
+          example: an_error_code
+        message:
+          type: string
+          description: A human-readable error message representing the error
+          example: An error message.
+        details:
+          type: object
+          description: An optional object with extra helpful details about the error.
+          example:
+            errors:
+              name: is not a valid email.
     EOLPackagesViolation:
       type: object
       allOf:
@@ -943,6 +797,32 @@ components:
                 type:
                 - string
                 - 'null'
+    PaginationEnvelope:
+      type: object
+      required:
+      - current_page
+      - next_page
+      - prev_page
+      - total_pages
+      - total_count
+      - per_page
+      properties:
+        current_page:
+          type: integer
+        next_page:
+          type:
+          - integer
+          - 'null'
+        prev_page:
+          type:
+          - integer
+          - 'null'
+        total_pages:
+          type: integer
+        total_count:
+          type: integer
+        per_page:
+          type: integer
     BatchRequest:
       type: object
       properties:
@@ -959,40 +839,6 @@ components:
                 type: string
         message:
           type: string
-    UpToDateViolation:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/ViolationCommon'
-      - type: object
-        required:
-        - up_to_date
-        properties:
-          up_to_date:
-            type: object
-            additionalProperties: false
-            required:
-            - release_date
-            - days_too_old
-            properties:
-              release_date:
-                type:
-                - string
-                - 'null'
-              days_too_old:
-                type:
-                - string
-                - 'null'
-    AllowedLicensesViolation:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/ViolationCommon'
-      - type: object
-        additionalProperties: false
-        required:
-        - license
-        properties:
-          license:
-            type: string
     LifterRecommendationFragment:
       type: object
       additionalProperties: false
@@ -1063,6 +909,184 @@ components:
           type: string
         updated_at:
           type: string
+    IdentifiedLicensesViolation:
+      type: object
+      additionalProperties: false
+      allOf:
+      - $ref: '#/components/schemas/ViolationCommon'
+      - type: object
+        required:
+        - original_license
+        - repository_url
+        properties:
+          original_license:
+            type:
+            - string
+            - 'null'
+          repository_url:
+            type:
+            - string
+            - 'null'
+    CatalogRequestResponse:
+      type: object
+      properties:
+        platform:
+          type: string
+        name:
+          type: string
+        version:
+          type: string
+        status:
+          type: string
+        reviewer_notes:
+          type:
+          - string
+          - 'null'
+        catalog:
+          type: object
+          properties:
+            display_name:
+              type: string
+            name:
+              type: string
+            id:
+              type: string
+    LookupDetail:
+      type: object
+      additionalProperties: false
+      properties:
+        version:
+          type: string
+        deny_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Date of any pending future denial, if set
+        approve_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Date of any pending future approval, if set
+        published_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        notes:
+          type:
+          - string
+          - 'null'
+        vulnerabilities:
+          type: array
+          items:
+            type:
+            - object
+            - 'null'
+            properties:
+              id:
+                type: string
+              upgrade_path:
+                type: array
+                items:
+                  type: string
+        violations:
+          $ref: '#/components/schemas/Violations'
+    Violations:
+      type: array
+      items:
+        anyOf:
+        - $ref: '#/components/schemas/AllowedLicensesViolation'
+        - $ref: '#/components/schemas/DeprecationViolation'
+        - $ref: '#/components/schemas/EOLPackagesViolation'
+        - $ref: '#/components/schemas/IdentifiedLicensesViolation'
+        - $ref: '#/components/schemas/UpToDateViolation'
+        - $ref: '#/components/schemas/VulnerabilitiesViolation'
+    CatalogReleaseGroup:
+      type: object
+      additionalProperties: false
+      required:
+      - approved_releases
+      - denied_releases
+      - requested_releases
+      - platform
+      - name
+      properties:
+        approved_releases:
+          type: array
+          items:
+            type: string
+        denied_releases:
+          type: array
+          items:
+            type:
+            - string
+            - 'null'
+        requested_releases:
+          type: array
+          items:
+            type: string
+        warning_releases:
+          type: array
+          items:
+            type: string
+        no_new_introduction_releases:
+          type: array
+          items:
+            type: string
+        platform:
+          type: string
+        name:
+          type: string
+    ViolationCommon:
+      type: object
+      required:
+      - catalog_standard
+      - violation_id
+      - title
+      additionalProperties: false
+      properties:
+        catalog_standard:
+          type: string
+        violation_id:
+          type: string
+        title:
+          type: string
+        package_name:
+          type: string
+        package_platform:
+          type: string
+        version:
+          type: string
+        task_id:
+          type:
+          - string
+          - 'null'
+  parameters:
+    orgNameParam:
+      in: path
+      name: org_name
+      required: true
+      schema:
+        type: string
+        example: My-Company
+      description: The name of the Organization.
+    catalogNameParam:
+      in: path
+      name: catalog_name
+      required: true
+      schema:
+        type: string
+        example: default
+      description: The name of the Catalog.
+    projectParam:
+      in: path
+      name: project
+      required: true
+      schema:
+        type: string
+      description: The name of the Project.
   responses:
     401Error:
       description: Unauthorized
@@ -1076,30 +1100,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/StandardError'
-  parameters:
-    orgNameParam:
-      in: path
-      name: org_name
-      required: true
-      schema:
-        type: string
-        example: My-Company
-      description: The name of the Organization.
-    projectParam:
-      in: path
-      name: project
-      required: true
-      schema:
-        type: string
-      description: The name of the Project.
-    catalogNameParam:
-      in: path
-      name: catalog_name
-      required: true
-      schema:
-        type: string
-        example: default
-      description: The name of the Catalog.
   securitySchemes:
     BearerAuth:
       type: http

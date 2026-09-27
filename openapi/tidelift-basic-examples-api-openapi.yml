@@ -91,6 +91,13 @@ paths:
         '401':
           $ref: '#/components/responses/401Error'
 components:
+  responses:
+    401Error:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandardError'
   schemas:
     StandardError:
       description: The standard error format
@@ -113,13 +120,6 @@ components:
           example:
             errors:
               name: is not a valid email.
-  responses:
-    401Error:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StandardError'
   securitySchemes:
     BearerAuth:
       type: http

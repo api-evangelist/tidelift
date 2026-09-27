@@ -45,7 +45,7 @@ created: '2026-07-17'
 modified: '2026-09-16'
 tags:
 - Company
-- Open-Source
+- Open Source
 - Software Supply Chain
 - Dependency Management
 - Application Security
@@ -63,6 +63,7 @@ tags_raw:
 - License Compliance
 - Vulnerability Management
 - Developer Tools
+- Open-Source
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
