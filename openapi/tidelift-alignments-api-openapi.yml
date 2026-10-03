@@ -179,199 +179,37 @@ paths:
         '404':
           description: 404 Scan Not Found
 components:
+  parameters:
+    orgNameParam:
+      in: path
+      name: org_name
+      required: true
+      schema:
+        type: string
+        example: My-Company
+      description: The name of the Organization.
   schemas:
-    AlignmentRelease:
+    StandardError:
+      description: The standard error format
       type: object
+      required:
+      - error
+      - message
       properties:
-        id:
-          type: integer
-        latest_release_number:
-          type:
-          - string
-          - 'null'
-          description: Version of the package that is considered the most recent release.
-        license_normalized:
-          type:
-          - boolean
-          - 'null'
-          description: If license data has been normalized to SPDX values from an upstream source.
-        license_set_by_admin:
-          type:
-          - boolean
-          - 'null'
-          description: If license data has been set by a Tidelift researcher.
-        licenses:
-          type:
-          - string
-          - 'null'
-          description: License expression for this release.
-        name:
+        error:
           type: string
-          description: The package name.
-        platform:
+          description: An error code representing the error
+          example: an_error_code
+        message:
           type: string
-          description: The package platform.
-        project_license:
-          type:
-          - string
-          - 'null'
-          description: The license data tied to the package.
-        repository_license:
-          type:
-          - string
-          - 'null'
-          description: The license data tied to the package's source repository.
-        type:
-          type:
-          - string
-          - 'null'
-        unknown:
-          type:
-          - boolean
-          - 'null'
-          description: If Tidelift does not have any upstream data for this package.
-        direct:
-          type: boolean
-          description: If the package is referenced directly by the project dependency manifest.
-        resolved_version:
-          type: string
-          description: Real release version that the manifest resolved to.
-        requirement:
-          type: string
-          description: Raw requirement text included in the project manifest file.
-        lockfile_requirement:
-          type:
-          - string
-          - 'null'
-          description: Raw requirement text included in the project's manifest lockfile.
-        original_license:
-          type:
-          - string
-          - 'null'
-          description: The license found using only upstream source data.
-        version:
-          type: string
-          description: Version of the release used in the alignment analysis.
-        status:
-          type:
-          - string
-          - 'null'
-          description: Status of this release within the alignment results.
-    AlignmentStatus:
-      allOf:
-      - $ref: '#/components/schemas/Alignment'
-      - type: object
-        required:
-        - details_url
-        - status
-        - revision
-        - external_identifier
-        - alignment_counts
-        - production_alignment_counts
-        additionalProperties: false
-        properties:
-          error:
-            $ref: '#/components/schemas/ScanLog'
-          warnings:
-            type: array
-            items:
-              $ref: '#/components/schemas/ScanLog'
-          actions:
-            type: array
-            items:
-              type: object
-              additionalProperties: false
-              required:
-              - action_description
-              - action
-              - violations
-              properties:
-                action_description:
-                  type: string
-                action:
-                  type: object
-                  properties:
-                    package_name:
-                      type: string
-                    dependency_source:
-                      type: string
-                    current_version:
-                      type: string
-                    suggested_version:
-                      type: string
-                violations:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      title:
-                        type: string
-          details_url:
-            type: string
-            description: URL to view more alignment details in the Tidelift UI.
-          status:
-            type:
-            - string
-            - 'null'
-            description: Status to indicate if the alignment has finished analyzing or is still running.
-            enum:
-            - scheduled
-            - running
-            - error
-            - failure
-            - success
-          revision:
-            type: string
-            description: Revision of the project that was used for alignment analysis.
-          external_identifier:
-            type:
-            - string
-            - 'null'
-            description: The external identifier for the scan, if set
-          alignment_counts:
-            description: Counts of releases that fall within each bucket within the alignment results.
-            type: object
-            properties:
-              approved:
-                type: integer
-                description: Number of releases with an approved status.
-              denied:
-                type: integer
-                description: Number of releases with a denied status.
-              requested:
-                type: integer
-                description: Number of releases that have been requested to the catalog, but do not have a status yet.
-              unapproved:
-                type: integer
-                description: Number of releases without any status.
-              newly_introduced:
-                type: integer
-                description: Number of releases with a new issue from the baseline alignment.
-              no_new_introduction:
-                type: integer
-                description: Number of releases that are approved for use, but are not allowed to add any new issues to the project.
-          production_alignment_counts:
-            description: Counts of releases that are likely deployed with the project code that fall within each bucket within the alignment results.
-            type: object
-            properties:
-              approved:
-                type: integer
-                description: Number of releases with an approved status.
-              denied:
-                type: integer
-                description: Number of releases with a denied status.
-              requested:
-                type: integer
-                description: Number of releases that have been requested to the catalog, but do not have a status yet.
-              unapproved:
-                type: integer
-                description: Number of releases without any status.
-              newly_introduced:
-                type: integer
-                description: Number of releases with a new issue from the baseline alignment.
-              no_new_introduction:
-                type: integer
-                description: Number of releases that are approved for use, but are not allowed to add any new issues to the project.
+          description: A human-readable error message representing the error
+          example: An error message.
+        details:
+          type: object
+          description: An optional object with extra helpful details about the error.
+          example:
+            errors:
+              name: is not a valid email.
     Alignment:
       type: object
       additionalProperties: false
@@ -580,6 +418,121 @@ components:
                   properties:
                     title:
                       type: string
+    AlignmentStatus:
+      allOf:
+      - $ref: '#/components/schemas/Alignment'
+      - type: object
+        required:
+        - details_url
+        - status
+        - revision
+        - external_identifier
+        - alignment_counts
+        - production_alignment_counts
+        additionalProperties: false
+        properties:
+          error:
+            $ref: '#/components/schemas/ScanLog'
+          warnings:
+            type: array
+            items:
+              $ref: '#/components/schemas/ScanLog'
+          actions:
+            type: array
+            items:
+              type: object
+              additionalProperties: false
+              required:
+              - action_description
+              - action
+              - violations
+              properties:
+                action_description:
+                  type: string
+                action:
+                  type: object
+                  properties:
+                    package_name:
+                      type: string
+                    dependency_source:
+                      type: string
+                    current_version:
+                      type: string
+                    suggested_version:
+                      type: string
+                violations:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+          details_url:
+            type: string
+            description: URL to view more alignment details in the Tidelift UI.
+          status:
+            type:
+            - string
+            - 'null'
+            description: Status to indicate if the alignment has finished analyzing or is still running.
+            enum:
+            - scheduled
+            - running
+            - error
+            - failure
+            - success
+          revision:
+            type: string
+            description: Revision of the project that was used for alignment analysis.
+          external_identifier:
+            type:
+            - string
+            - 'null'
+            description: The external identifier for the scan, if set
+          alignment_counts:
+            description: Counts of releases that fall within each bucket within the alignment results.
+            type: object
+            properties:
+              approved:
+                type: integer
+                description: Number of releases with an approved status.
+              denied:
+                type: integer
+                description: Number of releases with a denied status.
+              requested:
+                type: integer
+                description: Number of releases that have been requested to the catalog, but do not have a status yet.
+              unapproved:
+                type: integer
+                description: Number of releases without any status.
+              newly_introduced:
+                type: integer
+                description: Number of releases with a new issue from the baseline alignment.
+              no_new_introduction:
+                type: integer
+                description: Number of releases that are approved for use, but are not allowed to add any new issues to the project.
+          production_alignment_counts:
+            description: Counts of releases that are likely deployed with the project code that fall within each bucket within the alignment results.
+            type: object
+            properties:
+              approved:
+                type: integer
+                description: Number of releases with an approved status.
+              denied:
+                type: integer
+                description: Number of releases with a denied status.
+              requested:
+                type: integer
+                description: Number of releases that have been requested to the catalog, but do not have a status yet.
+              unapproved:
+                type: integer
+                description: Number of releases without any status.
+              newly_introduced:
+                type: integer
+                description: Number of releases with a new issue from the baseline alignment.
+              no_new_introduction:
+                type: integer
+                description: Number of releases that are approved for use, but are not allowed to add any new issues to the project.
     AlignmentFragment:
       type: object
       additionalProperties: false
@@ -690,27 +643,6 @@ components:
                 - string
                 - 'null'
                 description: String representation of some more metadata of a warning encountered during analysis.
-    StandardError:
-      description: The standard error format
-      type: object
-      required:
-      - error
-      - message
-      properties:
-        error:
-          type: string
-          description: An error code representing the error
-          example: an_error_code
-        message:
-          type: string
-          description: A human-readable error message representing the error
-          example: An error message.
-        details:
-          type: object
-          description: An optional object with extra helpful details about the error.
-          example:
-            errors:
-              name: is not a valid email.
     ScanLog:
       description: Information about a scan problem, if there was one.
       properties:
@@ -751,15 +683,83 @@ components:
               - string
               - 'null'
               description: Relevant human-readable message about this detail.
-  parameters:
-    orgNameParam:
-      in: path
-      name: org_name
-      required: true
-      schema:
-        type: string
-        example: My-Company
-      description: The name of the Organization.
+    AlignmentRelease:
+      type: object
+      properties:
+        id:
+          type: integer
+        latest_release_number:
+          type:
+          - string
+          - 'null'
+          description: Version of the package that is considered the most recent release.
+        license_normalized:
+          type:
+          - boolean
+          - 'null'
+          description: If license data has been normalized to SPDX values from an upstream source.
+        license_set_by_admin:
+          type:
+          - boolean
+          - 'null'
+          description: If license data has been set by a Tidelift researcher.
+        licenses:
+          type:
+          - string
+          - 'null'
+          description: License expression for this release.
+        name:
+          type: string
+          description: The package name.
+        platform:
+          type: string
+          description: The package platform.
+        project_license:
+          type:
+          - string
+          - 'null'
+          description: The license data tied to the package.
+        repository_license:
+          type:
+          - string
+          - 'null'
+          description: The license data tied to the package's source repository.
+        type:
+          type:
+          - string
+          - 'null'
+        unknown:
+          type:
+          - boolean
+          - 'null'
+          description: If Tidelift does not have any upstream data for this package.
+        direct:
+          type: boolean
+          description: If the package is referenced directly by the project dependency manifest.
+        resolved_version:
+          type: string
+          description: Real release version that the manifest resolved to.
+        requirement:
+          type: string
+          description: Raw requirement text included in the project manifest file.
+        lockfile_requirement:
+          type:
+          - string
+          - 'null'
+          description: Raw requirement text included in the project's manifest lockfile.
+        original_license:
+          type:
+          - string
+          - 'null'
+          description: The license found using only upstream source data.
+        version:
+          type: string
+          description: Version of the release used in the alignment analysis.
+        status:
+          type:
+          - string
+          - 'null'
+          description: Status of this release within the alignment results.
   responses:
     401Error:
       description: Unauthorized

@@ -98,23 +98,6 @@ paths:
         '404':
           $ref: '#/components/responses/404Error'
 components:
-  responses:
-    404Error:
-      description: Record Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StandardError'
-  parameters:
-    vulnerabilityIdParam:
-      in: path
-      name: vulnerability_id
-      required: true
-      schema:
-        type: string
-        example:
-        - CVE-2021-44228
-        description: The id of the vulnerability.
   schemas:
     Vulnerability:
       type: object
@@ -335,6 +318,23 @@ components:
           type: integer
         per_page:
           type: integer
+  responses:
+    404Error:
+      description: Record Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandardError'
+  parameters:
+    vulnerabilityIdParam:
+      in: path
+      name: vulnerability_id
+      required: true
+      schema:
+        type: string
+        example:
+        - CVE-2021-44228
+        description: The id of the vulnerability.
   securitySchemes:
     BearerAuth:
       type: http

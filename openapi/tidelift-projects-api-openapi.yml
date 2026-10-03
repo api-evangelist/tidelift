@@ -516,25 +516,9 @@ paths:
         '404':
           description: Couldn't find scan by revision or latest from default branch, or unable to build BOM from Scan.
 components:
-  parameters:
-    projectParam:
-      in: path
-      name: project
-      required: true
-      schema:
-        type: string
-      description: The name of the Project.
-    orgNameParam:
-      in: path
-      name: org_name
-      required: true
-      schema:
-        type: string
-        example: My-Company
-      description: The name of the Organization.
   responses:
-    403GroupUsers:
-      description: The user is not an admin of the organization or doesn't belong to the organization.
+    400Error:
+      description: Bad Request
       content:
         application/json:
           schema:
@@ -545,13 +529,50 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/StandardError'
-    400Error:
-      description: Bad Request
+    403GroupUsers:
+      description: The user is not an admin of the organization or doesn't belong to the organization.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/StandardError'
+  parameters:
+    orgNameParam:
+      in: path
+      name: org_name
+      required: true
+      schema:
+        type: string
+        example: My-Company
+      description: The name of the Organization.
+    projectParam:
+      in: path
+      name: project
+      required: true
+      schema:
+        type: string
+      description: The name of the Project.
   schemas:
+    StandardError:
+      description: The standard error format
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: An error code representing the error
+          example: an_error_code
+        message:
+          type: string
+          description: A human-readable error message representing the error
+          example: An error message.
+        details:
+          type: object
+          description: An optional object with extra helpful details about the error.
+          example:
+            errors:
+              name: is not a valid email.
     Project:
       type: object
       additionalProperties: false
@@ -588,27 +609,6 @@ components:
           - string
           - 'null'
           description: An optional custom identifier that can be set that corresponds to something outside of Tidelift
-    StandardError:
-      description: The standard error format
-      type: object
-      required:
-      - error
-      - message
-      properties:
-        error:
-          type: string
-          description: An error code representing the error
-          example: an_error_code
-        message:
-          type: string
-          description: A human-readable error message representing the error
-          example: An error message.
-        details:
-          type: object
-          description: An optional object with extra helpful details about the error.
-          example:
-            errors:
-              name: is not a valid email.
     BillOfMaterials:
       type: array
       items:

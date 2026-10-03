@@ -285,6 +285,30 @@ paths:
           description: The package, release, or license was not found
 components:
   schemas:
+    CreateLicenseRequest:
+      type: object
+      properties:
+        license:
+          type: string
+          description: The name of the SPDX license. (note that SPDX license expressions are not valid)
+        notes:
+          type: string
+          description: The notes to leave for why the license was changed.
+    CreateLicenseResponse:
+      type: object
+      properties:
+        package_id:
+          type: number
+        name:
+          type: string
+        platform:
+          type: string
+        license:
+          type: string
+        notes:
+          type: string
+        version:
+          type: string
     LicensingCatalogRule:
       type: object
       properties:
@@ -310,30 +334,6 @@ components:
               policy_status: approved
               generate_tasks: true
               reference_url: https://github.com/tidelift/project1/blob/main/LICENSE.md
-    CreateLicenseRequest:
-      type: object
-      properties:
-        license:
-          type: string
-          description: The name of the SPDX license. (note that SPDX license expressions are not valid)
-        notes:
-          type: string
-          description: The notes to leave for why the license was changed.
-    CreateLicenseResponse:
-      type: object
-      properties:
-        package_id:
-          type: number
-        name:
-          type: string
-        platform:
-          type: string
-        license:
-          type: string
-        notes:
-          type: string
-        version:
-          type: string
   parameters:
     packagePlatformParam:
       in: path
@@ -343,14 +343,6 @@ components:
         type: string
         example: rubygems
       description: The platform of the package.
-    orgNameParam:
-      in: path
-      name: org_name
-      required: true
-      schema:
-        type: string
-        example: My-Company
-      description: The name of the Organization.
     catalogNameParam:
       in: path
       name: catalog_name
@@ -359,17 +351,25 @@ components:
         type: string
         example: default
       description: The name of the Catalog.
-    packageNamePathParam:
-      name: package_name
-      in: path
-      description: The name of the package to change the license of.
-      required: true
-      schema:
-        type: string
     versionPathParam:
       name: version
       in: path
       description: The version of the package to change the license of.
+      required: true
+      schema:
+        type: string
+    orgNameParam:
+      in: path
+      name: org_name
+      required: true
+      schema:
+        type: string
+        example: My-Company
+      description: The name of the Organization.
+    packageNamePathParam:
+      name: package_name
+      in: path
+      description: The name of the package to change the license of.
       required: true
       schema:
         type: string

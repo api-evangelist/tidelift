@@ -166,13 +166,6 @@ paths:
           $ref: '#/components/responses/401Error'
 components:
   parameters:
-    projectParam:
-      in: path
-      name: project
-      required: true
-      schema:
-        type: string
-      description: The name of the Project.
     orgNameParam:
       in: path
       name: org_name
@@ -181,19 +174,13 @@ components:
         type: string
         example: My-Company
       description: The name of the Organization.
-  responses:
-    403GroupUsers:
-      description: The user is not an admin of the organization or doesn't belong to the organization.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StandardError'
-    401Error:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StandardError'
+    projectParam:
+      in: path
+      name: project
+      required: true
+      schema:
+        type: string
+      description: The name of the Project.
   schemas:
     Project:
       type: object
@@ -252,6 +239,19 @@ components:
           example:
             errors:
               name: is not a valid email.
+  responses:
+    401Error:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandardError'
+    403GroupUsers:
+      description: The user is not an admin of the organization or doesn't belong to the organization.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandardError'
   securitySchemes:
     BearerAuth:
       type: http

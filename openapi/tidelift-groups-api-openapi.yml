@@ -320,17 +320,10 @@ components:
         example: My-Company
       description: The name of the Organization.
   schemas:
-    GroupProjectResponse:
-      type: object
-      properties:
-        uuid:
-          type: string
-        name:
-          type: string
-    GroupsResponse:
+    GroupProjectsResponse:
       type: array
       items:
-        $ref: '#/components/schemas/GroupResponse'
+        $ref: '#/components/schemas/GroupProjectResponse'
     GroupUserResponse:
       type: object
       properties:
@@ -338,29 +331,6 @@ components:
           type: string
         email:
           type: string
-    GroupUsersResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/GroupUserResponse'
-    GroupResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        slug:
-          type: string
-        repository_count:
-          type: integer
-          deprecated: true
-          description: Deprecated in favor of project_count.
-        project_count:
-          type: integer
-        user_count:
-          type: integer
-        conditional_exception_count:
-          type: integer
     StandardError:
       description: The standard error format
       type: object
@@ -382,19 +352,49 @@ components:
           example:
             errors:
               name: is not a valid email.
-    GroupProjectsResponse:
+    GroupResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        slug:
+          type: string
+        repository_count:
+          type: integer
+          deprecated: true
+          description: Deprecated in favor of project_count.
+        project_count:
+          type: integer
+        user_count:
+          type: integer
+        conditional_exception_count:
+          type: integer
+    GroupProjectResponse:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+    GroupsResponse:
       type: array
       items:
-        $ref: '#/components/schemas/GroupProjectResponse'
+        $ref: '#/components/schemas/GroupResponse'
+    GroupUsersResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/GroupUserResponse'
   responses:
-    403GroupUsers:
-      description: The user is not an admin of the organization or doesn't belong to the organization.
+    404GroupUsers:
+      description: The user doesn't exist within the organization
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/StandardError'
-    404GroupUsers:
-      description: The user doesn't exist within the organization
+    403GroupUsers:
+      description: The user is not an admin of the organization or doesn't belong to the organization.
       content:
         application/json:
           schema:

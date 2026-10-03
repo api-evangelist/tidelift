@@ -58,6 +58,15 @@ paths:
         '404':
           $ref: '#/components/responses/404Error'
 components:
+  parameters:
+    orgNameParam:
+      in: path
+      name: org_name
+      required: true
+      schema:
+        type: string
+        example: My-Company
+      description: The name of the Organization.
   responses:
     404Error:
       description: Record Not Found
@@ -71,15 +80,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/StandardError'
-  parameters:
-    orgNameParam:
-      in: path
-      name: org_name
-      required: true
-      schema:
-        type: string
-        example: My-Company
-      description: The name of the Organization.
   schemas:
     StandardError:
       description: The standard error format
