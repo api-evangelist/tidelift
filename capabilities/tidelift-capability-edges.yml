@@ -1,0 +1,125 @@
+slug: tidelift
+provider: Tidelift
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 10
+edges:
+- tag: Alignments
+  spec_file: tidelift-alignments-api-openapi.yml
+  capability_id: BC-4200.60
+  capability_id_l1: BC-4200
+  capability_name: Open Source Stewardship
+  confidence: 0.78
+  evidence: 'POST /v1/catalog/{org_name}/{project}/alignment  performProjectAlignment  Perform an alignment
+    with a specific project; schemas: Alignment, ScanLog, AlignmentRelease'
+  reason: Alignment here means scanning a project's open-source dependencies against the organization's
+    catalog standards (schemas AlignmentRelease, ScanLog). That is inbound open-source use governance
+    — Open Source Stewardship — not generic compliance or audit.
+- tag: Catalogs
+  spec_file: tidelift-catalogs-api-openapi.yml
+  capability_id: BC-4200.60
+  capability_id_l1: BC-4200
+  capability_name: Open Source Stewardship
+  confidence: 0.78
+  evidence: GET /v1/{org_name}/catalogs/{catalog_name}/violations  listViolationsForCatalog  Get all the
+    violations for a catalog; POST .../blocked_items  Create catalog blocked items from a version range
+  reason: Catalogs of approved dependencies, violation override workflow, blocked items and catalog reports
+    (EOLImpactReport, LicenseAttributionReport) constitute governance of inbound open-source components
+    — Open Source Stewardship.
+- tag: Packages
+  spec_file: tidelift-packages-api-openapi.yml
+  capability_id: BC-4200.60
+  capability_id_l1: BC-4200
+  capability_name: Open Source Stewardship
+  confidence: 0.78
+  evidence: 'POST /v1/packages/eol-packages  eol_packages  Show end-of-life details for a set of packages;
+    schemas: PackageAppearsMaintainedQualityCheck, PackageAttestationStatement'
+  reason: Package intelligence on open-source dependencies — maintenance/quality checks, EOL status, attestation
+    statements — supports governance of inbound open-source software and its supply-chain artefacts (Open
+    Source Stewardship).
+- tag: Projects
+  spec_file: tidelift-projects-api-openapi.yml
+  capability_id: BC-4200.60
+  capability_id_l1: BC-4200
+  capability_name: Open Source Stewardship
+  confidence: 0.78
+  evidence: POST /v1/{org_name}/projects/import-sbom — "Create a new project with an initial scan, using
+    the provided SBOM file"; GET "Get a project's bill of materials"; "Get the TACOS-formatted attestation
+    report for packages used in a project"
+  reason: Projects here are units of open-source dependency tracking, with SBOM import, bill-of-materials
+    and attestation reporting — supply-chain artefacts for open-source software embedded in a product.
+    Maps to Open Source Stewardship rather than generic project management.
+- tag: Releases
+  spec_file: tidelift-releases-api-openapi.yml
+  capability_id: BC-4200.60
+  capability_id_l1: BC-4200
+  capability_name: Open Source Stewardship
+  confidence: 0.78
+  evidence: '"Show end-of-life details for a set of releases", "Show the direct dependencies of the release",
+    "Show the SBOM of the release"; schemas AllowedLicensesViolation, EOLPackagesViolation, VulnerabilitiesViolation'
+  reason: Operations expose open-source package release intelligence — dependencies, SBOMs, licence and
+    EOL violations — which is inbound open-source use governance and supply-chain artefact management.
+- tag: Attestations
+  spec_file: tidelift-attestations-api-openapi.yml
+  capability_id: BC-4200.60
+  capability_id_l1: BC-4200
+  capability_name: Open Source Stewardship
+  confidence: 0.76
+  evidence: POST /v1/{org_name}/projects/import-sbom  importSbomProject  Create a new project with an
+    initial scan, using the provided SBOM file; GET .../attestation-report  Get the TACOS-formatted attestation
+    report for packages used in a project
+  reason: SBOM import and package attestation reporting are open-source supply-chain artefacts for dependencies
+    embedded in the product, matching Open Source Stewardship. Not a service attestation (SOC 2 / ISO)
+    capability despite the word 'attestation'.
+- tag: Licenses
+  spec_file: tidelift-licenses-api-openapi.yml
+  capability_id: BC-4200.60
+  capability_id_l1: BC-4200
+  capability_name: Open Source Stewardship
+  confidence: 0.76
+  evidence: POST /v1/{org_name}/licenses/{package_platform}/{package_name}  createPackageLicense  Creates
+    or updates a researched license for a given package
+  reason: Manages researched open-source license data per package/release plus the catalog's allowed-license
+    policy — inbound open-source license compliance, i.e. Open Source Stewardship, not corporate IP licensing.
+- tag: Catalog Releases
+  spec_file: tidelift-catalog-releases-api-openapi.yml
+  capability_id: BC-4200.60
+  capability_id_l1: BC-4200
+  capability_name: Open Source Stewardship
+  confidence: 0.74
+  evidence: 'GET /v1/{org_name}/catalogs/{catalog_name}/releases  listReleases  List all releases in a
+    catalog; schemas: AllowedLicensesViolation, VulnerabilitiesViolation, EOLPackagesViolation'
+  reason: Operations manage and look up approved open-source package releases in an organisation's catalog
+    and surface license/vulnerability/EOL violations and catalog requests — governance of inbound open-source
+    dependencies (Open Source Stewardship).
+- tag: CatalogStandards
+  spec_file: tidelift-catalogstandards-api-openapi.yml
+  capability_id: BC-4200.60
+  capability_id_l1: BC-4200
+  capability_name: Open Source Stewardship
+  confidence: 0.72
+  evidence: PUT /v1/{org_name}/catalogs/{catalog_name}/configure-standards/allowed-licenses/add  configureAllowedLicensesAdd  Add
+    SPDX licenses to the catalog's license policies
+  reason: Configures which SPDX open-source licenses are permitted in the dependency catalog — open-source
+    license policy for components used in the product, i.e. Open Source Stewardship. Mapped there rather
+    than generic Policy Management because the subject is OSS dependencies.
+- tag: Reports
+  spec_file: tidelift-reports-api-openapi.yml
+  capability_id: BC-4200.60
+  capability_id_l1: BC-4200
+  capability_name: Open Source Stewardship
+  confidence: 0.7
+  evidence: schemas EOLImpactReport, AllProjectsPackageQualityReport, LicenseAttributionReport, AllProjectsComplianceReport,
+    CatalogActivityAuditReport
+  reason: Generic report-generation endpoints, but the report schemas are specifically open-source package
+    quality, licence attribution and compliance over dependency catalogs, grounding it in Open Source
+    Stewardship. Slightly lower confidence because the tag itself is reporting plumbing.

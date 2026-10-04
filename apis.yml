@@ -266,6 +266,9 @@ apis:
   - type: APIReference
     url: https://api.tidelift.com/docs/
 common:
+- type: CapabilityMap
+  url: capabilities/tidelift-capability-edges.yml
+  name: Tidelift Business Capability Map
 - type: ParentCompany
   url: https://apis.io/providers/sonar/
   name: Sonar
