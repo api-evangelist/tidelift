@@ -179,37 +179,7 @@ paths:
         '404':
           description: 404 Scan Not Found
 components:
-  parameters:
-    orgNameParam:
-      in: path
-      name: org_name
-      required: true
-      schema:
-        type: string
-        example: My-Company
-      description: The name of the Organization.
   schemas:
-    StandardError:
-      description: The standard error format
-      type: object
-      required:
-      - error
-      - message
-      properties:
-        error:
-          type: string
-          description: An error code representing the error
-          example: an_error_code
-        message:
-          type: string
-          description: A human-readable error message representing the error
-          example: An error message.
-        details:
-          type: object
-          description: An optional object with extra helpful details about the error.
-          example:
-            errors:
-              name: is not a valid email.
     Alignment:
       type: object
       additionalProperties: false
@@ -418,6 +388,46 @@ components:
                   properties:
                     title:
                       type: string
+    ScanLog:
+      description: Information about a scan problem, if there was one.
+      properties:
+        code:
+          type: string
+          description: Machine-readable code for the issue.
+          enum:
+          - inexact_versions
+          - invalid_version
+          - invalid_packages
+        message:
+          type: string
+          description: Human-readable message about the issue.
+        details:
+          type: object
+          description: List of details about the issue.
+          properties:
+            platform:
+              type:
+              - string
+              - 'null'
+              description: Relevant platform that triggered the issue.
+            path:
+              type:
+              - string
+              - 'null'
+              description: Relevant manifest path that triggered the issue.
+            kind:
+              type:
+              - string
+              - 'null'
+              description: Relevant manifest kind that triggered the issue.
+              enum:
+              - lockfile
+              - manifest
+            message:
+              type:
+              - string
+              - 'null'
+              description: Relevant human-readable message about this detail.
     AlignmentStatus:
       allOf:
       - $ref: '#/components/schemas/Alignment'
@@ -643,46 +653,27 @@ components:
                 - string
                 - 'null'
                 description: String representation of some more metadata of a warning encountered during analysis.
-    ScanLog:
-      description: Information about a scan problem, if there was one.
+    StandardError:
+      description: The standard error format
+      type: object
+      required:
+      - error
+      - message
       properties:
-        code:
+        error:
           type: string
-          description: Machine-readable code for the issue.
-          enum:
-          - inexact_versions
-          - invalid_version
-          - invalid_packages
+          description: An error code representing the error
+          example: an_error_code
         message:
           type: string
-          description: Human-readable message about the issue.
+          description: A human-readable error message representing the error
+          example: An error message.
         details:
           type: object
-          description: List of details about the issue.
-          properties:
-            platform:
-              type:
-              - string
-              - 'null'
-              description: Relevant platform that triggered the issue.
-            path:
-              type:
-              - string
-              - 'null'
-              description: Relevant manifest path that triggered the issue.
-            kind:
-              type:
-              - string
-              - 'null'
-              description: Relevant manifest kind that triggered the issue.
-              enum:
-              - lockfile
-              - manifest
-            message:
-              type:
-              - string
-              - 'null'
-              description: Relevant human-readable message about this detail.
+          description: An optional object with extra helpful details about the error.
+          example:
+            errors:
+              name: is not a valid email.
     AlignmentRelease:
       type: object
       properties:
@@ -767,6 +758,15 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/StandardError'
+  parameters:
+    orgNameParam:
+      in: path
+      name: org_name
+      required: true
+      schema:
+        type: string
+        example: My-Company
+      description: The name of the Organization.
   securitySchemes:
     BearerAuth:
       type: http

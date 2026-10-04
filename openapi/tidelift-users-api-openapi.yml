@@ -58,6 +58,19 @@ paths:
         '404':
           $ref: '#/components/responses/404Error'
 components:
+  responses:
+    403GroupUsers:
+      description: The user is not an admin of the organization or doesn't belong to the organization.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandardError'
+    404Error:
+      description: Record Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandardError'
   parameters:
     orgNameParam:
       in: path
@@ -67,19 +80,6 @@ components:
         type: string
         example: My-Company
       description: The name of the Organization.
-  responses:
-    404Error:
-      description: Record Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StandardError'
-    403GroupUsers:
-      description: The user is not an admin of the organization or doesn't belong to the organization.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StandardError'
   schemas:
     StandardError:
       description: The standard error format

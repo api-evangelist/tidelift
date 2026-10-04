@@ -514,7 +514,456 @@ paths:
         '404':
           description: Multiple catalogs found, please specify one.
 components:
+  parameters:
+    reportTypeParam:
+      in: path
+      name: report_type
+      required: true
+      description: "Type of report\n\n - [all_projects_compliance (compliance of projects to catalog standards)](https://support.tidelift.com/hc/en-us/articles/24885171849236)\n - [all_projects_package_quality (Tidelift recommendations by package)](https://support.tidelift.com/hc/en-us/articles/24971666742932)\n - [all_projects_violations (All projects violations)](https://support.tidelift.com/hc/en-us/articles/24883174701332)\n - catalog_activity_audit (Catalog Activity)\n - eol_impact (End of life)\n - license_attribution (License attribution)\n - release_usage (Catalog-wide open source use)\n"
+      schema:
+        $ref: '#/components/schemas/ReportTypes'
+    catalogNameParam:
+      in: path
+      name: catalog_name
+      required: true
+      schema:
+        type: string
+        example: default
+      description: The name of the Catalog.
+    violationStatusOverrideIdParam:
+      in: path
+      name: violation_status_override_id
+      required: true
+      schema:
+        type: string
+        example: 1992c539-11f0-4f9a-a668-da54e77726a2
+      description: the ID of the violation status override to perform the action on.
+    catalogBlockedItemIdParam:
+      in: path
+      name: catalog_blocked_item_id
+      required: true
+      schema:
+        type: string
+        example: 1992c539-11f0-4f9a-a668-da54e77726a2
+      description: The id of the catalog blocked item to perform the action on.
+    violationIdParam:
+      in: path
+      name: violation_id
+      required: true
+      schema:
+        type: string
+        example: 1992c539-11f0-4f9a-a668-da54e77726a2
+      description: The id of the violation to perform the action on.
+    orgNameParam:
+      in: path
+      name: org_name
+      required: true
+      schema:
+        type: string
+        example: My-Company
+      description: The name of the Organization.
   schemas:
+    VulnerabilitiesViolation:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ViolationCommon'
+      - type: object
+        required:
+        - vulnerability
+        properties:
+          vulnerability:
+            type: object
+            additionalProperties: false
+            required:
+            - id
+            - severity
+            - description
+            - date
+            - url
+            - severity_rating
+            - epss_percentile
+            - epss_probability
+            - epss_score
+            - known_exploited
+            - lifter_recommendations
+            properties:
+              id:
+                type:
+                - string
+                - 'null'
+              severity:
+                type:
+                - string
+                - 'null'
+              description:
+                type:
+                - string
+                - 'null'
+              date:
+                type: string
+              url:
+                type:
+                - string
+                - 'null'
+              severity_rating:
+                type:
+                - string
+                - 'null'
+              epss_percentile:
+                type:
+                - string
+                - 'null'
+              epss_probability:
+                type:
+                - string
+                - 'null'
+              epss_score:
+                type:
+                - string
+                - 'null'
+              known_exploited:
+                type:
+                - boolean
+                - 'null'
+              lifter_recommendations:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LifterRecommendationFragment'
+    Violations:
+      type: array
+      items:
+        anyOf:
+        - $ref: '#/components/schemas/AllowedLicensesViolation'
+        - $ref: '#/components/schemas/DeprecationViolation'
+        - $ref: '#/components/schemas/EOLPackagesViolation'
+        - $ref: '#/components/schemas/IdentifiedLicensesViolation'
+        - $ref: '#/components/schemas/UpToDateViolation'
+        - $ref: '#/components/schemas/VulnerabilitiesViolation'
+    CatalogActivityAuditReport:
+      type: object
+      properties:
+        date:
+          type: string
+        event_name:
+          type: string
+        event_details:
+          type: string
+        user:
+          type: string
+        event_link:
+          type: string
+    ViolationStatusOverride:
+      type: array
+      items:
+        type: object
+        additionalProperties: false
+        required:
+        - id
+        - violation_id
+        - platform
+        - name
+        - version
+        - status
+        - note
+        - created_at
+        - created_by
+        properties:
+          id:
+            type: string
+          catalog_standard:
+            type:
+            - string
+            - 'null'
+          violation_id:
+            type: string
+          platform:
+            type:
+            - string
+            - 'null'
+            description: The platform of the package, when the VSO is scoped to a package or release
+          name:
+            type:
+            - string
+            - 'null'
+            description: The name of the package, when the VSO is scoped to a package or release
+          version:
+            type:
+            - string
+            - 'null'
+            description: The version of the package, when the VSO is scoped to a release
+          note:
+            type:
+            - string
+            - 'null'
+          status:
+            type: string
+            description: The status that this applies to any affected releases.
+          created_at:
+            type: string
+            format: date-time
+          created_by:
+            type: string
+            description: Name of the User that added the override
+    ViolationStatusOverrideId:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      properties:
+        id:
+          description: The id of the violation status override
+          type: string
+    EOLPackagesViolation:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ViolationCommon'
+      - type: object
+        required:
+        - eol_package
+        properties:
+          eol_package:
+            type: object
+            additionalProperties: true
+            required:
+            - reason
+            - description
+            properties:
+              reason:
+                type:
+                - string
+                - 'null'
+              description:
+                type:
+                - string
+                - 'null'
+    IdentifiedLicensesViolation:
+      type: object
+      additionalProperties: false
+      allOf:
+      - $ref: '#/components/schemas/ViolationCommon'
+      - type: object
+        required:
+        - original_license
+        - repository_url
+        properties:
+          original_license:
+            type:
+            - string
+            - 'null'
+          repository_url:
+            type:
+            - string
+            - 'null'
+    AllProjectsViolationsReport:
+      type: object
+      properties:
+        project:
+          type: string
+        external_identifier:
+          type: string
+        catalog:
+          type: string
+        groups:
+          type: string
+        violation_type:
+          type: string
+        platform:
+          type: string
+        direct_package:
+          type: string
+        direct_verison:
+          type: string
+        direct_purl:
+          type: string
+        violating_package:
+          type: string
+        violating_version:
+          type: string
+        violating_purl:
+          type: string
+        dependency_chain:
+          type: string
+        dependency_scope:
+          type: string
+        action:
+          type: string
+        action_status:
+          type: string
+        action_recommendation:
+          type: string
+        recommended_dependency_chain:
+          type: string
+        violation_id:
+          type: string
+        violation_title:
+          type: string
+        violation_description:
+          type: string
+        violation_allowed:
+          type: boolean
+        violation_link:
+          type: string
+        lifter_recommendation:
+          type: string
+        report_date:
+          type: string
+    AllProjectsComplianceReport:
+      type: object
+      properties:
+        project:
+          type: string
+        external_identifier:
+          type:
+          - string
+          - 'null'
+        catalog:
+          type: string
+        groups:
+          type: string
+        alignment:
+          type: number
+        project_link:
+          type: string
+        blocked_releases_count:
+          type: integer
+        low_security_vulnerabilities:
+          type: integer
+        medium_security_vulnerabilities:
+          type: integer
+        high_security_vulnerabilities:
+          type: integer
+        critical_security_vulnerabilities:
+          type: integer
+        active_release_stream_violations:
+          type: integer
+        allowed_licenses_violations:
+          type: integer
+        deprecation_violations:
+          type: integer
+        identified_licenses_violations:
+          type: integer
+        known_packages_violations:
+          type: integer
+        prereleases_violations:
+          type: integer
+        removed_releases_violations:
+          type: integer
+        up_to_date_violations:
+          type: integer
+        vulnerabilities_violations:
+          type: integer
+        eol_packages_violations:
+          type: integer
+        known_releases_violations:
+          type: integer
+        report_date:
+          type: string
+    ViolationCommon:
+      type: object
+      required:
+      - catalog_standard
+      - violation_id
+      - title
+      additionalProperties: false
+      properties:
+        catalog_standard:
+          type: string
+        violation_id:
+          type: string
+        title:
+          type: string
+        package_name:
+          type: string
+        package_platform:
+          type: string
+        version:
+          type: string
+        task_id:
+          type:
+          - string
+          - 'null'
+    EOLImpactReport:
+      type: object
+      properties:
+        purl:
+          type: string
+        platform:
+          type: string
+        package_name:
+          type: string
+        version_in_use:
+          type: string
+          description: Version requested in catalog
+        latest_stable_version:
+          type: string
+          description: Latest stable version number of package
+        days_out:
+          type: string
+          description: Number of days between the publish date of latest stable version and version in use
+        versions_out:
+          type: string
+          description: Count of major and minor versions between the latest stable version and version in use
+        release_is_not_eol:
+          $ref: '#/components/schemas/PackageCheckStatus'
+        release_is_not_eol_explanation:
+          type: string
+          description: The categorical reason this release is or is not considered to be at end of life
+          enum:
+          - release_is_attested_supported
+          - release_is_attested_unsupported
+          - release_is_prerelease
+          - release_is_assumed_supported
+          - release_is_assumed_unsupported
+        maintenance_plan:
+          type: string
+          description: The recent versions supported by maintainer or URL at which they report their maintenance policy
+        package_is_not_eol:
+          $ref: '#/components/schemas/PackageCheckStatus'
+        package_is_not_eol_explanation:
+          type: string
+          description: The categorical reason this package is or is not considered to be at end of life
+          enum:
+          - package_is_end_of_life
+          - package_has_future_end_of_life
+          - package_has_no_known_end_of_life
+          - package_repository_is_unmaintained
+          - package_is_renamed
+          - package_is_unknown
+        package_eol_effective_on:
+          type: string
+          description: Date at which the End of Life takes effect
+        package_vuln_count:
+          type: string
+          description: Count of vulnerabilities affecting package
+        release_vuln_count:
+          type: string
+          description: Count of vulnerabilities affecting release
+        project_count:
+          type: string
+          description: Count of projects used by release
+        project_names:
+          type: string
+          description: Comma separated list of project names used by release
+        direct:
+          type: string
+          description: Returns true if any projects use this package as a direct dependency
+          enum:
+          - true
+          - false
+        report_date:
+          type: string
+          description: Timestamp at which report was generated.
+    ReportTypes:
+      type: string
+      enum:
+      - all_projects_compliance
+      - all_projects_package_quality
+      - all_projects_violations
+      - catalog_activity_audit
+      - eol_impact
+      - license_attribution
+      - release_usage
+      example: all_projects_violations
     AllowedLicensesViolation:
       type: object
       allOf:
@@ -596,120 +1045,6 @@ components:
           type: string
         updated_at:
           type: string
-    AllProjectsViolationsReport:
-      type: object
-      properties:
-        project:
-          type: string
-        external_identifier:
-          type: string
-        catalog:
-          type: string
-        groups:
-          type: string
-        violation_type:
-          type: string
-        platform:
-          type: string
-        direct_package:
-          type: string
-        direct_verison:
-          type: string
-        direct_purl:
-          type: string
-        violating_package:
-          type: string
-        violating_version:
-          type: string
-        violating_purl:
-          type: string
-        dependency_chain:
-          type: string
-        dependency_scope:
-          type: string
-        action:
-          type: string
-        action_status:
-          type: string
-        action_recommendation:
-          type: string
-        recommended_dependency_chain:
-          type: string
-        violation_id:
-          type: string
-        violation_title:
-          type: string
-        violation_description:
-          type: string
-        violation_allowed:
-          type: boolean
-        violation_link:
-          type: string
-        lifter_recommendation:
-          type: string
-        report_date:
-          type: string
-    ReportTypes:
-      type: string
-      enum:
-      - all_projects_compliance
-      - all_projects_package_quality
-      - all_projects_violations
-      - catalog_activity_audit
-      - eol_impact
-      - license_attribution
-      - release_usage
-      example: all_projects_violations
-    CatalogActivityAuditReport:
-      type: object
-      properties:
-        date:
-          type: string
-        event_name:
-          type: string
-        event_details:
-          type: string
-        user:
-          type: string
-        event_link:
-          type: string
-    ReleaseUsageReport:
-      type: object
-      properties:
-        package_platform:
-          type: string
-        package_name:
-          type: string
-        package_version:
-          type: string
-        package_status:
-          type: string
-        license:
-          type: string
-        date_added:
-          type: string
-        published_date:
-          type:
-          - string
-          - 'null'
-        projects_using:
-          type: string
-        decision_by_name:
-          type: string
-        decision_by_email:
-          type: string
-        internal_package:
-          type: string
-        package_link:
-          type: string
-        package_source:
-          type: string
-        purl:
-          type: string
-        deny_at:
-          type:
-          - string
-          - 'null'
     UpToDateViolation:
       type: object
       allOf:
@@ -733,188 +1068,33 @@ components:
                 type:
                 - string
                 - 'null'
-    PackageCheckStatus:
-      type: string
-      enum:
-      - passed
-      - not_passed
-      - noassertion
-      - pending
-    VulnerabilitiesViolation:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/ViolationCommon'
-      - type: object
-        required:
-        - vulnerability
-        properties:
-          vulnerability:
-            type: object
-            additionalProperties: false
-            required:
-            - id
-            - severity
-            - description
-            - date
-            - url
-            - severity_rating
-            - epss_percentile
-            - epss_probability
-            - epss_score
-            - known_exploited
-            - lifter_recommendations
-            properties:
-              id:
-                type:
-                - string
-                - 'null'
-              severity:
-                type:
-                - string
-                - 'null'
-              description:
-                type:
-                - string
-                - 'null'
-              date:
-                type: string
-              url:
-                type:
-                - string
-                - 'null'
-              severity_rating:
-                type:
-                - string
-                - 'null'
-              epss_percentile:
-                type:
-                - string
-                - 'null'
-              epss_probability:
-                type:
-                - string
-                - 'null'
-              epss_score:
-                type:
-                - string
-                - 'null'
-              known_exploited:
-                type:
-                - boolean
-                - 'null'
-              lifter_recommendations:
-                type: array
-                items:
-                  $ref: '#/components/schemas/LifterRecommendationFragment'
-    CatalogSummary:
-      type: object
-      additionalProperties: false
-      required:
-      - display_name
-      - name
-      - release_count
-      properties:
-        display_name:
-          type: string
-        name:
-          type: string
-        release_count:
-          type: integer
-          format: int32
-    LicenseAttributionReport:
+    AllProjectsPackageQualityReport:
       type: object
       properties:
+        purl:
+          type: string
+        platform:
+          type: string
         package_name:
           type: string
-        package_version:
+        tidelift_recommendation:
           type: string
-        package_platform:
+        tidelift_recommendation_reasons:
           type: string
-        dependency_type:
+        production_projects_count:
           type: string
-        detected_license:
+        non_production_projects_count:
           type: string
-        license_source:
+        direct_projects_count:
           type: string
-        projects_using:
+        transitive_projects_count:
           type: string
-        external_link:
+        project_usage_link:
           type: string
         package_link:
           type: string
-        license_text:
+        report_date:
           type: string
-    Violations:
-      type: array
-      items:
-        anyOf:
-        - $ref: '#/components/schemas/AllowedLicensesViolation'
-        - $ref: '#/components/schemas/DeprecationViolation'
-        - $ref: '#/components/schemas/EOLPackagesViolation'
-        - $ref: '#/components/schemas/IdentifiedLicensesViolation'
-        - $ref: '#/components/schemas/UpToDateViolation'
-        - $ref: '#/components/schemas/VulnerabilitiesViolation'
-    CatalogBlockedItemId:
-      type: object
-      additionalProperties: false
-      required:
-      - id
-      properties:
-        id:
-          description: The id of the catalog blocked item
-          type: string
-    ViolationStatusOverride:
-      type: array
-      items:
-        type: object
-        additionalProperties: false
-        required:
-        - id
-        - violation_id
-        - platform
-        - name
-        - version
-        - status
-        - note
-        - created_at
-        - created_by
-        properties:
-          id:
-            type: string
-          catalog_standard:
-            type:
-            - string
-            - 'null'
-          violation_id:
-            type: string
-          platform:
-            type:
-            - string
-            - 'null'
-            description: The platform of the package, when the VSO is scoped to a package or release
-          name:
-            type:
-            - string
-            - 'null'
-            description: The name of the package, when the VSO is scoped to a package or release
-          version:
-            type:
-            - string
-            - 'null'
-            description: The version of the package, when the VSO is scoped to a release
-          note:
-            type:
-            - string
-            - 'null'
-          status:
-            type: string
-            description: The status that this applies to any affected releases.
-          created_at:
-            type: string
-            format: date-time
-          created_by:
-            type: string
-            description: Name of the User that added the override
     OrganizationWithCatalogs:
       type: object
       additionalProperties: false
@@ -950,53 +1130,6 @@ components:
                   items:
                     description: role
                     type: string
-    ViolationCommon:
-      type: object
-      required:
-      - catalog_standard
-      - violation_id
-      - title
-      additionalProperties: false
-      properties:
-        catalog_standard:
-          type: string
-        violation_id:
-          type: string
-        title:
-          type: string
-        package_name:
-          type: string
-        package_platform:
-          type: string
-        version:
-          type: string
-        task_id:
-          type:
-          - string
-          - 'null'
-    EOLPackagesViolation:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/ViolationCommon'
-      - type: object
-        required:
-        - eol_package
-        properties:
-          eol_package:
-            type: object
-            additionalProperties: true
-            required:
-            - reason
-            - description
-            properties:
-              reason:
-                type:
-                - string
-                - 'null'
-              description:
-                type:
-                - string
-                - 'null'
     StandardError:
       description: The standard error format
       type: object
@@ -1018,182 +1151,6 @@ components:
           example:
             errors:
               name: is not a valid email.
-    EOLImpactReport:
-      type: object
-      properties:
-        purl:
-          type: string
-        platform:
-          type: string
-        package_name:
-          type: string
-        version_in_use:
-          type: string
-          description: Version requested in catalog
-        latest_stable_version:
-          type: string
-          description: Latest stable version number of package
-        days_out:
-          type: string
-          description: Number of days between the publish date of latest stable version and version in use
-        versions_out:
-          type: string
-          description: Count of major and minor versions between the latest stable version and version in use
-        release_is_not_eol:
-          $ref: '#/components/schemas/PackageCheckStatus'
-        release_is_not_eol_explanation:
-          type: string
-          description: The categorical reason this release is or is not considered to be at end of life
-          enum:
-          - release_is_attested_supported
-          - release_is_attested_unsupported
-          - release_is_prerelease
-          - release_is_assumed_supported
-          - release_is_assumed_unsupported
-        maintenance_plan:
-          type: string
-          description: The recent versions supported by maintainer or URL at which they report their maintenance policy
-        package_is_not_eol:
-          $ref: '#/components/schemas/PackageCheckStatus'
-        package_is_not_eol_explanation:
-          type: string
-          description: The categorical reason this package is or is not considered to be at end of life
-          enum:
-          - package_is_end_of_life
-          - package_has_future_end_of_life
-          - package_has_no_known_end_of_life
-          - package_repository_is_unmaintained
-          - package_is_renamed
-          - package_is_unknown
-        package_eol_effective_on:
-          type: string
-          description: Date at which the End of Life takes effect
-        package_vuln_count:
-          type: string
-          description: Count of vulnerabilities affecting package
-        release_vuln_count:
-          type: string
-          description: Count of vulnerabilities affecting release
-        project_count:
-          type: string
-          description: Count of projects used by release
-        project_names:
-          type: string
-          description: Comma separated list of project names used by release
-        direct:
-          type: string
-          description: Returns true if any projects use this package as a direct dependency
-          enum:
-          - true
-          - false
-        report_date:
-          type: string
-          description: Timestamp at which report was generated.
-    AllProjectsPackageQualityReport:
-      type: object
-      properties:
-        purl:
-          type: string
-        platform:
-          type: string
-        package_name:
-          type: string
-        tidelift_recommendation:
-          type: string
-        tidelift_recommendation_reasons:
-          type: string
-        production_projects_count:
-          type: string
-        non_production_projects_count:
-          type: string
-        direct_projects_count:
-          type: string
-        transitive_projects_count:
-          type: string
-        project_usage_link:
-          type: string
-        package_link:
-          type: string
-        report_date:
-          type: string
-    ViolationStatusOverrideId:
-      type: object
-      additionalProperties: false
-      required:
-      - id
-      properties:
-        id:
-          description: The id of the violation status override
-          type: string
-    IdentifiedLicensesViolation:
-      type: object
-      additionalProperties: false
-      allOf:
-      - $ref: '#/components/schemas/ViolationCommon'
-      - type: object
-        required:
-        - original_license
-        - repository_url
-        properties:
-          original_license:
-            type:
-            - string
-            - 'null'
-          repository_url:
-            type:
-            - string
-            - 'null'
-    AllProjectsComplianceReport:
-      type: object
-      properties:
-        project:
-          type: string
-        external_identifier:
-          type:
-          - string
-          - 'null'
-        catalog:
-          type: string
-        groups:
-          type: string
-        alignment:
-          type: number
-        project_link:
-          type: string
-        blocked_releases_count:
-          type: integer
-        low_security_vulnerabilities:
-          type: integer
-        medium_security_vulnerabilities:
-          type: integer
-        high_security_vulnerabilities:
-          type: integer
-        critical_security_vulnerabilities:
-          type: integer
-        active_release_stream_violations:
-          type: integer
-        allowed_licenses_violations:
-          type: integer
-        deprecation_violations:
-          type: integer
-        identified_licenses_violations:
-          type: integer
-        known_packages_violations:
-          type: integer
-        prereleases_violations:
-          type: integer
-        removed_releases_violations:
-          type: integer
-        up_to_date_violations:
-          type: integer
-        vulnerabilities_violations:
-          type: integer
-        eol_packages_violations:
-          type: integer
-        known_releases_violations:
-          type: integer
-        report_date:
-          type: string
     DeprecationViolation:
       type: object
       allOf:
@@ -1231,6 +1188,66 @@ components:
                     type: string
                   name:
                     type: string
+    ReleaseUsageReport:
+      type: object
+      properties:
+        package_platform:
+          type: string
+        package_name:
+          type: string
+        package_version:
+          type: string
+        package_status:
+          type: string
+        license:
+          type: string
+        date_added:
+          type: string
+        published_date:
+          type:
+          - string
+          - 'null'
+        projects_using:
+          type: string
+        decision_by_name:
+          type: string
+        decision_by_email:
+          type: string
+        internal_package:
+          type: string
+        package_link:
+          type: string
+        package_source:
+          type: string
+        purl:
+          type: string
+        deny_at:
+          type:
+          - string
+          - 'null'
+    LicenseAttributionReport:
+      type: object
+      properties:
+        package_name:
+          type: string
+        package_version:
+          type: string
+        package_platform:
+          type: string
+        dependency_type:
+          type: string
+        detected_license:
+          type: string
+        license_source:
+          type: string
+        projects_using:
+          type: string
+        external_link:
+          type: string
+        package_link:
+          type: string
+        license_text:
+          type: string
     PaginationEnvelope:
       type: object
       required:
@@ -1257,63 +1274,46 @@ components:
           type: integer
         per_page:
           type: integer
-  parameters:
-    reportTypeParam:
-      in: path
-      name: report_type
-      required: true
-      description: "Type of report\n\n - [all_projects_compliance (compliance of projects to catalog standards)](https://support.tidelift.com/hc/en-us/articles/24885171849236)\n - [all_projects_package_quality (Tidelift recommendations by package)](https://support.tidelift.com/hc/en-us/articles/24971666742932)\n - [all_projects_violations (All projects violations)](https://support.tidelift.com/hc/en-us/articles/24883174701332)\n - catalog_activity_audit (Catalog Activity)\n - eol_impact (End of life)\n - license_attribution (License attribution)\n - release_usage (Catalog-wide open source use)\n"
-      schema:
-        $ref: '#/components/schemas/ReportTypes'
-    orgNameParam:
-      in: path
-      name: org_name
-      required: true
-      schema:
-        type: string
-        example: My-Company
-      description: The name of the Organization.
-    catalogNameParam:
-      in: path
-      name: catalog_name
-      required: true
-      schema:
-        type: string
-        example: default
-      description: The name of the Catalog.
-    violationStatusOverrideIdParam:
-      in: path
-      name: violation_status_override_id
-      required: true
-      schema:
-        type: string
-        example: 1992c539-11f0-4f9a-a668-da54e77726a2
-      description: the ID of the violation status override to perform the action on.
-    violationIdParam:
-      in: path
-      name: violation_id
-      required: true
-      schema:
-        type: string
-        example: 1992c539-11f0-4f9a-a668-da54e77726a2
-      description: The id of the violation to perform the action on.
-    catalogBlockedItemIdParam:
-      in: path
-      name: catalog_blocked_item_id
-      required: true
-      schema:
-        type: string
-        example: 1992c539-11f0-4f9a-a668-da54e77726a2
-      description: The id of the catalog blocked item to perform the action on.
+    PackageCheckStatus:
+      type: string
+      enum:
+      - passed
+      - not_passed
+      - noassertion
+      - pending
+    CatalogBlockedItemId:
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      properties:
+        id:
+          description: The id of the catalog blocked item
+          type: string
+    CatalogSummary:
+      type: object
+      additionalProperties: false
+      required:
+      - display_name
+      - name
+      - release_count
+      properties:
+        display_name:
+          type: string
+        name:
+          type: string
+        release_count:
+          type: integer
+          format: int32
   responses:
-    403GroupUsers:
-      description: The user is not an admin of the organization or doesn't belong to the organization.
+    401Error:
+      description: Unauthorized
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/StandardError'
-    401Error:
-      description: Unauthorized
+    403GroupUsers:
+      description: The user is not an admin of the organization or doesn't belong to the organization.
       content:
         application/json:
           schema:

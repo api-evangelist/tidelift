@@ -401,230 +401,96 @@ paths:
         '404':
           description: Package not found
 components:
-  parameters:
-    packagePlatformParam:
-      in: path
-      name: package_platform
-      required: true
-      schema:
-        type: string
-        example: rubygems
-      description: The platform of the package.
-    perPagePaginationParam:
-      name: per_page
-      in: query
-      required: false
-      schema:
-        type: integer
-    pagePaginationParam:
-      name: page
-      in: query
-      required: false
-      schema:
-        type: integer
-    packageNameParam:
-      in: path
-      name: package_name
-      required: true
-      schema:
-        type: string
-        example: rails
-      description: The name of the package to look up.
   schemas:
-    TideliftPackageRecommendationReasons:
-      type: array
-      items:
-        type: string
-        enum:
-        - is deprecated
-        - does not appear maintained
-        - has no releases available
-        - contains binary artifacts
-        - has not verified two factor authentication
-        - doesn't have all release managers reviewed
-        - has vulnerabilities in latest release
-        - has dependency issues on latest release
-        - has no stable releases older than two years
-        - is lifted
-        - has organizational backing
-    PackageWithHint:
-      allOf:
-      - $ref: '#/components/schemas/Package'
-      - type: object
-        description: An optional hint, which might be the reason the package wasn't found.
-        additionalProperties: false
-        properties:
-          hint:
-            type: string
-    PackageCheckStatus:
-      type: string
-      enum:
-      - passed
-      - not_passed
-      - noassertion
-      - pending
-    PackageAttestationStatement:
-      type: object
-      additionalProperties: false
-      required:
-      - PackageName
-      - PackagePlatform
-      - PURL
-      - UpstreamRepositoryURL
-      - SPDXLicenseLatestRelease
-      - LatestStableRelease
-      - ReleasesInUse
-      - SBOM
-      - PackageManagerMFAEnabled
-      - SourceRepoMFAEnabled
-      - DocumentedBuildPractices
-      - KnownReleasesURL
-      - CleanReleaseAvailable
-      - FixedVulnerabilities
-      - DependenciesAreManaged
-      - KnownVulnerabilitiesURL
-      - PackageSecurityPolicyURL
-      - PackageSecurityContact
-      - SecurityResponsive
-      - MultipleMaintainers
-      - SuccessionPlan
-      - NoBinariesInRepository
-      - CodeReviewPractice
-      - FuzzingPractice
-      - SDLCPolicyURL
-      - SDLCEvidenceDataURL
-      - PackageStatus
-      - IncomeStreams
-      properties:
-        PackageName:
-          type: string
-        PackagePlatform:
-          type: string
-        PURL:
-          type: string
-        UpstreamRepositoryURL:
-          type: string
-        SPDXLicenseLatestRelease:
-          type: string
-        LatestStableRelease:
-          type: string
-        ReleasesInUse:
-          type: array
-          items:
-            type: string
-        SBOM:
-          type: array
-          items:
-            type: object
-            additionalProperties: false
-            required:
-            - Type
-            - URL
-            - DigitalSignatureURL
-            properties:
-              Type:
-                type: string
-              URL:
-                type: string
-              DigitalSignatureURL:
-                type: string
-        PackageManagerMFAEnabled:
-          type: string
-        SourceRepoMFAEnabled:
-          type: string
-        DocumentedBuildPractices:
-          type: string
-        KnownReleasesURL:
-          type: string
-        CleanReleaseAvailable:
-          type: string
-        FixedVulnerabilities:
-          type: string
-        DependenciesAreManaged:
-          type: string
-        KnownVulnerabilitiesURL:
-          type: string
-        PackageSecurityPolicyURL:
-          type: string
-        PackageSecurityContact:
-          type: string
-        SecurityResponsive:
-          type: string
-        MultipleMaintainers:
-          type: string
-        SuccessionPlan:
-          type: string
-        NoBinariesInRepository:
-          type: string
-        CodeReviewPractice:
-          type: string
-        FuzzingPractice:
-          type: string
-        ReleasesDigitallySigned:
-          type: string
-        SDLCPolicyURL:
-          type: string
-        SDLCEvidenceDataURL:
-          type: string
-        PackageStatus:
-          type: object
-          additionalProperties: false
-          required:
-          - Status
-          - LastModifiedDateTimeUTC
-          properties:
-            Status:
-              type: string
-            LastModifiedDateTimeUTC:
-              type: string
-              format: date-time
-        IncomeStreams:
-          oneOf:
-          - type: string
-            enum:
-            - NOASSERTION
-          - type: array
-            items:
-              type: object
-              required:
-              - Type
-              - EvidenceURL
-              - LastModifiedDateTimeUTC
-              properties:
-                Type:
-                  type: string
-                EvidenceURL:
-                  type: string
-                LastModifiedDateTimeUTC:
-                  type: string
-                  format: date-time
-    GenericQualityCheck:
+    PackageHasMultipleActiveMaintainersQualityCheck:
+      description: The package has multiple active maintainers
       type: object
       additionalProperties: false
       required:
       - status
       - recommendation_status
-      - additional_data
       properties:
         status:
-          $ref: '#/components/schemas/PackageCheckStatus'
+          type: string
+          enum:
+          - passed
+          - not_passed
         recommendation_status:
-          $ref: '#/components/schemas/QualityCheckRecommendationStatus'
+          type: string
+          enum:
+          - success
+          - warning
         additional_data:
           type:
           - object
           - 'null'
-    PackageAppearsMaintainedAdditionalData--is-lifted:
+          additionalProperties: false
+          required:
+          - one_maintainer
+          - unmaintained
+          - not_enough_contributors
+          - last_52_weeks_contributors
+          - contributor_count
+          properties:
+            one_maintainer:
+              type: boolean
+              description: If the project has less than two maintainers.
+            unmaintained:
+              type: boolean
+              description: If the package appears unmaintained.
+            not_enough_contributors:
+              type: boolean
+              description: If the project has had less than two contributors in the last 52 weeks or less than five contributors overall.
+            last_52_weeks_contributors:
+              type: integer
+              description: The count of contributors in the last 52 weeks.
+            contributor_count:
+              type: integer
+              description: The total count of contributors.
+    PackageList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PackageWithPurl'
+    PackageDetailRelease:
+      type: object
+      additionalProperties: false
+      required:
+      - version
+      - published_at
+      properties:
+        version:
+          type:
+          - string
+          - 'null'
+        published_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+    PackageAppearsMaintainedAdditionalData--maintenance-assessment:
       type: object
       additionalProperties: false
       required:
       - reason
+      - is_maintained
+      - is_maintained_updated_at
       properties:
         reason:
           type: string
           enum:
-          - package_is_lifted
-          description: Tidelift is partnering with the maintainer of this package to ensure its continued maintenance.
+          - package_is_maintained_assessed_true
+          - package_is_maintained_assessed_false
+          description: Tidelift has manually assessed this package's maintenance status.
+        is_maintained:
+          type: boolean
+          description: The manual assessment of the package's maintenance status.
+        is_maintained_updated_at:
+          type: string
+          format: date-time
+          description: The time at which the package's maintenance status was manually assessed.
     PackageAppearsMaintainedQualityCheck:
       description: The project lacks auto-detectable evidence of recent activity
       type: object
@@ -646,6 +512,37 @@ components:
           - type:
             - object
             - 'null'
+    PackageAppearsMaintainedAdditionalData--is-lifted:
+      type: object
+      additionalProperties: false
+      required:
+      - reason
+      properties:
+        reason:
+          type: string
+          enum:
+          - package_is_lifted
+          description: Tidelift is partnering with the maintainer of this package to ensure its continued maintenance.
+    Package:
+      type: object
+      additionalProperties: false
+      required:
+      - platform
+      - name
+      properties:
+        platform:
+          type: string
+        name:
+          type: string
+    PackageWithHint:
+      allOf:
+      - $ref: '#/components/schemas/Package'
+      - type: object
+        description: An optional hint, which might be the reason the package wasn't found.
+        additionalProperties: false
+        properties:
+          hint:
+            type: string
     QualityCheckRecommendationStatus:
       type: string
       enum:
@@ -653,24 +550,38 @@ components:
       - warning
       - issue
       - unknown
-    TideliftReleaseRecommendation:
-      type:
-      - string
-      - 'null'
-      enum:
-      - recommended
-      - not_recommended
-      - not_assessed
-    TideliftPackageRecommendation:
-      type:
-      - string
-      - 'null'
-      enum:
-      - recommended
-      - not_recommended
-      - caution_advised
-      - neutral
-      - not_assessed
+    TideliftPackageRecommendationReasons:
+      type: array
+      items:
+        type: string
+        enum:
+        - is deprecated
+        - does not appear maintained
+        - has no releases available
+        - contains binary artifacts
+        - has not verified two factor authentication
+        - doesn't have all release managers reviewed
+        - has vulnerabilities in latest release
+        - has dependency issues on latest release
+        - has no stable releases older than two years
+        - is lifted
+        - has organizational backing
+    GenericQualityCheck:
+      type: object
+      additionalProperties: false
+      required:
+      - status
+      - recommendation_status
+      - additional_data
+      properties:
+        status:
+          $ref: '#/components/schemas/PackageCheckStatus'
+        recommendation_status:
+          $ref: '#/components/schemas/QualityCheckRecommendationStatus'
+        additional_data:
+          type:
+          - object
+          - 'null'
     PackageAppearsMaintainedAdditionalData--maintenance-appearance:
       type: object
       additionalProperties: false
@@ -792,108 +703,24 @@ components:
           example:
             errors:
               name: is not a valid email.
-    PackageDetailRelease:
-      type: object
-      additionalProperties: false
-      required:
-      - version
-      - published_at
-      properties:
-        version:
-          type:
-          - string
-          - 'null'
-        published_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-    PackageHasMultipleActiveMaintainersQualityCheck:
-      description: The package has multiple active maintainers
-      type: object
-      additionalProperties: false
-      required:
-      - status
-      - recommendation_status
-      properties:
-        status:
-          type: string
-          enum:
-          - passed
-          - not_passed
-        recommendation_status:
-          type: string
-          enum:
-          - success
-          - warning
-        additional_data:
-          type:
-          - object
-          - 'null'
-          additionalProperties: false
-          required:
-          - one_maintainer
-          - unmaintained
-          - not_enough_contributors
-          - last_52_weeks_contributors
-          - contributor_count
-          properties:
-            one_maintainer:
-              type: boolean
-              description: If the project has less than two maintainers.
-            unmaintained:
-              type: boolean
-              description: If the package appears unmaintained.
-            not_enough_contributors:
-              type: boolean
-              description: If the project has had less than two contributors in the last 52 weeks or less than five contributors overall.
-            last_52_weeks_contributors:
-              type: integer
-              description: The count of contributors in the last 52 weeks.
-            contributor_count:
-              type: integer
-              description: The total count of contributors.
-    PackageAppearsMaintainedAdditionalData--maintenance-assessment:
-      type: object
-      additionalProperties: false
-      required:
-      - reason
-      - is_maintained
-      - is_maintained_updated_at
-      properties:
-        reason:
-          type: string
-          enum:
-          - package_is_maintained_assessed_true
-          - package_is_maintained_assessed_false
-          description: Tidelift has manually assessed this package's maintenance status.
-        is_maintained:
-          type: boolean
-          description: The manual assessment of the package's maintenance status.
-        is_maintained_updated_at:
-          type: string
-          format: date-time
-          description: The time at which the package's maintenance status was manually assessed.
-    PackageList:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/PackageWithPurl'
-    PackageWithPurl:
-      type: object
-      additionalProperties: false
-      required:
-      - platform
-      - name
-      properties:
-        platform:
-          type: string
-        name:
-          type: string
-        purl:
-          type: string
+    TideliftReleaseRecommendation:
+      type:
+      - string
+      - 'null'
+      enum:
+      - recommended
+      - not_recommended
+      - not_assessed
+    TideliftPackageRecommendation:
+      type:
+      - string
+      - 'null'
+      enum:
+      - recommended
+      - not_recommended
+      - caution_advised
+      - neutral
+      - not_assessed
     PackageIsNotEOLQualityCheck:
       description: The project does not have an active end-of-life notification.
       type: object
@@ -954,76 +781,6 @@ components:
             no_planned_maintenance:
               type: boolean
               description: If the package's deprecation status and repository activity indicates no further updates should be expected.
-    Package:
-      type: object
-      additionalProperties: false
-      required:
-      - platform
-      - name
-      properties:
-        platform:
-          type: string
-        name:
-          type: string
-    QualityChecks:
-      type: object
-      additionalProperties: false
-      required:
-      - no_known_vulnerabilities_on_latest_release
-      - no_known_issues_in_dependencies_for_latest_release
-      - discoverable_security_policy
-      - two_factor_authentication_at_source_repository
-      - two_factor_authentication_for_package_manager
-      - release_managers_are_reviewed
-      - package_is_not_deprecated
-      - package_appears_maintained
-      - package_has_a_stable_release_greater_than_two_years_old
-      - package_has_multiple_active_maintainers
-      - package_is_not_eol
-      - releases_are_discoverable_upstream
-      properties:
-        no_known_vulnerabilities_on_latest_release:
-          allOf:
-          - $ref: '#/components/schemas/GenericQualityCheck'
-          - description: A latest release should be available that clears all valid, confirmed, known vulnerabilities
-        no_known_issues_in_dependencies_for_latest_release:
-          allOf:
-          - $ref: '#/components/schemas/GenericQualityCheck'
-          - description: The transitive dependencies of the latest release should pass Tidelift's standards
-        discoverable_security_policy:
-          allOf:
-          - $ref: '#/components/schemas/GenericQualityCheck'
-          - description: The project should have a policy and process for reporting security vulnerabilities
-        two_factor_authentication_at_source_repository:
-          allOf:
-          - $ref: '#/components/schemas/GenericQualityCheck'
-          - description: The project should use two-factor authentication for everyone with access to the source code
-        two_factor_authentication_for_package_manager:
-          allOf:
-          - $ref: '#/components/schemas/GenericQualityCheck'
-          - description: The project should use two-factor authentication to publish releases
-        release_managers_are_reviewed:
-          allOf:
-          - $ref: '#/components/schemas/GenericQualityCheck'
-          - description: A Tidelift-partnered maintainer should confirm the list of people allowed to publish releases
-        package_is_not_deprecated:
-          allOf:
-          - $ref: '#/components/schemas/GenericQualityCheck'
-          - description: The package should not be deprecated
-        package_appears_maintained:
-          $ref: '#/components/schemas/PackageAppearsMaintainedQualityCheck'
-        package_has_a_stable_release_greater_than_two_years_old:
-          allOf:
-          - $ref: '#/components/schemas/GenericQualityCheck'
-          - description: The project should be "seasoned" with at least two years of stable releases
-        package_has_multiple_active_maintainers:
-          $ref: '#/components/schemas/PackageHasMultipleActiveMaintainersQualityCheck'
-        package_is_not_eol:
-          $ref: '#/components/schemas/PackageIsNotEOLQualityCheck'
-        releases_are_discoverable_upstream:
-          allOf:
-          - $ref: '#/components/schemas/GenericQualityCheck'
-          - description: The project should have releases that are still available for download
     PaginationEnvelope:
       type: object
       required:
@@ -1365,6 +1122,220 @@ components:
               (Tidelift can often help fill in `noassertion` checks, let us know what you need.)
 
               '
+    PackageWithPurl:
+      type: object
+      additionalProperties: false
+      required:
+      - platform
+      - name
+      properties:
+        platform:
+          type: string
+        name:
+          type: string
+        purl:
+          type: string
+    PackageCheckStatus:
+      type: string
+      enum:
+      - passed
+      - not_passed
+      - noassertion
+      - pending
+    PackageAttestationStatement:
+      type: object
+      additionalProperties: false
+      required:
+      - PackageName
+      - PackagePlatform
+      - PURL
+      - UpstreamRepositoryURL
+      - SPDXLicenseLatestRelease
+      - LatestStableRelease
+      - ReleasesInUse
+      - SBOM
+      - PackageManagerMFAEnabled
+      - SourceRepoMFAEnabled
+      - DocumentedBuildPractices
+      - KnownReleasesURL
+      - CleanReleaseAvailable
+      - FixedVulnerabilities
+      - DependenciesAreManaged
+      - KnownVulnerabilitiesURL
+      - PackageSecurityPolicyURL
+      - PackageSecurityContact
+      - SecurityResponsive
+      - MultipleMaintainers
+      - SuccessionPlan
+      - NoBinariesInRepository
+      - CodeReviewPractice
+      - FuzzingPractice
+      - SDLCPolicyURL
+      - SDLCEvidenceDataURL
+      - PackageStatus
+      - IncomeStreams
+      properties:
+        PackageName:
+          type: string
+        PackagePlatform:
+          type: string
+        PURL:
+          type: string
+        UpstreamRepositoryURL:
+          type: string
+        SPDXLicenseLatestRelease:
+          type: string
+        LatestStableRelease:
+          type: string
+        ReleasesInUse:
+          type: array
+          items:
+            type: string
+        SBOM:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            required:
+            - Type
+            - URL
+            - DigitalSignatureURL
+            properties:
+              Type:
+                type: string
+              URL:
+                type: string
+              DigitalSignatureURL:
+                type: string
+        PackageManagerMFAEnabled:
+          type: string
+        SourceRepoMFAEnabled:
+          type: string
+        DocumentedBuildPractices:
+          type: string
+        KnownReleasesURL:
+          type: string
+        CleanReleaseAvailable:
+          type: string
+        FixedVulnerabilities:
+          type: string
+        DependenciesAreManaged:
+          type: string
+        KnownVulnerabilitiesURL:
+          type: string
+        PackageSecurityPolicyURL:
+          type: string
+        PackageSecurityContact:
+          type: string
+        SecurityResponsive:
+          type: string
+        MultipleMaintainers:
+          type: string
+        SuccessionPlan:
+          type: string
+        NoBinariesInRepository:
+          type: string
+        CodeReviewPractice:
+          type: string
+        FuzzingPractice:
+          type: string
+        ReleasesDigitallySigned:
+          type: string
+        SDLCPolicyURL:
+          type: string
+        SDLCEvidenceDataURL:
+          type: string
+        PackageStatus:
+          type: object
+          additionalProperties: false
+          required:
+          - Status
+          - LastModifiedDateTimeUTC
+          properties:
+            Status:
+              type: string
+            LastModifiedDateTimeUTC:
+              type: string
+              format: date-time
+        IncomeStreams:
+          oneOf:
+          - type: string
+            enum:
+            - NOASSERTION
+          - type: array
+            items:
+              type: object
+              required:
+              - Type
+              - EvidenceURL
+              - LastModifiedDateTimeUTC
+              properties:
+                Type:
+                  type: string
+                EvidenceURL:
+                  type: string
+                LastModifiedDateTimeUTC:
+                  type: string
+                  format: date-time
+    QualityChecks:
+      type: object
+      additionalProperties: false
+      required:
+      - no_known_vulnerabilities_on_latest_release
+      - no_known_issues_in_dependencies_for_latest_release
+      - discoverable_security_policy
+      - two_factor_authentication_at_source_repository
+      - two_factor_authentication_for_package_manager
+      - release_managers_are_reviewed
+      - package_is_not_deprecated
+      - package_appears_maintained
+      - package_has_a_stable_release_greater_than_two_years_old
+      - package_has_multiple_active_maintainers
+      - package_is_not_eol
+      - releases_are_discoverable_upstream
+      properties:
+        no_known_vulnerabilities_on_latest_release:
+          allOf:
+          - $ref: '#/components/schemas/GenericQualityCheck'
+          - description: A latest release should be available that clears all valid, confirmed, known vulnerabilities
+        no_known_issues_in_dependencies_for_latest_release:
+          allOf:
+          - $ref: '#/components/schemas/GenericQualityCheck'
+          - description: The transitive dependencies of the latest release should pass Tidelift's standards
+        discoverable_security_policy:
+          allOf:
+          - $ref: '#/components/schemas/GenericQualityCheck'
+          - description: The project should have a policy and process for reporting security vulnerabilities
+        two_factor_authentication_at_source_repository:
+          allOf:
+          - $ref: '#/components/schemas/GenericQualityCheck'
+          - description: The project should use two-factor authentication for everyone with access to the source code
+        two_factor_authentication_for_package_manager:
+          allOf:
+          - $ref: '#/components/schemas/GenericQualityCheck'
+          - description: The project should use two-factor authentication to publish releases
+        release_managers_are_reviewed:
+          allOf:
+          - $ref: '#/components/schemas/GenericQualityCheck'
+          - description: A Tidelift-partnered maintainer should confirm the list of people allowed to publish releases
+        package_is_not_deprecated:
+          allOf:
+          - $ref: '#/components/schemas/GenericQualityCheck'
+          - description: The package should not be deprecated
+        package_appears_maintained:
+          $ref: '#/components/schemas/PackageAppearsMaintainedQualityCheck'
+        package_has_a_stable_release_greater_than_two_years_old:
+          allOf:
+          - $ref: '#/components/schemas/GenericQualityCheck'
+          - description: The project should be "seasoned" with at least two years of stable releases
+        package_has_multiple_active_maintainers:
+          $ref: '#/components/schemas/PackageHasMultipleActiveMaintainersQualityCheck'
+        package_is_not_eol:
+          $ref: '#/components/schemas/PackageIsNotEOLQualityCheck'
+        releases_are_discoverable_upstream:
+          allOf:
+          - $ref: '#/components/schemas/GenericQualityCheck'
+          - description: The project should have releases that are still available for download
   responses:
     401Error:
       description: Unauthorized
@@ -1372,6 +1343,35 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/StandardError'
+  parameters:
+    pagePaginationParam:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+    packagePlatformParam:
+      in: path
+      name: package_platform
+      required: true
+      schema:
+        type: string
+        example: rubygems
+      description: The platform of the package.
+    perPagePaginationParam:
+      name: per_page
+      in: query
+      required: false
+      schema:
+        type: integer
+    packageNameParam:
+      in: path
+      name: package_name
+      required: true
+      schema:
+        type: string
+        example: rails
+      description: The name of the package to look up.
   securitySchemes:
     BearerAuth:
       type: http

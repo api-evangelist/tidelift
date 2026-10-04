@@ -165,22 +165,6 @@ paths:
         '401':
           $ref: '#/components/responses/401Error'
 components:
-  parameters:
-    orgNameParam:
-      in: path
-      name: org_name
-      required: true
-      schema:
-        type: string
-        example: My-Company
-      description: The name of the Organization.
-    projectParam:
-      in: path
-      name: project
-      required: true
-      schema:
-        type: string
-      description: The name of the Project.
   schemas:
     Project:
       type: object
@@ -252,6 +236,22 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/StandardError'
+  parameters:
+    projectParam:
+      in: path
+      name: project
+      required: true
+      schema:
+        type: string
+      description: The name of the Project.
+    orgNameParam:
+      in: path
+      name: org_name
+      required: true
+      schema:
+        type: string
+        example: My-Company
+      description: The name of the Organization.
   securitySchemes:
     BearerAuth:
       type: http

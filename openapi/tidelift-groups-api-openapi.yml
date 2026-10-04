@@ -302,28 +302,11 @@ paths:
         '403':
           $ref: '#/components/responses/403GroupUsers'
 components:
-  parameters:
-    groupIdParam:
-      in: path
-      name: group_id
-      required: true
-      schema:
-        type: string
-        example: 1992c539-11f0-4f9a-a668-da54e77726a2
-      description: The id of the group to perform the action on.
-    orgNameParam:
-      in: path
-      name: org_name
-      required: true
-      schema:
-        type: string
-        example: My-Company
-      description: The name of the Organization.
   schemas:
-    GroupProjectsResponse:
+    GroupsResponse:
       type: array
       items:
-        $ref: '#/components/schemas/GroupProjectResponse'
+        $ref: '#/components/schemas/GroupResponse'
     GroupUserResponse:
       type: object
       properties:
@@ -331,6 +314,14 @@ components:
           type: string
         email:
           type: string
+    GroupProjectsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/GroupProjectResponse'
+    GroupUsersResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/GroupUserResponse'
     StandardError:
       description: The standard error format
       type: object
@@ -378,23 +369,32 @@ components:
           type: string
         name:
           type: string
-    GroupsResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/GroupResponse'
-    GroupUsersResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/GroupUserResponse'
+  parameters:
+    groupIdParam:
+      in: path
+      name: group_id
+      required: true
+      schema:
+        type: string
+        example: 1992c539-11f0-4f9a-a668-da54e77726a2
+      description: The id of the group to perform the action on.
+    orgNameParam:
+      in: path
+      name: org_name
+      required: true
+      schema:
+        type: string
+        example: My-Company
+      description: The name of the Organization.
   responses:
-    404GroupUsers:
-      description: The user doesn't exist within the organization
+    403GroupUsers:
+      description: The user is not an admin of the organization or doesn't belong to the organization.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/StandardError'
-    403GroupUsers:
-      description: The user is not an admin of the organization or doesn't belong to the organization.
+    404GroupUsers:
+      description: The user doesn't exist within the organization
       content:
         application/json:
           schema:
