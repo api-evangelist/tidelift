@@ -303,10 +303,6 @@ paths:
           $ref: '#/components/responses/403GroupUsers'
 components:
   schemas:
-    GroupsResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/GroupResponse'
     GroupUserResponse:
       type: object
       properties:
@@ -314,14 +310,25 @@ components:
           type: string
         email:
           type: string
-    GroupProjectsResponse:
+    GroupsResponse:
       type: array
       items:
-        $ref: '#/components/schemas/GroupProjectResponse'
+        $ref: '#/components/schemas/GroupResponse'
     GroupUsersResponse:
       type: array
       items:
         $ref: '#/components/schemas/GroupUserResponse'
+    GroupProjectsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/GroupProjectResponse'
+    GroupProjectResponse:
+      type: object
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
     StandardError:
       description: The standard error format
       type: object
@@ -362,13 +369,6 @@ components:
           type: integer
         conditional_exception_count:
           type: integer
-    GroupProjectResponse:
-      type: object
-      properties:
-        uuid:
-          type: string
-        name:
-          type: string
   parameters:
     groupIdParam:
       in: path
@@ -387,14 +387,14 @@ components:
         example: My-Company
       description: The name of the Organization.
   responses:
-    403GroupUsers:
-      description: The user is not an admin of the organization or doesn't belong to the organization.
+    404GroupUsers:
+      description: The user doesn't exist within the organization
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/StandardError'
-    404GroupUsers:
-      description: The user doesn't exist within the organization
+    403GroupUsers:
+      description: The user is not an admin of the organization or doesn't belong to the organization.
       content:
         application/json:
           schema:

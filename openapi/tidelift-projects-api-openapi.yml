@@ -516,25 +516,6 @@ paths:
         '404':
           description: Couldn't find scan by revision or latest from default branch, or unable to build BOM from Scan.
 components:
-  responses:
-    400Error:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StandardError'
-    401Error:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StandardError'
-    403GroupUsers:
-      description: The user is not an admin of the organization or doesn't belong to the organization.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StandardError'
   schemas:
     Project:
       type: object
@@ -664,6 +645,25 @@ components:
         type: string
         example: My-Company
       description: The name of the Organization.
+  responses:
+    401Error:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandardError'
+    400Error:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandardError'
+    403GroupUsers:
+      description: The user is not an admin of the organization or doesn't belong to the organization.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StandardError'
   securitySchemes:
     BearerAuth:
       type: http

@@ -401,6 +401,168 @@ paths:
           description: Release or Package not found
 components:
   schemas:
+    ViolationCommon:
+      type: object
+      required:
+      - catalog_standard
+      - violation_id
+      - title
+      additionalProperties: false
+      properties:
+        catalog_standard:
+          type: string
+        violation_id:
+          type: string
+        title:
+          type: string
+        package_name:
+          type: string
+        package_platform:
+          type: string
+        version:
+          type: string
+        task_id:
+          type:
+          - string
+          - 'null'
+    Violations:
+      type: array
+      items:
+        anyOf:
+        - $ref: '#/components/schemas/AllowedLicensesViolation'
+        - $ref: '#/components/schemas/DeprecationViolation'
+        - $ref: '#/components/schemas/EOLPackagesViolation'
+        - $ref: '#/components/schemas/IdentifiedLicensesViolation'
+        - $ref: '#/components/schemas/UpToDateViolation'
+        - $ref: '#/components/schemas/VulnerabilitiesViolation'
+    StandardError:
+      description: The standard error format
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: An error code representing the error
+          example: an_error_code
+        message:
+          type: string
+          description: A human-readable error message representing the error
+          example: An error message.
+        details:
+          type: object
+          description: An optional object with extra helpful details about the error.
+          example:
+            errors:
+              name: is not a valid email.
+    ReleaseDetail:
+      type: object
+      properties:
+        name:
+          type: string
+        platform:
+          type: string
+        version:
+          type: string
+        published_at:
+          type:
+          - string
+          - 'null'
+        purl:
+          type: string
+        repository:
+          type: object
+          properties:
+            url:
+              type:
+              - string
+              - 'null'
+            source:
+              type: string
+              enum:
+              - package_manager
+              - human_verified
+        tidelift_recommendation:
+          $ref: '#/components/schemas/TideliftReleaseRecommendation'
+        violations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Violations'
+        license:
+          type: object
+          properties:
+            expression:
+              type: string
+            source:
+              type: string
+              enum:
+              - corrected_by_tidelift
+              - researched_by_tidelift
+              - valid_spdx
+              - tidelift_researching
+              - overridden_by_organization
+              - verified_by_maintainer
+        nearest_recommended_release:
+          type:
+          - object
+          - 'null'
+          properties:
+            version:
+              type: string
+            published_at:
+              type:
+              - string
+              - 'null'
+              format: date-time
+    UpToDateViolation:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ViolationCommon'
+      - type: object
+        required:
+        - up_to_date
+        properties:
+          up_to_date:
+            type: object
+            additionalProperties: false
+            required:
+            - release_date
+            - days_too_old
+            properties:
+              release_date:
+                type:
+                - string
+                - 'null'
+              days_too_old:
+                type:
+                - string
+                - 'null'
+    Release:
+      type: object
+      additionalProperties: false
+      required:
+      - platform
+      - name
+      - version
+      properties:
+        platform:
+          type: string
+        name:
+          type: string
+        version:
+          type: string
+    AllowedLicensesViolation:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ViolationCommon'
+      - type: object
+        additionalProperties: false
+        required:
+        - license
+        properties:
+          license:
+            type: string
     ReleaseRequirement:
       type: object
       properties:
@@ -414,6 +576,81 @@ components:
           type: string
         scope:
           type: string
+    CycloneDxJson:
+      type: object
+      properties:
+        bomFormat:
+          type: string
+          enum:
+          - CycloneDX
+        specVersion:
+          type: string
+        serialNumber:
+          type: string
+        metadata:
+          type: object
+        components:
+          type: array
+          items:
+            type: object
+        dependencies:
+          type: array
+          items:
+            type: object
+      xml:
+        namespace: http://cyclonedx.org/schema/bom/1.3
+        name: bom
+    PaginationEnvelope:
+      type: object
+      required:
+      - current_page
+      - next_page
+      - prev_page
+      - total_pages
+      - total_count
+      - per_page
+      properties:
+        current_page:
+          type: integer
+        next_page:
+          type:
+          - integer
+          - 'null'
+        prev_page:
+          type:
+          - integer
+          - 'null'
+        total_pages:
+          type: integer
+        total_count:
+          type: integer
+        per_page:
+          type: integer
+    PackageCheckStatus:
+      type: string
+      enum:
+      - passed
+      - not_passed
+      - noassertion
+      - pending
+    IdentifiedLicensesViolation:
+      type: object
+      additionalProperties: false
+      allOf:
+      - $ref: '#/components/schemas/ViolationCommon'
+      - type: object
+        required:
+        - original_license
+        - repository_url
+        properties:
+          original_license:
+            type:
+            - string
+            - 'null'
+          repository_url:
+            type:
+            - string
+            - 'null'
     VulnerabilitiesViolation:
       type: object
       allOf:
@@ -480,189 +717,43 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/LifterRecommendationFragment'
-    Violations:
-      type: array
-      items:
-        anyOf:
-        - $ref: '#/components/schemas/AllowedLicensesViolation'
-        - $ref: '#/components/schemas/DeprecationViolation'
-        - $ref: '#/components/schemas/EOLPackagesViolation'
-        - $ref: '#/components/schemas/IdentifiedLicensesViolation'
-        - $ref: '#/components/schemas/UpToDateViolation'
-        - $ref: '#/components/schemas/VulnerabilitiesViolation'
-    Release:
-      type: object
-      additionalProperties: false
-      required:
-      - platform
-      - name
-      - version
-      properties:
-        platform:
-          type: string
-        name:
-          type: string
-        version:
-          type: string
-    CycloneDxJson:
-      type: object
-      properties:
-        bomFormat:
-          type: string
-          enum:
-          - CycloneDX
-        specVersion:
-          type: string
-        serialNumber:
-          type: string
-        metadata:
-          type: object
-        components:
-          type: array
-          items:
-            type: object
-        dependencies:
-          type: array
-          items:
-            type: object
-      xml:
-        namespace: http://cyclonedx.org/schema/bom/1.3
-        name: bom
-    EOLPackagesViolation:
+    DeprecationViolation:
       type: object
       allOf:
       - $ref: '#/components/schemas/ViolationCommon'
       - type: object
         required:
-        - eol_package
+        - deprecation
         properties:
-          eol_package:
+          deprecation:
             type: object
-            additionalProperties: true
+            additionalProperties: false
             required:
+            - deprecated_at
             - reason
-            - description
+            - package_to_use_instead
             properties:
+              deprecated_at:
+                type:
+                - string
+                - 'null'
               reason:
                 type:
                 - string
                 - 'null'
-              description:
+              package_to_use_instead:
                 type:
-                - string
+                - object
                 - 'null'
-    IdentifiedLicensesViolation:
-      type: object
-      additionalProperties: false
-      allOf:
-      - $ref: '#/components/schemas/ViolationCommon'
-      - type: object
-        required:
-        - original_license
-        - repository_url
-        properties:
-          original_license:
-            type:
-            - string
-            - 'null'
-          repository_url:
-            type:
-            - string
-            - 'null'
-    ViolationCommon:
-      type: object
-      required:
-      - catalog_standard
-      - violation_id
-      - title
-      additionalProperties: false
-      properties:
-        catalog_standard:
-          type: string
-        violation_id:
-          type: string
-        title:
-          type: string
-        package_name:
-          type: string
-        package_platform:
-          type: string
-        version:
-          type: string
-        task_id:
-          type:
-          - string
-          - 'null'
-    ReleaseDetail:
-      type: object
-      properties:
-        name:
-          type: string
-        platform:
-          type: string
-        version:
-          type: string
-        published_at:
-          type:
-          - string
-          - 'null'
-        purl:
-          type: string
-        repository:
-          type: object
-          properties:
-            url:
-              type:
-              - string
-              - 'null'
-            source:
-              type: string
-              enum:
-              - package_manager
-              - human_verified
-        tidelift_recommendation:
-          $ref: '#/components/schemas/TideliftReleaseRecommendation'
-        violations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Violations'
-        license:
-          type: object
-          properties:
-            expression:
-              type: string
-            source:
-              type: string
-              enum:
-              - corrected_by_tidelift
-              - researched_by_tidelift
-              - valid_spdx
-              - tidelift_researching
-              - overridden_by_organization
-              - verified_by_maintainer
-        nearest_recommended_release:
-          type:
-          - object
-          - 'null'
-          properties:
-            version:
-              type: string
-            published_at:
-              type:
-              - string
-              - 'null'
-              format: date-time
-    AllowedLicensesViolation:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/ViolationCommon'
-      - type: object
-        additionalProperties: false
-        required:
-        - license
-        properties:
-          license:
-            type: string
+                additionalProperties: false
+                required:
+                - platform
+                - name
+                properties:
+                  platform:
+                    type: string
+                  name:
+                    type: string
     LifterRecommendationFragment:
       type: object
       additionalProperties: false
@@ -733,29 +824,6 @@ components:
           type: string
         updated_at:
           type: string
-    UpToDateViolation:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/ViolationCommon'
-      - type: object
-        required:
-        - up_to_date
-        properties:
-          up_to_date:
-            type: object
-            additionalProperties: false
-            required:
-            - release_date
-            - days_too_old
-            properties:
-              release_date:
-                type:
-                - string
-                - 'null'
-              days_too_old:
-                type:
-                - string
-                - 'null'
     CycloneDxXml:
       type: object
       properties:
@@ -772,64 +840,29 @@ components:
       xml:
         namespace: http://cyclonedx.org/schema/bom/1.3
         name: bom
-    StandardError:
-      description: The standard error format
-      type: object
-      required:
-      - error
-      - message
-      properties:
-        error:
-          type: string
-          description: An error code representing the error
-          example: an_error_code
-        message:
-          type: string
-          description: A human-readable error message representing the error
-          example: An error message.
-        details:
-          type: object
-          description: An optional object with extra helpful details about the error.
-          example:
-            errors:
-              name: is not a valid email.
-    DeprecationViolation:
+    EOLPackagesViolation:
       type: object
       allOf:
       - $ref: '#/components/schemas/ViolationCommon'
       - type: object
         required:
-        - deprecation
+        - eol_package
         properties:
-          deprecation:
+          eol_package:
             type: object
-            additionalProperties: false
+            additionalProperties: true
             required:
-            - deprecated_at
             - reason
-            - package_to_use_instead
+            - description
             properties:
-              deprecated_at:
-                type:
-                - string
-                - 'null'
               reason:
                 type:
                 - string
                 - 'null'
-              package_to_use_instead:
+              description:
                 type:
-                - object
+                - string
                 - 'null'
-                additionalProperties: false
-                required:
-                - platform
-                - name
-                properties:
-                  platform:
-                    type: string
-                  name:
-                    type: string
     TideliftReleaseRecommendation:
       type:
       - string
@@ -838,39 +871,6 @@ components:
       - recommended
       - not_recommended
       - not_assessed
-    PaginationEnvelope:
-      type: object
-      required:
-      - current_page
-      - next_page
-      - prev_page
-      - total_pages
-      - total_count
-      - per_page
-      properties:
-        current_page:
-          type: integer
-        next_page:
-          type:
-          - integer
-          - 'null'
-        prev_page:
-          type:
-          - integer
-          - 'null'
-        total_pages:
-          type: integer
-        total_count:
-          type: integer
-        per_page:
-          type: integer
-    PackageCheckStatus:
-      type: string
-      enum:
-      - passed
-      - not_passed
-      - noassertion
-      - pending
   responses:
     401Error:
       description: Unauthorized
@@ -879,20 +879,34 @@ components:
           schema:
             $ref: '#/components/schemas/StandardError'
   parameters:
+    releaseVersionParam:
+      in: path
+      name: release_version
+      required: true
+      schema:
+        type: string
+        example: 1.2.3
+      description: The version of the package to look up.
+    perPagePaginationParam:
+      name: per_page
+      in: query
+      required: false
+      schema:
+        type: integer
     pagePaginationParam:
       name: page
       in: query
       required: false
       schema:
         type: integer
-    packagePlatformParam:
+    packageNameParam:
       in: path
-      name: package_platform
+      name: package_name
       required: true
       schema:
         type: string
-        example: rubygems
-      description: The platform of the package.
+        example: rails
+      description: The name of the package to look up.
     sbomTypeParam:
       in: query
       name: sbom_type
@@ -902,28 +916,14 @@ components:
         - cyclonedx
         - spdx
       description: The type the SBOM to generate. Required, unless older sbom_format parameter is passed.
-    perPagePaginationParam:
-      name: per_page
-      in: query
-      required: false
-      schema:
-        type: integer
-    releaseVersionParam:
+    packagePlatformParam:
       in: path
-      name: release_version
+      name: package_platform
       required: true
       schema:
         type: string
-        example: 1.2.3
-      description: The version of the package to look up.
-    packageNameParam:
-      in: path
-      name: package_name
-      required: true
-      schema:
-        type: string
-        example: rails
-      description: The name of the package to look up.
+        example: rubygems
+      description: The platform of the package.
   securitySchemes:
     BearerAuth:
       type: http
